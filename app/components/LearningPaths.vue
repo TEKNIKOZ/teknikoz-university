@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
           Why <span class="text-brand">TEKNIKOZ</span> University Stands Out
         </h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto text-pretty">
           We don't just teach concepts - we prepare you for real-world success
         </p>
       </div>
@@ -14,10 +14,14 @@
       <!-- Learning Paths Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         <!-- Freshers -->
-        <div class="bg-white rounded-2xl border-2 border-blue-200 p-8 hover:shadow-lg transition-shadow duration-300">
-          <div class="flex items-center mb-6">
-            <div class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mr-4">
-              <Icon name="mdi:school" class="text-white text-2xl" />
+        <div
+          class="bg-white rounded-2xl border-2 border-blue-200 p-8 hover:shadow-lg transition-shadow duration-300"
+        >
+          <div class="flex items-start mb-6">
+            <div
+              class="w-14 h-14 bg-brand rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+            >
+              <Icon name="mdi:school" class="text-white text-3xl" />
             </div>
             <div>
               <h3 class="text-2xl font-bold text-brand mb-1">Freshers</h3>
@@ -26,7 +30,7 @@
               </p>
             </div>
           </div>
-          
+
           <!-- Features list -->
           <ul class="space-y-3 mb-8">
             <li class="flex items-center text-gray-700">
@@ -47,16 +51,22 @@
             </li>
           </ul>
 
-          <button class="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full">
+          <button
+            class="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full"
+          >
             Learn More
           </button>
         </div>
 
         <!-- Professionals -->
-        <div class="bg-white rounded-2xl border-2 border-blue-200 p-8 hover:shadow-lg transition-shadow duration-300">
-          <div class="flex items-center mb-6">
-            <div class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mr-4">
-              <Icon name="mdi:trending-up" class="text-white text-2xl" />
+        <div
+          class="bg-white rounded-2xl border-2 border-blue-200 p-8 hover:shadow-lg transition-shadow duration-300"
+        >
+          <div class="flex items-start mb-6">
+            <div
+              class="w-14 h-14 bg-brand rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+            >
+              <Icon name="mdi:briefcase-check" class="text-white text-2xl" />
             </div>
             <div>
               <h3 class="text-2xl font-bold text-brand mb-1">Professionals</h3>
@@ -65,7 +75,7 @@
               </p>
             </div>
           </div>
-          
+
           <!-- Features list -->
           <ul class="space-y-3 mb-8">
             <li class="flex items-center text-gray-700">
@@ -86,15 +96,21 @@
             </li>
           </ul>
 
-          <button class="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full">
+          <button
+            class="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full"
+          >
             Learn More
           </button>
         </div>
 
         <!-- Enterprises -->
-        <div class="bg-white rounded-2xl border-2 border-blue-200 p-8 hover:shadow-lg transition-shadow duration-300">
+        <div
+          class="bg-white rounded-2xl border-2 border-blue-200 p-8 hover:shadow-lg transition-shadow duration-300"
+        >
           <div class="flex items-center mb-6">
-            <div class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mr-4">
+            <div
+              class="w-14 h-14 bg-brand rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+            >
               <Icon name="mdi:office-building" class="text-white text-2xl" />
             </div>
             <div>
@@ -104,7 +120,7 @@
               </p>
             </div>
           </div>
-          
+
           <!-- Features list -->
           <ul class="space-y-3 mb-8">
             <li class="flex items-center text-gray-700">
@@ -125,7 +141,9 @@
             </li>
           </ul>
 
-          <button class="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full">
+          <button
+            class="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full"
+          >
             Learn More
           </button>
         </div>
@@ -133,7 +151,9 @@
 
       <!-- CTA Button -->
       <div class="text-center">
-        <button class="bg-gray-900 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-800 transition-colors duration-300">
+        <button
+          class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-800 transition-colors duration-300"
+        >
           Find Your Path
         </button>
       </div>

@@ -7,7 +7,7 @@
         <!-- Logo -->
         <div class="flex items-center">
           <img
-            src="/assets/images/top-logo.png"
+            src="/assets/images/logo.png"
             alt="Teknikoz University Logo"
             class="h-8 md:h-12 w-auto"
           />

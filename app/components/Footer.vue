@@ -1,183 +1,241 @@
 <template>
-  <footer class="bg-gray-900 text-white pt-24">
-    <!-- Main Footer Content -->
-    <div class="max-w-7xl mx-auto px-4 pt-20 pb-16">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Logo and Description -->
-        <div class="lg:col-span-1">
-          <div class="flex items-center mb-6">
+  <footer class="relative bg-gray-900 text-white">
+    <div class="container max-w-7xl mx-auto px-4 sm:px-6 sm:py-20 relative">
+      <!-- Main Footer Content -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-gray-300"
+      >
+        <!-- TEKNIKOZ University Column -->
+        <div class="text-left">
+          <div class="flex items-center mb-4 sm:mb-6">
             <img
               :src="footerLogo"
               alt="TEKNIKOZ University"
-              class="h-12 w-auto"
+              class="h-10 w-auto mr-3"
             />
           </div>
-          <p class="text-gray-300 mb-6 leading-relaxed">
+          <p class="text-white text-sm leading-relaxed mb-6">
             Empowering professionals with industry-leading PLM and AI skills
             through hands-on, mentor-led courses.
           </p>
-          <div class="flex items-center space-x-4">
-            <span class="text-gray-400 text-sm">Follow us:</span>
+          <!-- Social Media Icons -->
+          <div class="flex justify-start gap-4">
             <a
               href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
+              class="text-white hover:text-blue-400 transition-colors duration-300"
+              aria-label="Facebook"
             >
-              <Icon name="mdi:facebook" class="text-xl" />
+              <Icon name="mdi:facebook" class="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
               href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
+              class="text-white hover:text-blue-400 transition-colors duration-300"
+              aria-label="Twitter"
             >
-              <Icon name="mdi:twitter" class="text-xl" />
+              <Icon name="mdi:twitter" class="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
               href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
+              class="text-white hover:text-pink-400 transition-colors duration-300"
+              aria-label="Instagram"
             >
-              <Icon name="mdi:instagram" class="text-xl" />
+              <Icon name="mdi:instagram" class="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
               href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
+              class="text-white hover:text-blue-600 transition-colors duration-300"
+              aria-label="LinkedIn"
             >
-              <Icon name="mdi:linkedin" class="text-xl" />
+              <Icon name="mdi:linkedin" class="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
               href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
+              class="text-white hover:text-red-500 transition-colors duration-300"
+              aria-label="YouTube"
             >
-              <Icon name="mdi:youtube" class="text-xl" />
+              <Icon name="mdi:youtube" class="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </div>
         </div>
 
-        <!-- For Users -->
-        <div>
-          <h3 class="text-lg font-semibold mb-6 relative">
+        <!-- For Users Column -->
+        <div class="text-left">
+          <h3 class="relative text-white font-bold text-lg mb-4 sm:mb-6 pl-5">
+            <span
+              class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
+            ></span>
             For Users
-            <div
-              class="absolute bottom-0 left-0 w-12 h-0.5 bg-brand mt-2"
-            ></div>
           </h3>
-          <ul class="space-y-4">
-            <li>
+          <ul class="space-y-3">
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - Browse Categories
+                Browse Categories
               </a>
             </li>
-            <li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - How it Works
+                How it Works
               </a>
             </li>
-            <li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - FAQs
+                FAQs
               </a>
             </li>
-            <li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - Contact Us
+                Contact Us
               </a>
             </li>
           </ul>
         </div>
 
-        <!-- For Businesses -->
-        <div>
-          <h3 class="text-lg font-semibold mb-6 relative">
+        <!-- For Businesses Column -->
+        <div class="text-left">
+          <h3 class="relative text-white font-bold text-lg mb-4 sm:mb-6 pl-5">
+            <span
+              class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
+            ></span>
             For Businesses
-            <div
-              class="absolute bottom-0 left-0 w-12 h-0.5 bg-brand mt-2"
-            ></div>
           </h3>
-          <ul class="space-y-4">
-            <li>
+
+          <ul class="space-y-3">
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - List Your Business
+                List Your Business
               </a>
             </li>
-            <li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - Business Login
+                Business Login
               </a>
             </li>
-            <li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - Advertising
+                Advertising
               </a>
             </li>
-            <li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
               <a
                 href="#"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                - Business Support
+                Business Support
               </a>
             </li>
           </ul>
         </div>
 
-        <!-- Get In Touch -->
-        <div>
-          <h3 class="text-lg font-semibold mb-6 relative">
+        <!-- Get In Touch Column -->
+        <div class="text-left">
+          <h3 class="relative text-white font-bold text-lg mb-4 sm:mb-6 pl-5">
+            <span
+              class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
+            ></span>
             Get In Touch
-            <div
-              class="absolute bottom-0 left-0 w-12 h-0.5 bg-brand mt-2"
-            ></div>
           </h3>
           <div class="space-y-4">
+            <!-- Address -->
             <div class="flex items-start">
               <Icon
                 name="mdi:map-marker"
-                class="text-brand text-xl mr-3 mt-1 flex-shrink-0"
+                class="w-5 h-5 text-white hover:text-gray-400 mr-3 mt-1 flex-shrink-0"
               />
-              <div class="text-gray-300">
-                <p>2499 Palm Ridge Rd, Sanibel</p>
-                <p>Florida 33957 USA</p>
-              </div>
+              <p class="hover:text-white text-sm leading-relaxed text-pretty">
+                2499 Palm Ridge Rd, Sanibel Florida 33957 USA
+              </p>
             </div>
+            <!-- Phone -->
             <div class="flex items-center">
               <Icon
                 name="mdi:phone"
-                class="text-brand text-xl mr-3 flex-shrink-0"
+                class="w-5 h-5 text-white mr-3 flex-shrink-0"
               />
               <a
                 href="tel:+11234567890"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white text-sm transition-colors"
               >
                 (123) 456-7890
               </a>
             </div>
+            <!-- Email -->
             <div class="flex items-center">
               <Icon
                 name="mdi:email"
-                class="text-brand text-xl mr-3 flex-shrink-0"
+                class="w-5 h-5 text-white mr-3 flex-shrink-0"
               />
               <a
                 href="mailto:info@teknikoz.com"
-                class="text-gray-300 hover:text-white transition-colors duration-300"
+                class="hover:text-white text-sm transition-colors"
               >
                 info@teknikoz.com
               </a>
@@ -185,26 +243,30 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Bottom Bar -->
-    <div class="border-t border-gray-800">
-      <div class="max-w-7xl mx-auto px-4 py-6">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <p class="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2025 TEKNIKOZ University. All Rights Reserved.
-          </p>
-          <div class="flex items-center space-x-6">
+      <!-- Bottom Bar -->
+      <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-700">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0"
+        >
+          <div class="text-center order-1 sm:order-2">
+            <p class="text-gray-400 text-sm">
+              &copy; {{ new Date().getFullYear() }}
+              TEKNIKOZ University. All Rights Reserved.
+            </p>
+          </div>
+          <div
+            class="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 order-3"
+          >
             <a
               href="#"
-              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:underline underline-offset-4"
             >
               Terms of Service
             </a>
-            <span class="text-gray-600">|</span>
             <a
               href="#"
-              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:underline underline-offset-4"
             >
               Privacy Policy
             </a>

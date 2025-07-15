@@ -3,12 +3,11 @@
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
       <div class="mb-16">
-        <h2
-          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
-        >
-          <span class="text-brand">Real Projects,</span> Real Impact
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          Real <span class="text-brand">Projects</span>, Real
+          <span class="text-brand">Impact</span>
         </h2>
-        <p class="text-lg text-gray-600 max-w-2xl">
+        <p class="text-lg text-gray-600 max-w-2xl text-pretty">
           Create portfolio-ready projects that impress recruiters and showcase
           your skills
         </p>
@@ -32,7 +31,7 @@
               <div
                 class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mr-4 flex-shrink-0"
               >
-                <Icon name="mdi:cog" class="text-white text-2xl" />
+                <Icon name="mdi:cog" class="text-white text-3xl" />
               </div>
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 mb-2">
@@ -42,9 +41,13 @@
                   Build a complete BOM management system with change control
                 </p>
                 <button
-                  class="text-brand font-semibold text-sm hover:underline"
+                  class="text-brand font-semibold text-sm flex items-center gap-2"
                 >
                   View Project Details
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="text-brand text-lg flex-shrink-0"
+                  />
                 </button>
               </div>
             </div>
@@ -64,7 +67,7 @@
               <div
                 class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mr-4 flex-shrink-0"
               >
-                <Icon name="mdi:brain" class="text-white text-2xl" />
+                <Icon name="mdi:brain" class="text-white text-3xl" />
               </div>
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 mb-2">
@@ -74,9 +77,13 @@
                   Develop machine learning models for industrial equipment
                 </p>
                 <button
-                  class="text-brand font-semibold text-sm hover:underline"
+                  class="text-brand font-semibold text-sm flex items-center gap-2"
                 >
                   View Project Details
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="text-brand text-lg flex-shrink-0"
+                  />
                 </button>
               </div>
             </div>
@@ -96,7 +103,7 @@
               <div
                 class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mr-4 flex-shrink-0"
               >
-                <Icon name="mdi:cloud-outline" class="text-white text-2xl" />
+                <Icon name="mdi:cloud-outline" class="text-white text-3xl" />
               </div>
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 mb-2">
@@ -106,9 +113,13 @@
                   Design scalable PLM infrastructure on AWS/Azure
                 </p>
                 <button
-                  class="text-brand font-semibold text-sm hover:underline"
+                  class="text-brand font-semibold text-sm flex items-center gap-2"
                 >
                   View Project Details
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="text-brand text-lg flex-shrink-0"
+                  />
                 </button>
               </div>
             </div>
@@ -123,7 +134,7 @@
                 <img
                   :src="projects[selectedProject].image"
                   :alt="projects[selectedProject].title"
-                  class="w-full h-[400px] object-cover transition-opacity duration-500"
+                  class="w-full h-[480px] object-cover transition-opacity duration-500"
                 />
                 <!-- PLM Badge -->
                 <div
@@ -140,7 +151,7 @@
       <!-- CTA Button -->
       <div class="text-center">
         <button
-          class="bg-gray-900 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-800 transition-colors duration-300"
+          class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-800 transition-colors duration-300"
         >
           See Project Examples
         </button>
@@ -165,12 +176,12 @@ const projects = ref([
   },
   {
     title: "AI-Powered Predictive Maintenance",
-    image: project1, // Using same image for now, you can add more project images
+    image: project1,
     category: "AI/ML",
   },
   {
     title: "Cloud PLM Architecture",
-    image: project1, // Using same image for now, you can add more project images
+    image: project1,
     category: "Cloud",
   },
 ]);
