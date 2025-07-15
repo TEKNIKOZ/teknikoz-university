@@ -1,17 +1,19 @@
 <template>
   <header
-    class="bg-white dark:bg-slate-800 shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700"
+    class="bg-white dark:bg-slate-800 shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 sm:px-0 px-4"
   >
-    <div class="container mx-auto max-w-7xl px-4">
+    <div class="container mx-auto max-w-7xl">
       <div class="flex items-center justify-between h-16 md:h-20">
         <!-- Logo -->
-        <div class="flex items-center">
-          <img
-            src="/assets/images/logo.png"
-            alt="Teknikoz University Logo"
-            class="h-8 md:h-12 w-auto"
-          />
-        </div>
+        <NuxtLink to="/">
+          <div class="flex items-center">
+            <img
+              src="/assets/images/logo.png"
+              alt="Teknikoz University Logo"
+              class="h-8 md:h-12 w-auto"
+            />
+          </div>
+        </NuxtLink>
 
         <!-- Desktop Navigation -->
         <nav class="hidden lg:flex items-center space-x-8">
@@ -45,7 +47,7 @@
         <div class="flex items-center space-x-2 md:space-x-4">
           <NuxtLink
             to="/enroll"
-            class="bg-gray-800 dark:bg-gray-700 text-white px-4 py-2 md:px-6 md:py-2 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200 font-medium text-sm md:text-base"
+            class="bg-brand text-white px-4 py-2 md:px-6 md:py-2 rounded-lg hover:bg-brand/90 transition-colors duration-200 font-medium text-sm md:text-base hover:shadow-sm"
           >
             Enroll Now
           </NuxtLink>

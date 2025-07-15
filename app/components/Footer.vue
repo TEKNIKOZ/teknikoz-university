@@ -1,6 +1,8 @@
 <template>
   <footer class="relative bg-gray-900 text-white">
-    <div class="container max-w-7xl mx-auto px-4 sm:px-6 sm:py-20 relative">
+    <div
+      class="container max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:pt-16 sm:pb-12 relative"
+    >
       <!-- Main Footer Content -->
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-gray-300"
@@ -9,7 +11,7 @@
         <div class="text-left">
           <div class="flex items-center mb-4 sm:mb-6">
             <img
-              :src="footerLogo"
+              src="/assets/images/footer-logo.png"
               alt="TEKNIKOZ University"
               class="h-10 w-auto mr-3"
             />
@@ -58,13 +60,13 @@
           </div>
         </div>
 
-        <!-- For Users Column -->
+        <!-- Quick Links Column -->
         <div class="text-left">
           <h3 class="relative text-white font-bold text-lg mb-4 sm:mb-6 pl-5">
             <span
               class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
             ></span>
-            For Users
+            Quick Links
           </h3>
           <ul class="space-y-3">
             <li
@@ -78,7 +80,7 @@
                 href="#"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                Browse Categories
+                About Us
               </a>
             </li>
             <li
@@ -89,10 +91,10 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/courses"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                How it Works
+                Courses
               </a>
             </li>
             <li
@@ -103,10 +105,10 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/mentors"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                FAQs
+                Mentors
               </a>
             </li>
             <li
@@ -117,24 +119,37 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/testimonials"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                Contact Us
+                Testimonials
+              </a>
+            </li>
+            <li
+              class="flex items-center transition-transform hover:translate-x-1 duration-300"
+            >
+              <Icon
+                name="mdi:chevron-right"
+                class="w-4 h-4 mr-2 text-brand/70"
+              />
+              <a
+                href="/contact"
+                class="hover:text-white transition-colors text-sm sm:text-base"
+              >
+                Contact
               </a>
             </li>
           </ul>
         </div>
 
-        <!-- For Businesses Column -->
+        <!-- Legal Column -->
         <div class="text-left">
           <h3 class="relative text-white font-bold text-lg mb-4 sm:mb-6 pl-5">
             <span
               class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
             ></span>
-            For Businesses
+            Legal
           </h3>
-
           <ul class="space-y-3">
             <li
               class="flex items-center transition-transform hover:translate-x-1 duration-300"
@@ -147,7 +162,7 @@
                 href="#"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                List Your Business
+                Privacy Policy
               </a>
             </li>
             <li
@@ -161,7 +176,7 @@
                 href="#"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                Business Login
+                Terms of Service
               </a>
             </li>
             <li
@@ -175,7 +190,7 @@
                 href="#"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                Advertising
+                Cookie Policy
               </a>
             </li>
             <li
@@ -189,7 +204,7 @@
                 href="#"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                Business Support
+                Refund Policy
               </a>
             </li>
           </ul>
@@ -276,8 +291,3 @@
     </div>
   </footer>
 </template>
-
-<script setup lang="ts">
-// Import footer logo
-import footerLogo from "@/assets/images/footer-logo.png";
-</script>

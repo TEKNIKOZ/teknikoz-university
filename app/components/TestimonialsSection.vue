@@ -1,12 +1,16 @@
 <template>
-  <section class="py-16 px-4 bg-orange-50">
+  <section class="py-8 sm:py-12 md:py-16 px-4 bg-orange-50">
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <div class="text-center mb-8 sm:mb-12 md:mb-16">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2"
+        >
           <span class="text-brand">Hear from</span> Our Champions
         </h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto text-pretty">
+        <p
+          class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto text-pretty px-2"
+        >
           Success stories from professionals who transformed their careers
         </p>
       </div>
@@ -18,139 +22,94 @@
             class="flex transition-transform duration-500 ease-in-out"
             :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
           >
-            <!-- Slide 1 -->
-            <div class="w-full flex-shrink-0 px-4">
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-2xl p-8 relative">
+            <!-- Individual testimonial slides for mobile, paired for desktop -->
+            <div
+              v-for="(testimonial, index) in testimonials"
+              :key="index"
+              class="w-full flex-shrink-0 px-2 sm:px-4"
+              v-show="isMobile || index % 2 === 0"
+            >
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
+              >
+                <!-- Current testimonial -->
+                <div
+                  class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 relative"
+                >
                   <div
-                    class="absolute top-4 right-4 text-6xl text-gray-200 font-sans"
+                    class="absolute top-2 right-2 sm:top-4 sm:right-4 text-4xl sm:text-5xl lg:text-6xl text-gray-200 font-sans"
                   >
                     "
                   </div>
-                  <div class="flex items-center mb-6">
-                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                  <div class="flex items-start sm:items-center mb-4 sm:mb-6">
+                    <div
+                      class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden mr-3 sm:mr-4 flex-shrink-0"
+                    >
                       <img
                         :src="testimonials[0].image"
                         :alt="testimonials[0].name"
                         class="w-full h-full object-cover"
                       />
                     </div>
-                    <div>
-                      <h4 class="text-lg font-bold text-gray-900">
-                        {{ testimonials[0].name }}
+                    <div class="min-w-0 flex-1">
+                      <h4
+                        class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 truncate"
+                      >
+                        {{ testimonial.name }}
                       </h4>
-                      <p class="text-brand text-sm">
-                        - {{ testimonials[0].role }}
+                      <p class="text-brand text-xs sm:text-sm truncate">
+                        - {{ testimonial.role }}
                       </p>
-                      <div class="flex text-yellow-400 text-sm mt-1">
+                      <div class="flex text-yellow-400 text-xs sm:text-sm mt-1">
                         <Icon v-for="star in 5" :key="star" name="mdi:star" />
                       </div>
                     </div>
                   </div>
-                  <p class="text-gray-600 leading-relaxed">
-                    "{{ testimonials[0].testimonial }}"
+                  <p
+                    class="text-gray-600 leading-relaxed text-xs sm:text-sm lg:text-base"
+                  >
+                    "{{ testimonial.testimonial }}"
                   </p>
                 </div>
 
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-2xl p-8 relative">
+                <!-- Next testimonial for desktop (hidden on mobile) -->
+                <div
+                  v-if="testimonials[index + 1] && index % 2 === 0"
+                  class="hidden sm:block bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 relative"
+                >
                   <div
-                    class="absolute top-4 right-4 text-6xl text-gray-200 font-sans"
+                    class="absolute top-2 right-2 sm:top-4 sm:right-4 text-4xl sm:text-5xl lg:text-6xl text-gray-200 font-sans"
                   >
                     "
                   </div>
-                  <div class="flex items-center mb-6">
-                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                  <div class="flex items-start sm:items-center mb-4 sm:mb-6">
+                    <div
+                      class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden mr-3 sm:mr-4 flex-shrink-0"
+                    >
                       <img
-                        :src="testimonials[1].image"
-                        :alt="testimonials[1].name"
+                        :src="testimonials[index + 1].image"
+                        :alt="testimonials[index + 1].name"
                         class="w-full h-full object-cover"
                       />
                     </div>
-                    <div>
-                      <h4 class="text-lg font-bold text-gray-900">
-                        {{ testimonials[1].name }}
+                    <div class="min-w-0 flex-1">
+                      <h4
+                        class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 truncate"
+                      >
+                        {{ testimonials[index + 1].name }}
                       </h4>
-                      <p class="text-brand text-sm">
-                        - {{ testimonials[1].role }}
+                      <p class="text-brand text-xs sm:text-sm truncate">
+                        - {{ testimonials[index + 1].role }}
                       </p>
-                      <div class="flex text-yellow-400 text-sm mt-1">
+                      <div class="flex text-yellow-400 text-xs sm:text-sm mt-1">
                         <Icon v-for="star in 5" :key="star" name="mdi:star" />
                       </div>
                     </div>
                   </div>
-                  <p class="text-gray-600 leading-relaxed">
-                    "{{ testimonials[1].testimonial }}"
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="w-full flex-shrink-0 px-4">
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-2xl p-8 relative">
-                  <div
-                    class="absolute top-4 right-4 text-6xl text-gray-200 font-sans"
+                  <p
+                    class="text-gray-600 leading-relaxed text-xs sm:text-sm lg:text-base"
                   >
-                    "
-                  </div>
-                  <div class="flex items-center mb-6">
-                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                      <img
-                        :src="testimonials[2].image"
-                        :alt="testimonials[2].name"
-                        class="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold text-gray-900">
-                        {{ testimonials[2].name }}
-                      </h4>
-                      <p class="text-brand text-sm">
-                        - {{ testimonials[2].role }}
-                      </p>
-                      <div class="flex text-yellow-400 text-sm mt-1">
-                        <Icon v-for="star in 5" :key="star" name="mdi:star" />
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-gray-600 leading-relaxed">
-                    "{{ testimonials[2].testimonial }}"
-                  </p>
-                </div>
-
-                <!-- Testimonial 4 -->
-                <div class="bg-white rounded-2xl p-8 relative">
-                  <div
-                    class="absolute top-4 right-4 text-6xl text-gray-200 font-sans"
-                  >
-                    "
-                  </div>
-                  <div class="flex items-center mb-6">
-                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                      <img
-                        :src="testimonials[3].image"
-                        :alt="testimonials[3].name"
-                        class="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold text-gray-900">
-                        {{ testimonials[3].name }}
-                      </h4>
-                      <p class="text-brand text-sm">
-                        - {{ testimonials[3].role }}
-                      </p>
-                      <div class="flex text-yellow-400 text-sm mt-1">
-                        <Icon v-for="star in 5" :key="star" name="mdi:star" />
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-gray-600 leading-relaxed">
-                    "{{ testimonials[3].testimonial }}"
+                    "{{ testimonials[index + 1].testimonial }}"
                   </p>
                 </div>
               </div>
@@ -159,13 +118,15 @@
         </div>
 
         <!-- Carousel Indicators -->
-        <div class="flex justify-center mt-8 space-x-2">
+        <div class="flex justify-center mt-6 sm:mt-8 space-x-2">
           <button
-            v-for="(slide, index) in totalSlides"
+            v-for="(slide, index) in isMobile
+              ? testimonials.length
+              : Math.ceil(testimonials.length / 2)"
             :key="index"
             @click="currentSlide = index"
             :class="[
-              'w-3 h-3 rounded-full transition-colors duration-300',
+              'w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors duration-300',
               currentSlide === index ? 'bg-gray-900' : 'bg-gray-300',
             ]"
           ></button>
@@ -176,53 +137,59 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-
-// Import testimonial images
-import testimonial1 from "@/assets/images/testimonial1.png";
-import testimonial2 from "@/assets/images/testimonial2.png";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 
 // Testimonials data
 const testimonials = [
   {
     name: "Rajesh Kumar",
+    image: "/assets/images/testimonial1.png",
     role: "AI Solutions Architect",
-    image: testimonial1,
     testimonial:
       "TEKNIKOZ transformed my career! I landed a PLM role at a top automotive company within 3 months of completing the course. The hands-on projects were exactly what I needed.",
   },
   {
     name: "Priya Sharma",
+    image: "/assets/images/testimonial2.png",
     role: "PLM Engineer at Tata Motors",
-    image: testimonial2,
     testimonial:
       "The AI/ML course was incredible. Real industry projects, expert mentorship, and practical learning approach. I'm now leading AI initiatives at my company.",
   },
   {
     name: "Amit Patel",
+    image: "/assets/images/testimonial1.png",
     role: "Senior Data Scientist",
-    image: testimonial1,
     testimonial:
       "The comprehensive curriculum and industry-relevant projects helped me transition from a traditional IT role to data science. The mentorship was outstanding and career support was exceptional.",
   },
   {
     name: "Sneha Reddy",
+    image: "/assets/images/testimonial2.png",
     role: "Product Manager at Microsoft",
-    image: testimonial2,
     testimonial:
       "TEKNIKOZ's product management course gave me the strategic thinking and technical skills I needed. The real-world case studies and networking opportunities were invaluable for my career growth.",
   },
 ];
 
 const currentSlide = ref(0);
-const totalSlides = ref(2);
 let autoSlideInterval: NodeJS.Timeout;
+
+// Check if screen is mobile
+const isMobile = computed(() => {
+  if (typeof window !== "undefined") {
+    return window.innerWidth < 640;
+  }
+  return false;
+});
 
 // Auto-slide functionality
 const startAutoSlide = () => {
   autoSlideInterval = setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % totalSlides.value;
-  }, 5000); // Change slide every 5 seconds
+    const maxSlides = isMobile.value
+      ? testimonials.length
+      : Math.ceil(testimonials.length / 2);
+    currentSlide.value = (currentSlide.value + 1) % maxSlides;
+  }, 5000);
 };
 
 const stopAutoSlide = () => {

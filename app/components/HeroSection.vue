@@ -37,9 +37,12 @@
               class="flex items-center justify-center lg:justify-start space-x-3"
             >
               <div
-                class="flex-shrink-0 w-5 h-5 bg-gray-600 rounded-full flex items-center justify-center"
+                class="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center"
               >
-                <Icon name="mdi:check" class="w-3 h-3 text-white" />
+                <Icon
+                  name="mdi:account-group"
+                  class="w-4 h-4 lg:w-5 lg:h-5 text-white"
+                />
               </div>
               <span
                 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200"
@@ -52,9 +55,12 @@
               class="flex items-center justify-center lg:justify-start space-x-3"
             >
               <div
-                class="flex-shrink-0 w-5 h-5 bg-gray-600 rounded-full flex items-center justify-center"
+                class="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center"
               >
-                <Icon name="mdi:check" class="w-3 h-3 text-white" />
+                <Icon
+                  name="mdi:chart-line"
+                  class="w-4 h-4 lg:w-5 lg:h-5 text-white"
+                />
               </div>
               <span
                 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200"
@@ -67,9 +73,12 @@
               class="flex items-center justify-center lg:justify-start space-x-3 sm:col-span-2"
             >
               <div
-                class="flex-shrink-0 w-5 h-5 bg-gray-600 rounded-full flex items-center justify-center"
+                class="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center"
               >
-                <Icon name="mdi:check" class="w-3 h-3 text-white" />
+                <Icon
+                  name="mdi:certificate"
+                  class="w-4 h-4 lg:w-5 lg:h-5 text-white"
+                />
               </div>
               <span
                 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200"
@@ -83,15 +92,23 @@
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <NuxtLink
               to="/enroll"
-              class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gray-900 dark:bg-gray-800 text-white font-semibold rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-200 text-sm sm:text-base"
+              class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-brand bg-brand text-white font-semibold rounded-full transition-all duration-200 text-sm sm:text-base group"
             >
+              <Icon
+                name="mdi:play-circle"
+                class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform"
+              />
               Start Learning Now
             </NuxtLink>
 
             <NuxtLink
               to="/consultation"
-              class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-brand text-brand font-semibold rounded-full hover:bg-brand hover:text-white transition-all duration-200 text-sm sm:text-base"
+              class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-brand text-brand font-semibold rounded-full hover:bg-brand hover:text-white transition-all duration-200 text-sm sm:text-base group"
             >
+              <Icon
+                name="mdi:calendar-clock"
+                class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform"
+              />
               Book a Free Consultation
             </NuxtLink>
           </div>
@@ -114,7 +131,7 @@
               class="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6"
             >
               <div
-                class="bg-gradient-to-r from-pink-400 to-pink-500 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold shadow-lg"
+                class="bg-gradient-to-r from-pink-400 to-pink-500 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-3 rounded-lg text-sm font-bold shadow-lg"
               >
                 Live Project<br />
                 <span class="text-xs font-medium">Windchill BOM Config</span>
@@ -125,7 +142,7 @@
               class="absolute bottom-3 sm:bottom-4 md:bottom-6 left-3 sm:left-4 md:left-6"
             >
               <div
-                class="bg-gradient-to-r from-green-400 to-green-500 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold shadow-lg"
+                class="bg-gradient-to-r from-green-400 to-green-500 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-3 rounded-lg text-sm font-bold shadow-lg"
               >
                 AI Certification<br />
                 <span class="text-xs sm:text-sm font-medium"
