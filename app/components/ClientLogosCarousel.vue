@@ -10,7 +10,7 @@
           <img
             :src="logo"
             :alt="`Client logo ${index + 1}`"
-            class="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+            class="max-w-full max-h-full object-contain"
             loading="lazy"
           />
         </div>
@@ -22,7 +22,7 @@
           <img
             :src="logo"
             :alt="`Client logo ${index + 1}`"
-            class="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+            class="max-w-full max-h-full object-contain"
             loading="lazy"
           />
         </div>
