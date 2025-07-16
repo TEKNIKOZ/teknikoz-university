@@ -45,12 +45,12 @@
 
         <!-- CTA Button & Mobile Menu Button -->
         <div class="flex items-center space-x-2 md:space-x-4">
-          <NuxtLink
-            to="/enroll"
+          <button
+            @click="contactStore.openModal()"
             class="bg-brand text-white px-4 py-2 md:px-6 md:py-2 rounded-lg hover:bg-brand/90 transition-colors duration-200 font-medium text-sm md:text-base hover:shadow-sm"
           >
             Enroll Now
-          </NuxtLink>
+          </button>
 
           <!-- Mobile menu button -->
           <button
@@ -106,6 +106,9 @@
 </template>
 
 <script setup lang="ts">
+import { useContactStore } from '@/stores/contact'
+
+const contactStore = useContactStore()
 const isMobileMenuOpen = ref(false);
 
 const toggleMobileMenu = () => {
