@@ -1,5 +1,5 @@
 <template>
-  <section class="relative px-4 pb-6 sm:pb-8">
+  <section class="relative px-4 pb-6 sm:pb-8 bg-gray-50">
     <!-- CTA Banner -->
     <div
       class="bg-gradient-to-br from-brand via-blue-600 to-blue-700 rounded-xl sm:rounded-2xl relative overflow-hidden max-w-6xl mx-auto"
