@@ -32,15 +32,24 @@
 </template>
 
 <script setup lang="ts">
+import clientLogo1 from "@/assets/images/client-logo1.png";
+import clientLogo2 from "@/assets/images/client-logo2.png";
+import clientLogo3 from "@/assets/images/client-logo3.png";
+import clientLogo4 from "@/assets/images/client-logo4.png";
+import clientLogo5 from "@/assets/images/client-logo5.png";
+import clientLogo6 from "@/assets/images/client-logo6.png";
+import clientLogo7 from "@/assets/images/client-logo7.png";
+import clientLogo8 from "@/assets/images/client-logo8.png";
+
 const logos = [
-  "/assets/images/client-logo1.png",
-  "/assets/images/client-logo2.png",
-  "/assets/images/client-logo3.png",
-  "/assets/images/client-logo4.png",
-  "/assets/images/client-logo5.png",
-  "/assets/images/client-logo6.png",
-  "/assets/images/client-logo7.png",
-  "/assets/images/client-logo8.png",
+  clientLogo1,
+  clientLogo2,
+  clientLogo3,
+  clientLogo4,
+  clientLogo5,
+  clientLogo6,
+  clientLogo7,
+  clientLogo8,
 ];
 </script>
 

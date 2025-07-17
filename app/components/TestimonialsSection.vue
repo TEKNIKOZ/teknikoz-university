@@ -138,33 +138,35 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
+import testimonial1 from "@/assets/images/testimonial1.png";
+import testimonial2 from "@/assets/images/testimonial2.png";
 
 // Testimonials data
 const testimonials = [
   {
     name: "Rajesh Kumar",
-    image: "/assets/images/testimonial1.png",
+    image: testimonial1,
     role: "AI Solutions Architect",
     testimonial:
       "TEKNIKOZ transformed my career! I landed a PLM role at a top automotive company within 3 months of completing the course. The hands-on projects were exactly what I needed.",
   },
   {
     name: "Priya Sharma",
-    image: "/assets/images/testimonial2.png",
+    image: testimonial2,
     role: "PLM Engineer at Tata Motors",
     testimonial:
       "The AI/ML course was incredible. Real industry projects, expert mentorship, and practical learning approach. I'm now leading AI initiatives at my company.",
   },
   {
     name: "Amit Patel",
-    image: "/assets/images/testimonial1.png",
+    image: testimonial1,
     role: "Senior Data Scientist",
     testimonial:
       "The comprehensive curriculum and industry-relevant projects helped me transition from a traditional IT role to data science. The mentorship was outstanding and career support was exceptional.",
   },
   {
     name: "Sneha Reddy",
-    image: "/assets/images/testimonial2.png",
+    image: testimonial2,
     role: "Product Manager at Microsoft",
     testimonial:
       "TEKNIKOZ's product management course gave me the strategic thinking and technical skills I needed. The real-world case studies and networking opportunities were invaluable for my career growth.",

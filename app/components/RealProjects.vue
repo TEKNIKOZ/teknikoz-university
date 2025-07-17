@@ -214,6 +214,9 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import windchillBom from "@/assets/images/windchill-bom.jpg";
+import aiPowered from "@/assets/images/ai-powered.jpg";
+import cloudPlm from "@/assets/images/cloud-plm.jpg";
 
 const selectedProject = ref(0);
 
@@ -221,17 +224,17 @@ const projects = ref([
   {
     title: "Windchill BOM Configuration",
     category: "PLM",
-    image: "/images/windchill-bom.jpg",
+    image: windchillBom,
   },
   {
     title: "AI-Powered Predictive Maintenance",
     category: "AI/ML",
-    image: "/images/ai-powered.jpg",
+    image: aiPowered,
   },
   {
     title: "Cloud PLM Architecture",
     category: "Cloud",
-    image: "/images/cloud-plm.jpg",
+    image: cloudPlm,
   },
 ]);
 
