@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative bg-white dark:bg-slate-900 py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden"
+    class="relative bg-white py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden"
   >
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div
@@ -12,15 +12,13 @@
           <h1
             class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-none mb-4 sm:mb-6"
           >
-            <span class="text-gray-900 dark:text-white">BECOME A </span>
+            <span class="text-gray-900">BECOME A </span>
             <span class="text-brand">PLM & AI CHAMPION</span>
-            <span class="text-gray-900 dark:text-white">
-              WITH REAL PROJECT EXPOSURE</span
-            >
+            <span class="text-gray-900"> WITH REAL PROJECT EXPOSURE</span>
           </h1>
 
           <!-- Subtitle -->
-          <div class="space-y-1 mb-6 sm:mb-8 text-gray-600 dark:text-gray-300">
+          <div class="space-y-1 mb-6 sm:mb-8 text-gray-600">
             <p class="text-base sm:text-lg font-medium">
               Learn from Industry Veterans. Get Certified.
             </p>
@@ -44,9 +42,7 @@
                   class="w-4 h-4 lg:w-5 lg:h-5 text-white"
                 />
               </div>
-              <span
-                class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200"
-              >
+              <span class="text-base sm:text-lg font-semibold text-gray-800">
                 <span class="text-brand">15,000+</span> Students Trained
               </span>
             </div>
@@ -62,9 +58,7 @@
                   class="w-4 h-4 lg:w-5 lg:h-5 text-white"
                 />
               </div>
-              <span
-                class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200"
-              >
+              <span class="text-base sm:text-lg font-semibold text-gray-800">
                 <span class="text-brand">95%</span> Success Rate
               </span>
             </div>
@@ -80,9 +74,7 @@
                   class="w-4 h-4 lg:w-5 lg:h-5 text-white"
                 />
               </div>
-              <span
-                class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200"
-              >
+              <span class="text-base sm:text-lg font-semibold text-gray-800">
                 Industry-Recognized Certifications
               </span>
             </div>
@@ -102,7 +94,7 @@
             </NuxtLink>
 
             <NuxtLink
-              to="/consultation"
+              to="/enroll"
               class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-brand text-brand font-semibold rounded-full hover:bg-brand hover:text-white transition-all duration-200 text-sm sm:text-base group"
             >
               <Icon

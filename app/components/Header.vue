@@ -1,6 +1,6 @@
 <template>
   <header
-    class="bg-white dark:bg-slate-800 shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 sm:px-0 px-4"
+    class="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200 sm:px-0 px-4"
   >
     <div class="container mx-auto max-w-7xl">
       <div class="flex items-center justify-between h-16 md:h-20">
@@ -8,7 +8,7 @@
         <NuxtLink to="/">
           <div class="flex items-center">
             <img
-              src="/assets/images/logo.png"
+              src="/assets/images/header-logo.svg"
               alt="Teknikoz University Logo"
               class="h-8 md:h-12 w-auto"
             />
@@ -19,25 +19,25 @@
         <nav class="hidden lg:flex items-center space-x-8">
           <NuxtLink
             to="/courses"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 font-medium"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
           >
             Courses
           </NuxtLink>
           <NuxtLink
             to="/mentors"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 font-medium"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
           >
             Mentors
           </NuxtLink>
           <NuxtLink
             to="/testimonials"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 font-medium"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
           >
             Testimonials
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 font-medium"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
           >
             Contact
           </NuxtLink>
@@ -55,7 +55,7 @@
           <!-- Mobile menu button -->
           <button
             @click="toggleMobileMenu"
-            class="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
           >
             <Icon
               :name="isMobileMenuOpen ? 'mdi:close' : 'mdi:menu'"
@@ -66,35 +66,32 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <nav
-        v-if="isMobileMenuOpen"
-        class="lg:hidden py-4 border-t dark:border-gray-700"
-      >
+      <nav v-if="isMobileMenuOpen" class="lg:hidden py-4 border-t">
         <div class="flex flex-col space-y-4">
           <NuxtLink
             to="/courses"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 py-2"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
             @click="closeMobileMenu"
           >
             Courses
           </NuxtLink>
           <NuxtLink
             to="/mentors"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 py-2"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
             @click="closeMobileMenu"
           >
             Mentors
           </NuxtLink>
           <NuxtLink
             to="/testimonials"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 py-2"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
             @click="closeMobileMenu"
           >
             Testimonials
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="text-gray-700 dark:text-gray-300 hover:text-brand transition-colors duration-200 py-2"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
             @click="closeMobileMenu"
           >
             Contact
@@ -106,9 +103,9 @@
 </template>
 
 <script setup lang="ts">
-import { useContactStore } from '@/stores/contact'
+import { useContactStore } from "@/stores/contact";
 
-const contactStore = useContactStore()
+const contactStore = useContactStore();
 const isMobileMenuOpen = ref(false);
 
 const toggleMobileMenu = () => {

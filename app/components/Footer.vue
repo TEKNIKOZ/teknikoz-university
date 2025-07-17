@@ -11,7 +11,7 @@
         <div class="text-left">
           <div class="flex items-center mb-4 sm:mb-6">
             <img
-              src="/assets/images/footer-logo.png"
+              src="/assets/images/footer-logo.svg"
               alt="TEKNIKOZ University"
               class="h-10 w-auto mr-3"
             />

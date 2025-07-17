@@ -180,9 +180,9 @@
             >
               <div class="relative">
                 <img
-                  src="/assets/images/project1.jpg"
+                  :src="projects[selectedProject].image"
                   :alt="projects[selectedProject].title"
-                  class="w-full h-[240px] sm:h-[300px] lg:h-[480px] object-cover transition-opacity duration-500"
+                  class="w-full h-[240px] sm:h-[300px] lg:h-[460px] object-cover transition-opacity duration-500"
                 />
                 <!-- PLM Badge -->
                 <div
@@ -221,14 +221,17 @@ const projects = ref([
   {
     title: "Windchill BOM Configuration",
     category: "PLM",
+    image: "/images/windchill-bom.jpg",
   },
   {
     title: "AI-Powered Predictive Maintenance",
     category: "AI/ML",
+    image: "/images/ai-powered.jpg",
   },
   {
     title: "Cloud PLM Architecture",
     category: "Cloud",
+    image: "/images/cloud-plm.jpg",
   },
 ]);
 
