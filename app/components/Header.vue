@@ -1,6 +1,11 @@
 <template>
   <header
-    class="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200 sm:px-0 px-4"
+    :class="[
+      'sticky top-0 z-50 sm:px-0 px-4 transition-all duration-300',
+      isScrolled
+        ? 'bg-white/85 backdrop-blur-md shadow-lg border-b border-gray-200/40'
+        : 'bg-white',
+    ]"
   >
     <div class="container mx-auto max-w-7xl">
       <div class="flex items-center justify-between h-16 md:h-20">
@@ -66,7 +71,15 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <nav v-if="isMobileMenuOpen" class="lg:hidden py-4 border-t">
+      <nav
+        v-if="isMobileMenuOpen"
+        :class="[
+          'lg:hidden py-4',
+          isScrolled
+            ? 'border-t border-gray-200/50'
+            : 'border-t border-white/20',
+        ]"
+      >
         <div class="flex flex-col space-y-4">
           <NuxtLink
             to="/courses"
@@ -107,6 +120,20 @@ import { useContactStore } from "@/stores/contact";
 
 const contactStore = useContactStore();
 const isMobileMenuOpen = ref(false);
+const isScrolled = ref(false);
+
+// Scroll detection
+onMounted(() => {
+  const handleScroll = () => {
+    isScrolled.value = window.scrollY > 10;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+  });
+});
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;

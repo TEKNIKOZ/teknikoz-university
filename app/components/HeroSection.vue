@@ -1,8 +1,19 @@
 <template>
-  <section
-    class="relative bg-white py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden"
-  >
-    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <section class="min-h-screen w-full relative overflow-hidden">
+    <!-- Radial Gradient Background -->
+    <div
+      class="absolute inset-0 z-0"
+      style="
+        background: radial-gradient(
+          125% 125% at 50% 90%,
+          #fff 50%,
+          rgba(21, 160, 231, 0.8) 100%
+        );
+      "
+    />
+    <div
+      class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 py-8 sm:py-12 md:py-16 lg:py-24"
+    >
       <div
         class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center"
       >
@@ -112,7 +123,7 @@
             <!-- Main Hero Image with rounded corners -->
             <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl">
               <img
-                src="/assets/images/header-banner.jpg"
+                src="/assets/images/hero-header.png"
                 alt="PLM & AI Champion"
                 class="w-full h-[280px] sm:h-[350px] md:h-[400px] lg:h-[500px] object-cover"
               />
@@ -123,7 +134,7 @@
               class="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6"
             >
               <div
-                class="bg-gradient-to-r from-pink-400 to-pink-500 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-3 rounded-lg text-sm font-bold shadow-lg"
+                class="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-3 rounded-lg text-sm font-bold shadow-lg"
               >
                 Live Project<br />
                 <span class="text-xs font-medium">Windchill BOM Config</span>
@@ -134,7 +145,7 @@
               class="absolute bottom-3 sm:bottom-4 md:bottom-6 left-3 sm:left-4 md:left-6"
             >
               <div
-                class="bg-gradient-to-r from-green-400 to-green-500 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-3 rounded-lg text-sm font-bold shadow-lg"
+                class="bg-gradient-to-r from-green-500 to-green-600 text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-3 rounded-lg text-sm font-bold shadow-lg"
               >
                 AI Certification<br />
                 <span class="text-xs sm:text-sm font-medium"

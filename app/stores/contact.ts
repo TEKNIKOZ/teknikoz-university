@@ -59,29 +59,69 @@ export const useContactStore = defineStore('contact', () => {
     clearErrors()
     let isValid = true
 
+    // Name validation
     if (!formData.value.name.trim()) {
       setError('name', 'Name is required')
       isValid = false
+    } else if (formData.value.name.trim().length < 2) {
+      setError('name', 'Name must be at least 2 characters long')
+      isValid = false
+    } else if (!/^[a-zA-Z\s'.,-]+$/.test(formData.value.name.trim())) {
+      setError('name', 'Name can only contain letters, spaces, and common punctuation')
+      isValid = false
     }
 
+    // Email validation
     if (!formData.value.email.trim()) {
       setError('email', 'Email is required')
       isValid = false
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.value.email)) {
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.value.email.trim())) {
       setError('email', 'Please enter a valid email address')
       isValid = false
     }
 
+    // Phone validation - exactly 10 digits
     if (!formData.value.phone.trim()) {
       setError('phone', 'Phone number is required')
       isValid = false
-    } else if (!/^\+?[\d\s-()]+$/.test(formData.value.phone)) {
-      setError('phone', 'Please enter a valid phone number')
+    } else {
+      // Remove all non-digit characters
+      const phoneDigits = formData.value.phone.replace(/\D/g, '')
+      if (phoneDigits.length !== 10) {
+        setError('phone', 'Phone number must be exactly 10 digits')
+        isValid = false
+      } else if (!/^[6-9]/.test(phoneDigits)) {
+        setError('phone', 'Phone number must start with 6, 7, 8, or 9')
+        isValid = false
+      }
+    }
+
+    // Course interest validation
+    const validCourses = [
+      'plm-windchill',
+      'siemens-teamcenter',
+      'cloud-solutions',
+      'web-development',
+      'data-science',
+      'mobile-development',
+      'devops',
+      'ai-ml',
+      'cybersecurity',
+      'cloud-computing',
+      'other'
+    ]
+    
+    if (!formData.value.courseInterest.trim()) {
+      setError('courseInterest', 'Please select a course')
+      isValid = false
+    } else if (!validCourses.includes(formData.value.courseInterest)) {
+      setError('courseInterest', 'Please select a valid course option')
       isValid = false
     }
 
-    if (!formData.value.courseInterest.trim()) {
-      setError('courseInterest', 'Please select a course')
+    // Message validation (optional but with length limit)
+    if (formData.value.message.trim().length > 500) {
+      setError('message', 'Message must be less than 500 characters')
       isValid = false
     }
 
