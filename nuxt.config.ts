@@ -47,10 +47,10 @@ export default defineNuxtConfig({
     public: {
       baseUrl:
         process.env.NUXT_PUBLIC_BASE_URL ||
-        "https://teknikoz-university.vercel.app",
+        "http://localhost:3000",
       baseUrlApi:
         process.env.NUXT_PUBLIC_BASE_URL_API ||
-        "https://teknikoz-university-backend.onrender.com/api",
+        "http://localhost:8080",
     },
   },
 });
