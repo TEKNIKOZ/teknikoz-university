@@ -32,14 +32,14 @@
 </template>
 
 <script setup lang="ts">
-import clientLogo1 from "@/assets/images/client-logo1.png";
-import clientLogo2 from "@/assets/images/client-logo2.png";
-import clientLogo3 from "@/assets/images/client-logo3.png";
-import clientLogo4 from "@/assets/images/client-logo4.png";
-import clientLogo5 from "@/assets/images/client-logo5.png";
-import clientLogo6 from "@/assets/images/client-logo6.png";
-import clientLogo7 from "@/assets/images/client-logo7.png";
-import clientLogo8 from "@/assets/images/client-logo8.png";
+import clientLogo1 from "@/assets/images/bosch.svg";
+import clientLogo2 from "@/assets/images/daimler-logo.svg";
+import clientLogo3 from "@/assets/images/ford-8.svg";
+import clientLogo4 from "@/assets/images/general-motors-2021--1.svg";
+import clientLogo5 from "@/assets/images/mahindra-mahindra-logo (1).svg";
+import clientLogo6 from "@/assets/images/renault.svg";
+import clientLogo7 from "@/assets/images/zf.svg";
+import clientLogo8 from "@/assets/images/volvo.svg";
 
 const logos = [
   clientLogo1,
@@ -59,13 +59,14 @@ const logos = [
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(calc(-100% / 2));
   }
 }
 
 .animate-scroll-infinite {
-  animation: scroll-infinite 20s linear infinite;
-  width: calc(200% + 4rem);
+  animation: scroll-infinite 30s linear infinite;
+  display: flex;
+  width: fit-content;
 }
 
 .animate-scroll-infinite:hover {

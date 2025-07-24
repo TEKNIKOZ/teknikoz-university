@@ -73,7 +73,7 @@ export default defineNuxtPlugin(() => {
                      baseURL: baseUrlApi,
                   }
                )
-               
+
                if (refreshResult?.success && refreshResult?.data?.accessToken) {
                   const newToken = refreshResult.data.accessToken
 
