@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen w-full relative overflow-hidden">
+  <section class="w-full relative overflow-hidden">
     <!-- Radial Gradient Background -->
     <div
       class="absolute inset-0 z-0"
