@@ -50,7 +50,7 @@ export default defineNuxtConfig({
         "http://localhost:3000",
       baseUrlApi:
         process.env.NUXT_PUBLIC_BASE_URL_API ||
-        "http://localhost:8080",
+        "https://teknikoz-univ-backend.onrender.com",
     },
   },
 });
