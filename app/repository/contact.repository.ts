@@ -50,6 +50,41 @@ export interface BrochureResponse {
   errors?: any[];
 }
 
+export interface Contact {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  course_interest: string;
+  message?: string;
+  form_type: 'contact' | 'brochure';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ContactsListResponse {
+  success: boolean;
+  data?: Contact[];
+  pagination?: {
+    limit: number;
+    offset: number;
+    total: number;
+  };
+  message?: string;
+}
+
+export interface ContactDetailResponse {
+  success: boolean;
+  data?: Contact;
+  message?: string;
+}
+
+export interface ContactsByEmailResponse {
+  success: boolean;
+  data?: Contact[];
+  message?: string;
+}
+
 export const contactRepository = (fetch: $Fetch) => {
   return {
     // Submit contact form
@@ -65,6 +100,48 @@ export const contactRepository = (fetch: $Fetch) => {
       return fetch(`/api/brochure-requests`, {
         method: "POST",
         body: formData,
+      });
+    },
+
+    // Get all contacts with pagination and filtering
+    getAllContacts: async (params?: {
+      limit?: number;
+      offset?: number;
+      form_type?: 'contact' | 'brochure';
+    }): Promise<ContactsListResponse> => {
+      const searchParams = new URLSearchParams();
+      
+      if (params?.limit) searchParams.append('limit', params.limit.toString());
+      if (params?.offset) searchParams.append('offset', params.offset.toString());
+      if (params?.form_type) searchParams.append('form_type', params.form_type);
+
+      const queryString = searchParams.toString();
+      const url = queryString ? `/api/contacts?${queryString}` : '/api/contacts';
+      
+      console.log('📡 API Request URL:', url);
+      
+      return fetch(url, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+    },
+
+    // Get contact by ID
+    getContactById: async (id: string): Promise<ContactDetailResponse> => {
+      return fetch(`/api/contacts/${id}`, {
+        method: "GET",
+      });
+    },
+
+    // Get contacts by email
+    getContactsByEmail: async (email: string): Promise<ContactsByEmailResponse> => {
+      return fetch(`/api/contacts/email/${encodeURIComponent(email)}`, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
       });
     },
   };
