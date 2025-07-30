@@ -5,6 +5,8 @@
     <main>
       <slot />
     </main>
-    <ContactFormModal />
+    <Footer />
+    <ContactModal />
+    <BrochureModal />
   </div>
 </template>

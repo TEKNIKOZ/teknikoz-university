@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { contactRepository, type ContactFormData as ApiContactFormData, type BrochureRequestData } from '@/repository/contact.repository'
 
 interface ContactFormData {
   name: string
@@ -8,90 +9,100 @@ interface ContactFormData {
   message: string
 }
 
+interface BrochureFormData {
+  name: string
+  email: string
+  phone: string
+  courseInterest: string
+  message: string
+}
+
 export const useContactStore = defineStore('contact', () => {
-  // Contact store state
-  const isModalOpen = ref(false)
-  const formData = ref<ContactFormData>({
+  // Contact form state
+  const isContactModalOpen = ref(false)
+  const contactFormData = ref<ContactFormData>({
     name: '',
     email: '',
     phone: '',
     courseInterest: '',
     message: ''
   })
-  const isSubmitting = ref(false)
-  const hasSubmitted = ref(false)
-  const canDownloadBrochure = ref(false)
-  const errors = ref<Record<string, string>>({})
+  const isContactSubmitting = ref(false)
+  const hasContactSubmitted = ref(false)
+  const contactErrors = ref<Record<string, string>>({})
 
-  // Open modal and reset submission state
-  const openModal = () => {
-    isModalOpen.value = true
-    // Reset hasSubmitted when opening modal to allow new submissions
-    hasSubmitted.value = false
+  // Brochure form state
+  const isBrochureModalOpen = ref(false)
+  const brochureFormData = ref<BrochureFormData>({
+    name: '',
+    email: '',
+    phone: '',
+    courseInterest: '',
+    message: ''
+  })
+  const isBrochureSubmitting = ref(false)
+  const hasBrochureSubmitted = ref(false)
+  const brochureErrors = ref<Record<string, string>>({})
+
+  // Contact Modal Actions
+  const openContactModal = () => {
+    isContactModalOpen.value = true
+    hasContactSubmitted.value = false
   }
 
-  // Close modal and reset form
-  const closeModal = () => {
-    isModalOpen.value = false
-    resetForm()
+  const closeContactModal = () => {
+    isContactModalOpen.value = false
+    resetContactForm()
   }
 
-  // Update form data and clear field errors
-  const updateFormData = (field: keyof ContactFormData, value: string) => {
-    formData.value[field] = value
-    if (errors.value[field]) {
-      delete errors.value[field]
-    }
+  // Brochure Modal Actions
+  const openBrochureModal = () => {
+    isBrochureModalOpen.value = true
+    hasBrochureSubmitted.value = false
   }
 
-  // Set error for a specific field
-  const setError = (field: string, message: string) => {
-    errors.value[field] = message
+  const closeBrochureModal = () => {
+    isBrochureModalOpen.value = false
+    resetBrochureForm()
   }
 
-  // Clear all errors
-  const clearErrors = () => {
-    errors.value = {}
-  }
-
-  // Validate form data
-  const validateForm = (): boolean => {
-    clearErrors()
+  // Contact Form Validation
+  const validateContactForm = (): boolean => {
+    contactErrors.value = {}
     let isValid = true
 
     // Name validation
-    if (!formData.value.name.trim()) {
-      setError('name', 'Name is required')
+    if (!contactFormData.value.name.trim()) {
+      contactErrors.value.name = 'Name is required'
       isValid = false
-    } else if (formData.value.name.trim().length < 2) {
-      setError('name', 'Name must be at least 2 characters long')
+    } else if (contactFormData.value.name.trim().length < 2) {
+      contactErrors.value.name = 'Name must be at least 2 characters long'
       isValid = false
-    } else if (!/^[a-zA-Z\s'.,-]+$/.test(formData.value.name.trim())) {
-      setError('name', 'Name can only contain letters, spaces, and common punctuation')
+    } else if (!/^[a-zA-Z\s'.,-]+$/.test(contactFormData.value.name.trim())) {
+      contactErrors.value.name = 'Name can only contain letters, spaces, and common punctuation'
       isValid = false
     }
 
     // Email validation
-    if (!formData.value.email.trim()) {
-      setError('email', 'Email is required')
+    if (!contactFormData.value.email.trim()) {
+      contactErrors.value.email = 'Email is required'
       isValid = false
-    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.value.email.trim())) {
-      setError('email', 'Please enter a valid email address')
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(contactFormData.value.email.trim())) {
+      contactErrors.value.email = 'Please enter a valid email address'
       isValid = false
     }
 
     // Phone validation - exactly 10 digits
-    if (!formData.value.phone.trim()) {
-      setError('phone', 'Phone number is required')
+    if (!contactFormData.value.phone.trim()) {
+      contactErrors.value.phone = 'Phone number is required'
       isValid = false
     } else {
-      // Remove all non-digit characters
-      const phoneDigits = formData.value.phone.replace(/\D/g, '')
+      const phoneDigits = contactFormData.value.phone.replace(/\D/g, '')
       if (phoneDigits.length !== 10) {
-        setError('phone', 'Phone number must be exactly 10 digits')
+        contactErrors.value.phone = 'Phone number must be exactly 10 digits'
         isValid = false
       } else if (!/^[6-9]/.test(phoneDigits)) {
-        setError('phone', 'Phone number must start with 6, 7, 8, or 9')
+        contactErrors.value.phone = 'Phone number must start with 6, 7, 8, or 9'
         isValid = false
       }
     }
@@ -111,127 +122,222 @@ export const useContactStore = defineStore('contact', () => {
       'other'
     ]
     
-    if (!formData.value.courseInterest.trim()) {
-      setError('courseInterest', 'Please select a course')
+    if (!contactFormData.value.courseInterest.trim()) {
+      contactErrors.value.courseInterest = 'Please select a course'
       isValid = false
-    } else if (!validCourses.includes(formData.value.courseInterest)) {
-      setError('courseInterest', 'Please select a valid course option')
+    } else if (!validCourses.includes(contactFormData.value.courseInterest)) {
+      contactErrors.value.courseInterest = 'Please select a valid course option'
       isValid = false
     }
 
     // Message validation (optional but with length limit)
-    if (formData.value.message.trim().length > 500) {
-      setError('message', 'Message must be less than 500 characters')
+    if (contactFormData.value.message.trim().length > 500) {
+      contactErrors.value.message = 'Message must be less than 500 characters'
       isValid = false
     }
 
     return isValid
   }
 
-  // Submit form data
-  const submitForm = async () => {
-    if (!validateForm()) return false
+  // Brochure Form Validation
+  const validateBrochureForm = (): boolean => {
+    brochureErrors.value = {}
+    let isValid = true
 
-    isSubmitting.value = true
+    // Name validation
+    if (!brochureFormData.value.name.trim()) {
+      brochureErrors.value.name = 'Name is required'
+      isValid = false
+    } else if (brochureFormData.value.name.trim().length < 2) {
+      brochureErrors.value.name = 'Name must be at least 2 characters long'
+      isValid = false
+    } else if (!/^[a-zA-Z\s'.,-]+$/.test(brochureFormData.value.name.trim())) {
+      brochureErrors.value.name = 'Name can only contain letters, spaces, and common punctuation'
+      isValid = false
+    }
+
+    // Email validation
+    if (!brochureFormData.value.email.trim()) {
+      brochureErrors.value.email = 'Email is required'
+      isValid = false
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(brochureFormData.value.email.trim())) {
+      brochureErrors.value.email = 'Please enter a valid email address'
+      isValid = false
+    }
+
+    // Phone validation - exactly 10 digits
+    if (!brochureFormData.value.phone.trim()) {
+      brochureErrors.value.phone = 'Phone number is required'
+      isValid = false
+    } else {
+      const phoneDigits = brochureFormData.value.phone.replace(/\D/g, '')
+      if (phoneDigits.length !== 10) {
+        brochureErrors.value.phone = 'Phone number must be exactly 10 digits'
+        isValid = false
+      } else if (!/^[6-9]/.test(phoneDigits)) {
+        brochureErrors.value.phone = 'Phone number must start with 6, 7, 8, or 9'
+        isValid = false
+      }
+    }
+
+    // Course interest validation
+    const validCourses = [
+      'plm-windchill',
+      'siemens-teamcenter',
+      'cloud-solutions',
+      'web-development',
+      'data-science',
+      'mobile-development',
+      'devops',
+      'ai-ml',
+      'cybersecurity',
+      'cloud-computing',
+      'other'
+    ]
+    
+    if (!brochureFormData.value.courseInterest.trim()) {
+      brochureErrors.value.courseInterest = 'Please select a course'
+      isValid = false
+    } else if (!validCourses.includes(brochureFormData.value.courseInterest)) {
+      brochureErrors.value.courseInterest = 'Please select a valid course option'
+      isValid = false
+    }
+
+    // Message validation (optional but with length limit)
+    if (brochureFormData.value.message.trim().length > 500) {
+      brochureErrors.value.message = 'Message must be less than 500 characters'
+      isValid = false
+    }
+
+    return isValid
+  }
+
+  // Submit contact form
+  const submitContactForm = async () => {
+    if (!validateContactForm()) return false
+
+    isContactSubmitting.value = true
 
     try {
-      // Simulate API call - replace with actual API call later
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const { $api } = useNuxtApp()
+      const repository = contactRepository($api)
 
-      // Mark as submitted and allow brochure download
-      hasSubmitted.value = true
-      canDownloadBrochure.value = true
+      // Prepare data for API
+      const apiData: ApiContactFormData = {
+        name: contactFormData.value.name.trim(),
+        email: contactFormData.value.email.trim(),
+        phone: contactFormData.value.phone.replace(/\D/g, ''), // Remove non-digits
+        course_interest: contactFormData.value.courseInterest,
+        message: contactFormData.value.message.trim() || undefined,
+        form_type: 'contact'
+      }
 
-      // Store submission in localStorage for persistence
-      localStorage.setItem('teknikoz_contact_submitted', 'true')
-      localStorage.setItem('teknikoz_contact_data', JSON.stringify(formData.value))
+      // Submit contact form
+      const response = await repository.submitContact(apiData)
+      
+      if (!response.success) {
+        throw new Error(response.message || 'Failed to submit contact form')
+      }
 
       return true
     } catch (error) {
-      console.error('Form submission error:', error)
+      console.error('Contact form submission error:', error)
+      contactErrors.value.submit = error instanceof Error ? error.message : 'Failed to submit form. Please try again.'
       return false
     } finally {
-      isSubmitting.value = false
+      isContactSubmitting.value = false
     }
   }
 
-  // Download brochure if allowed
-  const downloadBrochure = () => {
-    if (!canDownloadBrochure.value) return false
+  // Submit brochure request form
+  const submitBrochureForm = async () => {
+    if (!validateBrochureForm()) return false
 
-    // Create a temporary download link
-    const link = document.createElement('a')
-    link.href = '/brochure/teknikoz-university-brochure.pdf'
-    link.download = 'Teknikoz-University-Brochure.pdf'
-    link.click()
+    isBrochureSubmitting.value = true
 
-    return true
+    try {
+      const { $api } = useNuxtApp()
+      const repository = contactRepository($api)
+
+      // Prepare data for API
+      const apiData: BrochureRequestData = {
+        name: brochureFormData.value.name.trim(),
+        email: brochureFormData.value.email.trim(),
+        phone: brochureFormData.value.phone.replace(/\D/g, ''), // Remove non-digits
+        course_interest: brochureFormData.value.courseInterest,
+        message: brochureFormData.value.message.trim() || undefined
+      }
+
+      // Submit brochure request
+      const response = await repository.submitBrochureRequest(apiData)
+      
+      if (!response.success) {
+        throw new Error(response.message || 'Failed to submit brochure request')
+      }
+
+      return true
+    } catch (error) {
+      console.error('Brochure form submission error:', error)
+      brochureErrors.value.submit = error instanceof Error ? error.message : 'Failed to submit form. Please try again.'
+      return false
+    } finally {
+      isBrochureSubmitting.value = false
+    }
   }
 
-  // Reset form to initial state
-  const resetForm = () => {
-    formData.value = {
+  // Reset contact form
+  const resetContactForm = () => {
+    contactFormData.value = {
       name: '',
       email: '',
       phone: '',
       courseInterest: '',
       message: ''
     }
-    clearErrors()
-    isSubmitting.value = false
-    hasSubmitted.value = false
+    contactErrors.value = {}
+    isContactSubmitting.value = false
+    hasContactSubmitted.value = false
   }
 
-  // Clear all stored data (useful for testing)
-  const clearStoredData = () => {
-    localStorage.removeItem('teknikoz_contact_submitted')
-    localStorage.removeItem('teknikoz_contact_data')
-    canDownloadBrochure.value = false
-    hasSubmitted.value = false
-    resetForm()
-  }
-
-  // Check if user has previously submitted the form (only for brochure access)
-  const checkPreviousSubmission = () => {
-    const hasSubmittedStored = localStorage.getItem('teknikoz_contact_submitted')
-    if (hasSubmittedStored === 'true') {
-      // Only enable brochure download, don't set hasSubmitted to true
-      // This allows users to submit the form again while maintaining download access
-      canDownloadBrochure.value = true
-
-      const savedData = localStorage.getItem('teknikoz_contact_data')
-      if (savedData) {
-        try {
-          const parsedData = JSON.parse(savedData)
-          // Pre-fill form with previous data for convenience
-          formData.value = { ...parsedData }
-        } catch (error) {
-          console.error('Error parsing saved form data:', error)
-        }
-      }
+  // Reset brochure form
+  const resetBrochureForm = () => {
+    brochureFormData.value = {
+      name: '',
+      email: '',
+      phone: '',
+      courseInterest: '',
+      message: ''
     }
+    brochureErrors.value = {}
+    isBrochureSubmitting.value = false
+    hasBrochureSubmitted.value = false
   }
 
   return {
-    // State
-    isModalOpen,
-    formData,
-    isSubmitting,
-    hasSubmitted,
-    canDownloadBrochure,
-    errors,
+    // Contact form state
+    isContactModalOpen,
+    contactFormData,
+    isContactSubmitting,
+    hasContactSubmitted,
+    contactErrors,
+
+    // Brochure form state
+    isBrochureModalOpen,
+    brochureFormData,
+    isBrochureSubmitting,
+    hasBrochureSubmitted,
+    brochureErrors,
 
     // Actions
-    openModal,
-    closeModal,
-    updateFormData,
-    setError,
-    clearErrors,
-    validateForm,
-    submitForm,
-    downloadBrochure,
-    resetForm,
-    clearStoredData,
-    checkPreviousSubmission
+    openContactModal,
+    closeContactModal,
+    openBrochureModal,
+    closeBrochureModal,
+    validateContactForm,
+    validateBrochureForm,
+    submitContactForm,
+    submitBrochureForm,
+    resetContactForm,
+    resetBrochureForm
   }
 })

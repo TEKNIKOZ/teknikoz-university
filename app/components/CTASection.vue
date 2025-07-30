@@ -69,6 +69,7 @@
               class="flex flex-col sm:flex-row lg:flex-row gap-2 sm:gap-3 justify-center lg:justify-start mb-4 sm:mb-6"
             >
               <button
+                @click="contactStore.openContactModal()"
                 class="group bg-white text-gray-900 px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl text-sm"
               >
                 <Icon
@@ -78,6 +79,7 @@
                 Start Learning Now
               </button>
               <button
+                @click="contactStore.openContactModal()"
                 class="group bg-gray-900/80 backdrop-blur-sm text-white px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-gray-800 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl text-sm"
               >
                 <Icon
@@ -86,15 +88,7 @@
                 />
                 Book Free Consultation
               </button>
-              <button
-                class="group border-2 border-white/60 text-white px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-white hover:text-brand transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl text-sm"
-              >
-                <Icon
-                  name="mdi:download-outline"
-                  class="mr-1.5 sm:mr-2 text-sm sm:text-base group-hover:animate-pulse"
-                />
-                Download Course Brochure
-              </button>
+              <BrochureDownload variant="hero" />
             </div>
 
             <!-- Statistics -->
@@ -134,3 +128,9 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { useContactStore } from "@/stores/contact";
+
+const contactStore = useContactStore();
+</script>

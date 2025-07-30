@@ -110,11 +110,7 @@
 
       <!-- CTA Button -->
       <div class="text-center">
-        <button
-          class="w-full sm:w-auto bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-base sm:text-lg hover:bg-brand/80 transition-colors duration-300"
-        >
-          Download Course Brochure
-        </button>
+        <BrochureDownload />
       </div>
     </div>
   </section>

@@ -1,25 +1,22 @@
 <template>
   <div class="inline-block">
     <button
-      v-if="contactStore.canDownloadBrochure"
-      @click="handleDownload"
-      class="group border-2 border-green-400 text-green-400 px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-green-400 hover:text-white transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl text-sm"
+      @click="contactStore.openBrochureModal()"
+      :class="[
+        'group font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl',
+        variant === 'hero' 
+          ? 'border-2 border-white/60 text-white px-4 sm:px-5 py-3 rounded-full hover:bg-white hover:text-brand text-sm'
+          : 'w-full sm:w-auto bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full hover:bg-brand/80 text-base sm:text-lg'
+      ]"
     >
       <Icon
         name="mdi:download-outline"
-        class="mr-1.5 sm:mr-2 text-sm sm:text-base group-hover:animate-pulse"
-      />
-      Download Brochure
-    </button>
-
-    <button
-      v-else
-      @click="contactStore.openModal()"
-      class="group border-2 border-white/60 text-white px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-white hover:text-brand transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl text-sm"
-    >
-      <Icon
-        name="mdi:download-outline"
-        class="mr-1.5 sm:mr-2 text-sm sm:text-base group-hover:animate-pulse"
+        :class="[
+          'group-hover:animate-pulse',
+          variant === 'hero' 
+            ? 'mr-1.5 sm:mr-2 text-sm sm:text-base'
+            : 'mr-2 text-lg'
+        ]"
       />
       Download Course Brochure
     </button>
@@ -29,17 +26,13 @@
 <script setup lang="ts">
 import { useContactStore } from "@/stores/contact";
 
+interface Props {
+  variant?: 'hero' | 'section'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  variant: 'section'
+})
+
 const contactStore = useContactStore();
-
-// Check previous submission on mount
-onMounted(async () => {
-  await contactStore.checkPreviousSubmission();
-});
-
-const handleDownload = () => {
-  const success = contactStore.downloadBrochure();
-  if (success) {
-    console.log("Brochure downloaded successfully");
-  }
-};
 </script>
