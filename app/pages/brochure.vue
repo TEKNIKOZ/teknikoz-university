@@ -1,158 +1,370 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <div class="container mx-auto px-4 py-8">
-      <div class="max-w-6xl mx-auto">
-        <!-- Header -->
-        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">Course Brochure</h1>
-          <p class="text-gray-600">Comprehensive information about our courses and programs</p>
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">Brochure Management</h1>
+        <p class="text-gray-600">Manage and track all brochure requests and email deliveries</p>
+      </div>
+
+      <!-- Check if user is authenticated and has admin access -->
+      <div v-if="!authStore.isAuthenticated" class="bg-white rounded-lg shadow-sm p-8 text-center">
+        <Icon name="mdi:lock" class="w-16 h-16 text-gray-400 mx-auto mb-4" />
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Authentication Required</h2>
+        <p class="text-gray-600 mb-6">Please sign in to access brochure management</p>
+        <NuxtLink
+          to="/login"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-brand hover:bg-brand/90"
+        >
+          Sign In
+        </NuxtLink>
+      </div>
+
+      <!-- Main Content -->
+      <div v-else class="space-y-6">
+        <!-- Stats Cards -->
+        <div v-if="brochureStore.deliveryStats" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center">
+              <Icon name="mdi:file-document-multiple" class="w-8 h-8 text-blue-500" />
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Requests</p>
+                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.total_requests }}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center">
+              <Icon name="mdi:email-check" class="w-8 h-8 text-green-500" />
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Emails Sent</p>
+                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.emails_sent }}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center">
+              <Icon name="mdi:email-clock" class="w-8 h-8 text-yellow-500" />
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Pending</p>
+                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.emails_pending }}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center">
+              <Icon name="mdi:chart-line" class="w-8 h-8 text-purple-500" />
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Success Rate</p>
+                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.success_rate }}%</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Brochure Content -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <!-- Main Content -->
-          <div class="lg:col-span-2 space-y-6">
-            <!-- Course Overview -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-              <h2 class="text-2xl font-semibold text-gray-900 mb-4">Our Programs</h2>
-              <div class="space-y-4">
-                <div class="border-l-4 border-brand pl-4">
-                  <h3 class="text-lg font-medium text-gray-900">Full Stack Development</h3>
-                  <p class="text-gray-600 mt-1">Master modern web development with React, Node.js, and cloud technologies.</p>
-                </div>
-                <div class="border-l-4 border-brand pl-4">
-                  <h3 class="text-lg font-medium text-gray-900">Data Science & Analytics</h3>
-                  <p class="text-gray-600 mt-1">Learn Python, machine learning, and data visualization techniques.</p>
-                </div>
-                <div class="border-l-4 border-brand pl-4">
-                  <h3 class="text-lg font-medium text-gray-900">DevOps Engineering</h3>
-                  <p class="text-gray-600 mt-1">Master CI/CD, containerization, and cloud infrastructure management.</p>
-                </div>
-              </div>
+        <!-- Filters and Search -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Course Type Filter -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Course Type</label>
+              <select
+                v-model="brochureStore.filters.course_type"
+                @change="brochureStore.setCourseTypeFilter(brochureStore.filters.course_type)"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+              >
+                <option :value="undefined">All Types</option>
+                <option value="engineering">Engineering</option>
+                <option value="medical">Medical</option>
+                <option value="web-development">Web Development</option>
+                <option value="data-science">Data Science</option>
+                <option value="devops">DevOps</option>
+                <option value="ai-ml">AI/ML</option>
+                <option value="other">Other</option>
+              </select>
             </div>
 
-            <!-- Key Features -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-              <h2 class="text-2xl font-semibold text-gray-900 mb-4">Why Choose Us?</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-start space-x-3">
-                  <Icon name="mdi:check-circle" class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 class="font-medium text-gray-900">Expert Mentors</h3>
-                    <p class="text-sm text-gray-600">Learn from industry professionals with years of experience</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <Icon name="mdi:check-circle" class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 class="font-medium text-gray-900">Hands-on Projects</h3>
-                    <p class="text-sm text-gray-600">Build real-world applications and portfolio projects</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <Icon name="mdi:check-circle" class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 class="font-medium text-gray-900">Career Support</h3>
-                    <p class="text-sm text-gray-600">Job placement assistance and interview preparation</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <Icon name="mdi:check-circle" class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 class="font-medium text-gray-900">Lifetime Access</h3>
-                    <p class="text-sm text-gray-600">Access to course materials and community forever</p>
-                  </div>
-                </div>
-              </div>
+            <!-- Results per page -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Per Page</label>
+              <select
+                v-model="brochureStore.filters.limit"
+                @change="brochureStore.setLimit(brochureStore.filters.limit)"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+              >
+                <option :value="10">10</option>
+                <option :value="20">20</option>
+                <option :value="50">50</option>
+                <option :value="100">100</option>
+              </select>
             </div>
 
-            <!-- Course Structure -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-              <h2 class="text-2xl font-semibold text-gray-900 mb-4">Course Structure</h2>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span class="font-medium text-gray-900">Duration</span>
-                  <span class="text-gray-600">6-12 months</span>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span class="font-medium text-gray-900">Format</span>
-                  <span class="text-gray-600">Online & Self-paced</span>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span class="font-medium text-gray-900">Support</span>
-                  <span class="text-gray-600">24/7 Community & Mentors</span>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span class="font-medium text-gray-900">Certificate</span>
-                  <span class="text-gray-600">Industry-recognized completion certificate</span>
-                </div>
+            <!-- Contact ID Search -->
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Search by Contact ID</label>
+              <div class="flex">
+                <input
+                  v-model="contactIdSearch"
+                  type="text"
+                  placeholder="Enter contact ID..."
+                  class="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                  @keyup.enter="handleContactSearch"
+                />
+                <button
+                  @click="handleContactSearch"
+                  :disabled="brochureStore.isSearching"
+                  class="px-4 py-2 bg-brand text-white rounded-r-md hover:bg-brand/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Icon 
+                    :name="brochureStore.isSearching ? 'mdi:loading' : 'mdi:magnify'" 
+                    :class="['w-5 h-5', brochureStore.isSearching ? 'animate-spin' : '']"
+                  />
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- Sidebar -->
-          <div class="space-y-6">
-            <!-- Download Brochure -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Get Detailed Brochure</h3>
-              <p class="text-gray-600 mb-4">Download our comprehensive brochure with detailed curriculum and pricing information.</p>
+          <!-- Action Buttons -->
+          <div class="mt-4 flex justify-between items-center">
+            <div class="flex space-x-4">
               <button
-                @click="handleDownloadBrochure"
-                class="w-full bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand/90 transition-colors font-medium"
+                @click="brochureStore.resetFilters"
+                class="text-sm text-gray-600 hover:text-brand"
               >
-                <Icon name="mdi:download" class="inline w-5 h-5 mr-2" />
-                Download PDF
+                Reset Filters
+              </button>
+              <button
+                @click="loadPendingDeliveries"
+                class="text-sm text-gray-600 hover:text-brand"
+              >
+                View Pending Deliveries
               </button>
             </div>
-
-            <!-- Contact Info -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Need More Info?</h3>
-              <p class="text-gray-600 mb-4">Have questions about our programs? Get in touch with our admissions team.</p>
-              <NuxtLink
-                to="/contact"
-                class="w-full inline-block text-center bg-gray-100 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-              >
-                <Icon name="mdi:email" class="inline w-5 h-5 mr-2" />
-                Contact Us
-              </NuxtLink>
-            </div>
-
-            <!-- Testimonial -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Student Success</h3>
-              <blockquote class="text-gray-600 italic mb-3">
-                "The program exceeded my expectations. The mentors were incredibly supportive and the projects were challenging and relevant to real-world scenarios."
-              </blockquote>
-              <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-brand/10 rounded-full flex items-center justify-center">
-                  <Icon name="mdi:account" class="w-5 h-5 text-brand" />
-                </div>
-                <div>
-                  <p class="font-medium text-gray-900">Sarah Johnson</p>
-                  <p class="text-sm text-gray-600">Full Stack Developer</p>
-                </div>
-              </div>
+            <div class="text-sm text-gray-600">
+              Total: {{ brochureStore.pagination.total }} requests
             </div>
           </div>
         </div>
+
+        <!-- Contact Search Results -->
+        <div v-if="showContactResults" class="bg-white rounded-lg shadow-sm">
+          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+            <h3 class="text-lg font-medium text-gray-900">
+              Contact Search Results ({{ brochureStore.contactBrochures.length }})
+            </h3>
+            <button
+              @click="clearContactSearch"
+              class="text-sm text-gray-600 hover:text-brand"
+            >
+              Clear Search
+            </button>
+          </div>
+          <div class="divide-y divide-gray-200">
+            <div
+              v-for="brochure in brochureStore.contactBrochures"
+              :key="brochure.id"
+              class="p-4 hover:bg-gray-50 cursor-pointer"
+              @click="viewBrochure(brochure.id)"
+            >
+              <BrochureCard :brochure="brochure" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Deliveries -->
+        <div v-if="showPendingDeliveries" class="bg-white rounded-lg shadow-sm">
+          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+            <h3 class="text-lg font-medium text-gray-900">
+              Pending Email Deliveries ({{ brochureStore.pendingDeliveries.length }})
+            </h3>
+            <button
+              @click="showPendingDeliveries = false"
+              class="text-sm text-gray-600 hover:text-brand"
+            >
+              Hide Pending
+            </button>
+          </div>
+          <div class="divide-y divide-gray-200">
+            <div
+              v-for="brochure in brochureStore.pendingDeliveries"
+              :key="brochure.id"
+              class="p-4 hover:bg-gray-50 cursor-pointer"
+              @click="viewBrochure(brochure.id)"
+            >
+              <BrochureCard :brochure="brochure" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Brochure Requests List -->
+        <div v-if="!showContactResults && !showPendingDeliveries" class="bg-white rounded-lg shadow-sm">
+          <!-- Loading State -->
+          <div v-if="brochureStore.isLoading" class="p-8 text-center">
+            <Icon name="mdi:loading" class="w-8 h-8 text-brand animate-spin mx-auto mb-4" />
+            <p class="text-gray-600">Loading brochure requests...</p>
+          </div>
+
+          <!-- Error State -->
+          <div v-else-if="brochureStore.error" class="p-8 text-center">
+            <Icon name="mdi:alert-circle" class="w-8 h-8 text-red-500 mx-auto mb-4" />
+            <p class="text-red-600 mb-4">{{ brochureStore.error }}</p>
+            <button
+              @click="brochureStore.fetchBrochureRequests()"
+              class="px-4 py-2 bg-brand text-white rounded-md hover:bg-brand/90"
+            >
+              Retry
+            </button>
+          </div>
+
+          <!-- Brochure Requests List -->
+          <div v-else-if="brochureStore.brochureRequests.length > 0">
+            <div class="divide-y divide-gray-200">
+              <div
+                v-for="brochure in brochureStore.brochureRequests"
+                :key="brochure.id"
+                class="p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+                @click="viewBrochure(brochure.id)"
+              >
+                <BrochureCard :brochure="brochure" />
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="p-4 border-t border-gray-200 flex items-center justify-between">
+              <div class="text-sm text-gray-600">
+                Showing {{ brochureStore.filters.offset + 1 }} to 
+                {{ Math.min(brochureStore.filters.offset + brochureStore.filters.limit, brochureStore.pagination.total) }}
+                of {{ brochureStore.pagination.total }} requests
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <button
+                  @click="brochureStore.prevPage()"
+                  :disabled="!brochureStore.hasPrevPage"
+                  class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                >
+                  Previous
+                </button>
+                
+                <span class="text-sm text-gray-600">
+                  Page {{ brochureStore.currentPage }} of {{ brochureStore.totalPages }}
+                </span>
+                
+                <button
+                  @click="brochureStore.nextPage()"
+                  :disabled="!brochureStore.hasNextPage"
+                  class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div v-else class="p-8 text-center">
+            <Icon name="mdi:file-document-outline" class="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No brochure requests found</h3>
+            <p class="text-gray-600 mb-4">No requests match your current filters</p>
+            <button
+              @click="brochureStore.resetFilters"
+              class="px-4 py-2 bg-brand text-white rounded-md hover:bg-brand/90"
+            >
+              Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Brochure Detail Modal -->
+        <BrochureDetailModal
+          v-if="showBrochureDetail"
+          :brochure="brochureStore.selectedBrochure"
+          :is-resending="isResending"
+          @close="closeBrochureDetail"
+          @resend="handleResendBrochure"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const handleDownloadBrochure = () => {
-  // This would typically trigger a PDF download
-  // For now, we'll show an alert
-  alert('Brochure download would be implemented here. This would typically generate and download a PDF file.');
-};
+import { useBrochureManagementStore } from '@/stores/brochure-management'
+import { useAuthStore } from '@/stores/auth.stores'
+
+const brochureStore = useBrochureManagementStore()
+const authStore = useAuthStore()
+
+// Local state
+const contactIdSearch = ref('')
+const showBrochureDetail = ref(false)
+const showPendingDeliveries = ref(false)
+const isResending = ref(false)
+
+// Computed
+const showContactResults = computed(() => 
+  brochureStore.contactBrochures.length > 0 || brochureStore.searchError
+)
+
+// Methods
+const handleContactSearch = async () => {
+  if (contactIdSearch.value.trim()) {
+    await brochureStore.searchBrochuresByContact(contactIdSearch.value)
+  }
+}
+
+const clearContactSearch = () => {
+  contactIdSearch.value = ''
+  brochureStore.clearContactSearch()
+}
+
+const loadPendingDeliveries = async () => {
+  await brochureStore.fetchPendingDeliveries()
+  showPendingDeliveries.value = true
+}
+
+const viewBrochure = async (id: string) => {
+  await brochureStore.fetchBrochureById(id)
+  showBrochureDetail.value = true
+}
+
+const closeBrochureDetail = () => {
+  showBrochureDetail.value = false
+  brochureStore.clearSelectedBrochure()
+}
+
+const handleResendBrochure = async (id: string) => {
+  isResending.value = true
+  try {
+    await brochureStore.resendBrochure(id)
+    // Refresh the current brochure details
+    await brochureStore.fetchBrochureById(id)
+  } finally {
+    isResending.value = false
+  }
+}
+
+// Initialize data
+onMounted(async () => {
+  if (authStore.isAuthenticated) {
+    await Promise.all([
+      brochureStore.fetchBrochureRequests(),
+      brochureStore.fetchDeliveryStats()
+    ])
+  }
+})
 
 // SEO
 useHead({
-  title: 'Course Brochure - Teknikoz University',
+  title: "Brochure Management - Teknikoz University",
   meta: [
-    { name: 'description', content: 'Download our comprehensive course brochure with detailed information about our programs, curriculum, and pricing.' }
-  ]
-});
+    {
+      name: "description",
+      content: "Manage and track all brochure requests and email deliveries for Teknikoz University",
+    },
+  ],
+})
 </script>
