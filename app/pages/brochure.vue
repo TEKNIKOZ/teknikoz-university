@@ -3,15 +3,26 @@
     <div class="container mx-auto px-4 py-8">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Brochure Management</h1>
-        <p class="text-gray-600">Manage and track all brochure requests and email deliveries</p>
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">
+          Brochure Management
+        </h1>
+        <p class="text-gray-600">
+          Manage and track all brochure requests and email deliveries
+        </p>
       </div>
 
       <!-- Check if user is authenticated and has admin access -->
-      <div v-if="!authStore.isAuthenticated" class="bg-white rounded-lg shadow-sm p-8 text-center">
+      <div
+        v-if="!authStore.isAuthenticated"
+        class="bg-white rounded-lg shadow-sm p-8 text-center"
+      >
         <Icon name="mdi:lock" class="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h2 class="text-xl font-semibold text-gray-900 mb-2">Authentication Required</h2>
-        <p class="text-gray-600 mb-6">Please sign in to access brochure management</p>
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">
+          Authentication Required
+        </h2>
+        <p class="text-gray-600 mb-6">
+          Please sign in to access brochure management
+        </p>
         <NuxtLink
           to="/login"
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-brand hover:bg-brand/90"
@@ -23,43 +34,60 @@
       <!-- Main Content -->
       <div v-else class="space-y-6">
         <!-- Stats Cards -->
-        <div v-if="brochureStore.deliveryStats" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div
+          v-if="brochureStore.deliveryStats"
+          class="grid grid-cols-1 md:grid-cols-4 gap-6"
+        >
           <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="flex items-center">
-              <Icon name="mdi:file-document-multiple" class="w-8 h-8 text-blue-500" />
+              <Icon
+                name="mdi:file-document-multiple"
+                class="w-8 h-8 text-blue-500"
+              />
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Total Requests</p>
-                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.total_requests }}</p>
+                <p class="text-2xl font-semibold text-gray-900">
+                  {{ brochureStore.deliveryStats.total_requests }}
+                </p>
               </div>
             </div>
           </div>
-          
+
           <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="flex items-center">
               <Icon name="mdi:email-check" class="w-8 h-8 text-green-500" />
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Emails Sent</p>
-                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.emails_sent }}</p>
+                <p class="text-2xl font-semibold text-gray-900">
+                  {{ brochureStore.deliveryStats.emails_sent }}
+                </p>
               </div>
             </div>
           </div>
-          
+
           <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="flex items-center">
-              <Icon name="mdi:email-clock" class="w-8 h-8 text-yellow-500" />
+              <Icon name="heroicons:clock" class="w-8 h-8 text-yellow-500" />
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Pending</p>
-                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.emails_pending }}</p>
+                <p class="text-2xl font-semibold text-gray-900">
+                  {{ brochureStore.deliveryStats.emails_pending }}
+                </p>
               </div>
             </div>
           </div>
-          
+
           <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="flex items-center">
-              <Icon name="mdi:chart-line" class="w-8 h-8 text-purple-500" />
+              <Icon
+                name="heroicons:chart-bar"
+                class="w-8 h-8 text-purple-500"
+              />
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Success Rate</p>
-                <p class="text-2xl font-semibold text-gray-900">{{ brochureStore.deliveryStats.success_rate }}%</p>
+                <p class="text-2xl font-semibold text-gray-900">
+                  {{ brochureStore.deliveryStats.success_rate }}%
+                </p>
               </div>
             </div>
           </div>
@@ -70,10 +98,16 @@
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <!-- Course Type Filter -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Course Type</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Course Type</label
+              >
               <select
                 v-model="brochureStore.filters.course_type"
-                @change="brochureStore.setCourseTypeFilter(brochureStore.filters.course_type)"
+                @change="
+                  brochureStore.setCourseTypeFilter(
+                    brochureStore.filters.course_type
+                  )
+                "
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
               >
                 <option :value="undefined">All Types</option>
@@ -89,7 +123,9 @@
 
             <!-- Results per page -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Per Page</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Per Page</label
+              >
               <select
                 v-model="brochureStore.filters.limit"
                 @change="brochureStore.setLimit(brochureStore.filters.limit)"
@@ -104,7 +140,9 @@
 
             <!-- Contact ID Search -->
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Search by Contact ID</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Search by Contact ID</label
+              >
               <div class="flex">
                 <input
                   v-model="contactIdSearch"
@@ -115,12 +153,17 @@
                 />
                 <button
                   @click="handleContactSearch"
-                  :disabled="brochureStore.isSearching"
+                  :disabled="isSearching"
                   class="px-4 py-2 bg-brand text-white rounded-r-md hover:bg-brand/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Icon 
-                    :name="brochureStore.isSearching ? 'mdi:loading' : 'mdi:magnify'" 
-                    :class="['w-5 h-5', brochureStore.isSearching ? 'animate-spin' : '']"
+                  <Icon
+                    :name="
+                      isSearching ? 'mdi:loading' : 'mdi:magnify'
+                    "
+                    :class="[
+                      'w-5 h-5',
+                      isSearching ? 'animate-spin' : '',
+                    ]"
                   />
                 </button>
               </div>
@@ -151,9 +194,13 @@
 
         <!-- Contact Search Results -->
         <div v-if="showContactResults" class="bg-white rounded-lg shadow-sm">
-          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+          <div
+            class="p-4 border-b border-gray-200 flex justify-between items-center"
+          >
             <h3 class="text-lg font-medium text-gray-900">
-              Contact Search Results ({{ brochureStore.contactBrochures.length }})
+              Contact Search Results ({{
+                brochureStore.contactBrochures.length
+              }})
             </h3>
             <button
               @click="clearContactSearch"
@@ -176,9 +223,13 @@
 
         <!-- Pending Deliveries -->
         <div v-if="showPendingDeliveries" class="bg-white rounded-lg shadow-sm">
-          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+          <div
+            class="p-4 border-b border-gray-200 flex justify-between items-center"
+          >
             <h3 class="text-lg font-medium text-gray-900">
-              Pending Email Deliveries ({{ brochureStore.pendingDeliveries.length }})
+              Pending Email Deliveries ({{
+                brochureStore.pendingDeliveries.length
+              }})
             </h3>
             <button
               @click="showPendingDeliveries = false"
@@ -200,19 +251,28 @@
         </div>
 
         <!-- Brochure Requests List -->
-        <div v-if="!showContactResults && !showPendingDeliveries" class="bg-white rounded-lg shadow-sm">
+        <div
+          v-if="!showContactResults && !showPendingDeliveries"
+          class="bg-white rounded-lg shadow-sm"
+        >
           <!-- Loading State -->
-          <div v-if="brochureStore.isLoading" class="p-8 text-center">
-            <Icon name="mdi:loading" class="w-8 h-8 text-brand animate-spin mx-auto mb-4" />
+          <div v-if="isLoading" class="p-8 text-center">
+            <Icon
+              name="mdi:loading"
+              class="w-8 h-8 text-brand animate-spin mx-auto mb-4"
+            />
             <p class="text-gray-600">Loading brochure requests...</p>
           </div>
 
           <!-- Error State -->
-          <div v-else-if="brochureStore.error" class="p-8 text-center">
-            <Icon name="mdi:alert-circle" class="w-8 h-8 text-red-500 mx-auto mb-4" />
-            <p class="text-red-600 mb-4">{{ brochureStore.error }}</p>
+          <div v-else-if="error" class="p-8 text-center">
+            <Icon
+              name="mdi:alert-circle"
+              class="w-8 h-8 text-red-500 mx-auto mb-4"
+            />
+            <p class="text-red-600 mb-4">{{ error }}</p>
             <button
-              @click="brochureStore.fetchBrochureRequests()"
+              @click="fetchBrochureData()"
               class="px-4 py-2 bg-brand text-white rounded-md hover:bg-brand/90"
             >
               Retry
@@ -233,42 +293,28 @@
             </div>
 
             <!-- Pagination -->
-            <div class="p-4 border-t border-gray-200 flex items-center justify-between">
-              <div class="text-sm text-gray-600">
-                Showing {{ brochureStore.filters.offset + 1 }} to 
-                {{ Math.min(brochureStore.filters.offset + brochureStore.filters.limit, brochureStore.pagination.total) }}
-                of {{ brochureStore.pagination.total }} requests
-              </div>
-              
-              <div class="flex items-center space-x-2">
-                <button
-                  @click="brochureStore.prevPage()"
-                  :disabled="!brochureStore.hasPrevPage"
-                  class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Previous
-                </button>
-                
-                <span class="text-sm text-gray-600">
-                  Page {{ brochureStore.currentPage }} of {{ brochureStore.totalPages }}
-                </span>
-                
-                <button
-                  @click="brochureStore.nextPage()"
-                  :disabled="!brochureStore.hasNextPage"
-                  class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Next
-                </button>
-              </div>
+            <div class="p-4 border-t border-gray-200">
+              <Pagination
+                :current-page="brochureStore.currentPage"
+                :total-items="brochureStore.pagination.total"
+                :per-page="brochureStore.filters.limit"
+                @page-change="brochureStore.goToPage"
+              />
             </div>
           </div>
 
           <!-- Empty State -->
           <div v-else class="p-8 text-center">
-            <Icon name="mdi:file-document-outline" class="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No brochure requests found</h3>
-            <p class="text-gray-600 mb-4">No requests match your current filters</p>
+            <Icon
+              name="mdi:file-document-outline"
+              class="w-16 h-16 text-gray-400 mx-auto mb-4"
+            />
+            <h3 class="text-lg font-medium text-gray-900 mb-2">
+              No brochure requests found
+            </h3>
+            <p class="text-gray-600 mb-4">
+              No requests match your current filters
+            </p>
             <button
               @click="brochureStore.resetFilters"
               class="px-4 py-2 bg-brand text-white rounded-md hover:bg-brand/90"
@@ -292,70 +338,111 @@
 </template>
 
 <script setup lang="ts">
-import { useBrochureManagementStore } from '@/stores/brochure-management'
-import { useAuthStore } from '@/stores/auth.stores'
+import { useBrochureManagementStore } from "@/stores/brochure.stores";
+import { useAuthStore } from "@/stores/auth.stores";
 
-const brochureStore = useBrochureManagementStore()
-const authStore = useAuthStore()
+const brochureStore = useBrochureManagementStore();
+const authStore = useAuthStore();
 
 // Local state
-const contactIdSearch = ref('')
-const showBrochureDetail = ref(false)
-const showPendingDeliveries = ref(false)
-const isResending = ref(false)
+const contactIdSearch = ref("");
+const showBrochureDetail = ref(false);
+const showPendingDeliveries = ref(false);
+const isResending = ref(false);
+const isLoading = ref(false);
+const error = ref<string | null>(null);
+const isSearching = ref(false);
+const searchError = ref<string | null>(null);
 
 // Computed
-const showContactResults = computed(() => 
-  brochureStore.contactBrochures.length > 0 || brochureStore.searchError
-)
+const showContactResults = computed(
+  () => brochureStore.contactBrochures.length > 0 || searchError.value
+);
 
 // Methods
 const handleContactSearch = async () => {
   if (contactIdSearch.value.trim()) {
-    await brochureStore.searchBrochuresByContact(contactIdSearch.value)
+    isSearching.value = true;
+    searchError.value = null;
+    const result = await brochureStore.searchBrochuresByContact(contactIdSearch.value);
+    if (!result.success) {
+      searchError.value = result.error || 'Failed to search brochure requests';
+    }
+    isSearching.value = false;
   }
-}
+};
 
 const clearContactSearch = () => {
-  contactIdSearch.value = ''
-  brochureStore.clearContactSearch()
-}
+  contactIdSearch.value = "";
+  searchError.value = null;
+  brochureStore.clearContactSearch();
+};
 
 const loadPendingDeliveries = async () => {
-  await brochureStore.fetchPendingDeliveries()
-  showPendingDeliveries.value = true
-}
+  isLoading.value = true;
+  error.value = null;
+  const result = await brochureStore.fetchPendingDeliveries();
+  if (result.success) {
+    showPendingDeliveries.value = true;
+  } else {
+    error.value = result.error || 'Failed to fetch pending deliveries';
+  }
+  isLoading.value = false;
+};
 
 const viewBrochure = async (id: string) => {
-  await brochureStore.fetchBrochureById(id)
-  showBrochureDetail.value = true
-}
+  const result = await brochureStore.fetchBrochureById(id);
+  if (result.success) {
+    showBrochureDetail.value = true;
+  }
+};
 
 const closeBrochureDetail = () => {
-  showBrochureDetail.value = false
-  brochureStore.clearSelectedBrochure()
-}
+  showBrochureDetail.value = false;
+  brochureStore.clearSelectedBrochure();
+};
 
 const handleResendBrochure = async (id: string) => {
-  isResending.value = true
+  isResending.value = true;
   try {
-    await brochureStore.resendBrochure(id)
-    // Refresh the current brochure details
-    await brochureStore.fetchBrochureById(id)
+    const result = await brochureStore.resendBrochure(id);
+    if (result.success) {
+      // Refresh the brochure requests and current brochure details
+      await fetchBrochureData();
+      await brochureStore.fetchBrochureById(id);
+    }
   } finally {
-    isResending.value = false
+    isResending.value = false;
   }
-}
+};
+
+// Data fetching function
+const fetchBrochureData = async () => {
+  isLoading.value = true;
+  error.value = null;
+  
+  const [brochuresResult, statsResult] = await Promise.all([
+    brochureStore.fetchBrochureRequests(),
+    brochureStore.fetchDeliveryStats()
+  ]);
+  
+  if (!brochuresResult.success) {
+    error.value = brochuresResult.error || 'Failed to fetch brochure requests';
+  }
+  
+  if (!statsResult.success) {
+    console.error('Failed to fetch delivery stats:', statsResult.error);
+  }
+  
+  isLoading.value = false;
+};
 
 // Initialize data
 onMounted(async () => {
   if (authStore.isAuthenticated) {
-    await Promise.all([
-      brochureStore.fetchBrochureRequests(),
-      brochureStore.fetchDeliveryStats()
-    ])
+    await fetchBrochureData();
   }
-})
+});
 
 // SEO
 useHead({
@@ -363,8 +450,9 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Manage and track all brochure requests and email deliveries for Teknikoz University",
+      content:
+        "Manage and track all brochure requests and email deliveries for Teknikoz University",
     },
   ],
-})
+});
 </script>

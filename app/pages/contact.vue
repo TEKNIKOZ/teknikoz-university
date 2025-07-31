@@ -67,12 +67,12 @@
                 />
                 <button
                   @click="handleEmailSearch"
-                  :disabled="contactStore.isSearching"
+                  :disabled="isSearching"
                   class="px-4 py-2 bg-brand text-white rounded-r-md hover:bg-brand/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Icon 
-                    :name="contactStore.isSearching ? 'mdi:loading' : 'mdi:magnify'" 
-                    :class="['w-5 h-5', contactStore.isSearching ? 'animate-spin' : '']"
+                    :name="isSearching ? 'mdi:loading' : 'mdi:magnify'" 
+                    :class="['w-5 h-5', isSearching ? 'animate-spin' : '']"
                   />
                 </button>
               </div>
@@ -121,17 +121,17 @@
         <!-- Contacts List -->
         <div v-if="!showEmailResults" class="bg-white rounded-lg shadow-sm">
           <!-- Loading State -->
-          <div v-if="contactStore.isLoading" class="p-8 text-center">
+          <div v-if="isLoading" class="p-8 text-center">
             <Icon name="mdi:loading" class="w-8 h-8 text-brand animate-spin mx-auto mb-4" />
             <p class="text-gray-600">Loading contacts...</p>
           </div>
 
           <!-- Error State -->
-          <div v-else-if="contactStore.error" class="p-8 text-center">
+          <div v-else-if="error" class="p-8 text-center">
             <Icon name="mdi:alert-circle" class="w-8 h-8 text-red-500 mx-auto mb-4" />
-            <p class="text-red-600 mb-4">{{ contactStore.error }}</p>
+            <p class="text-red-600 mb-4">{{ error }}</p>
             <button
-              @click="contactStore.fetchContacts()"
+              @click="fetchContactData()"
               class="px-4 py-2 bg-brand text-white rounded-md hover:bg-brand/90"
             >
               Retry
@@ -152,34 +152,13 @@
             </div>
 
             <!-- Pagination -->
-            <div class="p-4 border-t border-gray-200 flex items-center justify-between">
-              <div class="text-sm text-gray-600">
-                Showing {{ contactStore.filters.offset + 1 }} to 
-                {{ Math.min(contactStore.filters.offset + contactStore.filters.limit, contactStore.pagination.total) }}
-                of {{ contactStore.pagination.total }} contacts
-              </div>
-              
-              <div class="flex items-center space-x-2">
-                <button
-                  @click="contactStore.prevPage()"
-                  :disabled="!contactStore.hasPrevPage"
-                  class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Previous
-                </button>
-                
-                <span class="text-sm text-gray-600">
-                  Page {{ contactStore.currentPage }} of {{ contactStore.totalPages }}
-                </span>
-                
-                <button
-                  @click="contactStore.nextPage()"
-                  :disabled="!contactStore.hasNextPage"
-                  class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Next
-                </button>
-              </div>
+            <div class="p-4 border-t border-gray-200">
+              <Pagination
+                :current-page="contactStore.currentPage"
+                :total-items="contactStore.pagination.total"
+                :per-page="contactStore.filters.limit"
+                @page-change="contactStore.goToPage"
+              />
             </div>
           </div>
 
@@ -209,7 +188,7 @@
 </template>
 
 <script setup lang="ts">
-import { useContactManagementStore } from '@/stores/contact-management'
+import { useContactManagementStore } from '@/stores/contact.stores'
 import { useAuthStore } from '@/stores/auth.stores'
 
 const contactStore = useContactManagementStore()
@@ -218,27 +197,40 @@ const authStore = useAuthStore()
 // Local state
 const emailSearch = ref('')
 const showContactDetail = ref(false)
+const isLoading = ref(false)
+const error = ref<string | null>(null)
+const isSearching = ref(false)
+const searchError = ref<string | null>(null)
 
 // Computed
 const showEmailResults = computed(() => 
-  contactStore.emailSearchResults.length > 0 || contactStore.searchError
+  contactStore.emailSearchResults.length > 0 || searchError.value
 )
 
 // Methods
 const handleEmailSearch = async () => {
   if (emailSearch.value.trim()) {
-    await contactStore.searchContactsByEmail(emailSearch.value)
+    isSearching.value = true
+    searchError.value = null
+    const result = await contactStore.searchContactsByEmail(emailSearch.value)
+    if (!result.success) {
+      searchError.value = result.error || 'Failed to search contacts'
+    }
+    isSearching.value = false
   }
 }
 
 const clearEmailSearch = () => {
   emailSearch.value = ''
+  searchError.value = null
   contactStore.clearEmailSearch()
 }
 
 const viewContact = async (id: string) => {
-  await contactStore.fetchContactById(id)
-  showContactDetail.value = true
+  const result = await contactStore.fetchContactById(id)
+  if (result.success) {
+    showContactDetail.value = true
+  }
 }
 
 const closeContactDetail = () => {
@@ -246,10 +238,24 @@ const closeContactDetail = () => {
   contactStore.clearSelectedContact()
 }
 
+// Data fetching function
+const fetchContactData = async () => {
+  isLoading.value = true
+  error.value = null
+  
+  const result = await contactStore.fetchContacts()
+  
+  if (!result.success) {
+    error.value = result.error || 'Failed to fetch contacts'
+  }
+  
+  isLoading.value = false
+}
+
 // Initialize data
 onMounted(async () => {
   if (authStore.isAuthenticated) {
-    await contactStore.fetchContacts()
+    await fetchContactData()
   }
 })
 

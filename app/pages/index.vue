@@ -1,15 +1,14 @@
 <template>
   <div>
-    <EnrollmentPopup />
-    <HeroSection />
-    <ClientLogosCarousel />
-    <CoursesSection />
-    <MentorsSection />
-    <WhyStandsOut />
-    <TestimonialsSection />
-    <LearningPaths />
-    <RealProjects />
-    <CTASection />
-    <Footer />
+    <HomepageEnrollmentPopup />
+    <HomepageHeroSection />
+    <HomepageClientLogosCarousel />
+    <HomepageCoursesSection />
+    <HomepageMentorsSection />
+    <HomepageWhyStandsOut />
+    <HomepageTestimonialsSection />
+    <HomepageLearningPaths />
+    <HomepageRealProjects />
+    <HomepageCTASection />
   </div>
 </template>

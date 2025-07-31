@@ -73,7 +73,7 @@ export const authRepository = (fetch: $Fetch) => {
          email: string,
          password: string
       ): Promise<AuthRepositoryData> => {
-         return fetch(`/api/auth/login`, {
+         return fetch(`${apiUrl}/auth/login`, {
             method: "POST",
             body: { email, password },
             credentials: "include",
@@ -85,7 +85,7 @@ export const authRepository = (fetch: $Fetch) => {
          email: string,
          password: string
       ): Promise<AuthRepositoryData> => {
-         return fetch(`/api/auth/signup`, {
+         return fetch(`${apiUrl}/auth/signup`, {
             method: "POST",
             body: { fullname, email, password },
             credentials: "include",
@@ -93,14 +93,14 @@ export const authRepository = (fetch: $Fetch) => {
       },
 
       refreshToken: async (): Promise<{ success: boolean; data?: { accessToken: string; expiresIn: number }; message?: string }> => {
-         return fetch(`/api/auth/refresh-token`, {
+         return fetch(`${apiUrl}/auth/refresh-token`, {
             method: "POST",
             credentials: "include",
          });
       },
 
       logout: async (): Promise<{ success: boolean; message?: string; data?: null }> => {
-         return fetch(`/api/auth/logout`, {
+         return fetch(`${apiUrl}/auth/logout`, {
             method: "POST",
             credentials: "include",
          });

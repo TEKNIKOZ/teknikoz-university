@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="contactStore.isContactModalOpen"
+    v-if="brochureStore.isBrochureModalOpen"
     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4"
   >
     <div
@@ -14,13 +14,13 @@
           class="text-lg sm:text-2xl font-bold text-gray-900 flex-1 leading-tight"
         >
           {{
-            contactStore.hasContactSubmitted
+            brochureStore.hasBrochureSubmitted
               ? "Thank You!"
-              : "Contact Teknikoz University"
+              : "Download Course Brochure"
           }}
         </h2>
         <button
-          @click="contactStore.closeContactModal()"
+          @click="brochureStore.closeBrochureModal()"
           class="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-1 transition-colors flex-shrink-0 -mt-1"
         >
           <Icon
@@ -33,7 +33,7 @@
       <!-- Modal Content -->
       <div class="p-4 sm:p-6">
         <!-- Success State -->
-        <div v-if="contactStore.hasContactSubmitted" class="text-center">
+        <div v-if="brochureStore.hasBrochureSubmitted" class="text-center">
           <div
             class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
           >
@@ -43,14 +43,14 @@
             />
           </div>
           <p class="text-lg text-gray-700 mb-6">
-            Thank you for contacting us! We'll get back to you soon.
+            Thank you! The course brochure has been sent to your email address.
           </p>
         </div>
 
         <!-- Form State -->
         <div v-else>
           <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
-            Fill out the form below and we'll get in touch with you
+            Fill out the form below to receive the course brochure via email
           </p>
 
           <form @submit.prevent="handleSubmit" class="space-y-4">
@@ -59,46 +59,46 @@
               <!-- Name Field -->
               <div>
                 <label
-                  for="contact-name"
+                  for="brochure-name"
                   class="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Full Name *
                 </label>
                 <input
-                  id="contact-name"
-                  v-model="contactStore.contactFormData.name"
+                  id="brochure-name"
+                  v-model="brochureStore.brochureFormData.name"
                   type="text"
                   class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
                   placeholder="Enter your full name"
                 />
                 <p
-                  v-if="contactStore.contactErrors.name"
+                  v-if="brochureStore.brochureErrors.name"
                   class="text-red-500 text-sm mt-1"
                 >
-                  {{ contactStore.contactErrors.name }}
+                  {{ brochureStore.brochureErrors.name }}
                 </p>
               </div>
 
               <!-- Email Field -->
               <div>
                 <label
-                  for="contact-email"
+                  for="brochure-email"
                   class="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Email Address *
                 </label>
                 <input
-                  id="contact-email"
-                  v-model="contactStore.contactFormData.email"
+                  id="brochure-email"
+                  v-model="brochureStore.brochureFormData.email"
                   type="email"
                   class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
                   placeholder="Enter your email address"
                 />
                 <p
-                  v-if="contactStore.contactErrors.email"
+                  v-if="brochureStore.brochureErrors.email"
                   class="text-red-500 text-sm mt-1"
                 >
-                  {{ contactStore.contactErrors.email }}
+                  {{ brochureStore.brochureErrors.email }}
                 </p>
               </div>
             </div>
@@ -108,14 +108,14 @@
               <!-- Phone Field -->
               <div>
                 <label
-                  for="contact-phone"
+                  for="brochure-phone"
                   class="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Phone Number *
                 </label>
                 <input
-                  id="contact-phone"
-                  v-model="contactStore.contactFormData.phone"
+                  id="brochure-phone"
+                  v-model="brochureStore.brochureFormData.phone"
                   type="tel"
                   maxlength="10"
                   @input="handlePhoneInput"
@@ -123,25 +123,25 @@
                   placeholder="Enter your 10-digit phone number"
                 />
                 <p
-                  v-if="contactStore.contactErrors.phone"
+                  v-if="brochureStore.brochureErrors.phone"
                   class="text-red-500 text-sm mt-1"
                 >
-                  {{ contactStore.contactErrors.phone }}
+                  {{ brochureStore.brochureErrors.phone }}
                 </p>
               </div>
 
               <!-- Course Interest Field -->
               <div>
                 <label
-                  for="contact-courseInterest"
+                  for="brochure-courseInterest"
                   class="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Course Interest *
                 </label>
                 <div class="relative">
                   <select
-                    id="contact-courseInterest"
-                    v-model="contactStore.contactFormData.courseInterest"
+                    id="brochure-courseInterest"
+                    v-model="brochureStore.brochureFormData.courseInterest"
                     class="w-full px-3 py-2 pr-8 sm:px-4 sm:py-2 sm:pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent appearance-none bg-white text-sm sm:text-base"
                   >
                     <option value="">Select a course</option>
@@ -171,10 +171,10 @@
                   </div>
                 </div>
                 <p
-                  v-if="contactStore.contactErrors.courseInterest"
+                  v-if="brochureStore.brochureErrors.courseInterest"
                   class="text-red-500 text-sm mt-1"
                 >
-                  {{ contactStore.contactErrors.courseInterest }}
+                  {{ brochureStore.brochureErrors.courseInterest }}
                 </p>
               </div>
             </div>
@@ -182,39 +182,39 @@
             <!-- Message Field -->
             <div>
               <label
-                for="contact-message"
+                for="brochure-message"
                 class="block text-sm font-medium text-gray-700 mb-2"
               >
                 Message (Optional)
               </label>
               <textarea
-                id="contact-message"
-                v-model="contactStore.contactFormData.message"
+                id="brochure-message"
+                v-model="brochureStore.brochureFormData.message"
                 rows="3"
                 class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base resize-none"
-                placeholder="Tell us how we can help you..."
+                placeholder="Tell us about your goals and what you'd like to learn..."
               ></textarea>
             </div>
 
             <!-- Submit Error -->
-            <div v-if="contactStore.contactErrors.submit" class="text-red-500 text-sm mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-              {{ contactStore.contactErrors.submit }}
+            <div v-if="brochureStore.brochureErrors.submit" class="text-red-500 text-sm mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+              {{ brochureStore.brochureErrors.submit }}
             </div>
 
             <!-- Submit Button -->
             <div class="flex gap-3 sm:gap-4">
               <button
                 type="submit"
-                :disabled="contactStore.isContactSubmitting"
+                :disabled="brochureStore.isBrochureSubmitting"
                 class="flex-1 bg-brand text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg hover:bg-brand/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 text-sm sm:text-base font-medium"
               >
                 <Icon
-                  v-if="contactStore.isContactSubmitting"
+                  v-if="brochureStore.isBrochureSubmitting"
                   name="heroicons:arrow-path"
                   class="w-5 h-5 animate-spin"
                 />
                 <span>{{
-                  contactStore.isContactSubmitting ? "Submitting..." : "Submit"
+                  brochureStore.isBrochureSubmitting ? "Sending..." : "Send Brochure"
                 }}</span>
               </button>
             </div>
@@ -226,8 +226,8 @@
 </template>
 
 <script setup lang="ts">
-import { useContactStore } from "@/stores/contact";
-const contactStore = useContactStore();
+import { useBrochureStore } from "@/stores/brochure.stores";
+const brochureStore = useBrochureStore();
 
 // Handle phone input to allow only digits and limit to 10 characters
 const handlePhoneInput = (event: Event) => {
@@ -238,21 +238,21 @@ const handlePhoneInput = (event: Event) => {
   const limitedDigits = digitsOnly.slice(0, 10);
   // Update the input value and store
   target.value = limitedDigits;
-  contactStore.contactFormData.phone = limitedDigits;
+  brochureStore.brochureFormData.phone = limitedDigits;
 };
 
 const handleSubmit = async () => {
-  const success = await contactStore.submitContactForm();
+  const success = await brochureStore.submitBrochureForm();
   if (success) {
-    contactStore.hasContactSubmitted = true;
+    brochureStore.hasBrochureSubmitted = true;
   }
 };
 
 // Close modal on escape key
 onMounted(() => {
   const handleEscape = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && contactStore.isContactModalOpen) {
-      contactStore.closeContactModal();
+    if (e.key === "Escape" && brochureStore.isBrochureModalOpen) {
+      brochureStore.closeBrochureModal();
     }
   };
   document.addEventListener("keydown", handleEscape);

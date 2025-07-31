@@ -130,7 +130,7 @@
 </template>
 
 <script setup lang="ts">
-import { useContactStore } from "@/stores/contact";
+import { useContactStore } from "@/stores/contact.stores";
 
 const contactStore = useContactStore();
 </script>

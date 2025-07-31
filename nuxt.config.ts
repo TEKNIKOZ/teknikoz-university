@@ -47,7 +47,7 @@ export default defineNuxtConfig({
     public: {
       baseUrl:
         process.env.NUXT_PUBLIC_BASE_URL ||
-        "http://localhost:3000",
+        "https://e-learning.teknikoz.com",
       baseUrlApi:
         process.env.NUXT_PUBLIC_BASE_URL_API ||
         "https://teknikoz-univ-backend.onrender.com",
