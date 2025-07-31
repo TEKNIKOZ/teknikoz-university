@@ -1,7 +1,7 @@
 <template>
   <div class="inline-block">
     <button
-      @click="contactStore.openBrochureModal()"
+      @click="brochureStore.openBrochureModal()"
       :class="[
         'group font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl',
         variant === 'hero' 
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { useContactStore } from "@/stores/contact";
+import { useBrochureStore } from "@/stores/brochure.stores";
 
 interface Props {
   variant?: 'hero' | 'section'
@@ -34,5 +34,5 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'section'
 })
 
-const contactStore = useContactStore();
+const brochureStore = useBrochureStore();
 </script>

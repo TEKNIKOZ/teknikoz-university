@@ -236,7 +236,7 @@
 </template>
 
 <script setup lang="ts">
-import { useContactStore } from "@/stores/contact";
+import { useContactStore } from "@/stores/contact.stores";
 import { useAuthStore } from "@/stores/auth.stores";
 
 const contactStore = useContactStore();

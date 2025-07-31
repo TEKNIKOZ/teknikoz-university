@@ -1,6 +1,14 @@
 import { defineStore } from 'pinia'
-import { brochureRepository, type BrochureRequest } from '@/repository/contact.repository'
 import type { $Fetch } from 'nitropack'
+import { brochureRepository, type BrochureRequest, type BrochureRequestData } from '@/repository/brochure.repository'
+
+interface BrochureFormData {
+  name: string
+  email: string
+  phone: string
+  courseInterest: string
+  message: string
+}
 
 interface BrochureFilters {
   limit: number
@@ -27,8 +35,6 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
   const selectedBrochure = ref<BrochureRequest | null>(null)
   const pendingDeliveries = ref<BrochureRequest[]>([])
   const deliveryStats = ref<BrochureDeliveryStats | null>(null)
-  const isLoading = ref(false)
-  const error = ref<string | null>(null)
   const pagination = ref<BrochurePagination>({
     limit: 20,
     offset: 0,
@@ -44,17 +50,12 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
 
   // Contact search
   const contactBrochures = ref<BrochureRequest[]>([])
-  const isSearching = ref(false)
-  const searchError = ref<string | null>(null)
 
   // Actions
   const fetchBrochureRequests = async (resetOffset = false) => {
     if (resetOffset) {
       filters.value.offset = 0
     }
-
-    isLoading.value = true
-    error.value = null
 
     try {
       const { $api } = useNuxtApp()
@@ -76,20 +77,17 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
         pagination.value = response.pagination
       }
 
-      return true
+      return { success: true, data: response }
     } catch (err) {
       console.error('Error fetching brochure requests:', err)
-      error.value = err instanceof Error ? err.message : 'Failed to fetch brochure requests'
-      return false
-    } finally {
-      isLoading.value = false
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to fetch brochure requests'
+      }
     }
   }
 
   const fetchBrochureById = async (id: string) => {
-    isLoading.value = true
-    error.value = null
-
     try {
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
@@ -101,21 +99,18 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
       }
 
       selectedBrochure.value = response.data || null
-      return true
+      return { success: true, data: response.data }
     } catch (err) {
       console.error('Error fetching brochure request:', err)
-      error.value = err instanceof Error ? err.message : 'Failed to fetch brochure request'
       selectedBrochure.value = null
-      return false
-    } finally {
-      isLoading.value = false
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to fetch brochure request'
+      }
     }
   }
 
   const fetchPendingDeliveries = async (limit = 50) => {
-    isLoading.value = true
-    error.value = null
-
     try {
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
@@ -127,20 +122,17 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
       }
 
       pendingDeliveries.value = response.data || []
-      return true
+      return { success: true, data: response.data }
     } catch (err) {
       console.error('Error fetching pending deliveries:', err)
-      error.value = err instanceof Error ? err.message : 'Failed to fetch pending deliveries'
-      return false
-    } finally {
-      isLoading.value = false
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to fetch pending deliveries'
+      }
     }
   }
 
   const fetchDeliveryStats = async () => {
-    isLoading.value = true
-    error.value = null
-
     try {
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
@@ -152,24 +144,21 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
       }
 
       deliveryStats.value = response.data || null
-      return true
+      return { success: true, data: response.data }
     } catch (err) {
       console.error('Error fetching delivery stats:', err)
-      error.value = err instanceof Error ? err.message : 'Failed to fetch delivery stats'
-      return false
-    } finally {
-      isLoading.value = false
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to fetch delivery stats'
+      }
     }
   }
 
   const searchBrochuresByContact = async (contactId: string) => {
     if (!contactId.trim()) {
       contactBrochures.value = []
-      return
+      return { success: true, data: [] }
     }
-
-    isSearching.value = true
-    searchError.value = null
 
     try {
       const { $api } = useNuxtApp()
@@ -182,21 +171,18 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
       }
 
       contactBrochures.value = response.data || []
-      return true
+      return { success: true, data: response.data }
     } catch (err) {
       console.error('Error searching brochure requests by contact:', err)
-      searchError.value = err instanceof Error ? err.message : 'Failed to search brochure requests'
       contactBrochures.value = []
-      return false
-    } finally {
-      isSearching.value = false
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to search brochure requests'
+      }
     }
   }
 
   const resendBrochure = async (id: string) => {
-    isLoading.value = true
-    error.value = null
-
     try {
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
@@ -207,15 +193,13 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
         throw new Error(response.message || 'Failed to resend brochure')
       }
 
-      // Refresh the brochure requests after resending
-      await fetchBrochureRequests()
-      return true
+      return { success: true, data: response }
     } catch (err) {
       console.error('Error resending brochure:', err)
-      error.value = err instanceof Error ? err.message : 'Failed to resend brochure'
-      return false
-    } finally {
-      isLoading.value = false
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to resend brochure'
+      }
     }
   }
 
@@ -268,7 +252,6 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
 
   const clearContactSearch = () => {
     contactBrochures.value = []
-    searchError.value = null
   }
 
   // Computed
@@ -283,13 +266,9 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     selectedBrochure,
     pendingDeliveries,
     deliveryStats,
-    isLoading,
-    error,
     pagination,
     filters,
     contactBrochures,
-    isSearching,
-    searchError,
 
     // Actions
     fetchBrochureRequests,
@@ -312,5 +291,170 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     totalPages,
     hasNextPage,
     hasPrevPage
+  }
+})
+
+export const useBrochureStore = defineStore('brochure', () => {
+  // Brochure form state
+  const isBrochureModalOpen = ref(false)
+  const brochureFormData = ref<BrochureFormData>({
+    name: '',
+    email: '',
+    phone: '',
+    courseInterest: '',
+    message: ''
+  })
+  const isBrochureSubmitting = ref(false)
+  const hasBrochureSubmitted = ref(false)
+  const brochureErrors = ref<Record<string, string>>({})
+
+  // Brochure Modal Actions
+  const openBrochureModal = () => {
+    isBrochureModalOpen.value = true
+    hasBrochureSubmitted.value = false
+  }
+
+  const closeBrochureModal = () => {
+    isBrochureModalOpen.value = false
+    resetBrochureForm()
+  }
+
+  // Brochure Form Validation
+  const validateBrochureForm = (): boolean => {
+    brochureErrors.value = {}
+    let isValid = true
+
+    // Name validation
+    if (!brochureFormData.value.name.trim()) {
+      brochureErrors.value.name = 'Name is required'
+      isValid = false
+    } else if (brochureFormData.value.name.trim().length < 2) {
+      brochureErrors.value.name = 'Name must be at least 2 characters long'
+      isValid = false
+    } else if (!/^[a-zA-Z\s'.,-]+$/.test(brochureFormData.value.name.trim())) {
+      brochureErrors.value.name = 'Name can only contain letters, spaces, and common punctuation'
+      isValid = false
+    }
+
+    // Email validation
+    if (!brochureFormData.value.email.trim()) {
+      brochureErrors.value.email = 'Email is required'
+      isValid = false
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(brochureFormData.value.email.trim())) {
+      brochureErrors.value.email = 'Please enter a valid email address'
+      isValid = false
+    }
+
+    // Phone validation - exactly 10 digits
+    if (!brochureFormData.value.phone.trim()) {
+      brochureErrors.value.phone = 'Phone number is required'
+      isValid = false
+    } else {
+      const phoneDigits = brochureFormData.value.phone.replace(/\D/g, '')
+      if (phoneDigits.length !== 10) {
+        brochureErrors.value.phone = 'Phone number must be exactly 10 digits'
+        isValid = false
+      } else if (!/^[6-9]/.test(phoneDigits)) {
+        brochureErrors.value.phone = 'Phone number must start with 6, 7, 8, or 9'
+        isValid = false
+      }
+    }
+
+    // Course interest validation
+    const validCourses = [
+      'plm-windchill',
+      'siemens-teamcenter',
+      'cloud-solutions',
+      'web-development',
+      'data-science',
+      'mobile-development',
+      'devops',
+      'ai-ml',
+      'cybersecurity',
+      'cloud-computing',
+      'other'
+    ]
+
+    if (!brochureFormData.value.courseInterest.trim()) {
+      brochureErrors.value.courseInterest = 'Please select a course'
+      isValid = false
+    } else if (!validCourses.includes(brochureFormData.value.courseInterest)) {
+      brochureErrors.value.courseInterest = 'Please select a valid course option'
+      isValid = false
+    }
+
+    // Message validation (optional but with length limit)
+    if (brochureFormData.value.message.trim().length > 500) {
+      brochureErrors.value.message = 'Message must be less than 500 characters'
+      isValid = false
+    }
+
+    return isValid
+  }
+
+  // Submit brochure request form
+  const submitBrochureForm = async () => {
+    if (!validateBrochureForm()) return false
+
+    isBrochureSubmitting.value = true
+
+    try {
+      const { $api } = useNuxtApp()
+      const repository = brochureRepository($api as $Fetch)
+
+      // Prepare data for API
+      const apiData: BrochureRequestData = {
+        name: brochureFormData.value.name.trim(),
+        email: brochureFormData.value.email.trim(),
+        phone: brochureFormData.value.phone.replace(/\D/g, ''), // Remove non-digits
+        course_interest: brochureFormData.value.courseInterest,
+        message: brochureFormData.value.message.trim() || undefined
+      }
+
+      // Submit brochure request
+      const response = await repository.submitBrochureRequest(apiData)
+
+      if (!response.success) {
+        throw new Error(response.message || 'Failed to submit brochure request')
+      }
+
+      return true
+    } catch (error) {
+      console.error('Brochure form submission error:', error)
+      brochureErrors.value.submit = error instanceof Error ? error.message : 'Failed to submit form. Please try again.'
+      return false
+    } finally {
+      isBrochureSubmitting.value = false
+    }
+  }
+
+  // Reset brochure form
+  const resetBrochureForm = () => {
+    brochureFormData.value = {
+      name: '',
+      email: '',
+      phone: '',
+      courseInterest: '',
+      message: ''
+    }
+    brochureErrors.value = {}
+    isBrochureSubmitting.value = false
+    hasBrochureSubmitted.value = false
+  }
+
+  return {
+    // Brochure form state
+    isBrochureModalOpen,
+    brochureFormData,
+    isBrochureSubmitting,
+    hasBrochureSubmitted,
+    brochureErrors,
+
+    // Actions
+    openBrochureModal,
+    closeBrochureModal,
+    validateBrochureForm,
+    submitBrochureForm,
+    resetBrochureForm
   }
 })
