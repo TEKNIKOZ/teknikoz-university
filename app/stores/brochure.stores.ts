@@ -23,9 +23,9 @@ interface BrochurePagination {
 }
 
 interface BrochureDeliveryStats {
-  total_requests: number
-  emails_sent: number
-  emails_pending: number
+  total: number
+  sent: number
+  pending: number
   success_rate: number
 }
 
@@ -143,7 +143,14 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
         throw new Error(response.message || 'Failed to fetch delivery stats')
       }
 
-      deliveryStats.value = response.data || null
+      if (response.data) {
+        deliveryStats.value = {
+          ...response.data,
+          success_rate: response.data.total > 0 ? Math.round((response.data.sent / response.data.total) * 100) : 0
+        }
+      } else {
+        deliveryStats.value = null
+      }
       return { success: true, data: response.data }
     } catch (err) {
       console.error('Error fetching delivery stats:', err)

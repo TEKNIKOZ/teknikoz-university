@@ -47,7 +47,7 @@
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Total Requests</p>
                 <p class="text-2xl font-semibold text-gray-900">
-                  {{ brochureStore.deliveryStats.total_requests }}
+                  {{ brochureStore.deliveryStats.total }}
                 </p>
               </div>
             </div>
@@ -59,7 +59,7 @@
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Emails Sent</p>
                 <p class="text-2xl font-semibold text-gray-900">
-                  {{ brochureStore.deliveryStats.emails_sent }}
+                  {{ brochureStore.deliveryStats.sent }}
                 </p>
               </div>
             </div>
@@ -71,7 +71,7 @@
               <div class="ml-4">
                 <p class="text-sm font-medium text-gray-600">Pending</p>
                 <p class="text-2xl font-semibold text-gray-900">
-                  {{ brochureStore.deliveryStats.emails_pending }}
+                  {{ brochureStore.deliveryStats.pending }}
                 </p>
               </div>
             </div>
