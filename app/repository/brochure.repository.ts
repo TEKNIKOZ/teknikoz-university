@@ -71,10 +71,9 @@ export interface BrochurePendingDeliveryResponse {
 export interface BrochureDeliveryStatsResponse {
   success: boolean;
   data?: {
-    total_requests: number;
-    emails_sent: number;
-    emails_pending: number;
-    success_rate: number;
+    total: number;
+    sent: number;
+    pending: number;
   };
   message?: string;
 }
@@ -112,10 +111,6 @@ export const brochureRepository = (fetch: $Fetch) => {
 
       return fetch(url, {
         method: "GET",
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
       });
     },
 
@@ -132,10 +127,6 @@ export const brochureRepository = (fetch: $Fetch) => {
 
       return fetch(url, {
         method: "GET",
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
       });
     },
 
@@ -143,10 +134,6 @@ export const brochureRepository = (fetch: $Fetch) => {
     getDeliveryStats: async (): Promise<BrochureDeliveryStatsResponse> => {
       return fetch(`${apiUrl}/brochure-requests/stats/email-delivery`, {
         method: "GET",
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
       });
     },
 
@@ -154,9 +141,6 @@ export const brochureRepository = (fetch: $Fetch) => {
     getBrochureRequestsByContact: async (contactId: string): Promise<BrochureRequestsByContactResponse> => {
       return fetch(`${apiUrl}/brochure-requests/contact/${contactId}`, {
         method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-        },
       });
     },
 
@@ -164,9 +148,6 @@ export const brochureRepository = (fetch: $Fetch) => {
     getBrochureRequestById: async (id: string): Promise<BrochureRequestDetailResponse> => {
       return fetch(`${apiUrl}/brochure-requests/${id}`, {
         method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-        },
       });
     },
 
@@ -174,10 +155,6 @@ export const brochureRepository = (fetch: $Fetch) => {
     resendBrochure: async (id: string): Promise<BrochureResendResponse> => {
       return fetch(`${apiUrl}/brochure-requests/${id}/resend`, {
         method: "POST",
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
       });
     },
   };
