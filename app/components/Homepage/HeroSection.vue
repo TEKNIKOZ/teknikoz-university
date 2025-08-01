@@ -1,16 +1,5 @@
 <template>
   <section class="w-full relative overflow-hidden">
-    <!-- Radial Gradient Background -->
-    <div
-      class="absolute inset-0 z-0"
-      style="
-        background: radial-gradient(
-          125% 125% at 50% 90%,
-          #fff 50%,
-          rgba(21, 160, 231, 0.8) 100%
-        );
-      "
-    />
     <div
       class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 py-8 sm:py-12 md:py-16 lg:py-24"
     >

@@ -157,13 +157,8 @@
                   class="px-4 py-2 bg-brand text-white rounded-r-md hover:bg-brand/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Icon
-                    :name="
-                      isSearching ? 'mdi:loading' : 'mdi:magnify'
-                    "
-                    :class="[
-                      'w-5 h-5',
-                      isSearching ? 'animate-spin' : '',
-                    ]"
+                    :name="isSearching ? 'mdi:loading' : 'mdi:magnify'"
+                    :class="['w-5 h-5', isSearching ? 'animate-spin' : '']"
                   />
                 </button>
               </div>
@@ -213,7 +208,7 @@
             <div
               v-for="brochure in brochureStore.contactBrochures"
               :key="brochure.id"
-              class="p-4 hover:bg-gray-50 cursor-pointer"
+              class="p-4 cursor-pointer"
               @click="viewBrochure(brochure.id)"
             >
               <BrochureCard :brochure="brochure" />
@@ -364,9 +359,11 @@ const handleContactSearch = async () => {
   if (contactIdSearch.value.trim()) {
     isSearching.value = true;
     searchError.value = null;
-    const result = await brochureStore.searchBrochuresByContact(contactIdSearch.value);
+    const result = await brochureStore.searchBrochuresByContact(
+      contactIdSearch.value
+    );
     if (!result.success) {
-      searchError.value = result.error || 'Failed to search brochure requests';
+      searchError.value = result.error || "Failed to search brochure requests";
     }
     isSearching.value = false;
   }
@@ -385,7 +382,7 @@ const loadPendingDeliveries = async () => {
   if (result.success) {
     showPendingDeliveries.value = true;
   } else {
-    error.value = result.error || 'Failed to fetch pending deliveries';
+    error.value = result.error || "Failed to fetch pending deliveries";
   }
   isLoading.value = false;
 };
@@ -420,20 +417,20 @@ const handleResendBrochure = async (id: string) => {
 const fetchBrochureData = async () => {
   isLoading.value = true;
   error.value = null;
-  
+
   const [brochuresResult, statsResult] = await Promise.all([
     brochureStore.fetchBrochureRequests(),
-    brochureStore.fetchDeliveryStats()
+    brochureStore.fetchDeliveryStats(),
   ]);
-  
+
   if (!brochuresResult.success) {
-    error.value = brochuresResult.error || 'Failed to fetch brochure requests';
+    error.value = brochuresResult.error || "Failed to fetch brochure requests";
   }
-  
+
   if (!statsResult.success) {
-    console.error('Failed to fetch delivery stats:', statsResult.error);
+    console.error("Failed to fetch delivery stats:", statsResult.error);
   }
-  
+
   isLoading.value = false;
 };
 
