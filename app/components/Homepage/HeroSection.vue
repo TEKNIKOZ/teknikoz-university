@@ -93,16 +93,16 @@
               Start Learning Now
             </NuxtLink>
 
-            <NuxtLink
-              to="/enroll"
+            <button
+              @click="brochureStore.openBrochureModal()"
               class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-brand text-brand font-semibold rounded-full hover:bg-brand hover:text-white transition-all duration-200 text-sm sm:text-base group"
             >
               <Icon
-                name="mdi:calendar-clock"
+                name="mdi:file-download"
                 class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform"
               />
-              Book a Free Consultation
-            </NuxtLink>
+              Download Brochure
+            </button>
           </div>
         </div>
 
@@ -146,5 +146,14 @@
         </div>
       </div>
     </div>
+
+    <!-- Brochure Modal -->
+    <BrochureModal />
   </section>
 </template>
+
+<script setup lang="ts">
+import { useBrochureStore } from "@/stores/brochure.stores";
+
+const brochureStore = useBrochureStore();
+</script>
