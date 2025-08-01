@@ -197,7 +197,10 @@
             </div>
 
             <!-- Submit Error -->
-            <div v-if="brochureStore.brochureErrors.submit" class="text-red-500 text-sm mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <div
+              v-if="brochureStore.brochureErrors.submit"
+              class="text-red-500 text-sm mb-4 p-3 bg-red-50 border border-red-200 rounded-lg"
+            >
               {{ brochureStore.brochureErrors.submit }}
             </div>
 
@@ -214,7 +217,9 @@
                   class="w-5 h-5 animate-spin"
                 />
                 <span>{{
-                  brochureStore.isBrochureSubmitting ? "Sending..." : "Send Brochure"
+                  brochureStore.isBrochureSubmitting
+                    ? "Sending..."
+                    : "Send Brochure"
                 }}</span>
               </button>
             </div>

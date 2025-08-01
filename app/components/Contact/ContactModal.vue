@@ -197,7 +197,10 @@
             </div>
 
             <!-- Submit Error -->
-            <div v-if="contactStore.contactErrors.submit" class="text-red-500 text-sm mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <div
+              v-if="contactStore.contactErrors.submit"
+              class="text-red-500 text-sm mb-4 p-3 bg-red-50 border border-red-200 rounded-lg"
+            >
               {{ contactStore.contactErrors.submit }}
             </div>
 

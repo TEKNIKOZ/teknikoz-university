@@ -4,7 +4,7 @@
       'sticky top-0 z-50 sm:px-0 px-4 transition-all duration-300',
       isScrolled
         ? 'bg-white backdrop-blur-sm shadow-sm border-b border-gray-200/40'
-        : 'bg-white',
+        : 'bg-white shadow-sm',
     ]"
   >
     <div class="container mx-auto max-w-7xl">
@@ -79,9 +79,12 @@
               >
                 <Icon name="mdi:account-circle" class="w-5 h-5" />
                 <span>{{ authStore.fullname }}</span>
-                <Icon 
-                  name="mdi:chevron-down" 
-                  :class="['w-4 h-4 transition-transform duration-200', isUserDropdownOpen ? 'rotate-180' : '']"
+                <Icon
+                  name="mdi:chevron-down"
+                  :class="[
+                    'w-4 h-4 transition-transform duration-200',
+                    isUserDropdownOpen ? 'rotate-180' : '',
+                  ]"
                 />
               </button>
 
@@ -157,75 +160,164 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <nav
-        v-if="isMobileMenuOpen"
-        :class="[
-          'lg:hidden py-4',
-          isScrolled
-            ? 'border-t border-gray-200/50'
-            : 'border-t border-white/20',
-        ]"
-      >
-        <div class="flex flex-col space-y-4">
-          <NuxtLink
-            to="/courses"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
-            @click="closeMobileMenu"
-          >
-            Courses
-          </NuxtLink>
-          <NuxtLink
-            to="/mentors"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
-            @click="closeMobileMenu"
-          >
-            Mentors
-          </NuxtLink>
-          <NuxtLink
-            to="/testimonials"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
-            @click="closeMobileMenu"
-          >
-            Testimonials
-          </NuxtLink>
-          <NuxtLink
-            to="/contact"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 py-2"
-            @click="closeMobileMenu"
-          >
-            Contact
-          </NuxtLink>
-
-          <!-- Mobile Authentication -->
-          <div class="border-t border-gray-200/50 pt-4 mt-4">
-            <div
-              v-if="!authStore.isAuthenticated"
-              class="flex flex-col space-y-3"
+      <nav v-if="isMobileMenuOpen" class="lg:hidden mx-4 my-4">
+        <div>
+          <!-- NAVIGATE Section -->
+          <div class="mb-6">
+            <h3
+              class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
             >
+              NAVIGATE
+            </h3>
+            <div class="space-y-1">
               <NuxtLink
-                to="/login"
-                class="text-gray-700 hover:text-brand transition-colors duration-200 py-2 font-medium"
+                to="/courses"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
                 @click="closeMobileMenu"
               >
-                Sign In
+                <Icon
+                  name="mdi:school"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Courses</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
+              <NuxtLink
+                to="/mentors"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:account-group"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Mentors</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
+              <NuxtLink
+                to="/testimonials"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:star"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Testimonials</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
+              <NuxtLink
+                to="/contact"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:email"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Contact</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
+            </div>
+          </div>
+
+          <!-- Authentication Section -->
+          <div v-if="!authStore.isAuthenticated">
+            <h3
+              class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
+            >
+              ACCOUNT
+            </h3>
+            <div class="space-y-1">
+              <NuxtLink
+                to="/login"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:login"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Sign In</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
               </NuxtLink>
               <NuxtLink
                 to="/signup"
-                class="bg-brand/10 text-brand px-4 py-2 rounded-lg hover:bg-brand/20 transition-colors duration-200 font-medium text-center border border-brand/20"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
                 @click="closeMobileMenu"
               >
-                Sign Up
+                <Icon
+                  name="mdi:account-plus"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Sign Up</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
               </NuxtLink>
             </div>
-            <div v-else class="flex flex-col space-y-3">
-              <span class="text-gray-700 font-medium py-2">{{
-                authStore.fullname
-              }}</span>
+          </div>
+
+          <!-- User Account Section -->
+          <div v-else>
+            <h3
+              class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
+            >
+              ACCOUNT
+            </h3>
+            <div class="space-y-1">
+              <NuxtLink
+                to="/profile"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:account"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Profile</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
+              <NuxtLink
+                to="/brochure"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:file-document"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Brochure</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
               <button
                 @click="handleLogout"
-                class="text-red-600 hover:text-red-700 transition-colors duration-200 font-medium py-2 text-left"
+                class="w-full flex items-center text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 px-3 py-3 rounded-lg group mt-4"
               >
-                Sign Out
+                <Icon name="mdi:logout" class="w-5 h-5 mr-3" />
+                <span class="font-medium">Logout</span>
               </button>
             </div>
           </div>
@@ -253,7 +345,7 @@ onMounted(() => {
 
   const handleClickOutside = (event: MouseEvent) => {
     const target = event.target as Element;
-    if (!target.closest('.relative')) {
+    if (!target.closest(".relative")) {
       isUserDropdownOpen.value = false;
     }
   };
