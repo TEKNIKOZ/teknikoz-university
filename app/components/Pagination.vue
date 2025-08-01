@@ -4,9 +4,7 @@
     class="flex flex-row items-center justify-between gap-3 sm:gap-0"
   >
     <!-- Results count -->
-    <div
-      class="text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 order-2 sm:order-1"
-    >
+    <div class="text-[11px] sm:text-sm text-gray-500 order-2 sm:order-1">
       Showing {{ itemsStartIndex }} to {{ itemsEndIndex }} of
       {{ totalItems }} results
     </div>
@@ -14,13 +12,13 @@
     <!-- Navigation -->
     <nav class="flex items-center order-1 sm:order-2" aria-label="Pagination">
       <div
-        class="inline-flex items-center rounded-lg shadow-sm bg-white dark:bg-slate-800 p-0.5 sm:p-1 border border-gray-200 dark:border-slate-600"
+        class="inline-flex items-center rounded-lg shadow-sm bg-white p-0.5 sm:p-1 border border-gray-200"
       >
         <!-- First page -->
         <button
           @click="onPageChange(1)"
           :disabled="currentPage === 1"
-          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 dark:text-gray-400 hover:text-brand hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
+          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 hover:text-brand hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
           :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
           aria-label="First page"
         >
@@ -35,7 +33,7 @@
         <button
           @click="onPageChange(currentPage - 1)"
           :disabled="currentPage === 1"
-          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 dark:text-gray-400 hover:text-brand hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
+          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 hover:text-brand hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
           :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
           aria-label="Previous page"
         >
@@ -51,7 +49,7 @@
           <template v-for="page in visiblePageNumbers" :key="page">
             <template v-if="page === '...'">
               <span
-                class="flex items-center justify-center w-7 sm:w-8 h-7 sm:h-8 text-gray-400 dark:text-gray-500 text-xs sm:text-sm"
+                class="flex items-center justify-center w-7 sm:w-8 h-7 sm:h-8 text-gray-400 text-xs sm:text-sm"
                 >...</span
               >
             </template>
@@ -62,7 +60,7 @@
                   'inline-flex items-center justify-center w-7 sm:w-8 h-7 sm:h-8 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 focus:outline-none',
                   currentPage === Number(page)
                     ? 'bg-brand text-white shadow-brand/30 hover:bg-brand/90'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-brand',
+                    : 'text-gray-700 hover:bg-gray-50 hover:text-brand',
                 ]"
                 :aria-current="
                   currentPage === Number(page) ? 'page' : undefined
@@ -78,7 +76,7 @@
         <div
           class="flex sm:hidden items-center justify-center min-w-[3.5rem] px-1"
         >
-          <span class="text-xs font-medium text-gray-700 dark:text-gray-300"
+          <span class="text-xs font-medium text-gray-700"
             >{{ currentPage }}/{{ totalPages }}</span
           >
         </div>
@@ -87,7 +85,7 @@
         <button
           @click="onPageChange(currentPage + 1)"
           :disabled="currentPage === totalPages"
-          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 dark:text-gray-400 hover:text-brand hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
+          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 hover:text-brand hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
           :class="{
             'opacity-50 cursor-not-allowed': currentPage === totalPages,
           }"
@@ -104,7 +102,7 @@
         <button
           @click="onPageChange(totalPages)"
           :disabled="currentPage === totalPages"
-          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 dark:text-gray-400 hover:text-brand hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
+          class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-gray-600 hover:text-brand hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 focus:outline-none"
           :class="{
             'opacity-50 cursor-not-allowed': currentPage === totalPages,
           }"

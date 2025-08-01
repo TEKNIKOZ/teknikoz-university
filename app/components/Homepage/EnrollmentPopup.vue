@@ -141,7 +141,7 @@
 
                 <!-- Right side - Features & CTA -->
                 <div
-                  class="bg-white dark:bg-gray-900 p-6 sm:p-8 lg:p-16 flex flex-col justify-center"
+                  class="bg-white p-6 sm:p-8 lg:p-16 flex flex-col justify-center"
                 >
                   <!-- Special offer banner - Hidden on mobile -->
                   <div
@@ -166,7 +166,7 @@
                         />
                       </div>
                       <p
-                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800 dark:text-white"
+                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800"
                       >
                         6 Months Industry Training
                       </p>
@@ -181,7 +181,7 @@
                         />
                       </div>
                       <p
-                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800 dark:text-white"
+                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800"
                       >
                         100% Job Placement Support
                       </p>
@@ -196,7 +196,7 @@
                         />
                       </div>
                       <p
-                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800 dark:text-white"
+                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800"
                       >
                         Live Projects & Certifications
                       </p>
@@ -211,7 +211,7 @@
                         />
                       </div>
                       <p
-                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800 dark:text-white"
+                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-800"
                       >
                         Expert Mentorship Program
                       </p>
@@ -228,7 +228,7 @@
 
                   <button
                     @click="learnMore"
-                    class="w-full border-2 border-gray-800 dark:border-gray-600 text-gray-800 dark:text-white font-bold text-base sm:text-lg py-3 sm:py-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 mb-4 sm:mb-0"
+                    class="w-full border-2 border-gray-800 text-gray-800 font-bold text-base sm:text-lg py-3 sm:py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 mb-4 sm:mb-0"
                   >
                     View Course Details
                   </button>
@@ -238,29 +238,19 @@
                     class="hidden sm:flex items-center justify-center gap-4 sm:gap-8 mt-6 sm:mt-8"
                   >
                     <div class="text-center">
-                      <p
-                        class="text-2xl sm:text-3xl font-black text-gray-800 dark:text-white"
-                      >
+                      <p class="text-2xl sm:text-3xl font-black text-gray-800">
                         5000+
                       </p>
-                      <p
-                        class="text-xs sm:text-sm text-gray-600 dark:text-gray-400"
-                      >
+                      <p class="text-xs sm:text-sm text-gray-600">
                         Alumni Network
                       </p>
                     </div>
-                    <div
-                      class="w-px h-8 sm:h-12 bg-gray-300 dark:bg-gray-700"
-                    ></div>
+                    <div class="w-px h-8 sm:h-12 bg-gray-300"></div>
                     <div class="text-center">
-                      <p
-                        class="text-2xl sm:text-3xl font-black text-gray-800 dark:text-white"
-                      >
+                      <p class="text-2xl sm:text-3xl font-black text-gray-800">
                         4.9★
                       </p>
-                      <p
-                        class="text-xs sm:text-sm text-gray-600 dark:text-gray-400"
-                      >
+                      <p class="text-xs sm:text-sm text-gray-600">
                         Student Rating
                       </p>
                     </div>

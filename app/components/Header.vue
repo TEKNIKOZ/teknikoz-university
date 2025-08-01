@@ -91,14 +91,14 @@
               <!-- Dropdown menu -->
               <div
                 v-show="isUserDropdownOpen"
-                class="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                class="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
                 role="menu"
                 aria-orientation="vertical"
                 tabindex="-1"
               >
                 <NuxtLink
                   to="/profile"
-                  class="block px-4 py-2 rounded-t-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
+                  class="block px-4 py-2 rounded-t-md text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   tabindex="-1"
                   @click="closeUserDropdown"
@@ -108,7 +108,7 @@
                 </NuxtLink>
                 <NuxtLink
                   to="/contact"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   tabindex="-1"
                   @click="closeUserDropdown"
@@ -118,7 +118,7 @@
                 </NuxtLink>
                 <NuxtLink
                   to="/brochure"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   tabindex="-1"
                   @click="closeUserDropdown"
@@ -128,7 +128,7 @@
                 </NuxtLink>
                 <button
                   @click="handleLogout"
-                  class="block w-full text-left px-4 py-2 rounded-b-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-red-500 dark:hover:text-red-500"
+                  class="block w-full text-left px-4 py-2 rounded-b-md text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
                   role="menuitem"
                   tabindex="-1"
                 >
