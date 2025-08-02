@@ -226,7 +226,7 @@ export const useContactManagementStore = defineStore('contact-management', () =>
     }
   }
 
-  const fetchContactById = async (id: string) => {
+  const fetchContactById = async (id: number) => {
     try {
       const { $api } = useNuxtApp()
       const repository = contactRepository($api as $Fetch)
