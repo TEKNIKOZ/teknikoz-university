@@ -26,8 +26,8 @@ export interface BrochureResponse {
 }
 
 export interface BrochureRequest {
-  id: string;
-  contact_id: string;
+  id: number;
+  contact_id: number;
   course_type: string;
   brochure_name: string;
   email_sent: boolean;
@@ -138,21 +138,21 @@ export const brochureRepository = (fetch: $Fetch) => {
     },
 
     // Get brochure requests by contact ID
-    getBrochureRequestsByContact: async (contactId: string): Promise<BrochureRequestsByContactResponse> => {
+    getBrochureRequestsByContact: async (contactId: number): Promise<BrochureRequestsByContactResponse> => {
       return fetch(`${apiUrl}/brochure-requests/contact/${contactId}`, {
         method: "GET",
       });
     },
 
     // Get brochure request by ID
-    getBrochureRequestById: async (id: string): Promise<BrochureRequestDetailResponse> => {
+    getBrochureRequestById: async (id: number): Promise<BrochureRequestDetailResponse> => {
       return fetch(`${apiUrl}/brochure-requests/${id}`, {
         method: "GET",
       });
     },
 
     // Resend brochure
-    resendBrochure: async (id: string): Promise<BrochureResendResponse> => {
+    resendBrochure: async (id: number): Promise<BrochureResendResponse> => {
       return fetch(`${apiUrl}/brochure-requests/${id}/resend`, {
         method: "POST",
       });
