@@ -28,7 +28,7 @@ export interface ContactResponse {
 }
 
 export interface Contact {
-  id: string;
+  id: number;
   name: string;
   email: string;
   phone: string;
@@ -97,7 +97,7 @@ export const contactRepository = (fetch: $Fetch) => {
     },
 
     // Get contact by ID
-    getContactById: async (id: string): Promise<ContactDetailResponse> => {
+    getContactById: async (id: number): Promise<ContactDetailResponse> => {
       return fetch(`${apiUrl}/contacts/${id}`, {
         method: "GET",
       });
