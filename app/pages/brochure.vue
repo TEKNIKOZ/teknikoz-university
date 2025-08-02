@@ -111,12 +111,16 @@
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
               >
                 <option :value="undefined">All Types</option>
-                <option value="engineering">Engineering</option>
-                <option value="medical">Medical</option>
+                <option value="plm-windchill">PLM Windchill</option>
+                <option value="siemens-teamcenter">Siemens Teamcenter</option>
+                <option value="cloud-solutions">Cloud Solutions</option>
                 <option value="web-development">Web Development</option>
                 <option value="data-science">Data Science</option>
+                <option value="mobile-development">Mobile Development</option>
                 <option value="devops">DevOps</option>
                 <option value="ai-ml">AI/ML</option>
+                <option value="cybersecurity">Cybersecurity</option>
+                <option value="cloud-computing">Cloud Computing</option>
                 <option value="other">Other</option>
               </select>
             </div>
@@ -138,16 +142,16 @@
               </select>
             </div>
 
-            <!-- Contact ID Search -->
+            <!-- Contact Email Search -->
             <div class="md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Search by Contact ID</label
+                >Search by Contact Email</label
               >
               <div class="flex">
                 <input
-                  v-model="contactIdSearch"
-                  type="text"
-                  placeholder="Enter contact ID..."
+                  v-model="contactEmailSearch"
+                  type="email"
+                  placeholder="Enter contact email..."
                   class="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
                   @keyup.enter="handleContactSearch"
                 />
@@ -340,7 +344,7 @@ const brochureStore = useBrochureManagementStore();
 const authStore = useAuthStore();
 
 // Local state
-const contactIdSearch = ref("");
+const contactEmailSearch = ref("");
 const showBrochureDetail = ref(false);
 const showPendingDeliveries = ref(false);
 const isResending = ref(false);
@@ -356,11 +360,11 @@ const showContactResults = computed(
 
 // Methods
 const handleContactSearch = async () => {
-  if (contactIdSearch.value.trim()) {
+  if (contactEmailSearch.value.trim()) {
     isSearching.value = true;
     searchError.value = null;
-    const result = await brochureStore.searchBrochuresByContact(
-      Number(contactIdSearch.value)
+    const result = await brochureStore.searchBrochuresByEmail(
+      contactEmailSearch.value.trim()
     );
     if (!result.success) {
       searchError.value = result.error || "Failed to search brochure requests";
@@ -370,7 +374,7 @@ const handleContactSearch = async () => {
 };
 
 const clearContactSearch = () => {
-  contactIdSearch.value = "";
+  contactEmailSearch.value = "";
   searchError.value = null;
   brochureStore.clearContactSearch();
 };

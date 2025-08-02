@@ -189,6 +189,38 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     }
   }
 
+  const searchBrochuresByEmail = async (email: string) => {
+    if (!email.trim()) {
+      contactBrochures.value = []
+      return { success: true, data: [] }
+    }
+
+    try {
+      const { $api } = useNuxtApp()
+      const repository = brochureRepository($api as $Fetch)
+      const response = await repository.getAllBrochureRequests()
+
+      if (!response.success) {
+        throw new Error(response.message || 'Failed to search brochure requests')
+      }
+
+      // Filter brochures by contact email on frontend
+      const filteredBrochures = (response.data || []).filter(
+        brochure => brochure.contact?.email.toLowerCase().includes(email.toLowerCase())
+      )
+
+      contactBrochures.value = filteredBrochures
+      return { success: true, data: filteredBrochures }
+    } catch (err) {
+      console.error('Error searching brochure requests by email:', err)
+      contactBrochures.value = []
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Failed to search brochure requests'
+      }
+    }
+  }
+
   const resendBrochure = async (id: number) => {
     try {
       const { $api } = useNuxtApp()
@@ -283,6 +315,7 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     fetchPendingDeliveries,
     fetchDeliveryStats,
     searchBrochuresByContact,
+    searchBrochuresByEmail,
     resendBrochure,
     setCourseTypeFilter,
     setLimit,

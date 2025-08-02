@@ -23,12 +23,9 @@
           <span>ID: {{ brochure.id }}</span>
         </div>
 
-        <div class="flex items-center space-x-2">
-          <Icon name="mdi:account" class="w-4 h-4" />
-          <span v-if="brochure.contact">
-            {{ brochure.contact.name }} ({{ brochure.contact.email }})
-          </span>
-          <span v-else>Contact ID: {{ brochure.contact_id }}</span>
+        <div v-if="brochure.contact" class="flex items-center space-x-2">
+          <Icon name="mdi:email" class="w-4 h-4" />
+          <span>{{ brochure.contact.email }}</span>
         </div>
 
         <div class="flex items-center space-x-2">
