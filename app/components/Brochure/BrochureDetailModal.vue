@@ -257,7 +257,7 @@ defineProps<Props>();
 
 defineEmits<{
   close: [];
-  resend: [id: string];
+  resend: [id: number];
 }>();
 
 // Course type mapping

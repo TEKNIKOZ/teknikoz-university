@@ -20,12 +20,15 @@
       <div class="space-y-1 text-sm text-gray-600">
         <div class="flex items-center space-x-2">
           <Icon name="mdi:identifier" class="w-4 h-4" />
-          <span>ID: {{ brochure.id.slice(0, 8) }}...</span>
+          <span>ID: {{ brochure.id }}</span>
         </div>
 
         <div class="flex items-center space-x-2">
           <Icon name="mdi:account" class="w-4 h-4" />
-          <span>Contact: {{ brochure.contact_id.slice(0, 8) }}...</span>
+          <span v-if="brochure.contact">
+            {{ brochure.contact.name }} ({{ brochure.contact.email }})
+          </span>
+          <span v-else>Contact ID: {{ brochure.contact_id }}</span>
         </div>
 
         <div class="flex items-center space-x-2">
