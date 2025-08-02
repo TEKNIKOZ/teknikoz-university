@@ -87,7 +87,7 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     }
   }
 
-  const fetchBrochureById = async (id: string) => {
+  const fetchBrochureById = async (id: number) => {
     try {
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
@@ -161,8 +161,8 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     }
   }
 
-  const searchBrochuresByContact = async (contactId: string) => {
-    if (!contactId.trim()) {
+  const searchBrochuresByContact = async (contactId: number) => {
+    if (!contactId) {
       contactBrochures.value = []
       return { success: true, data: [] }
     }
@@ -171,7 +171,7 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
 
-      const response = await repository.getBrochureRequestsByContact(contactId.trim())
+      const response = await repository.getBrochureRequestsByContact(contactId)
 
       if (!response.success) {
         throw new Error(response.message || 'Failed to search brochure requests')
@@ -189,7 +189,7 @@ export const useBrochureManagementStore = defineStore('brochure-management', () 
     }
   }
 
-  const resendBrochure = async (id: string) => {
+  const resendBrochure = async (id: number) => {
     try {
       const { $api } = useNuxtApp()
       const repository = brochureRepository($api as $Fetch)
