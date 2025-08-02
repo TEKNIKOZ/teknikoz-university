@@ -360,7 +360,7 @@ const handleContactSearch = async () => {
     isSearching.value = true;
     searchError.value = null;
     const result = await brochureStore.searchBrochuresByContact(
-      contactIdSearch.value
+      Number(contactIdSearch.value)
     );
     if (!result.success) {
       searchError.value = result.error || "Failed to search brochure requests";
@@ -387,7 +387,7 @@ const loadPendingDeliveries = async () => {
   isLoading.value = false;
 };
 
-const viewBrochure = async (id: string) => {
+const viewBrochure = async (id: number) => {
   const result = await brochureStore.fetchBrochureById(id);
   if (result.success) {
     showBrochureDetail.value = true;
@@ -399,7 +399,7 @@ const closeBrochureDetail = () => {
   brochureStore.clearSelectedBrochure();
 };
 
-const handleResendBrochure = async (id: string) => {
+const handleResendBrochure = async (id: number) => {
   isResending.value = true;
   try {
     const result = await brochureStore.resendBrochure(id);
