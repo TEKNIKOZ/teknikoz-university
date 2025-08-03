@@ -79,7 +79,7 @@
                     name="mdi:check-circle"
                     class="w-4 h-4 text-purple-500 mr-2"
                   />
-                  Info*Engine, REST APIs & Enterprise Integration
+                  Info Engine, REST APIs & Enterprise Integration
                 </div>
               </div>
             </div>
@@ -336,5 +336,11 @@
 </template>
 
 <script setup>
-// navigateTo is auto-imported in Nuxt 3
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const navigateTo = (path) => {
+  router.push(path);
+};
 </script>
