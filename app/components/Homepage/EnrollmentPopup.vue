@@ -66,7 +66,7 @@
                   <h1
                     class="text-4xl sm:text-4xl lg:text-6xl font-black text-white mb-4 sm:mb-6 leading-tight"
                   >
-                    JULY BATCH<br />
+                    SEPTEMBER BATCH<br />
                     <span class="text-yellow-300">NOW OPEN!</span>
                   </h1>
 
@@ -271,7 +271,7 @@ import { ref, onMounted, computed, onUnmounted } from "vue";
 const isOpen = ref(false);
 const currentTime = ref(new Date());
 let timer = null;
-const targetDate = new Date("2025-07-31T23:59:59");
+const targetDate = new Date("2025-09-30T23:59:59");
 
 const timeLeft = computed(() => {
   const diff = targetDate - currentTime.value;

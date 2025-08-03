@@ -4,7 +4,7 @@
       <!-- Mobile Layout -->
       <div class="md:hidden flex items-center justify-between">
         <div class="text-left font-medium text-sm">
-          July Batch Now Enrolling - Only 50 Seats Left!
+          September Batch Now Enrolling - Only 50 Seats Left!
         </div>
         <div class="flex items-center space-x-3">
           <Icon
@@ -23,7 +23,7 @@
       <!-- Desktop Layout -->
       <div class="hidden md:flex items-center justify-between">
         <div class="text-left font-medium">
-          July Batch Now Enrolling - Only 50 Seats Left!
+          September Batch Now Enrolling - Only 50 Seats Left!
         </div>
         <div class="flex items-center space-x-6">
           <div

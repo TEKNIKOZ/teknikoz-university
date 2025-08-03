@@ -160,7 +160,7 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <nav v-if="isMobileMenuOpen" class="lg:hidden mx-4 my-4">
+      <nav v-if="isMobileMenuOpen" class="lg:hidden my-4">
         <div>
           <!-- NAVIGATE Section -->
           <div class="mb-6">
@@ -328,9 +328,12 @@
 </template>
 
 <script setup lang="ts">
-import { useContactStore } from "@/stores/contact.stores";
 import { useAuthStore } from "@/stores/auth.stores";
+import { useContactStore } from "@/stores/contact.stores";
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const contactStore = useContactStore();
 const authStore = useAuthStore();
 const isMobileMenuOpen = ref(false);
@@ -378,7 +381,7 @@ const closeUserDropdown = () => {
 const handleLogout = async () => {
   const result = await authStore.logout();
   if (result.success) {
-    await navigateTo("/");
+    await router.push("/");
   }
   closeMobileMenu();
   closeUserDropdown();
