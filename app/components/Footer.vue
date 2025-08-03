@@ -159,7 +159,7 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/legal/privacy"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
                 Privacy Policy
@@ -173,7 +173,7 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/legal/terms"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
                 Terms of Service
@@ -187,7 +187,7 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/legal/cookies"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
                 Cookie Policy
@@ -201,7 +201,7 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                href="/legal/refund"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
                 Refund Policy
@@ -274,13 +274,13 @@
             class="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 order-3"
           >
             <a
-              href="#"
+              href="/legal/terms"
               class="text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:underline underline-offset-4"
             >
               Terms of Service
             </a>
             <a
-              href="#"
+              href="/legal/privacy"
               class="text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:underline underline-offset-4"
             >
               Privacy Policy
