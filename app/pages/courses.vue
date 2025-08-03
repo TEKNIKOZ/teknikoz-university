@@ -17,12 +17,12 @@
     </section>
 
     <!-- Course Navigation -->
-    <section class="py-8 border-b bg-white sticky top-0 z-10 shadow-sm">
+    <section class="py-8 border-b bg-white">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-wrap justify-center gap-2 sm:gap-4">
           <a
             href="#windchill"
-            class="flex items-center px-3 sm:px-4 py-2 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors text-sm"
+            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors text-sm sm:text-base font-medium"
           >
             <div
               class="w-4 h-4 sm:w-5 sm:h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2"
@@ -33,7 +33,7 @@
           </a>
           <a
             href="#teamcenter"
-            class="flex items-center px-3 sm:px-4 py-2 rounded-full bg-green-100 text-green-700 hover:bg-green-200 transition-colors text-sm"
+            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-green-100 text-green-700 hover:bg-green-200 transition-colors text-sm sm:text-base font-medium"
           >
             <div
               class="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center mr-2"
@@ -44,7 +44,7 @@
           </a>
           <a
             href="#cloud"
-            class="flex items-center px-3 sm:px-4 py-2 rounded-full bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors text-sm"
+            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors text-sm sm:text-base font-medium"
           >
             <div
               class="w-4 h-4 sm:w-5 sm:h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2"
@@ -55,7 +55,7 @@
           </a>
           <a
             href="#aiml"
-            class="flex items-center px-3 sm:px-4 py-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors text-sm"
+            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors text-sm sm:text-base font-medium"
           >
             <div
               class="w-4 h-4 sm:w-5 sm:h-5 bg-blue-500 rounded-full flex items-center justify-center mr-2"
@@ -1128,6 +1128,8 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watch, nextTick } from "vue";
+
 useHead({
   title: "Courses - TEKNIKOZ University",
   meta: [
@@ -1138,4 +1140,53 @@ useHead({
     },
   ],
 });
+
+const route = useRoute();
+
+onMounted(() => {
+  if (route.query.category) {
+    const categoryMap = {
+      "PLM Windchill": "windchill",
+      "Siemens Teamcenter": "teamcenter",
+      "Cloud Solutions": "cloud",
+      "AI/ML": "aiml",
+    };
+    const section = categoryMap[route.query.category];
+    if (section) {
+      // Wait for page to be fully rendered then scroll
+      nextTick(() => {
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      });
+    }
+  }
+});
+
+// Watch for route changes
+watch(
+  () => route.query.category,
+  (newCategory) => {
+    if (newCategory) {
+      const categoryMap = {
+        "PLM Windchill": "windchill",
+        "Siemens Teamcenter": "teamcenter",
+        "Cloud Solutions": "cloud",
+        "AI/ML": "aiml",
+      };
+      const section = categoryMap[newCategory];
+      if (section) {
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      }
+    }
+  }
+);
 </script>
