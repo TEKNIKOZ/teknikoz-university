@@ -20,56 +20,41 @@
     <section class="py-8 border-b bg-white">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-wrap justify-center gap-2 sm:gap-4">
-          <a
-            href="#windchill"
-            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors text-sm sm:text-base font-medium"
+          <button
+            v-for="category in categories"
+            :key="category.id"
+            @click="activeCategory = category.id"
+            :class="[
+              'flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300',
+              activeCategory === category.id
+                ? getActiveCategoryStyle(category.id)
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+            ]"
           >
             <div
-              class="w-4 h-4 sm:w-5 sm:h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2"
+              :class="[
+                'w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center mr-2',
+                getCategoryBgColor(category.id),
+              ]"
             >
-              <Icon name="mdi:cog" class="text-white text-xs" />
+              <Icon :name="category.icon" class="text-white text-xs" />
             </div>
-            <span class="hidden sm:inline">PLM </span>Windchill
-          </a>
-          <a
-            href="#teamcenter"
-            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-green-100 text-green-700 hover:bg-green-200 transition-colors text-sm sm:text-base font-medium"
-          >
-            <div
-              class="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center mr-2"
+            <span
+              :class="category.id === 'PLM Windchill' ? 'hidden sm:inline' : ''"
             >
-              <Icon name="mdi:cube" class="text-white text-xs" />
-            </div>
-            Teamcenter
-          </a>
-          <a
-            href="#cloud"
-            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors text-sm sm:text-base font-medium"
-          >
-            <div
-              class="w-4 h-4 sm:w-5 sm:h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2"
-            >
-              <Icon name="mdi:cloud" class="text-white text-xs" />
-            </div>
-            <span class="hidden sm:inline">Cloud </span>Solutions
-          </a>
-          <a
-            href="#aiml"
-            class="flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors text-sm sm:text-base font-medium"
-          >
-            <div
-              class="w-4 h-4 sm:w-5 sm:h-5 bg-blue-500 rounded-full flex items-center justify-center mr-2"
-            >
-              <Icon name="mdi:robot" class="text-white text-xs" />
-            </div>
-            AI/ML
-          </a>
+              {{ category.id === "PLM Windchill" ? "PLM " : "" }} </span
+            >{{ category.name }}
+          </button>
         </div>
       </div>
     </section>
 
     <!-- PLM Windchill Course -->
-    <section id="windchill" class="py-12 sm:py-16">
+    <section
+      v-if="activeCategory === 'PLM Windchill'"
+      id="windchill"
+      class="py-12 sm:py-16"
+    >
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="mb-12">
           <div class="flex items-center mb-4">
@@ -330,7 +315,11 @@
     </section>
 
     <!-- Siemens Teamcenter Course -->
-    <section id="teamcenter" class="py-12 sm:py-16 bg-gray-100">
+    <section
+      v-if="activeCategory === 'Siemens Teamcenter'"
+      id="teamcenter"
+      class="py-12 sm:py-16 bg-gray-100"
+    >
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="mb-12">
           <div class="flex items-center mb-4">
@@ -596,7 +585,11 @@
     </section>
 
     <!-- Cloud Solutions Course -->
-    <section id="cloud" class="py-12 sm:py-16">
+    <section
+      v-if="activeCategory === 'Cloud Solutions'"
+      id="cloud"
+      class="py-12 sm:py-16"
+    >
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="mb-12">
           <div class="flex items-center mb-4">
@@ -852,7 +845,11 @@
     </section>
 
     <!-- AI/ML Course -->
-    <section id="aiml" class="py-12 sm:py-16 bg-gray-100">
+    <section
+      v-if="activeCategory === 'AI/ML'"
+      id="aiml"
+      class="py-12 sm:py-16 bg-gray-100"
+    >
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="mb-12">
           <div class="flex items-center mb-4">
@@ -1117,7 +1114,7 @@
           with TEKNIKOZ
         </p>
         <button
-          @click="navigateTo('/enroll')"
+          @click="navigateTo('/contact')"
           class="bg-white text-brand px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-100 transition-colors duration-300"
         >
           Enroll Now →
@@ -1128,7 +1125,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, nextTick } from "vue";
+import { ref, watch } from "vue";
 
 useHead({
   title: "Courses - TEKNIKOZ University",
@@ -1141,52 +1138,45 @@ useHead({
   ],
 });
 
+// Handle URL parameters for direct navigation
 const route = useRoute();
+const activeCategory = ref(route.query.category || "PLM Windchill");
 
-onMounted(() => {
-  if (route.query.category) {
-    const categoryMap = {
-      "PLM Windchill": "windchill",
-      "Siemens Teamcenter": "teamcenter",
-      "Cloud Solutions": "cloud",
-      "AI/ML": "aiml",
-    };
-    const section = categoryMap[route.query.category];
-    if (section) {
-      // Wait for page to be fully rendered then scroll
-      nextTick(() => {
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 100);
-      });
-    }
-  }
-});
-
-// Watch for route changes
+// Watch for route changes to update active category
 watch(
   () => route.query.category,
   (newCategory) => {
     if (newCategory) {
-      const categoryMap = {
-        "PLM Windchill": "windchill",
-        "Siemens Teamcenter": "teamcenter",
-        "Cloud Solutions": "cloud",
-        "AI/ML": "aiml",
-      };
-      const section = categoryMap[newCategory];
-      if (section) {
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 100);
-      }
+      activeCategory.value = newCategory;
     }
   }
 );
+
+const categories = [
+  { id: "PLM Windchill", name: "Windchill", icon: "mdi:cog" },
+  { id: "Siemens Teamcenter", name: "Teamcenter", icon: "mdi:cube" },
+  { id: "Cloud Solutions", name: "Solutions", icon: "mdi:cloud" },
+  { id: "AI/ML", name: "AI/ML", icon: "mdi:robot" },
+];
+
+// Helper functions for styling
+const getActiveCategoryStyle = (categoryId) => {
+  const styles = {
+    "PLM Windchill": "bg-purple-100 text-purple-700",
+    "Siemens Teamcenter": "bg-green-100 text-green-700",
+    "Cloud Solutions": "bg-orange-100 text-orange-700",
+    "AI/ML": "bg-blue-100 text-blue-700",
+  };
+  return styles[categoryId] || "bg-gray-100 text-gray-700";
+};
+
+const getCategoryBgColor = (categoryId) => {
+  const colors = {
+    "PLM Windchill": "bg-purple-500",
+    "Siemens Teamcenter": "bg-green-500",
+    "Cloud Solutions": "bg-orange-500",
+    "AI/ML": "bg-blue-500",
+  };
+  return colors[categoryId] || "bg-gray-500";
+};
 </script>
