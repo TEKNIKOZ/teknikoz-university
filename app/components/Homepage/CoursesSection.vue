@@ -85,7 +85,7 @@
             </div>
 
             <button
-              @click="handleNavigation('/courses#windchill')"
+              @click="navigateTo('/courses?category=PLM Windchill')"
               class="w-full bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 text-sm sm:text-base"
             >
               Explore Full Curriculum →
@@ -158,7 +158,7 @@
             </div>
 
             <button
-              @click="handleNavigation('/courses#teamcenter')"
+              @click="navigateTo('/courses?category=Siemens Teamcenter')"
               class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base"
             >
               Explore Full Curriculum →
@@ -231,7 +231,7 @@
             </div>
 
             <button
-              @click="handleNavigation('/courses#cloud')"
+              @click="navigateTo('/courses?category=Cloud Solutions')"
               class="w-full bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 text-sm sm:text-base"
             >
               Explore Full Curriculum →
@@ -304,7 +304,7 @@
             </div>
 
             <button
-              @click="handleNavigation('/courses#aiml')"
+              @click="navigateTo('/courses?category=AI/ML')"
               class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm sm:text-base"
             >
               Explore Full Curriculum →
@@ -336,11 +336,5 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
-const handleNavigation = (path) => {
-  router.push(path);
-};
+// navigateTo is auto-imported in Nuxt 3
 </script>

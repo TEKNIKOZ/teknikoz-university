@@ -18,7 +18,7 @@
     </section>
 
     <!-- Filter Tabs -->
-    <section class="py-8 border-b bg-white sticky top-0 z-10 shadow-sm">
+    <section class="py-8 border-b bg-white">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-wrap justify-center gap-2 sm:gap-4">
           <button
@@ -26,15 +26,28 @@
             :key="category.id"
             @click="activeCategory = category.id"
             :class="[
-              'px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300',
+              'flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300',
               activeCategory === category.id
-                ? 'bg-brand text-white shadow-lg scale-105'
+                ? getActiveCategoryStyle(category.id) + ' shadow-lg scale-105'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
             ]"
           >
+            <div
+              v-if="category.id !== 'all'"
+              :class="[
+                'w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center mr-2',
+                getCategoryBgColor(category.id),
+              ]"
+            >
+              <Icon
+                :name="category.icon"
+                class="text-white text-xs"
+              />
+            </div>
             <Icon
+              v-else
               :name="category.icon"
-              class="w-4 h-4 sm:w-5 sm:h-5 inline mr-2"
+              class="w-4 h-4 sm:w-5 sm:h-5 mr-2"
             />
             {{ category.name }}
           </button>
@@ -191,6 +204,27 @@ const categories = [
   { id: "Cloud Solutions", name: "Cloud Solutions", icon: "mdi:cloud" },
   { id: "AI/ML", name: "AI/ML", icon: "mdi:robot" },
 ];
+
+const getActiveCategoryStyle = (categoryId) => {
+  const styles = {
+    "all": "bg-brand text-white",
+    "PLM Windchill": "bg-purple-100 text-purple-700",
+    "Siemens Teamcenter": "bg-green-100 text-green-700", 
+    "Cloud Solutions": "bg-orange-100 text-orange-700",
+    "AI/ML": "bg-blue-100 text-blue-700",
+  };
+  return styles[categoryId] || "bg-brand text-white";
+};
+
+const getCategoryBgColor = (categoryId) => {
+  const colors = {
+    "PLM Windchill": "bg-purple-500",
+    "Siemens Teamcenter": "bg-green-500",
+    "Cloud Solutions": "bg-orange-500", 
+    "AI/ML": "bg-blue-500",
+  };
+  return colors[categoryId] || "bg-gray-500";
+};
 
 const allTestimonials = [
   // PLM Windchill Testimonials
@@ -539,12 +573,12 @@ const hasMore = computed(() => {
 
 const getCategoryStyle = (category) => {
   const styles = {
-    "PLM Windchill": "bg-purple-100 text-purple-800",
-    "Siemens Teamcenter": "bg-green-100 text-green-800",
-    "Cloud Solutions": "bg-orange-100 text-orange-800",
-    "AI/ML": "bg-blue-100 text-blue-800",
+    "PLM Windchill": "bg-purple-100 text-purple-700",
+    "Siemens Teamcenter": "bg-green-100 text-green-700",
+    "Cloud Solutions": "bg-orange-100 text-orange-700",
+    "AI/ML": "bg-blue-100 text-blue-700",
   };
-  return styles[category] || "bg-gray-100 text-gray-800";
+  return styles[category] || "bg-gray-100 text-gray-700";
 };
 
 const getCategoryIcon = (category) => {
