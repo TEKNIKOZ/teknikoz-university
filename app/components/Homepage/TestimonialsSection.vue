@@ -138,38 +138,70 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import testimonial1 from "@/assets/images/testimonial1.png";
-import testimonial2 from "@/assets/images/testimonial2.png";
+import testimonial1 from "@/assets/images/boy-testimonial.png";
+import testimonial2 from "@/assets/images/girl-testimonial.png";
 
 // Testimonials data
 const testimonials = [
+  // PLM Windchill Testimonials
   {
-    name: "Rajesh Kumar",
+    name: "Arjun M.",
     image: testimonial1,
-    role: "AI Solutions Architect",
+    role: "PLM Analyst at Tata Motors",
     testimonial:
-      "TEKNIKOZ transformed my career! I landed a PLM role at a top automotive company within 3 months of completing the course. The hands-on projects were exactly what I needed.",
+      "The Windchill course gave me end-to-end clarity on configuration, ECAD/MCAD integration, and BOM workflows. I implemented a live CR/CN workflow at my workplace.",
   },
   {
-    name: "Priya Sharma",
+    name: "Shruti R.",
     image: testimonial2,
-    role: "PLM Engineer at Tata Motors",
+    role: "Consultant at Capgemini",
     testimonial:
-      "The AI/ML course was incredible. Real industry projects, expert mentorship, and practical learning approach. I'm now leading AI initiatives at my company.",
+      "Thanks to TEKNIKOZ, I cracked a Lead Windchill Consultant role. The hands-on ECAD integration project was a game-changer.",
   },
+  // Siemens Teamcenter Testimonials
   {
-    name: "Amit Patel",
+    name: "Deepali S.",
     image: testimonial1,
-    role: "Senior Data Scientist",
+    role: "Engineering Systems Manager, Airbus",
     testimonial:
-      "The comprehensive curriculum and industry-relevant projects helped me transition from a traditional IT role to data science. The mentorship was outstanding and career support was exceptional.",
+      "From Advanced BOM to MRO configuration, this was the most practical Teamcenter course I've taken.",
   },
   {
-    name: "Sneha Reddy",
+    name: "Gokul M.",
     image: testimonial2,
-    role: "Product Manager at Microsoft",
+    role: "Teamcenter Admin, Mahindra & Mahindra",
     testimonial:
-      "TEKNIKOZ's product management course gave me the strategic thinking and technical skills I needed. The real-world case studies and networking opportunities were invaluable for my career growth.",
+      "BMIDE customization never made sense until I did this course. I now manage data model changes independently.",
+  },
+  // Cloud Solutions Testimonials
+  {
+    name: "Mohammed I.",
+    image: testimonial1,
+    role: "DevOps Engineer at Siemens Energy",
+    testimonial:
+      "I never imagined setting up Windchill on AWS would be this straightforward. Terraform modules made it click.",
+  },
+  {
+    name: "Ritika G.",
+    image: testimonial2,
+    role: "Cloud Infra Lead, Infosys",
+    testimonial:
+      "The Cloud PLM Architecture project helped me design a secure AWS-VPC setup for PLM rollout.",
+  },
+  // AI/ML for Engineers Testimonials
+  {
+    name: "Ashish V.",
+    image: testimonial1,
+    role: "Data Scientist at Honeywell",
+    testimonial:
+      "I used the AI Predictive Maintenance project to build my portfolio and land a role in IIoT product engineering.",
+  },
+  {
+    name: "Renu P.",
+    image: testimonial2,
+    role: "Engineering Analyst, Bosch",
+    testimonial:
+      "Finally a course that explains Industry 4.0 + ML with hands-on use cases – and no Python overkill!",
   },
 ];
 
