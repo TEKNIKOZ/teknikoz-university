@@ -238,9 +238,9 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, computed } from "vue";
 import { useContactManagementStore } from "@/stores/contact.stores";
 import { useAuthStore } from "@/stores/auth.stores";
-
 const contactStore = useContactManagementStore();
 const authStore = useAuthStore();
 
@@ -311,12 +311,12 @@ onMounted(async () => {
 
 // SEO
 useHead({
-  title: "Contact Management - Teknikoz University",
+  title: "Contact Management - Teknikoz E-Learning",
   meta: [
     {
       name: "description",
       content:
-        "Manage and view all contact submissions for Teknikoz University",
+        "Manage and view all contact submissions for Teknikoz E-Learning",
     },
   ],
 });

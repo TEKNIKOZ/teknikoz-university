@@ -30,13 +30,13 @@
                     Limited Time
                   </p>
                   <p class="text-base sm:text-lg font-bold text-white">
-                    Enroll by
+                    September Batch
                   </p>
                   <p class="text-2xl sm:text-3xl font-black text-yellow-400">
-                    July 15th
+                    Now Enrolling
                   </p>
                   <p class="text-xs sm:text-sm font-semibold text-white">
-                    to Secure Your Spot!
+                    Only 50 Seats Left!
                   </p>
                 </div>
               </div>
@@ -60,7 +60,7 @@
             <p
               class="text-sm sm:text-base text-blue-100 mb-4 sm:mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0 px-2 lg:px-0"
             >
-              Join TEKNIKOZ University today and unlock your potential with
+              Join TEKNIKOZ E-Learning today and unlock your potential with
               world-class mentorship and hands-on learning
             </p>
 

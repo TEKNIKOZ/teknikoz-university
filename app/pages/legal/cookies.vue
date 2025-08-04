@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20">
+    <section
+      class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20"
+    >
       <div class="container max-w-4xl mx-auto px-4 sm:px-6">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
           Cookie Policy
@@ -18,7 +20,8 @@
           </p>
 
           <p class="text-gray-700 mb-8 leading-relaxed">
-            This Cookie Policy explains how TEKNIKOZ uses cookies and similar technologies.
+            This Cookie Policy explains how TEKNIKOZ uses cookies and similar
+            technologies.
           </p>
 
           <!-- Section 1 -->
@@ -27,7 +30,8 @@
               1. What Are Cookies?
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              Cookies are small text files stored on your device to improve user experience.
+              Cookies are small text files stored on your device to improve user
+              experience.
             </p>
           </div>
 
@@ -36,7 +40,7 @@
             <h2 class="text-2xl font-bold text-gray-900 mb-4">
               2. Types of Cookies We Use
             </h2>
-            
+
             <div class="space-y-6">
               <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">
@@ -82,7 +86,8 @@
               3. How to Control Cookies
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              You can manage cookies through your browser settings or opt-out through the cookie banner.
+              You can manage cookies through your browser settings or opt-out
+              through the cookie banner.
             </p>
           </div>
         </div>
@@ -93,12 +98,13 @@
 
 <script setup>
 useHead({
-  title: 'Cookie Policy - TEKNIKOZ University',
+  title: "Cookie Policy - TEKNIKOZ E-Learning",
   meta: [
     {
-      name: 'description',
-      content: 'TEKNIKOZ University Cookie Policy - Learn about how we use cookies and similar technologies on our platform.'
-    }
-  ]
-})
+      name: "description",
+      content:
+        "TEKNIKOZ E-Learning Cookie Policy - Learn about how we use cookies and similar technologies on our platform.",
+    },
+  ],
+});
 </script>

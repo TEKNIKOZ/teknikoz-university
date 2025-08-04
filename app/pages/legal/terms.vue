@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20">
+    <section
+      class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20"
+    >
       <div class="container max-w-4xl mx-auto px-4 sm:px-6">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
           Terms of Service
@@ -18,7 +20,8 @@
           </p>
 
           <p class="text-gray-700 mb-8 leading-relaxed">
-            By accessing or using the TEKNIKOZ e-learning portal, you agree to be bound by the following terms:
+            By accessing or using the TEKNIKOZ e-learning portal, you agree to
+            be bound by the following terms:
           </p>
 
           <!-- Section 1 -->
@@ -28,7 +31,10 @@
             </h2>
             <ul class="list-disc list-inside space-y-2 text-gray-700">
               <li>You must be 18 years or older to register.</li>
-              <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+              <li>
+                You are responsible for maintaining the confidentiality of your
+                login credentials.
+              </li>
             </ul>
           </div>
 
@@ -39,8 +45,14 @@
             </h2>
             <ul class="list-disc list-inside space-y-2 text-gray-700">
               <li>Courses are licensed to you, not sold.</li>
-              <li>Content may not be copied, redistributed, or shared without permission.</li>
-              <li>You agree not to use the platform for illegal or unauthorized purposes.</li>
+              <li>
+                Content may not be copied, redistributed, or shared without
+                permission.
+              </li>
+              <li>
+                You agree not to use the platform for illegal or unauthorized
+                purposes.
+              </li>
             </ul>
           </div>
 
@@ -50,7 +62,8 @@
               3. Intellectual Property
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              All content on TEKNIKOZ is the intellectual property of TEKNIKOZ or its licensors.
+              All content on TEKNIKOZ is the intellectual property of TEKNIKOZ
+              or its licensors.
             </p>
           </div>
 
@@ -60,7 +73,8 @@
               4. Modifications
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              We reserve the right to modify or discontinue the platform at any time without notice.
+              We reserve the right to modify or discontinue the platform at any
+              time without notice.
             </p>
           </div>
 
@@ -70,7 +84,8 @@
               5. Limitation of Liability
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              TEKNIKOZ is not liable for any indirect or consequential damages arising from your use of the platform.
+              TEKNIKOZ is not liable for any indirect or consequential damages
+              arising from your use of the platform.
             </p>
           </div>
 
@@ -80,7 +95,8 @@
               6. Termination
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              We may suspend or terminate your account for violations of these terms.
+              We may suspend or terminate your account for violations of these
+              terms.
             </p>
           </div>
         </div>
@@ -91,12 +107,13 @@
 
 <script setup>
 useHead({
-  title: 'Terms of Service - TEKNIKOZ University',
+  title: "Terms of Service - TEKNIKOZ E-Learning",
   meta: [
     {
-      name: 'description',
-      content: 'TEKNIKOZ University Terms of Service - Read our terms and conditions for using our e-learning platform.'
-    }
-  ]
-})
+      name: "description",
+      content:
+        "TEKNIKOZ E-Learning Terms of Service - Read our terms and conditions for using our e-learning platform.",
+    },
+  ],
+});
 </script>

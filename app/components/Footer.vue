@@ -7,12 +7,12 @@
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-gray-300"
       >
-        <!-- TEKNIKOZ University Column -->
+        <!-- TEKNIKOZ E-Learning Column -->
         <div class="text-left">
           <div class="flex items-center mb-4 sm:mb-6">
             <img
               src="/assets/images/footer-logo.svg"
-              alt="TEKNIKOZ University"
+              alt="TEKNIKOZ E-Learning"
               class="h-10 w-auto mr-3"
             />
           </div>
@@ -22,41 +22,38 @@
           </p>
           <!-- Social Media Icons -->
           <div class="flex justify-start gap-4">
-            <a
-              href="#"
-              class="text-white hover:text-blue-400 transition-colors duration-300"
-              aria-label="Facebook"
-            >
-              <Icon name="mdi:facebook" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href="#"
-              class="text-white hover:text-blue-400 transition-colors duration-300"
-              aria-label="Twitter"
-            >
-              <Icon name="mdi:twitter" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href="#"
-              class="text-white hover:text-pink-400 transition-colors duration-300"
-              aria-label="Instagram"
-            >
-              <Icon name="mdi:instagram" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href="#"
+            <NuxtLink
+              to="https://www.linkedin.com/company/teknikoz"
+              target="_blank"
               class="text-white hover:text-blue-600 transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <Icon name="mdi:linkedin" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href="#"
-              class="text-white hover:text-red-500 transition-colors duration-300"
-              aria-label="YouTube"
+            </NuxtLink>
+            <NuxtLink
+              to="https://www.facebook.com/people/Teknikoz/100083293054761"
+              target="_blank"
+              class="text-white hover:text-blue-400 transition-colors duration-300"
+              aria-label="Facebook"
             >
-              <Icon name="mdi:youtube" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
+              <Icon name="mdi:facebook" class="w-5 h-5 sm:w-6 sm:h-6" />
+            </NuxtLink>
+            <NuxtLink
+              to="https://www.x.com/Teknikoz1"
+              target="_blank"
+              class="text-white hover:text-blue-400 transition-colors duration-300"
+              aria-label="Twitter"
+            >
+              <Icon name="mdi:twitter" class="w-5 h-5 sm:w-6 sm:h-6" />
+            </NuxtLink>
+            <NuxtLink
+              to="https://www.instagram.com/teknikoz"
+              target="_blank"
+              class="text-white hover:text-pink-400 transition-colors duration-300"
+              aria-label="Instagram"
+            >
+              <Icon name="mdi:instagram" class="w-5 h-5 sm:w-6 sm:h-6" />
+            </NuxtLink>
           </div>
         </div>
 
@@ -226,21 +223,9 @@
                 class="w-5 h-5 text-white hover:text-gray-400 mr-3 mt-1 flex-shrink-0"
               />
               <p class="hover:text-white text-sm leading-relaxed text-pretty">
-                2499 Palm Ridge Rd, Sanibel Florida 33957 USA
+                Rainmakers Workspace, 213, 2nd Floor, Ramanashree Arcade, 18 MG
+                Road, Bengaluru-560001 India
               </p>
-            </div>
-            <!-- Phone -->
-            <div class="flex items-center">
-              <Icon
-                name="mdi:phone"
-                class="w-5 h-5 text-white mr-3 flex-shrink-0"
-              />
-              <a
-                href="tel:+11234567890"
-                class="hover:text-white text-sm transition-colors"
-              >
-                (123) 456-7890
-              </a>
             </div>
             <!-- Email -->
             <div class="flex items-center">
@@ -267,7 +252,7 @@
           <div class="text-center order-1 sm:order-2">
             <p class="text-gray-400 text-sm">
               &copy; {{ new Date().getFullYear() }}
-              TEKNIKOZ University. All Rights Reserved.
+              TEKNIKOZ E-Learning. All Rights Reserved.
             </p>
           </div>
           <div

@@ -337,6 +337,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, computed } from "vue";
 import { useBrochureManagementStore } from "@/stores/brochure.stores";
 import { useAuthStore } from "@/stores/auth.stores";
 
@@ -447,12 +448,12 @@ onMounted(async () => {
 
 // SEO
 useHead({
-  title: "Brochure Management - Teknikoz University",
+  title: "Brochure Management - Teknikoz E-Learning",
   meta: [
     {
       name: "description",
       content:
-        "Manage and track all brochure requests and email deliveries for Teknikoz University",
+        "Manage and track all brochure requests and email deliveries for Teknikoz E-Learning",
     },
   ],
 });

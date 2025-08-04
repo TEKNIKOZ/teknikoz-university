@@ -39,10 +39,7 @@
                 getCategoryBgColor(category.id),
               ]"
             >
-              <Icon
-                :name="category.icon"
-                class="text-white text-xs"
-              />
+              <Icon :name="category.icon" class="text-white text-xs" />
             </div>
             <Icon
               v-else
@@ -184,12 +181,12 @@ import boyTestimonial from "@/assets/images/boy-testimonial.png";
 import girlTestimonial from "@/assets/images/girl-testimonial.png";
 
 useHead({
-  title: "Success Stories - TEKNIKOZ University",
+  title: "Success Stories - TEKNIKOZ E-Learning",
   meta: [
     {
       name: "description",
       content:
-        "Read success stories from TEKNIKOZ University students who transformed their careers through our courses",
+        "Read success stories from TEKNIKOZ E-Learning students who transformed their careers through our courses",
     },
   ],
 });
@@ -207,9 +204,9 @@ const categories = [
 
 const getActiveCategoryStyle = (categoryId) => {
   const styles = {
-    "all": "bg-brand text-white",
+    all: "bg-brand text-white",
     "PLM Windchill": "bg-purple-100 text-purple-700",
-    "Siemens Teamcenter": "bg-green-100 text-green-700", 
+    "Siemens Teamcenter": "bg-green-100 text-green-700",
     "Cloud Solutions": "bg-orange-100 text-orange-700",
     "AI/ML": "bg-blue-100 text-blue-700",
   };
@@ -220,7 +217,7 @@ const getCategoryBgColor = (categoryId) => {
   const colors = {
     "PLM Windchill": "bg-purple-500",
     "Siemens Teamcenter": "bg-green-500",
-    "Cloud Solutions": "bg-orange-500", 
+    "Cloud Solutions": "bg-orange-500",
     "AI/ML": "bg-blue-500",
   };
   return colors[categoryId] || "bg-gray-500";

@@ -5,7 +5,7 @@
         Enroll Now
       </h1>
       <div class="text-center text-gray-600">
-        <p class="text-lg">Start your journey with TEKNIKOZ University</p>
+        <p class="text-lg">Start your journey with TEKNIKOZ E-Learning</p>
         <p class="mt-4">Enrollment form coming soon...</p>
       </div>
     </div>
@@ -14,12 +14,12 @@
 
 <script setup>
 useHead({
-  title: "Enroll - TEKNIKOZ University",
+  title: "Enroll - TEKNIKOZ E-Learning",
   meta: [
     {
       name: "description",
       content:
-        "Enroll in TEKNIKOZ University courses and transform your career",
+        "Enroll in TEKNIKOZ E-Learning courses and transform your career",
     },
   ],
 });

@@ -1128,12 +1128,12 @@
 import { ref, watch } from "vue";
 
 useHead({
-  title: "Courses - TEKNIKOZ University",
+  title: "Courses - TEKNIKOZ E-Learning",
   meta: [
     {
       name: "description",
       content:
-        "Explore comprehensive courses in PLM Windchill, Siemens Teamcenter, Cloud Solutions, and AI/ML at TEKNIKOZ University",
+        "Explore comprehensive courses in PLM Windchill, Siemens Teamcenter, Cloud Solutions, and AI/ML at TEKNIKOZ E-Learning",
     },
   ],
 });

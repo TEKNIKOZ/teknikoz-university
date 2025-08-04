@@ -7,15 +7,15 @@
           September Batch Now Enrolling - Only 50 Seats Left!
         </div>
         <div class="flex items-center space-x-3">
-          <Icon
+          <!-- <Icon
             name="heroicons:phone-solid"
             class="w-4 h-4 cursor-pointer"
             @click="call('+91 9876543210')"
-          />
+          /> -->
           <Icon
             name="heroicons:envelope-solid"
             class="w-4 h-4 cursor-pointer"
-            @click="mailto('support@teknikoz.com')"
+            @click="mailto('info@teknikoz.com')"
           />
         </div>
       </div>
@@ -26,21 +26,19 @@
           September Batch Now Enrolling - Only 50 Seats Left!
         </div>
         <div class="flex items-center space-x-6">
-          <div
+          <!-- <div
             class="flex items-center space-x-2 cursor-pointer"
             @click="call('+91 9876543210')"
           >
             <Icon name="heroicons:phone-solid" class="w-4 h-4" />
             <span @click="call('+91 9876543210')">+91 9876543210</span>
-          </div>
+          </div> -->
           <div
             class="flex items-center space-x-2 cursor-pointer"
-            @click="mailto('support@teknikoz.com')"
+            @click="mailto('info@teknikoz.com')"
           >
             <Icon name="heroicons:envelope-solid" class="w-4 h-4" />
-            <span @click="mailto('support@teknikozuniversity.in')"
-              >support@teknikoz.com</span
-            >
+            <span @click="mailto('info@teknikoz.com')">info@teknikoz.com</span>
           </div>
         </div>
       </div>
