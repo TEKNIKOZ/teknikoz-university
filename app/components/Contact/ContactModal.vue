@@ -16,7 +16,7 @@
           {{
             contactStore.hasContactSubmitted
               ? "Thank You!"
-              : "Contact Teknikoz University"
+              : "Contact Teknikoz E-Learning"
           }}
         </h2>
         <button
@@ -229,6 +229,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
 import { useContactStore } from "@/stores/contact.stores";
 const contactStore = useContactStore();
 

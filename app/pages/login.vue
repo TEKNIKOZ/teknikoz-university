@@ -147,15 +147,17 @@
 </template>
 
 <script setup lang="ts">
+import { reactive, ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "~/stores/auth.stores";
 const { login } = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 
 useSeoMeta({
-  title: "Login - Teknikoz University",
+  title: "Login - Teknikoz E-Learning",
   description:
-    "Sign in to your Teknikoz University account to access courses and learning materials.",
+    "Sign in to your Teknikoz E-Learning account to access courses and learning materials.",
 });
 
 const form = reactive({

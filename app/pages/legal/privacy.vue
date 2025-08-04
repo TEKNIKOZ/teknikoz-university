@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20">
+    <section
+      class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20"
+    >
       <div class="container max-w-4xl mx-auto px-4 sm:px-6">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
           Privacy Policy
@@ -18,7 +20,9 @@
           </p>
 
           <p class="text-gray-700 mb-8 leading-relaxed">
-            At TEKNIKOZ, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our e-learning portal.
+            At TEKNIKOZ, we are committed to protecting your privacy. This
+            Privacy Policy explains how we collect, use, disclose, and safeguard
+            your information when you visit our e-learning portal.
           </p>
 
           <!-- Section 1 -->
@@ -26,14 +30,15 @@
             <h2 class="text-2xl font-bold text-gray-900 mb-4">
               1. Information We Collect
             </h2>
-            
+
             <div class="space-y-6">
               <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">
                   Personal Data:
                 </h3>
                 <p class="text-gray-700 leading-relaxed">
-                  Name, email address, phone number, billing information, and login credentials.
+                  Name, email address, phone number, billing information, and
+                  login credentials.
                 </p>
               </div>
 
@@ -42,7 +47,8 @@
                   Usage Data:
                 </h3>
                 <p class="text-gray-700 leading-relaxed">
-                  Pages visited, time spent, courses accessed, browser type, and IP address.
+                  Pages visited, time spent, courses accessed, browser type, and
+                  IP address.
                 </p>
               </div>
 
@@ -90,7 +96,8 @@
               4. Data Security
             </h2>
             <p class="text-gray-700 leading-relaxed">
-              We implement strong encryption, firewalls, and secure data storage to protect your data.
+              We implement strong encryption, firewalls, and secure data storage
+              to protect your data.
             </p>
           </div>
 
@@ -107,11 +114,14 @@
 
           <!-- Section 6 -->
           <div class="mb-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">
-              6. Contact
-            </h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Contact</h2>
             <p class="text-gray-700 leading-relaxed">
-              For questions, email us at <a href="mailto:support@teknikoz.com" class="text-brand hover:underline">support@teknikoz.com</a>.
+              For questions, email us at
+              <a
+                href="mailto:support@teknikoz.com"
+                class="text-brand hover:underline"
+                >support@teknikoz.com</a
+              >.
             </p>
           </div>
         </div>
@@ -122,12 +132,13 @@
 
 <script setup>
 useHead({
-  title: 'Privacy Policy - TEKNIKOZ University',
+  title: "Privacy Policy - TEKNIKOZ E-Learning",
   meta: [
     {
-      name: 'description',
-      content: 'TEKNIKOZ University Privacy Policy - Learn how we collect, use, and protect your personal information.'
-    }
-  ]
-})
+      name: "description",
+      content:
+        "TEKNIKOZ E-Learning Privacy Policy - Learn how we collect, use, and protect your personal information.",
+    },
+  ],
+});
 </script>

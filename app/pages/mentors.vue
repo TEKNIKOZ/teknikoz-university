@@ -14,11 +14,11 @@
 
 <script setup>
 useHead({
-  title: "Mentors - TEKNIKOZ University",
+  title: "Mentors - TEKNIKOZ E-Learning",
   meta: [
     {
       name: "description",
-      content: "Meet our world-class mentors at TEKNIKOZ University",
+      content: "Meet our world-class mentors at TEKNIKOZ E-Learning",
     },
   ],
 });

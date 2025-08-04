@@ -74,24 +74,16 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "@/stores/auth.stores";
-
 const authStore = useAuthStore();
-
-const handleLogout = async () => {
-  const result = await authStore.logout();
-  if (result.success) {
-    await navigateTo("/");
-  }
-};
 
 // SEO
 useHead({
-  title: "Profile - Teknikoz University",
+  title: "Profile - Teknikoz E-Learning",
   meta: [
     {
       name: "description",
       content:
-        "Manage your Teknikoz University account information and preferences.",
+        "Manage your Teknikoz E-Learning account information and preferences.",
     },
   ],
 });

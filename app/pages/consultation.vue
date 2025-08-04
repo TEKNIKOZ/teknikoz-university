@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: "Free Consultation - TEKNIKOZ University",
+  title: "Free Consultation - TEKNIKOZ E-Learning",
   meta: [
     {
       name: "description",

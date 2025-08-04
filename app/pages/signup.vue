@@ -290,16 +290,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref, reactive, computed, watch } from "vue";
 import { useAuthStore } from "~/stores/auth.stores";
+import { useRouter } from "vue-router";
 const { signup } = useAuthStore();
 const router = useRouter();
 
 // Using default layout to include navbar
 
 useSeoMeta({
-  title: "Sign Up - Teknikoz University",
+  title: "Sign Up - Teknikoz E-Learning",
   description:
-    "Create your Teknikoz University account to start learning and access exclusive courses.",
+    "Create your Teknikoz E-Learning account to start learning and access exclusive courses.",
 });
 
 const form = reactive({

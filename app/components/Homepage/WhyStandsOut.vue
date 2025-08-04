@@ -6,7 +6,7 @@
         <h2
           class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2"
         >
-          Why <span class="text-brand">TEKNIKOZ</span> University Stands Out
+          Why <span class="text-brand">TEKNIKOZ</span> E-Learning Stands Out
         </h2>
         <p
           class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto text-pretty px-2"
