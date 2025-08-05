@@ -68,6 +68,7 @@
           </ul>
 
           <button
+            @click="navigateToFreshers"
             class="bg-gray-900 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full text-sm sm:text-base"
           >
             Learn More
@@ -126,6 +127,7 @@
           </ul>
 
           <button
+            @click="navigateToProfessionals"
             class="bg-gray-900 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full text-sm sm:text-base"
           >
             Learn More
@@ -184,6 +186,7 @@
           </ul>
 
           <button
+            @click="navigateToEnterprises"
             class="bg-gray-900 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full text-sm sm:text-base"
           >
             Learn More
@@ -194,11 +197,51 @@
       <!-- CTA Button -->
       <div class="text-center">
         <button
+          @click="openQuiz"
           class="w-full sm:w-auto bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-base sm:text-lg hover:bg-brand/80 transition-colors duration-300"
         >
           Find Your Path
         </button>
       </div>
+
+      <!-- Quiz Modal -->
+      <FindYourPathQuiz 
+        :showQuiz="showQuiz" 
+        @close="closeQuiz" 
+        @result="handleQuizResult" 
+      />
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import FindYourPathQuiz from '~/components/Quiz/FindYourPathQuiz.vue'
+
+const showQuiz = ref(false)
+
+const navigateToFreshers = () => {
+  navigateTo('/learning-paths/freshers')
+}
+
+const navigateToProfessionals = () => {
+  navigateTo('/learning-paths/professionals')
+}
+
+const navigateToEnterprises = () => {
+  navigateTo('/learning-paths/enterprises')
+}
+
+const openQuiz = () => {
+  showQuiz.value = true
+}
+
+const closeQuiz = () => {
+  showQuiz.value = false
+}
+
+const handleQuizResult = (result) => {
+  console.log('Quiz result:', result)
+  navigateTo(result.path)
+}
+</script>
