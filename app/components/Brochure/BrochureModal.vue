@@ -8,7 +8,7 @@
     >
       <!-- Modal Header -->
       <div
-        class="flex justify-between items-start p-4 sm:p-6 border-b border-gray-200 gap-3"
+        class="flex justify-between items-center p-4 sm:p-6 border-b border-gray-200 gap-3"
       >
         <h2
           class="text-lg sm:text-2xl font-bold text-gray-900 flex-1 leading-tight"
@@ -231,6 +231,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
 import { useBrochureStore } from "@/stores/brochure.stores";
 const brochureStore = useBrochureStore();
 

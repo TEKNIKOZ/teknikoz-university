@@ -8,36 +8,46 @@
             'px-2 py-1 text-xs font-medium rounded-full',
             contact.form_type === 'contact'
               ? 'bg-blue-100 text-blue-800'
-              : 'bg-green-100 text-green-800'
+              : 'bg-green-100 text-green-800',
           ]"
         >
-          {{ contact.form_type === 'contact' ? 'Contact Form' : 'Brochure Request' }}
+          {{
+            contact.form_type === "contact"
+              ? "Contact Form"
+              : "Brochure Request"
+          }}
         </span>
       </div>
-      
+
       <div class="space-y-2 text-sm text-gray-600">
         <div class="flex items-center space-x-2">
           <Icon name="mdi:email" class="w-4 h-4 text-gray-400" />
           <span>{{ contact.email }}</span>
         </div>
-        
+
         <div class="flex items-center space-x-2">
           <Icon name="mdi:phone" class="w-4 h-4 text-gray-400" />
           <span>{{ formatPhone(contact.phone) }}</span>
         </div>
-        
+
         <div class="flex items-center space-x-2">
           <Icon name="mdi:school" class="w-4 h-4 text-gray-400" />
           <span>{{ formatCourseInterest(contact.course_interest) }}</span>
         </div>
-        
-        <div v-if="contact.message" class="flex items-start space-x-2 mt-3 pt-2 border-t border-gray-100">
-          <Icon name="mdi:message-text" class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+
+        <div
+          v-if="contact.message"
+          class="flex items-start space-x-2 mt-3 pt-2 border-t border-gray-100"
+        >
+          <Icon
+            name="mdi:message-text"
+            class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+          />
           <span class="line-clamp-2 text-gray-700">{{ contact.message }}</span>
         </div>
       </div>
     </div>
-    
+
     <div class="text-right text-sm text-gray-500 ml-6 flex-shrink-0">
       <div class="font-medium">{{ formatDate(contact.created_at) }}</div>
       <div class="text-xs">{{ formatTime(contact.created_at) }}</div>
