@@ -14,7 +14,7 @@
         <div class="bg-white rounded-lg shadow-sm p-6">
           <div v-if="authStore.isAuthenticated" class="space-y-6">
             <!-- User Info -->
-            <div class="pb-6">
+            <div>
               <h2 class="text-xl font-semibold text-gray-900 mb-4">
                 Account Information
               </h2>

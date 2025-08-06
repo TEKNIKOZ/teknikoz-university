@@ -21,16 +21,16 @@
       >
         <!-- Freshers -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-blue-200 p-6 sm:p-8 hover:shadow-lg transition-shadow duration-300"
+          class="bg-white rounded-xl sm:rounded-2xl border-2 border-purple-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-purple-400"
         >
           <div class="flex items-start mb-4 sm:mb-6">
             <div
-              class="w-12 h-12 sm:w-14 sm:h-14 bg-brand rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-500 rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
             >
               <Icon name="mdi:school" class="text-white text-2xl sm:text-3xl" />
             </div>
             <div class="min-w-0 flex-1">
-              <h3 class="text-xl sm:text-2xl font-bold text-brand mb-1">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
                 Freshers
               </h3>
               <p class="text-gray-600 text-xs sm:text-sm">
@@ -69,19 +69,23 @@
 
           <button
             @click="navigateToFreshers"
-            class="bg-gray-900 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full text-sm sm:text-base"
+            class="w-full bg-purple-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group"
           >
             Learn More
+            <Icon
+              name="mdi:arrow-right"
+              class="ml-2 text-base group-hover:translate-x-1 transition-transform duration-300"
+            />
           </button>
         </div>
 
         <!-- Professionals -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-blue-200 p-6 sm:p-8 hover:shadow-lg transition-shadow duration-300"
+          class="bg-white rounded-xl sm:rounded-2xl border-2 border-green-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-green-400"
         >
           <div class="flex items-start mb-4 sm:mb-6">
             <div
-              class="w-12 h-12 sm:w-14 sm:h-14 bg-brand rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
             >
               <Icon
                 name="mdi:briefcase-check"
@@ -89,7 +93,7 @@
               />
             </div>
             <div class="min-w-0 flex-1">
-              <h3 class="text-xl sm:text-2xl font-bold text-brand mb-1">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
                 Professionals
               </h3>
               <p class="text-gray-600 text-xs sm:text-sm">
@@ -128,19 +132,23 @@
 
           <button
             @click="navigateToProfessionals"
-            class="bg-gray-900 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full text-sm sm:text-base"
+            class="w-full bg-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group"
           >
             Learn More
+            <Icon
+              name="mdi:arrow-right"
+              class="ml-2 text-base group-hover:translate-x-1 transition-transform duration-300"
+            />
           </button>
         </div>
 
         <!-- Enterprises -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-blue-200 p-6 sm:p-8 hover:shadow-lg transition-shadow duration-300"
+          class="bg-white rounded-xl sm:rounded-2xl border-2 border-orange-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-orange-400"
         >
           <div class="flex items-start mb-4 sm:mb-6">
             <div
-              class="w-12 h-12 sm:w-14 sm:h-14 bg-brand rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-500 rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
             >
               <Icon
                 name="mdi:office-building"
@@ -148,7 +156,7 @@
               />
             </div>
             <div class="min-w-0 flex-1">
-              <h3 class="text-xl sm:text-2xl font-bold text-brand mb-1">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
                 Enterprises
               </h3>
               <p class="text-gray-600 text-xs sm:text-sm">
@@ -187,61 +195,69 @@
 
           <button
             @click="navigateToEnterprises"
-            class="bg-gray-900 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 w-full text-sm sm:text-base"
+            class="w-full bg-orange-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group"
           >
             Learn More
+            <Icon
+              name="mdi:arrow-right"
+              class="ml-2 text-base group-hover:translate-x-1 transition-transform duration-300"
+            />
           </button>
         </div>
       </div>
 
       <!-- CTA Button -->
-      <div class="text-center">
+      <div class="flex justify-center">
         <button
           @click="openQuiz"
-          class="w-full sm:w-auto bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-base sm:text-lg hover:bg-brand/80 transition-colors duration-300"
+          class="bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-base sm:text-lg transition-colors duration-300 flex items-center group overflow-hidden"
         >
           Find Your Path
+          <Icon
+            name="mdi:rocket-launch"
+            class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-6"
+          />
         </button>
       </div>
 
       <!-- Quiz Modal -->
-      <FindYourPathQuiz 
-        :showQuiz="showQuiz" 
-        @close="closeQuiz" 
-        @result="handleQuizResult" 
+      <FindYourPathQuiz
+        :showQuiz="showQuiz"
+        @close="closeQuiz"
+        @result="handleQuizResult"
       />
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import FindYourPathQuiz from '~/components/Quiz/FindYourPathQuiz.vue'
+import { ref } from "vue";
+import FindYourPathQuiz from "~/components/Quiz/FindYourPathQuiz.vue";
 
-const showQuiz = ref(false)
+const showQuiz = ref(false);
 
 const navigateToFreshers = () => {
-  navigateTo('/learning-paths/freshers')
-}
+  navigateTo("/learning-paths/freshers");
+};
 
 const navigateToProfessionals = () => {
-  navigateTo('/learning-paths/professionals')
-}
+  navigateTo("/learning-paths/professionals");
+};
 
 const navigateToEnterprises = () => {
-  navigateTo('/learning-paths/enterprises')
-}
+  navigateTo("/learning-paths/enterprises");
+};
 
 const openQuiz = () => {
-  showQuiz.value = true
-}
+  showQuiz.value = true;
+};
 
 const closeQuiz = () => {
-  showQuiz.value = false
-}
+  showQuiz.value = false;
+};
 
 const handleQuizResult = (result) => {
-  console.log('Quiz result:', result)
-  navigateTo(result.path)
-}
+  console.log("Quiz result:", result);
+  navigateTo(result.path);
+};
 </script>

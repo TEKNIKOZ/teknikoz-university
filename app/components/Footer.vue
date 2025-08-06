@@ -94,7 +94,7 @@
                 Courses
               </a>
             </li>
-            <li
+            <!-- <li
               class="flex items-center transition-transform hover:translate-x-1 duration-300"
             >
               <Icon
@@ -107,7 +107,7 @@
               >
                 Mentors
               </a>
-            </li>
+            </li> -->
             <li
               class="flex items-center transition-transform hover:translate-x-1 duration-300"
             >

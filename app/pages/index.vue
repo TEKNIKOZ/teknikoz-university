@@ -4,7 +4,7 @@
     <HomepageHeroSection />
     <HomepageClientLogosCarousel />
     <HomepageCoursesSection />
-    <HomepageMentorsSection />
+    <!-- <HomepageMentorsSection /> -->
     <HomepageWhyStandsOut />
     <HomepageTestimonialsSection />
     <HomepageLearningPaths />

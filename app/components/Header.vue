@@ -29,11 +29,17 @@
             Courses
           </NuxtLink>
           <NuxtLink
+            to="/learning-paths"
+            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
+          >
+            Learning Paths
+          </NuxtLink>
+          <!-- <NuxtLink
             to="/mentors"
             class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
           >
             Mentors
-          </NuxtLink>
+          </NuxtLink> -->
           <NuxtLink
             to="/testimonials"
             class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
@@ -186,6 +192,21 @@
                 />
               </NuxtLink>
               <NuxtLink
+                to="/learning-paths"
+                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
+                @click="closeMobileMenu"
+              >
+                <Icon
+                  name="mdi:map-marker-path"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
+                />
+                <span class="font-medium">Learning Paths</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="w-4 h-4 ml-auto text-gray-400"
+                />
+              </NuxtLink>
+              <!-- <NuxtLink
                 to="/mentors"
                 class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
                 @click="closeMobileMenu"
@@ -199,7 +220,7 @@
                   name="mdi:chevron-right"
                   class="w-4 h-4 ml-auto text-gray-400"
                 />
-              </NuxtLink>
+              </NuxtLink> -->
               <NuxtLink
                 to="/testimonials"
                 class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
