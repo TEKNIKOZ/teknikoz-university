@@ -9,7 +9,9 @@
           Master <span class="text-brand">Industry-Leading</span> Skills with
           <span class="text-gray-900">Hands-On Courses</span>
         </h2>
-        <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-2">
+        <p
+          class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-2"
+        >
           Transform your career with our comprehensive, project-based learning
           approach
         </p>
@@ -28,7 +30,7 @@
               <div
                 class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-500 rounded-full flex items-center justify-center mr-4"
               >
-                <Icon name="mdi:cog" class="text-white text-xl sm:text-2xl" />
+                <Icon name="mdi:cog" class="text-white text-xl sm:text-3xl" />
               </div>
               <div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
@@ -37,7 +39,7 @@
               </div>
             </div>
 
-            <p class="text-sm sm:text-base text-gray-700 font-medium mb-4">
+            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
               From Basics to Enterprise Architect
             </p>
 
@@ -53,31 +55,39 @@
                 Key Learning Areas:
               </h4>
               <div class="grid grid-cols-1 gap-2">
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-purple-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Windchill Architecture & Lifecycle Management
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-purple-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   EBOM/MBOM & Change Management (CR/CN)
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-purple-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   ECAD/MCAD Integration (Creo, SolidWorks, Altium)
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-purple-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Info Engine, REST APIs & Enterprise Integration
                 </div>
@@ -86,9 +96,13 @@
 
             <button
               @click="navigateTo('/courses?category=PLM Windchill')"
-              class="w-full bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 text-sm sm:text-base"
+              class="w-full bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
             >
-              Explore Full Curriculum →
+              <span>Explore Full Curriculum</span>
+              <Icon
+                name="mdi:arrow-right"
+                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </button>
           </div>
         </div>
@@ -102,7 +116,7 @@
               <div
                 class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-full flex items-center justify-center mr-4"
               >
-                <Icon name="mdi:cube" class="text-white text-xl sm:text-2xl" />
+                <Icon name="mdi:cube" class="text-white text-xl sm:text-3xl" />
               </div>
               <div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
@@ -111,7 +125,7 @@
               </div>
             </div>
 
-            <p class="text-sm sm:text-base text-gray-700 font-medium mb-4">
+            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
               Deploying Digital Threads
             </p>
 
@@ -122,35 +136,43 @@
 
             <!-- Key Topics -->
             <div class="mb-6">
-              <h4 class="text-sm font-semibold text-gray-700 mb-3">
+              <h4 class="text-sm font-semibold text-gray-900 mb-3">
                 Key Learning Areas:
               </h4>
               <div class="grid grid-cols-1 gap-2">
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-green-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Teamcenter Architecture & Data Management
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-green-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Advanced BOM & Variant Configuration
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-green-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   BMIDE Customization & Active Workspace
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-green-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Multi-site Deployment & ERP Integration
                 </div>
@@ -159,9 +181,13 @@
 
             <button
               @click="navigateTo('/courses?category=Siemens Teamcenter')"
-              class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base"
+              class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
             >
-              Explore Full Curriculum →
+              <span>Explore Full Curriculum</span>
+              <Icon
+                name="mdi:arrow-right"
+                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </button>
           </div>
         </div>
@@ -175,7 +201,7 @@
               <div
                 class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-500 rounded-full flex items-center justify-center mr-4"
               >
-                <Icon name="mdi:cloud" class="text-white text-xl sm:text-2xl" />
+                <Icon name="mdi:cloud" class="text-white text-xl sm:text-3xl" />
               </div>
               <div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
@@ -184,7 +210,7 @@
               </div>
             </div>
 
-            <p class="text-sm sm:text-base text-gray-700 font-medium mb-4">
+            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
               AWS / Azure DevOps
             </p>
 
@@ -195,35 +221,43 @@
 
             <!-- Key Topics -->
             <div class="mb-6">
-              <h4 class="text-sm font-semibold text-gray-700 mb-3">
+              <h4 class="text-sm font-semibold text-gray-900 mb-3">
                 Key Learning Areas:
               </h4>
               <div class="grid grid-cols-1 gap-2">
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-orange-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   AWS & Azure Infrastructure Essentials
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-orange-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   CI/CD Pipelines & Terraform Automation
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-orange-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   High Availability & Disaster Recovery
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-orange-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Hybrid Cloud PLM Migration Strategies
                 </div>
@@ -232,9 +266,13 @@
 
             <button
               @click="navigateTo('/courses?category=Cloud Solutions')"
-              class="w-full bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 text-sm sm:text-base"
+              class="w-full bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
             >
-              Explore Full Curriculum →
+              <span>Explore Full Curriculum</span>
+              <Icon
+                name="mdi:arrow-right"
+                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </button>
           </div>
         </div>
@@ -248,7 +286,7 @@
               <div
                 class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-500 rounded-full flex items-center justify-center mr-4"
               >
-                <Icon name="mdi:robot" class="text-white text-xl sm:text-2xl" />
+                <Icon name="mdi:robot" class="text-white text-xl sm:text-3xl" />
               </div>
               <div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
@@ -257,7 +295,7 @@
               </div>
             </div>
 
-            <p class="text-sm sm:text-base text-gray-700 font-medium mb-4">
+            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
               Applied Intelligence for Industry 4.0
             </p>
 
@@ -268,35 +306,43 @@
 
             <!-- Key Topics -->
             <div class="mb-6">
-              <h4 class="text-sm font-semibold text-gray-700 mb-3">
+              <h4 class="text-sm font-semibold text-gray-900 mb-3">
                 Key Learning Areas:
               </h4>
               <div class="grid grid-cols-1 gap-2">
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-blue-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Python Essentials & ML Fundamentals
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-blue-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   ChatGPT & LangChain Integration
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-blue-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   Predictive Maintenance & Defect Detection
                 </div>
-                <div class="flex items-center text-xs sm:text-sm text-gray-600">
+                <div
+                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                >
                   <Icon
-                    name="mdi:check-circle"
-                    class="w-4 h-4 text-blue-500 mr-2"
+                    name="mdi:chevron-right"
+                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
                   />
                   AI-Powered PLM Decision Dashboards
                 </div>
@@ -305,9 +351,13 @@
 
             <button
               @click="navigateTo('/courses?category=AI/ML')"
-              class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm sm:text-base"
+              class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
             >
-              Explore Full Curriculum →
+              <span>Explore Full Curriculum</span>
+              <Icon
+                name="mdi:arrow-right"
+                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </button>
           </div>
         </div>

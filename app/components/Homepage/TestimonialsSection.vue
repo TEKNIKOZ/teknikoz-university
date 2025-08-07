@@ -9,7 +9,7 @@
           <span class="text-brand">Hear from</span> Our Champions
         </h2>
         <p
-          class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto text-pretty px-2"
+          class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-pretty px-2"
         >
           Success stories from professionals who transformed their careers
         </p>

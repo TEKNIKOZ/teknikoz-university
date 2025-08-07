@@ -47,12 +47,12 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:account-group" class="text-white text-2xl" />
+              <Icon name="mdi:account-group" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Team Training Programs
@@ -93,12 +93,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:book-open-variant" class="text-white text-2xl" />
+              <Icon name="mdi:book-open-variant" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Custom Curriculum
@@ -139,12 +139,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:trending-up" class="text-white text-2xl" />
+              <Icon name="mdi:trending-up" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Leadership & Change Enablement
@@ -185,12 +185,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-orange-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:rocket-launch" class="text-white text-2xl" />
+              <Icon name="mdi:rocket-launch" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Enterprise Onboarding Support
@@ -252,11 +252,11 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
           <div
-            class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8"
+            class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-indigo-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
           >
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"
+                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4 shadow-lg ring-1 ring-black/5"
               >
                 <Icon name="mdi:factory" class="text-white text-xl" />
               </div>
@@ -291,11 +291,11 @@
           </div>
 
           <div
-            class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8"
+            class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-emerald-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
           >
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4"
+                class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4 shadow-lg ring-1 ring-black/5"
               >
                 <Icon name="mdi:car" class="text-white text-xl" />
               </div>
@@ -352,12 +352,12 @@
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-indigo-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:school-outline" class="text-white text-2xl" />
+              <Icon name="mdi:school-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               LMS Integration
@@ -375,12 +375,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:chart-line" class="text-white text-2xl" />
+              <Icon name="mdi:chart-line" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               Progress Dashboards
@@ -397,14 +397,14 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:clipboard-check-outline"
-                class="text-white text-2xl"
+                class="text-white text-3xl"
               />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
@@ -443,58 +443,66 @@
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
         >
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:earth" class="text-white text-3xl" />
             </div>
             <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
               Global Trainer Pool
             </h3>
-            <p class="text-gray-600 text-xs sm:text-sm">
+            <p class="text-gray-600 text-xs sm:text-sm max-w-xs mx-auto">
               Certified experts from leading engineering companies worldwide
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:shield-check" class="text-white text-3xl" />
             </div>
             <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
               Compliance Aligned
             </h3>
-            <p class="text-gray-600 text-xs sm:text-sm">
+            <p class="text-gray-600 text-xs sm:text-sm max-w-xs mx-auto">
               MedDev, Automotive, Aerospace industry standards
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:clock-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
               24/7 Support
             </h3>
-            <p class="text-gray-600 text-xs sm:text-sm">
+            <p class="text-gray-600 text-xs sm:text-sm max-w-xs mx-auto">
               Dedicated success manager and round-the-clock technical support
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:trophy-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
               Proven Results
             </h3>
-            <p class="text-gray-600 text-xs sm:text-sm">
+            <p class="text-gray-600 text-xs sm:text-sm max-w-xs mx-auto">
               500+ successful enterprise transformations
             </p>
           </div>
@@ -639,7 +647,9 @@
     <section
       class="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-r from-indigo-900 to-purple-900"
     >
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div
+        class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 bg-white/5 backdrop-blur-sm rounded-2xl ring-1 ring-white/10 shadow-xl"
+      >
         <h2
           class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4"
         >
@@ -653,14 +663,22 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            class="bg-white text-indigo-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
+            class="bg-white text-indigo-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-gray-100 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group"
           >
-            Request Corporate Demo
+            <span>Request Corporate Demo</span>
+            <Icon
+              name="mdi:arrow-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </button>
           <button
-            class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-indigo-900 transition-colors duration-300"
+            class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-indigo-900 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group"
           >
-            Book a Strategy Call
+            <span>Book a Strategy Call</span>
+            <Icon
+              name="mdi:arrow-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </button>
         </div>
       </div>

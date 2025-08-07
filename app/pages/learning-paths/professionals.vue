@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
     <section
-      class="relative bg-gradient-to-br from-gray-900 to-gray-700 text-white py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden"
+      class="relative bg-gradient-to-br from-gray-900 to-gray-700 text-white py-8 sm:py-12 md:py-16 lg:py-32 overflow-hidden"
     >
       <div class="absolute inset-0 z-0">
         <img
@@ -48,12 +48,12 @@
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:cog-outline" class="text-white text-2xl" />
+              <Icon name="mdi:cog-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">
               Advanced PLM Modules
@@ -79,12 +79,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:brain" class="text-white text-2xl" />
+              <Icon name="mdi:brain" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">
               AI/ML for Engineers
@@ -110,12 +110,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:network-outline" class="text-white text-2xl" />
+              <Icon name="mdi:network-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">
               Cross-Discipline Integration
@@ -163,9 +163,11 @@
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:account-group" class="text-white text-3xl" />
             </div>
@@ -178,9 +180,11 @@
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:chart-line" class="text-white text-3xl" />
             </div>
@@ -193,9 +197,11 @@
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:puzzle-outline" class="text-white text-3xl" />
             </div>
@@ -231,12 +237,12 @@
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:school" class="text-white text-2xl" />
+              <Icon name="mdi:school" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               Industry Masterclasses
@@ -253,12 +259,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-indigo-500 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:account-multiple" class="text-white text-2xl" />
+              <Icon name="mdi:account-multiple" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               Community Groups
@@ -274,12 +280,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:handshake" class="text-white text-2xl" />
+              <Icon name="mdi:handshake" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               Circles
@@ -317,9 +323,11 @@
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
         >
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:chart-box-outline" class="text-white text-3xl" />
             </div>
@@ -331,9 +339,11 @@
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:briefcase-outline" class="text-white text-3xl" />
             </div>
@@ -345,9 +355,11 @@
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:medal-outline" class="text-white text-3xl" />
             </div>
@@ -359,9 +371,11 @@
             </p>
           </div>
 
-          <div class="text-center">
+          <div
+            class="text-center group bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4"
+              class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:linkedin" class="text-white text-3xl" />
             </div>
@@ -393,7 +407,7 @@
         </div>
 
         <div
-          class="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl max-w-4xl mx-auto"
+          class="bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl ring-1 ring-black/5 border border-gray-100 max-w-4xl mx-auto transition-all duration-300 hover:shadow-2xl"
         >
           <div
             class="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8"
@@ -457,16 +471,26 @@
         >
           Join the next generation of engineering leaders
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center bg-white/5 backdrop-blur-sm rounded-2xl ring-1 ring-white/10 shadow-xl p-4"
+        >
           <button
-            class="bg-brand text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-brand/80 transition-colors duration-300"
+            class="bg-brand text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-brand/80 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group"
           >
-            View Track Details
+            <span>View Track Details</span>
+            <Icon
+              name="mdi:arrow-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </button>
           <button
-            class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300"
+            class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group"
           >
-            Download Sample Certificate
+            <span>Download Sample Certificate</span>
+            <Icon
+              name="mdi:arrow-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </button>
         </div>
       </div>

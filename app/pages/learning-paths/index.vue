@@ -9,27 +9,31 @@
             Choose Your
             <span class="text-brand">Learning Path</span>
           </h1>
-          <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p
+            class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          >
             Discover tailored learning journeys designed for your career stage
             and goals. From fresh graduates to seasoned professionals and
             enterprises.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-16">
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-16"
+        >
           <!-- Freshers Path -->
           <div
             class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
           >
-            <div
-              class="h-48 relative overflow-hidden"
-            >
+            <div class="h-48 relative overflow-hidden">
               <img
                 src="/assets/images/fresher-learning-path.jpeg"
                 alt="Freshers Learning Path"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              ></div>
               <div class="absolute bottom-4 left-6">
                 <Icon name="mdi:school" class="w-8 h-8 text-white mb-2" />
                 <h3 class="text-xl font-bold text-white">For Freshers</h3>
@@ -76,15 +80,15 @@
           <div
             class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
           >
-            <div
-              class="h-48 relative overflow-hidden"
-            >
+            <div class="h-48 relative overflow-hidden">
               <img
                 src="/assets/images/pro-learning-path.jpeg"
                 alt="Professionals Learning Path"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              ></div>
               <div class="absolute bottom-4 left-6">
                 <Icon name="mdi:account-tie" class="w-8 h-8 text-white mb-2" />
                 <h3 class="text-xl font-bold text-white">For Professionals</h3>
@@ -131,15 +135,15 @@
           <div
             class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
           >
-            <div
-              class="h-48 relative overflow-hidden"
-            >
+            <div class="h-48 relative overflow-hidden">
               <img
                 src="/assets/images/enterp-learning-path.jpeg"
                 alt="Enterprise Learning Path"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              ></div>
               <div class="absolute bottom-4 left-6">
                 <Icon
                   name="mdi:office-building"
@@ -191,10 +195,14 @@
     <!-- CTA Section -->
     <section class="py-12 sm:py-20 bg-gray-50">
       <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6"
+        >
           Not Sure Which Path is Right for You?
         </h2>
-        <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto">
+        <p
+          class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto"
+        >
           Take our quick assessment to get personalized recommendations based on
           your background, goals, and current skill level.
         </p>

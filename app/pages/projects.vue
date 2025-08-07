@@ -5,11 +5,11 @@
       class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20"
     >
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">
           Real Projects Portfolio
         </h1>
         <p
-          class="text-base sm:text-lg text-center text-white/90 max-w-3xl mx-auto"
+          class="text-base sm:text-lg md:text-xl text-center text-white/90 max-w-3xl mx-auto"
         >
           Industry-aligned projects that showcase your skills and build your
           portfolio
@@ -87,7 +87,7 @@
 
           <h2
             :id="activeCategory.toLowerCase().replace(/[\s/]/g, '')"
-            class="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center scroll-mt-20"
+            class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 flex items-center scroll-mt-20"
           >
             <div
               :class="[
@@ -129,13 +129,11 @@
                     />
                   </div>
                   <div class="flex-1">
-                    <h3
-                      class="text-base sm:text-lg font-bold text-gray-900 mb-2"
-                    >
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                       {{ project.title }}
                     </h3>
                     <p
-                      class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3"
+                      class="text-sm sm:text-base text-gray-600 leading-relaxed mb-3"
                     >
                       {{ project.description }}
                     </p>
@@ -160,11 +158,15 @@
                 <!-- CTA Button -->
                 <button
                   :class="[
-                    'w-full py-2 px-3 rounded-lg font-semibold text-xs transition-colors duration-300',
+                    'w-full px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-colors duration-300 inline-flex items-center justify-center gap-2 group',
                     getCategoryButtonStyle(activeCategory),
                   ]"
                 >
-                  Start This Project
+                  <span>Start This Project</span>
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                  />
                 </button>
               </div>
             </div>
@@ -190,12 +192,12 @@
                   </div>
                   <div class="flex-1">
                     <h4
-                      class="font-bold text-gray-900 mb-2 text-sm sm:text-base"
+                      class="font-bold text-gray-900 mb-2 text-base sm:text-lg"
                     >
                       {{ project.title }}
                     </h4>
                     <p
-                      class="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed"
+                      class="text-sm sm:text-base text-gray-600 mb-3 leading-relaxed"
                     >
                       {{ project.description }}
                     </p>
@@ -203,11 +205,15 @@
                 </div>
                 <button
                   :class="[
-                    'w-full py-2 px-3 rounded-lg font-semibold text-xs transition-colors duration-300 border',
+                    'w-full px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-colors duration-300 border inline-flex items-center justify-center gap-2 group',
                     getCategoryOutlineButtonStyle(activeCategory),
                   ]"
                 >
-                  Learn More
+                  <span>Learn More</span>
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                  />
                 </button>
               </div>
             </div>
@@ -225,7 +231,7 @@
             <div class="mb-8">
               <h2
                 :id="category.id.toLowerCase().replace(/[\s/]/g, '')"
-                class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 flex items-center scroll-mt-20"
+                class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 flex items-center scroll-mt-20"
               >
                 <div
                   :class="[
@@ -240,7 +246,9 @@
                 </div>
                 {{ getCategoryDisplayName(category.id) }} Projects
               </h2>
-              <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
+              <p
+                class="text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl"
+              >
                 {{ getCategoryDescription(category.id) }}
               </p>
               <p class="text-xs sm:text-sm font-medium text-gray-500 mt-1">
@@ -305,11 +313,15 @@
                   <!-- CTA Button -->
                   <button
                     :class="[
-                      'w-full py-2 px-3 rounded-lg font-semibold text-xs transition-colors duration-300',
+                      'w-full px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-colors duration-300 inline-flex items-center justify-center gap-2 group',
                       getCategoryButtonStyle(category.id),
                     ]"
                   >
-                    Start This Project
+                    <span>Start This Project</span>
+                    <Icon
+                      name="mdi:arrow-right"
+                      class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    />
                   </button>
                 </div>
               </div>
@@ -348,11 +360,15 @@
                   </div>
                   <button
                     :class="[
-                      'w-full py-2 px-3 rounded-lg font-semibold text-xs transition-colors duration-300 border',
+                      'w-full px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-colors duration-300 border inline-flex items-center justify-center gap-2 group',
                       getCategoryOutlineButtonStyle(category.id),
                     ]"
                   >
-                    Learn More
+                    <span>Learn More</span>
+                    <Icon
+                      name="mdi:arrow-right"
+                      class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    />
                   </button>
                 </div>
               </div>
@@ -715,7 +731,7 @@ const getCategoryDisplayName = (categoryId) => {
     "PLM Windchill": "PLM Windchill",
     "Siemens Teamcenter": "Siemens Teamcenter",
     "Cloud Solutions": "Cloud Solutions",
-    "AI/ML": "AI/ML for Engineers",
+    "AI/ML": "AI/ML",
   };
   return names[categoryId] || categoryId;
 };

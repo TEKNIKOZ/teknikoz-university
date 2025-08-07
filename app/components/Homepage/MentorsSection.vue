@@ -10,7 +10,7 @@
           <span class="text-brand">Top 1%</span> Global Experts
         </h2>
         <p
-          class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto text-pretty px-2"
+          class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-pretty px-2"
         >
           Learn directly from industry leaders who've built PLM and AI solutions
           for Fortune 500 companies
