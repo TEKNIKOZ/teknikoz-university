@@ -185,9 +185,6 @@
         <!-- Results -->
         <div v-if="currentStep === 4" class="space-y-4">
           <div class="text-center">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-              Your Recommended Path
-            </h3>
             <p class="text-gray-600">
               Based on your selections, here's the perfect learning journey for
               you
