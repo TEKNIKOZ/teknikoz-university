@@ -9,7 +9,7 @@
           Why <span class="text-brand">TEKNIKOZ</span> E-Learning Stands Out
         </h2>
         <p
-          class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto text-pretty px-2"
+          class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-pretty px-2"
         >
           We don't just teach concepts - we prepare you for real-world success
         </p>
@@ -36,7 +36,7 @@
           >
             Real<br />World Projects
           </h3>
-          <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+          <p class="text-gray-600 text-xs sm:text-base leading-relaxed">
             Build portfolio-ready projects solving actual industry challenges
           </p>
         </div>
@@ -58,7 +58,7 @@
           >
             Resume &<br />LinkedIn Makeover
           </h3>
-          <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+          <p class="text-gray-600 text-xs sm:text-base leading-relaxed">
             Craft a profile that gets noticed by top recruiters
           </p>
         </div>
@@ -80,7 +80,7 @@
           >
             1:1<br />Career Mentorship
           </h3>
-          <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+          <p class="text-gray-600 text-xs sm:text-base leading-relaxed">
             Personalized guidance to accelerate your career
           </p>
         </div>
@@ -102,7 +102,7 @@
           >
             Placement<br />& Interview Prep
           </h3>
-          <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+          <p class="text-gray-600 text-xs sm:text-base leading-relaxed">
             Mock interviews, job referrals, and placement support
           </p>
         </div>
@@ -110,8 +110,22 @@
 
       <!-- CTA Button -->
       <div class="text-center">
-        <BrochureDownload />
+        <button
+          @click="brochureStore.openBrochureModal()"
+          class="bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-base sm:text-lg transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden"
+        >
+          <span>Download Brochure</span>
+          <Icon
+            name="mdi:arrow-right"
+            class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-0.5"
+          />
+        </button>
       </div>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { useBrochureStore } from "@/stores/brochure.stores";
+const brochureStore = useBrochureStore();
+</script>

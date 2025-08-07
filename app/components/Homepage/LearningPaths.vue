@@ -9,7 +9,7 @@
           Choose Your <span class="text-brand">Learning Path</span>
         </h2>
         <p
-          class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto text-pretty px-2"
+          class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-pretty px-2"
         >
           Tailored programs designed for every career stage and goal
         </p>

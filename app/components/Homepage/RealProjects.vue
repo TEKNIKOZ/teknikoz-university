@@ -2,26 +2,44 @@
   <section class="py-12 md:py-20 px-4 bg-gray-50">
     <div class="max-w-7xl mx-auto">
       <!-- Header Section -->
-      <div class="text-center mb-12 md:mb-16">
-        <h2
-          class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4"
+      <div class="mb-8 md:mb-12">
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
         >
-          Real <span class="text-brand">Projects</span>, Real
-          <span class="text-brand">Impact</span>
-        </h2>
-        <p
-          class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-        >
-          Create portfolio-ready projects that impress recruiters and showcase
-          your skills
-        </p>
+          <div class="text-left">
+            <h2
+              class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2"
+            >
+              Real <span class="text-brand">Projects</span>, Real
+              <span class="text-brand">Impact</span>
+            </h2>
+            <p
+              class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed"
+            >
+              Create portfolio-ready projects that impress recruiters and
+              showcase your skills
+            </p>
+          </div>
+          <div class="md:text-right">
+            <button
+              @click="navigateTo('/projects')"
+              class="bg-brand text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-base sm:text-lg transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden"
+            >
+              <span>See All Projects</span>
+              <Icon
+                name="mdi:arrow-right"
+                class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-0.5"
+              />
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Projects Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
         <!-- Project Card 1 -->
         <div
-          class="group bg-white rounded-2xl border-2 border-purple-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-purple-400 hover:-translate-y-1"
+          class="group bg-white rounded-2xl border-2 border-purple-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-purple-400"
         >
           <div class="flex items-start mb-6">
             <div
@@ -42,19 +60,19 @@
 
           <button
             @click="navigateTo('/projects?category=PLM Windchill')"
-            class="w-full bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg"
+            class="w-full bg-purple-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden"
           >
-            View Project Details
+            <span>View Project Details</span>
             <Icon
               name="mdi:arrow-right"
-              class="ml-2 text-lg group-hover:translate-x-1 transition-transform duration-300"
+              class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-0.5"
             />
           </button>
         </div>
 
         <!-- Project Card 2 -->
         <div
-          class="group bg-white rounded-2xl border-2 border-green-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-green-400 hover:-translate-y-1"
+          class="group bg-white rounded-2xl border-2 border-green-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-green-400"
         >
           <div class="flex items-start mb-6">
             <div
@@ -75,19 +93,19 @@
 
           <button
             @click="navigateTo('/projects?category=Siemens Teamcenter')"
-            class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg"
+            class="w-full bg-green-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-green-700 transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden"
           >
-            View Project Details
+            <span>View Project Details</span>
             <Icon
               name="mdi:arrow-right"
-              class="ml-2 text-lg group-hover:translate-x-1 transition-transform duration-300"
+              class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-0.5"
             />
           </button>
         </div>
 
         <!-- Project Card 3 -->
         <div
-          class="group bg-white rounded-2xl border-2 border-orange-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-orange-400 hover:-translate-y-1"
+          class="group bg-white rounded-2xl border-2 border-orange-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-orange-400"
         >
           <div class="flex items-start mb-6">
             <div
@@ -108,19 +126,19 @@
 
           <button
             @click="navigateTo('/projects?category=Cloud Solutions')"
-            class="w-full bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg"
+            class="w-full bg-orange-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-orange-700 transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden"
           >
-            View Project Details
+            <span>View Project Details</span>
             <Icon
               name="mdi:arrow-right"
-              class="ml-2 text-lg group-hover:translate-x-1 transition-transform duration-300"
+              class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-0.5"
             />
           </button>
         </div>
 
         <!-- Project Card 4 -->
         <div
-          class="group bg-white rounded-2xl border-2 border-blue-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-blue-400 hover:-translate-y-1"
+          class="group bg-white rounded-2xl border-2 border-blue-200 p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:border-blue-400"
         >
           <div class="flex items-start mb-6">
             <div
@@ -140,29 +158,15 @@
 
           <button
             @click="navigateTo('/projects?category=AI/ML')"
-            class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg"
+            class="w-full bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden"
           >
-            View Project Details
+            <span>View Project Details</span>
             <Icon
               name="mdi:arrow-right"
-              class="ml-2 text-lg group-hover:translate-x-1 transition-transform duration-300"
+              class="ml-2 text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-0.5"
             />
           </button>
         </div>
-      </div>
-
-      <!-- Call to Action -->
-      <div class="text-center mt-12">
-        <button
-          @click="navigateTo('/projects')"
-          class="bg-brand text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center mx-auto group shadow-lg hover:shadow-xl"
-        >
-          See More Projects
-          <Icon
-            name="mdi:arrow-right"
-            class="ml-2 text-xl group-hover:translate-x-1 transition-transform duration-300"
-          />
-        </button>
       </div>
     </div>
   </section>

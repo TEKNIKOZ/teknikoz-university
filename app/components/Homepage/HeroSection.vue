@@ -10,7 +10,7 @@
         <div class="order-2 lg:order-1 text-center lg:text-left">
           <!-- Main Heading -->
           <h1
-            class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-none mb-4 sm:mb-6"
+            class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight sm:leading-none mb-4 sm:mb-6"
           >
             <span class="text-gray-900">BECOME A </span>
             <span class="text-brand">PLM & AI CHAMPION</span>
@@ -19,10 +19,10 @@
 
           <!-- Subtitle -->
           <div class="space-y-1 mb-6 sm:mb-8 text-gray-600">
-            <p class="text-base sm:text-lg font-medium">
+            <p class="text-base sm:text-lg md:text-xl font-medium">
               Learn from Industry Veterans. Get Certified.
             </p>
-            <p class="text-base sm:text-lg font-medium">
+            <p class="text-base sm:text-lg md:text-xl font-medium">
               Master Real-World Tools. Transform Your Career.
             </p>
           </div>

@@ -49,12 +49,12 @@
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
         >
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-blue-600 flex items-center justify-center mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:school-outline" class="text-white text-2xl" />
+              <Icon name="mdi:school-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               Zero to Hero Training Path
@@ -65,14 +65,14 @@
           </div>
 
           <div
-            class="bg-white rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-blue-600 flex items-center justify-center mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:certificate-outline"
-                class="text-white text-2xl"
+                class="text-white text-3xl"
               />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
@@ -84,14 +84,14 @@
           </div>
 
           <div
-            class="bg-white rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-blue-600 flex items-center justify-center mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:gamepad-variant-outline"
-                class="text-white text-2xl"
+                class="text-white text-3xl"
               />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
@@ -103,14 +103,14 @@
           </div>
 
           <div
-            class="bg-white rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="group bg-white/90 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-blue-600 flex items-center justify-center mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:account-group-outline"
-                class="text-white text-2xl"
+                class="text-white text-3xl"
               />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
@@ -141,9 +141,11 @@
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-          <div class="text-center px-2">
+          <div
+            class="text-center group px-2 bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-12 h-12 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+              class="w-14 h-14 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:file-document-edit-outline"
@@ -160,9 +162,11 @@
             </p>
           </div>
 
-          <div class="text-center px-2">
+          <div
+            class="text-center group px-2 bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-12 h-12 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+              class="w-14 h-14 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:account-tie" class="text-white text-3xl" />
             </div>
@@ -176,9 +180,11 @@
             </p>
           </div>
 
-          <div class="text-center px-2">
+          <div
+            class="text-center group px-2 bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-12 h-12 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+              class="w-14 h-14 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:briefcase-check-outline"
@@ -195,9 +201,11 @@
             </p>
           </div>
 
-          <div class="text-center px-2">
+          <div
+            class="text-center group px-2 bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+          >
             <div
-              class="w-12 h-12 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+              class="w-12 h-12 sm:w-16 sm:h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon name="mdi:handshake-outline" class="text-white text-3xl" />
             </div>
@@ -234,12 +242,12 @@
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:battery-outline" class="text-white text-2xl" />
+              <Icon name="mdi:battery-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               EV Battery PLM BOM
@@ -261,14 +269,14 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
               <Icon
                 name="mdi:alert-circle-outline"
-                class="text-white text-2xl"
+                class="text-white text-3xl"
               />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
@@ -291,12 +299,12 @@
           </div>
 
           <div
-            class="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
+            class="group bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-2xl ring-1 ring-black/5 border border-gray-100 transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mb-4"
+              class="w-14 h-14 bg-indigo-500 rounded-full flex items-center justify-center mb-4 shadow-lg ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon name="mdi:graph-outline" class="text-white text-2xl" />
+              <Icon name="mdi:graph-outline" class="text-white text-3xl" />
             </div>
             <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">
               GraphML from CAD
@@ -338,7 +346,9 @@
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
-          <div class="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8">
+          <div
+            class="bg-gray-50/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+          >
             <div class="flex items-center mb-4">
               <div
                 class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mr-4"
@@ -360,7 +370,9 @@
             </p>
           </div>
 
-          <div class="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8">
+          <div
+            class="bg-gray-50/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+          >
             <div class="flex items-center mb-4">
               <div
                 class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mr-4"
@@ -382,7 +394,9 @@
             </p>
           </div>
 
-          <div class="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8">
+          <div
+            class="bg-gray-50/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+          >
             <div class="flex items-center mb-4">
               <div
                 class="w-12 h-12 bg-brand rounded-full flex items-center justify-center mr-4"
@@ -411,7 +425,9 @@
     <section
       class="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-r from-brand to-blue-600"
     >
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div
+        class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 bg-white/5 backdrop-blur-sm rounded-2xl ring-1 ring-white/10 shadow-xl"
+      >
         <h2
           class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4"
         >
@@ -425,14 +441,22 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            class="bg-white text-brand px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
+            class="bg-white text-brand px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-gray-100 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group"
           >
-            Enroll Now
+            <span>Enroll Now</span>
+            <Icon
+              name="mdi:arrow-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </button>
           <button
-            class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-brand transition-colors duration-300"
+            class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-brand transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group"
           >
-            Download Brochure
+            <span>Download Brochure</span>
+            <Icon
+              name="mdi:arrow-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            />
           </button>
         </div>
       </div>
