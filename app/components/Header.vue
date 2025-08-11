@@ -15,7 +15,7 @@
             <img
               src="/assets/images/header-logo.svg"
               alt="Teknikoz E-Learning Logo"
-              class="h-8 md:h-12 w-auto"
+              class="h-10 md:h-12 w-auto"
             />
           </div>
         </NuxtLink>

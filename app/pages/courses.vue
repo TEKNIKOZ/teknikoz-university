@@ -1155,7 +1155,7 @@ watch(
 const categories = [
   { id: "PLM Windchill", name: "Windchill", icon: "mdi:cog" },
   { id: "Siemens Teamcenter", name: "Teamcenter", icon: "mdi:cube" },
-  { id: "Cloud Solutions", name: "Solutions", icon: "mdi:cloud" },
+  { id: "Cloud Solutions", name: "Cloud Solutions", icon: "mdi:cloud" },
   { id: "AI/ML", name: "AI/ML", icon: "mdi:robot" },
 ];
 
