@@ -13,7 +13,7 @@
             <img
               src="/assets/images/footer-logo.svg"
               alt="TEKNIKOZ E-Learning"
-              class="h-10 w-auto mr-3"
+              class="h-12 w-auto mr-3"
             />
           </div>
           <p class="text-white text-sm leading-relaxed mb-6">
