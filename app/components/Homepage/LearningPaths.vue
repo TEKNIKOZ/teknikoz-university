@@ -65,8 +65,8 @@
             </li>
           </ul>
 
-          <button
-            @click="openQuiz()"
+          <NuxtLink
+            :to="learningPath.path"
             :class="[
               'w-full text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group',
               learningPath.buttonColor,
@@ -78,7 +78,7 @@
               name="mdi:arrow-right"
               class="ml-2 text-base group-hover:translate-x-1 transition-transform duration-300"
             />
-          </button>
+          </NuxtLink>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
+    class="min-h-[90vh] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
   >
     <div
       class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
@@ -20,7 +20,7 @@
               <div class="group">
                 <label
                   for="email"
-                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
                 >
                   Email Address
                 </label>
@@ -36,7 +36,7 @@
                     type="email"
                     autocomplete="email"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Enter your email"
                     :disabled="isLoading"
                   />
@@ -46,7 +46,7 @@
               <div class="group">
                 <label
                   for="password"
-                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
                 >
                   Password
                 </label>
@@ -62,7 +62,7 @@
                     type="password"
                     autocomplete="current-password"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Enter your password"
                     :disabled="isLoading"
                   />
@@ -82,7 +82,7 @@
                 />
                 <label
                   for="remember-me"
-                  class="ml-3 block text-base sm:text-sm text-gray-600"
+                  class="ml-3 block text-sm text-gray-600"
                 >
                   Remember me
                 </label>
@@ -154,6 +154,7 @@ const { login } = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 
+// SEO Meta Tags
 useSeoMeta({
   title: "Login - Teknikoz E-Learning",
   description:

@@ -89,17 +89,6 @@
             :id="activeCategory.toLowerCase().replace(/[\s/]/g, '')"
             class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 flex items-center scroll-mt-20"
           >
-            <div
-              :class="[
-                'w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-3',
-                getCategoryBgColor(activeCategory),
-              ]"
-            >
-              <Icon
-                :name="getCategoryIcon(activeCategory)"
-                class="text-white text-sm sm:text-base"
-              />
-            </div>
             {{ getCategoryDisplayName(activeCategory) }} Projects
           </h2>
 
@@ -234,16 +223,8 @@
                 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 flex items-center scroll-mt-20"
               >
                 <div
-                  :class="[
-                    'w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-3',
-                    getCategoryBgColor(category.id),
-                  ]"
-                >
-                  <Icon
-                    :name="category.icon"
-                    class="text-white text-sm sm:text-base"
-                  />
-                </div>
+                  :class="['rounded-full flex items-center justify-center']"
+                ></div>
                 {{ getCategoryDisplayName(category.id) }} Projects
               </h2>
               <p

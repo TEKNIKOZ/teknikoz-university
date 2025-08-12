@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
+    class="min-h-[90vh] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
   >
     <div
       class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-12"
@@ -20,7 +20,7 @@
               <div class="group">
                 <label
                   for="fullname"
-                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
                 >
                   Full Name
                 </label>
@@ -36,7 +36,7 @@
                     type="text"
                     autocomplete="name"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Enter your full name"
                     :disabled="isLoading"
                     :class="{
@@ -58,7 +58,7 @@
               <div class="group">
                 <label
                   for="email"
-                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
                 >
                   Email Address
                 </label>
@@ -74,7 +74,7 @@
                     type="email"
                     autocomplete="email"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Enter your email"
                     :disabled="isLoading"
                     :class="{
@@ -96,7 +96,7 @@
               <div class="group">
                 <label
                   for="password"
-                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
                 >
                   Password
                 </label>
@@ -112,7 +112,7 @@
                     type="password"
                     autocomplete="new-password"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Create a strong password"
                     :disabled="isLoading"
                     :class="{
@@ -155,7 +155,7 @@
               <div class="group">
                 <label
                   for="confirmPassword"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
                 >
                   Confirm Password
                 </label>
@@ -171,7 +171,7 @@
                     type="password"
                     autocomplete="new-password"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Confirm your password"
                     :disabled="isLoading"
                     :class="{
@@ -203,7 +203,7 @@
                 class="h-4 w-4 text-brand focus:ring-brand border-gray-300 rounded"
                 :disabled="isLoading"
               />
-              <label for="agree-terms" class="ml-3 block text-sm text-gray-600">
+              <label for="agree-terms" class="ml-3 block text-xs text-gray-600">
                 I agree to the
                 <NuxtLink
                   to="/terms"
@@ -233,7 +233,9 @@
                   />
                 </div>
                 <div class="ml-3">
-                  <p class="text-sm font-medium text-red-800">{{ error }}</p>
+                  <p class="text-base sm:text-sm font-medium text-red-800">
+                    {{ error }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -250,7 +252,7 @@
                   />
                 </div>
                 <div class="ml-3">
-                  <p class="text-sm font-medium text-green-800">
+                  <p class="text-base sm:text-sm font-medium text-green-800">
                     {{ success }}
                   </p>
                 </div>
@@ -273,13 +275,13 @@
 
           <!-- Footer -->
           <div class="mt-8 text-center">
-            <p class="text-sm text-gray-600">
+            <p class="text-base sm:text-sm text-gray-600">
               Already have an account?
               <NuxtLink
                 to="/login"
                 class="font-semibold text-brand hover:text-brand/80 transition-colors"
               >
-                Sign in here
+                Sign in
               </NuxtLink>
             </p>
           </div>
@@ -296,8 +298,7 @@ import { useRouter } from "vue-router";
 const { signup } = useAuthStore();
 const router = useRouter();
 
-// Using default layout to include navbar
-
+// SEO Meta Tags
 useSeoMeta({
   title: "Sign Up - Teknikoz E-Learning",
   description:
