@@ -6,8 +6,8 @@
     >
       <div class="absolute inset-0 z-0">
         <img
-          :src="heroData.backgroundImage"
-          :alt="heroData.backgroundAlt"
+          src="/assets/images/fresher-learning-path.jpeg"
+          alt="Freshers Learning Path"
           class="w-full h-full object-cover object-center opacity-20"
           loading="eager"
         />
@@ -56,9 +56,14 @@
             <div
               class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-brand to-blue-600 flex items-center justify-center mb-3 sm:mb-4 shadow-lg ring-1 ring-white/50 transition-transform duration-300 group-hover:scale-105"
             >
-              <Icon :name="highlight.icon" class="text-white text-2xl sm:text-3xl" />
+              <Icon
+                :name="highlight.icon"
+                class="text-white text-2xl sm:text-3xl"
+              />
             </div>
-            <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2">
+            <h3
+              class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2"
+            >
               {{ highlight.title }}
             </h3>
             <p class="text-sm sm:text-base text-gray-600">
@@ -142,9 +147,14 @@
                 getColorClasses(project.color),
               ]"
             >
-              <Icon :name="project.icon" class="text-white text-2xl sm:text-3xl" />
+              <Icon
+                :name="project.icon"
+                class="text-white text-2xl sm:text-3xl"
+              />
             </div>
-            <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2">
+            <h3
+              class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2"
+            >
               {{ project.title }}
             </h3>
             <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
@@ -195,10 +205,14 @@
               <div
                 class="w-10 h-10 sm:w-12 sm:h-12 bg-brand rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
               >
-                <span class="text-white font-bold text-base sm:text-lg">{{ testimonial.initial }}</span>
+                <span class="text-white font-bold text-base sm:text-lg">{{
+                  testimonial.initial
+                }}</span>
               </div>
               <div class="min-w-0 flex-1">
-                <h4 class="text-sm sm:text-base font-bold text-gray-900 truncate">
+                <h4
+                  class="text-sm sm:text-base font-bold text-gray-900 truncate"
+                >
                   {{ testimonial.name }}
                 </h4>
                 <p class="text-gray-600 text-xs sm:text-sm truncate">
@@ -270,8 +284,6 @@ useHead({
 const heroData = {
   title: "Kickstart Your Career with PLM & AI Skills",
   subtitle: "From Classroom to Career: Your Fast-Track to PLM + AI Jobs",
-  backgroundImage: "/assets/images/fresher-learning-path.jpeg",
-  backgroundAlt: "Freshers Learning Path",
 };
 
 const programHighlights = [
@@ -333,7 +345,8 @@ const industryProjects = [
     id: "ev-battery-plm",
     icon: "mdi:battery-outline",
     title: "EV Battery PLM BOM",
-    description: "Design and manage electric vehicle battery bill of materials using PLM systems",
+    description:
+      "Design and manage electric vehicle battery bill of materials using PLM systems",
     color: "green",
     tags: [
       { name: "Windchill", color: "blue" },
@@ -344,7 +357,8 @@ const industryProjects = [
     id: "ai-maintenance",
     icon: "mdi:alert-circle-outline",
     title: "AI-Driven Maintenance Alerts",
-    description: "Build predictive maintenance systems using machine learning algorithms",
+    description:
+      "Build predictive maintenance systems using machine learning algorithms",
     color: "orange",
     tags: [
       { name: "Python", color: "purple" },
@@ -355,7 +369,8 @@ const industryProjects = [
     id: "graph-ml",
     icon: "mdi:graph-outline",
     title: "GraphML from CAD",
-    description: "Convert CAD data into graph structures for advanced data analysis",
+    description:
+      "Convert CAD data into graph structures for advanced data analysis",
     color: "indigo",
     tags: [
       { name: "GraphML", color: "yellow" },
@@ -370,27 +385,31 @@ const studentTestimonials = [
     name: "Aisha Patel",
     role: "Mechanical Engineering Graduate",
     initial: "A",
-    testimonial: "I got placed at a top PLM consulting firm within 90 days! The hands-on projects and career support made all the difference.",
+    testimonial:
+      "I got placed at a top PLM consulting firm within 90 days! The hands-on projects and career support made all the difference.",
   },
   {
     id: "rahul-kumar",
     name: "Rahul Kumar",
     role: "Computer Science Graduate",
     initial: "R",
-    testimonial: "The AI and PLM integration course opened doors I never imagined. Now I'm working on cutting-edge projects in automotive!",
+    testimonial:
+      "The AI and PLM integration course opened doors I never imagined. Now I'm working on cutting-edge projects in automotive!",
   },
   {
     id: "sneha-sharma",
     name: "Sneha Sharma",
     role: "Electronics Engineering Graduate",
     initial: "S",
-    testimonial: "From zero programming knowledge to building ML models - this program transformed my career trajectory completely!",
+    testimonial:
+      "From zero programming knowledge to building ML models - this program transformed my career trajectory completely!",
   },
 ];
 
 const ctaData = {
   title: "Ready to Start Your Journey?",
-  subtitle: "Join thousands of successful graduates who started their careers with us",
+  subtitle:
+    "Join thousands of successful graduates who started their careers with us",
   buttons: [
     {
       text: "Enroll Now",

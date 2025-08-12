@@ -51,7 +51,6 @@
     <!-- Course Content -->
     <section class="py-12 sm:py-16">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <!-- Dynamic Course Content -->
         <div
           v-for="(courseData, categoryKey) in coursesData"
           :key="categoryKey"
@@ -130,38 +129,6 @@
       </div>
     </section>
 
-    <!-- Statistics Section -->
-    <section class="py-12 sm:py-16 bg-gray-900 text-white">
-      <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
-              15,000+
-            </div>
-            <p class="text-gray-400">Students Trained</p>
-          </div>
-          <div>
-            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
-              98%
-            </div>
-            <p class="text-gray-400">Job Placement</p>
-          </div>
-          <div>
-            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
-              4.8/5
-            </div>
-            <p class="text-gray-400">Course Rating</p>
-          </div>
-          <div>
-            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
-              100+
-            </div>
-            <p class="text-gray-400">Industry Partners</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="py-12 sm:py-16 bg-brand text-white">
       <div class="container max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -213,7 +180,7 @@ watch(
 
 const categories = [
   { id: "PLM Windchill", name: "PLM Windchill", icon: "mdi:cog" },
-  { id: "Siemens Teamcenter", name: "Teamcenter", icon: "mdi:cube" },
+  { id: "Siemens Teamcenter", name: "Siemens Teamcenter", icon: "mdi:cube" },
   { id: "Cloud Solutions", name: "Cloud Solutions", icon: "mdi:cloud" },
   { id: "AI/ML", name: "AI/ML", icon: "mdi:robot" },
 ];
@@ -280,7 +247,6 @@ const coursesData = {
       "Train engineers, consultants, and architects on BOM, MRO, workflow automation, and deployment strategies across industries.",
     icon: "mdi:cube",
     color: "green",
-    backgroundClass: "bg-gray-100",
     levels: [
       {
         title: "🧩 Level 1: Foundations",
@@ -390,7 +356,6 @@ const coursesData = {
       "Upskill engineering & PLM professionals with practical AI/ML to automate, optimize, and innovate engineering workflows.",
     icon: "mdi:robot",
     color: "blue",
-    backgroundClass: "bg-gray-100",
     levels: [
       {
         title: "🧩 Level 1: AI/ML Basics for Engineers",

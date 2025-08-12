@@ -74,7 +74,7 @@
             >
               <button
                 @click="contactStore.openContactModal()"
-                class="group bg-white text-gray-900 px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-sm"
+                class="group bg-white text-gray-900 px-4 sm:px-5 py-4 rounded-full font-bold hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-sm"
               >
                 <Icon
                   name="mdi:rocket-launch"
@@ -88,7 +88,7 @@
               </button>
               <button
                 @click="contactStore.openContactModal()"
-                class="group bg-gray-900/80 backdrop-blur-sm text-white px-4 sm:px-5 py-3 rounded-full font-bold hover:bg-gray-800 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-sm"
+                class="group bg-gray-900/80 backdrop-blur-sm text-white px-4 sm:px-5 py-4 rounded-full font-bold hover:bg-gray-800 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-sm"
               >
                 <Icon
                   name="mdi:calendar-check"
