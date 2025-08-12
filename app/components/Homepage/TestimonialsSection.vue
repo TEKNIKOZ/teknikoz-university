@@ -6,12 +6,13 @@
         <h2
           class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2"
         >
-          <span class="text-brand">Hear from</span> Our Champions
+          <span class="text-brand">{{ content.title.highlight }}</span>
+          {{ content.title.suffix }}
         </h2>
         <p
           class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-pretty px-2"
         >
-          Success stories from professionals who transformed their careers
+          {{ content.subtitle }}
         </p>
       </div>
 
@@ -46,8 +47,8 @@
                       class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden mr-3 sm:mr-4 flex-shrink-0"
                     >
                       <img
-                        :src="testimonials[0].image"
-                        :alt="testimonials[0].name"
+                        :src="testimonial.image"
+                        :alt="testimonial.name"
                         class="w-full h-full object-cover"
                       />
                     </div>
@@ -65,9 +66,7 @@
                       </div>
                     </div>
                   </div>
-                  <p
-                    class="text-gray-600 leading-relaxed text-xs sm:text-sm lg:text-base"
-                  >
+                  <p class="text-gray-600 leading-relaxed text-sm lg:text-base">
                     "{{ testimonial.testimonial }}"
                   </p>
                 </div>
@@ -138,72 +137,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import testimonial1 from "@/assets/images/boy-testimonial.png";
-import testimonial2 from "@/assets/images/girl-testimonial.png";
+import {
+  TESTIMONIALS_SECTION_DATA,
+  TESTIMONIALS_SECTION_CONTENT,
+} from "@/constants";
 
-// Testimonials data
-const testimonials = [
-  // PLM Windchill Testimonials
-  {
-    name: "Arjun M.",
-    image: testimonial1,
-    role: "PLM Analyst at Tata Motors",
-    testimonial:
-      "The Windchill course gave me end-to-end clarity on configuration, ECAD/MCAD integration, and BOM workflows. I implemented a live CR/CN workflow at my workplace.",
-  },
-  {
-    name: "Shruti R.",
-    image: testimonial2,
-    role: "Consultant at Capgemini",
-    testimonial:
-      "Thanks to TEKNIKOZ, I cracked a Lead Windchill Consultant role. The hands-on ECAD integration project was a game-changer.",
-  },
-  // Siemens Teamcenter Testimonials
-  {
-    name: "Deepali S.",
-    image: testimonial1,
-    role: "Engineering Systems Manager, Airbus",
-    testimonial:
-      "From Advanced BOM to MRO configuration, this was the most practical Teamcenter course I've taken.",
-  },
-  {
-    name: "Gokul M.",
-    image: testimonial2,
-    role: "Teamcenter Admin, Mahindra & Mahindra",
-    testimonial:
-      "BMIDE customization never made sense until I did this course. I now manage data model changes independently.",
-  },
-  // Cloud Solutions Testimonials
-  {
-    name: "Mohammed I.",
-    image: testimonial1,
-    role: "DevOps Engineer at Siemens Energy",
-    testimonial:
-      "I never imagined setting up Windchill on AWS would be this straightforward. Terraform modules made it click.",
-  },
-  {
-    name: "Ritika G.",
-    image: testimonial2,
-    role: "Cloud Infra Lead, Infosys",
-    testimonial:
-      "The Cloud PLM Architecture project helped me design a secure AWS-VPC setup for PLM rollout.",
-  },
-  // AI/ML for Engineers Testimonials
-  {
-    name: "Ashish V.",
-    image: testimonial1,
-    role: "Data Scientist at Honeywell",
-    testimonial:
-      "I used the AI Predictive Maintenance project to build my portfolio and land a role in IIoT product engineering.",
-  },
-  {
-    name: "Renu P.",
-    image: testimonial2,
-    role: "Engineering Analyst, Bosch",
-    testimonial:
-      "Finally a course that explains Industry 4.0 + ML with hands-on use cases – and no Python overkill!",
-  },
-];
+const testimonials = TESTIMONIALS_SECTION_DATA;
+const content = TESTIMONIALS_SECTION_CONTENT;
 
 const currentSlide = ref(0);
 let autoSlideInterval: NodeJS.Timeout;
@@ -223,7 +163,7 @@ const startAutoSlide = () => {
       ? testimonials.length
       : Math.ceil(testimonials.length / 2);
     currentSlide.value = (currentSlide.value + 1) % maxSlides;
-  }, 5000);
+  }, content.autoSlideInterval);
 };
 
 const stopAutoSlide = () => {

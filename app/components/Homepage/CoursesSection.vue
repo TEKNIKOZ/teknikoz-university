@@ -6,14 +6,15 @@
         <h2
           class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 text-pretty px-2"
         >
-          Master <span class="text-brand">Industry-Leading</span> Skills with
-          <span class="text-gray-900">Hands-On Courses</span>
+          {{ content.title.main }}
+          <span class="text-brand">{{ content.title.highlight }}</span>
+          {{ content.title.suffix }}
+          <span class="text-gray-900">{{ content.title.highlight2 }}</span>
         </h2>
         <p
           class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-2"
         >
-          Transform your career with our comprehensive, project-based learning
-          approach
+          {{ content.subtitle }}
         </p>
       </div>
 
@@ -21,339 +22,83 @@
       <div
         class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16"
       >
-        <!-- PLM Windchill -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-purple-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-purple-400"
+          v-for="course in courses"
+          :key="course.id"
+          :class="[
+            'bg-white rounded-xl sm:rounded-2xl border-2 p-6 sm:p-8 hover:shadow-xl transition-all duration-300',
+            course.borderColor,
+            course.hoverBorderColor,
+          ]"
         >
           <div class="flex flex-col">
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-500 rounded-full flex items-center justify-center mr-4"
+                :class="[
+                  'shrink-0 flex items-center justify-center mr-4',
+                  'w-12 h-12 sm:w-14 sm:h-14 rounded-full',
+                  course.bgColor,
+                ]"
               >
-                <Icon name="mdi:cog" class="text-white text-xl sm:text-3xl" />
+                <Icon
+                  :name="course.icon"
+                  class="text-white w-7 h-7 sm:w-8 sm:h-8"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                />
               </div>
               <div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
-                  PLM Windchill Mastery Track
+                  {{ course.title }}
                 </h3>
               </div>
             </div>
 
             <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
-              From Basics to Enterprise Architect
+              {{ course.subtitle }}
             </p>
 
             <p class="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-              End-to-end mastery of Windchill PLM for Configuration Management,
-              BOM, Change Processes, and ECAD/MCAD integration – aligned with
-              global deployment scenarios.
+              {{ course.description }}
             </p>
 
             <!-- Key Topics -->
             <div class="mb-6">
               <h4 class="text-sm font-semibold text-gray-700 mb-3">
-                Key Learning Areas:
+                {{ content.learningAreasLabel }}
               </h4>
               <div class="grid grid-cols-1 gap-2">
                 <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
+                  v-for="area in course.learningAreas"
+                  :key="area"
+                  class="group flex items-center text-sm sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
                 >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Windchill Architecture & Lifecycle Management
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  EBOM/MBOM & Change Management (CR/CN)
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  ECAD/MCAD Integration (Creo, SolidWorks, Altium)
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-purple-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Info Engine, REST APIs & Enterprise Integration
+                  <span class="flex items-center justify-center">
+                    <Icon
+                      name="mdi:chevron-right"
+                      :class="[
+                        'w-4 h-4 mr-2 transition-transform duration-200 group-hover:translate-x-0.5',
+                        course.bgColor.replace('bg-', 'text-'),
+                      ]"
+                    />
+                  </span>
+                  {{ area }}
                 </div>
               </div>
             </div>
 
             <button
-              @click="navigateTo('/courses?category=PLM Windchill')"
-              class="w-full bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
+              @click="navigateTo(`/courses?category=${course.category}`)"
+              :class="[
+                'w-full text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group',
+                course.buttonColor,
+                course.buttonHoverColor,
+              ]"
             >
-              <span>Explore Full Curriculum</span>
-              <Icon
-                name="mdi:arrow-right"
-                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
-              />
-            </button>
-          </div>
-        </div>
-
-        <!-- Siemens Teamcenter -->
-        <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-green-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-green-400"
-        >
-          <div class="flex flex-col">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-full flex items-center justify-center mr-4"
-              >
-                <Icon name="mdi:cube" class="text-white text-xl sm:text-3xl" />
-              </div>
-              <div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
-                  Siemens Teamcenter Masterclass
-                </h3>
-              </div>
-            </div>
-
-            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
-              Deploying Digital Threads
-            </p>
-
-            <p class="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-              Train engineers, consultants, and architects on BOM, MRO, workflow
-              automation, and deployment strategies across industries.
-            </p>
-
-            <!-- Key Topics -->
-            <div class="mb-6">
-              <h4 class="text-sm font-semibold text-gray-900 mb-3">
-                Key Learning Areas:
-              </h4>
-              <div class="grid grid-cols-1 gap-2">
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Teamcenter Architecture & Data Management
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Advanced BOM & Variant Configuration
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  BMIDE Customization & Active Workspace
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-green-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Multi-site Deployment & ERP Integration
-                </div>
-              </div>
-            </div>
-
-            <button
-              @click="navigateTo('/courses?category=Siemens Teamcenter')"
-              class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
-            >
-              <span>Explore Full Curriculum</span>
-              <Icon
-                name="mdi:arrow-right"
-                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
-              />
-            </button>
-          </div>
-        </div>
-
-        <!-- Cloud Solutions -->
-        <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-orange-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-orange-400"
-        >
-          <div class="flex flex-col">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-500 rounded-full flex items-center justify-center mr-4"
-              >
-                <Icon name="mdi:cloud" class="text-white text-xl sm:text-3xl" />
-              </div>
-              <div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
-                  Cloud Solutions for PLM & Engineering
-                </h3>
-              </div>
-            </div>
-
-            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
-              AWS / Azure DevOps
-            </p>
-
-            <p class="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-              Cloud-first design for PLM hosting, DevOps pipelines, and
-              infrastructure automation for Windchill/Teamcenter.
-            </p>
-
-            <!-- Key Topics -->
-            <div class="mb-6">
-              <h4 class="text-sm font-semibold text-gray-900 mb-3">
-                Key Learning Areas:
-              </h4>
-              <div class="grid grid-cols-1 gap-2">
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  AWS & Azure Infrastructure Essentials
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  CI/CD Pipelines & Terraform Automation
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  High Availability & Disaster Recovery
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-orange-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Hybrid Cloud PLM Migration Strategies
-                </div>
-              </div>
-            </div>
-
-            <button
-              @click="navigateTo('/courses?category=Cloud Solutions')"
-              class="w-full bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
-            >
-              <span>Explore Full Curriculum</span>
-              <Icon
-                name="mdi:arrow-right"
-                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
-              />
-            </button>
-          </div>
-        </div>
-
-        <!-- AI/ML -->
-        <div
-          class="bg-white rounded-xl sm:rounded-2xl border-2 border-blue-200 p-6 sm:p-8 hover:shadow-xl transition-all duration-300 hover:border-blue-400"
-        >
-          <div class="flex flex-col">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-500 rounded-full flex items-center justify-center mr-4"
-              >
-                <Icon name="mdi:robot" class="text-white text-xl sm:text-3xl" />
-              </div>
-              <div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
-                  AI/ML for Engineers
-                </h3>
-              </div>
-            </div>
-
-            <p class="text-sm sm:text-base text-gray-900 font-medium mb-2">
-              Applied Intelligence for Industry 4.0
-            </p>
-
-            <p class="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-              Upskill engineering & PLM professionals with practical AI/ML to
-              automate, optimize, and innovate engineering workflows.
-            </p>
-
-            <!-- Key Topics -->
-            <div class="mb-6">
-              <h4 class="text-sm font-semibold text-gray-900 mb-3">
-                Key Learning Areas:
-              </h4>
-              <div class="grid grid-cols-1 gap-2">
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Python Essentials & ML Fundamentals
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  ChatGPT & LangChain Integration
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  Predictive Maintenance & Defect Detection
-                </div>
-                <div
-                  class="group flex items-center text-xs sm:text-base text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <Icon
-                    name="mdi:chevron-right"
-                    class="w-4 h-4 text-blue-500 mr-2 transition-transform duration-200 group-hover:translate-x-0.5"
-                  />
-                  AI-Powered PLM Decision Dashboards
-                </div>
-              </div>
-            </div>
-
-            <button
-              @click="navigateTo('/courses?category=AI/ML')"
-              class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group"
-            >
-              <span>Explore Full Curriculum</span>
+              <span>{{ content.buttonText }}</span>
               <Icon
                 name="mdi:arrow-right"
                 class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -372,12 +117,17 @@
             class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center mb-3 sm:mb-0 sm:mr-4"
           >
             <Icon
-              name="mdi:certificate"
+              :name="content.bottomSection.icon"
               class="text-gray-900 text-lg sm:text-xl"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
             />
           </div>
           <h3 class="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">
-            100% Project-Based Learning with Certification
+            {{ content.bottomSection.title }}
           </h3>
         </div>
       </div>
@@ -385,12 +135,16 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from "vue-router";
+import { COURSES_SECTION_DATA, COURSES_SECTION_CONTENT } from "@/constants";
 
 const router = useRouter();
 
-const navigateTo = (path) => {
+const navigateTo = (path: string) => {
   router.push(path);
 };
+
+const courses = COURSES_SECTION_DATA;
+const content = COURSES_SECTION_CONTENT;
 </script>

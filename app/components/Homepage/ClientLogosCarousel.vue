@@ -5,7 +5,7 @@
         <div
           v-for="(logo, index) in logos"
           :key="`first-${index}`"
-          class="flex-shrink-0 w-24 h-24 md:w-40 md:h-28 flex items-center justify-center bg-white rounded-lg shadow-sm p-4"
+          class="flex-shrink-0 w-20 h-20 md:w-40 md:h-28 flex items-center justify-center bg-white rounded-lg shadow-sm p-4"
         >
           <img
             :src="logo"
@@ -17,7 +17,7 @@
         <div
           v-for="(logo, index) in logos"
           :key="`second-${index}`"
-          class="flex-shrink-0 w-24 h-24 md:w-40 md:h-28 flex items-center justify-center bg-white rounded-lg shadow-sm p-4"
+          class="flex-shrink-0 w-20 h-20 md:w-40 md:h-28 flex items-center justify-center bg-white rounded-lg shadow-sm p-4"
         >
           <img
             :src="logo"
