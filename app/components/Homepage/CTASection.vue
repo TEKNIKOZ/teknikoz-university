@@ -32,16 +32,16 @@
                   <p
                     class="text-xs sm:text-sm font-medium text-blue-200 uppercase tracking-wider"
                   >
-                    Limited Time
+                    {{ content.enrollment.limitedTime }}
                   </p>
                   <p class="text-base sm:text-lg font-bold text-white">
-                    September Batch
+                    {{ content.enrollment.title }}
                   </p>
                   <p class="text-2xl sm:text-3xl font-black text-yellow-400">
-                    Now Enrolling
+                    {{ content.enrollment.subtitle }}
                   </p>
                   <p class="text-xs sm:text-sm font-semibold text-white">
-                    Only 50 Seats Left!
+                    {{ content.enrollment.seatsLeft }}
                   </p>
                 </div>
               </div>
@@ -59,14 +59,13 @@
             <h2
               class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight px-2 lg:px-0"
             >
-              Ready to Transform Your
-              <span class="text-yellow-400">Career?</span>
+              {{ content.title.main }}
+              <span class="text-yellow-400">{{ content.title.highlight }}</span>
             </h2>
             <p
               class="text-base sm:text-lg md:text-xl text-blue-100 mb-4 sm:mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0 px-2 lg:px-0"
             >
-              Join TEKNIKOZ E-Learning today and unlock your potential with
-              world-class mentorship and hands-on learning
+              {{ content.subtitle }}
             </p>
 
             <!-- CTA Buttons -->
@@ -108,31 +107,29 @@
             <div
               class="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 text-white/90"
             >
-              <div class="flex items-center gap-1.5">
-                <div class="text-lg sm:text-xl font-bold text-yellow-400">
-                  15K+
-                </div>
-                <div class="text-xs sm:text-sm">Students</div>
-              </div>
-              <div class="w-px h-4 bg-white/30"></div>
-              <div class="flex items-center gap-1.5">
-                <div class="text-lg sm:text-xl font-bold text-green-400">
-                  95%
-                </div>
-                <div class="text-xs sm:text-sm">Placed</div>
-              </div>
-              <div class="w-px h-4 bg-white/30"></div>
-              <div class="flex items-center gap-1.5">
+              <div
+                v-for="(stat, index) in content.statistics"
+                :key="stat.label"
+                class="flex items-center gap-1.5"
+              >
                 <div
-                  class="text-lg sm:text-xl font-bold text-yellow-400 flex items-center gap-1"
+                  v-if="index > 0"
+                  class="w-px h-4 bg-white/30 mr-4 sm:mr-6"
+                ></div>
+                <div
+                  :class="[
+                    'text-lg sm:text-xl font-bold flex items-center gap-1',
+                    stat.color,
+                  ]"
                 >
-                  4.8
+                  {{ stat.value }}
                   <Icon
-                    name="mdi:star"
-                    class="text-yellow-400 text-sm sm:text-base"
+                    v-if="stat.icon"
+                    :name="stat.icon"
+                    :class="['text-sm sm:text-base', stat.color]"
                   />
                 </div>
-                <div class="text-xs sm:text-sm">Rating</div>
+                <div class="text-xs sm:text-sm">{{ stat.label }}</div>
               </div>
             </div>
           </div>
@@ -144,6 +141,10 @@
 
 <script setup lang="ts">
 import { useContactStore } from "@/stores/contact.stores";
+import { CTA_SECTION_BUTTONS, CTA_SECTION_CONTENT } from "@/constants";
 
 const contactStore = useContactStore();
+
+const ctaButtons = CTA_SECTION_BUTTONS;
+const content = CTA_SECTION_CONTENT;
 </script>

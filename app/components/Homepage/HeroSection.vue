@@ -84,7 +84,7 @@
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <NuxtLink
               to="/enroll"
-              class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-brand bg-brand text-white font-semibold rounded-full transition-all duration-200 text-sm sm:text-base group"
+              class="inline-flex items-center justify-center px-6 sm:px-8 py-4 border border-brand bg-brand text-white font-semibold rounded-full transition-all duration-200 text-sm sm:text-base group"
             >
               <Icon
                 name="mdi:play-circle"
@@ -95,7 +95,7 @@
 
             <button
               @click="brochureStore.openBrochureModal()"
-              class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-brand text-brand font-semibold rounded-full hover:bg-brand hover:text-white transition-all duration-200 text-sm sm:text-base group"
+              class="inline-flex items-center justify-center px-6 sm:px-8 py-4 border border-brand text-brand font-semibold rounded-full hover:bg-brand hover:text-white transition-all duration-200 text-sm sm:text-base group"
             >
               <Icon
                 name="mdi:file-download"
