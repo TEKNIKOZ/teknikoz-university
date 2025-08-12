@@ -49,7 +49,7 @@
 
         <!-- Form State -->
         <div v-else>
-          <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
+          <p class="text-base sm:text-base text-gray-600 mb-4 sm:mb-6">
             Fill out the form below to receive the course brochure via email
           </p>
 
@@ -60,7 +60,7 @@
               <div>
                 <label
                   for="brochure-name"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Full Name *
                 </label>
@@ -68,7 +68,7 @@
                   id="brochure-name"
                   v-model="brochureStore.brochureFormData.name"
                   type="text"
-                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
+                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base"
                   placeholder="Enter your full name"
                 />
                 <p
@@ -83,7 +83,7 @@
               <div>
                 <label
                   for="brochure-email"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Email Address *
                 </label>
@@ -91,7 +91,7 @@
                   id="brochure-email"
                   v-model="brochureStore.brochureFormData.email"
                   type="email"
-                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
+                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base"
                   placeholder="Enter your email address"
                 />
                 <p
@@ -109,7 +109,7 @@
               <div>
                 <label
                   for="brochure-phone"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Phone Number *
                 </label>
@@ -119,7 +119,7 @@
                   type="tel"
                   maxlength="10"
                   @input="handlePhoneInput"
-                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
+                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base"
                   placeholder="Enter your 10-digit phone number"
                 />
                 <p
@@ -134,7 +134,7 @@
               <div>
                 <label
                   for="brochure-courseInterest"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Course Interest *
                 </label>
@@ -142,7 +142,7 @@
                   <select
                     id="brochure-courseInterest"
                     v-model="brochureStore.brochureFormData.courseInterest"
-                    class="w-full px-3 py-2 pr-8 sm:px-4 sm:py-2 sm:pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent appearance-none bg-white text-sm sm:text-base"
+                    class="w-full px-3 py-2 pr-8 sm:px-4 sm:py-2 sm:pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent appearance-none bg-white text-base sm:text-base"
                   >
                     <option value="">Select a course</option>
                     <option value="plm-windchill">PLM Windchill</option>
@@ -183,7 +183,7 @@
             <div>
               <label
                 for="brochure-message"
-                class="block text-sm font-medium text-gray-700 mb-2"
+                class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
               >
                 Message (Optional)
               </label>
@@ -191,7 +191,7 @@
                 id="brochure-message"
                 v-model="brochureStore.brochureFormData.message"
                 rows="3"
-                class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base resize-none"
+                class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base resize-none"
                 placeholder="Tell us about your goals and what you'd like to learn..."
               ></textarea>
             </div>

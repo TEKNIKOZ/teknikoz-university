@@ -49,7 +49,7 @@
 
         <!-- Form State -->
         <div v-else>
-          <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
+          <p class="text-base sm:text-base text-gray-600 mb-4 sm:mb-6">
             Fill out the form below and we'll get in touch with you
           </p>
 
@@ -60,7 +60,7 @@
               <div>
                 <label
                   for="contact-name"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Full Name *
                 </label>
@@ -68,7 +68,7 @@
                   id="contact-name"
                   v-model="contactStore.contactFormData.name"
                   type="text"
-                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
+                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base"
                   placeholder="Enter your full name"
                 />
                 <p
@@ -83,7 +83,7 @@
               <div>
                 <label
                   for="contact-email"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Email Address *
                 </label>
@@ -91,7 +91,7 @@
                   id="contact-email"
                   v-model="contactStore.contactFormData.email"
                   type="email"
-                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
+                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base"
                   placeholder="Enter your email address"
                 />
                 <p
@@ -109,7 +109,7 @@
               <div>
                 <label
                   for="contact-phone"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Phone Number *
                 </label>
@@ -119,7 +119,7 @@
                   type="tel"
                   maxlength="10"
                   @input="handlePhoneInput"
-                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base"
+                  class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base"
                   placeholder="Enter your 10-digit phone number"
                 />
                 <p
@@ -134,7 +134,7 @@
               <div>
                 <label
                   for="contact-courseInterest"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
                 >
                   Course Interest *
                 </label>
@@ -142,7 +142,7 @@
                   <select
                     id="contact-courseInterest"
                     v-model="contactStore.contactFormData.courseInterest"
-                    class="w-full px-3 py-2 pr-8 sm:px-4 sm:py-2 sm:pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent appearance-none bg-white text-sm sm:text-base"
+                    class="w-full px-3 py-2 pr-8 sm:px-4 sm:py-2 sm:pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent appearance-none bg-white text-base sm:text-base"
                   >
                     <option value="">Select a course</option>
                     <option value="plm-windchill">PLM Windchill</option>
@@ -183,7 +183,7 @@
             <div>
               <label
                 for="contact-message"
-                class="block text-sm font-medium text-gray-700 mb-2"
+                class="block text-base sm:text-sm font-medium text-gray-700 mb-2"
               >
                 Message (Optional)
               </label>
@@ -191,7 +191,7 @@
                 id="contact-message"
                 v-model="contactStore.contactFormData.message"
                 rows="3"
-                class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-sm sm:text-base resize-none"
+                class="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent text-base sm:text-base resize-none"
                 placeholder="Tell us how we can help you..."
               ></textarea>
             </div>

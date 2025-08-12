@@ -20,7 +20,7 @@
               <div class="group">
                 <label
                   for="fullname"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
                 >
                   Full Name
                 </label>
@@ -36,7 +36,7 @@
                     type="text"
                     autocomplete="name"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Enter your full name"
                     :disabled="isLoading"
                     :class="{
@@ -58,7 +58,7 @@
               <div class="group">
                 <label
                   for="email"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
                 >
                   Email Address
                 </label>
@@ -74,7 +74,7 @@
                     type="email"
                     autocomplete="email"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Enter your email"
                     :disabled="isLoading"
                     :class="{
@@ -96,7 +96,7 @@
               <div class="group">
                 <label
                   for="password"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  class="block text-base sm:text-sm font-semibold text-gray-700 mb-2"
                 >
                   Password
                 </label>
@@ -112,7 +112,7 @@
                     type="password"
                     autocomplete="new-password"
                     required
-                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
+                    class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-gray-50/50 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-brand focus:bg-white transition-all duration-200"
                     placeholder="Create a strong password"
                     :disabled="isLoading"
                     :class="{
