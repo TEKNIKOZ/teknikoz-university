@@ -33,11 +33,14 @@
           >
             <div
               :class="[
-                'w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center mr-2 flex-shrink-0',
+                'w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0',
                 getCategoryBgColor(category.id),
               ]"
             >
-              <Icon :name="category.icon" class="text-white text-xs sm:text-sm" />
+              <Icon
+                :name="category.icon"
+                class="text-white text-xs sm:text-sm"
+              />
             </div>
             <span class="truncate">{{ category.name }}</span>
           </button>
@@ -48,1034 +51,81 @@
     <!-- Course Content -->
     <section class="py-12 sm:py-16">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <!-- PLM Windchill Course -->
-        <div v-if="activeCategory === 'PLM Windchill'" id="windchill">
+        <!-- Dynamic Course Content -->
+        <div
+          v-for="(courseData, categoryKey) in coursesData"
+          :key="categoryKey"
+          v-show="activeCategory === categoryKey"
+          :class="[
+            courseData.backgroundClass || '',
+            courseData.backgroundClass ? 'rounded-2xl p-6 sm:p-8' : '',
+          ]"
+        >
           <div class="mb-12">
             <div class="flex items-center mb-4">
               <div
-                class="w-8 h-8 sm:w-12 sm:h-12 bg-purple-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+                :class="[
+                  'w-8 h-8 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0',
+                  getColorClasses(courseData.color).bg,
+                ]"
               >
-                <Icon name="mdi:cog" class="text-white text-lg sm:text-2xl" />
+                <Icon
+                  :name="courseData.icon"
+                  class="text-white text-lg sm:text-2xl"
+                />
               </div>
-              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-                PLM Windchill Mastery Track
+              <h2
+                class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900"
+              >
+                {{ courseData.title }}
               </h2>
             </div>
             <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-              From Basics to Enterprise Architect
+              {{ courseData.subtitle }}
             </p>
             <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-              🎯 <strong>Objective:</strong> End-to-end mastery of Windchill PLM
-              for Configuration Management, BOM, Change Processes, and ECAD/MCAD
-              integration – aligned with global deployment scenarios.
+              🎯 <strong>Objective:</strong> {{ courseData.objective }}
             </p>
           </div>
 
-        <!-- Course Levels -->
-        <div class="space-y-6">
-          <!-- Level 1 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-purple-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-purple-700 mb-4">
-              🧩 Level 1: Foundations
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Windchill Architecture & Modules Overview (PDMLink, MPMLink,
-                  ProjectLink)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Introduction to Objects: WTPart, Document, CAD Document</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Lifecycle & Versioning Concepts</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Access Control & Team Roles</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 2 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-purple-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-purple-700 mb-4">
-              ⚙️ Level 2: Intermediate Concepts
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Configuration Management (Lifecycles, Soft Types, Object
-                  Initialization Rules)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >BOM Management: EBOM, MBOM, Occurrence Usage, Views</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Change Management (CR/CN/Promotion Requests)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Workflow Basics: Process Template Creation</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 3 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-purple-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-purple-700 mb-4">
-              🚀 Level 3: Advanced Practitioner Topics
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >ECAD/MCAD Integration (Creo, SolidWorks, Altium with
-                  XPLM)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >MPMLink for Manufacturing Process Planning</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Document & CAD Structure Synchronization</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Part Classification & Variant Management</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 4 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-purple-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-purple-700 mb-4">
-              🧠 Level 4: Customization & Extension
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Info*Engine & Windchill REST APIs</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Business Rules: OIR, ACL, Data Validation, Listener
-                  Events</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Report Builder & Custom UI Widgets (Action/Commands)</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 5 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-purple-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-purple-700 mb-4">
-              🛠 Level 5: Enterprise Implementation & Strategy
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Data Migration & Legacy Import (Excel Loader, Windchill
-                  Loader)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >ERP Integration (SAP, Oracle using Windchill ESI)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >PLM-ALM Integration Strategy</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >CM2 & Regulatory Compliance (Medical/Automotive Use
-                  Case)</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        </div>
-
-        <!-- Siemens Teamcenter Course -->
-        <div v-if="activeCategory === 'Siemens Teamcenter'" id="teamcenter" class="bg-gray-100 rounded-2xl p-6 sm:p-8">
-          <div class="mb-12">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-8 h-8 sm:w-12 sm:h-12 bg-green-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+          <!-- Course Levels -->
+          <div class="space-y-6">
+            <div
+              v-for="(level, levelIndex) in courseData.levels"
+              :key="levelIndex"
+              :class="[
+                'bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4',
+                getColorClasses(courseData.color).border,
+              ]"
+            >
+              <h3
+                :class="[
+                  'text-lg sm:text-xl font-bold mb-4',
+                  getColorClasses(courseData.color).text,
+                ]"
               >
-                <Icon name="mdi:cube" class="text-white text-lg sm:text-2xl" />
-              </div>
-              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-                Siemens Teamcenter Masterclass
-              </h2>
+                {{ level.title }}
+              </h3>
+              <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <li
+                  v-for="(item, itemIndex) in level.items"
+                  :key="itemIndex"
+                  class="flex items-start"
+                >
+                  <Icon
+                    name="mdi:chevron-right"
+                    :class="[
+                      'w-4 h-4 sm:w-5 sm:h-5 mt-0.5 mr-2 sm:mr-3 flex-shrink-0',
+                      getColorClasses(courseData.color).icon,
+                    ]"
+                  />
+                  <span class="text-sm sm:text-base text-gray-700">
+                    {{ item }}
+                  </span>
+                </li>
+              </ul>
             </div>
-            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-              Deploying Digital Threads
-            </p>
-            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-              🎯 <strong>Objective:</strong> Train engineers, consultants, and
-              architects on BOM, MRO, workflow automation, and deployment
-              strategies across industries.
-            </p>
           </div>
-
-        <!-- Course Levels -->
-        <div class="space-y-6">
-          <!-- Level 1 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-green-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-green-700 mb-4">
-              🧩 Level 1: Foundations
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Teamcenter Basics & Architecture</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Introduction to Item, Dataset, Revision & Workspace</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Lifecycle Management & Release Flow</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Basic Searches, Revisions, and Change Objects</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 2 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-green-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-green-700 mb-4">
-              ⚙️ Level 2: Intermediate BOM & Workflow Configuration
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >BOM View, Contexts, Occurrences, Alternate BOM</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Classification, Properties, and Attribute Inheritance</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Workflow Designer: Handlers, Rules, Review/Approval
-                  Flow</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Access Management & Role Permissions</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 3 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-green-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-green-700 mb-4">
-              🚀 Level 3: Advanced Use Cases
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Variant Configuration using Product Configurator</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Change Management with Impact Analysis</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >MRO BOMs for Aerospace & Defense</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Visualization (JT2Go, Teamcenter Visualization)</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 4 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-green-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-green-700 mb-4">
-              🧠 Level 4: Customization & BMIDE
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >BMIDE Deep Dive: Data Model, Extensions, LOVs,
-                  Stylesheets</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Custom Business Rules and Handlers</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Teamcenter Reporting & Analytics Configuration</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Active Workspace Custom UI & Integration</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 5 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-green-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-green-700 mb-4">
-              🛠 Level 5: Implementation Strategy & Scaling
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Multi-site Teamcenter Deployment</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Teamcenter-ERP Integration (SAP, Infor)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Teamcenter Data Migration & Cleanup</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Digital Thread Strategy for Connected Engineering</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        </div>
-
-        <!-- Cloud Solutions Course -->
-        <div v-if="activeCategory === 'Cloud Solutions'" id="cloud">
-          <div class="mb-12">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-8 h-8 sm:w-12 sm:h-12 bg-orange-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
-              >
-                <Icon name="mdi:cloud" class="text-white text-lg sm:text-2xl" />
-              </div>
-              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-                Cloud Solutions for PLM & Engineering
-              </h2>
-            </div>
-            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-              AWS / Azure DevOps
-            </p>
-            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-              🎯 <strong>Objective:</strong> Cloud-first design for PLM hosting,
-              DevOps pipelines, and infrastructure automation for
-              Windchill/Teamcenter.
-            </p>
-          </div>
-
-        <!-- Course Levels -->
-        <div class="space-y-6">
-          <!-- Level 1 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-orange-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-orange-700 mb-4">
-              🧩 Level 1: Cloud Infrastructure Basics
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >AWS & Azure Overview for Engineering Systems</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Compute, Storage, Networking Essentials</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >IAM & Security Models</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Basic CLI & Console Management</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 2 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-orange-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-orange-700 mb-4">
-              ⚙️ Level 2: Intermediate Cloud DevOps
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >IaaS vs PaaS vs SaaS: Which PLM Model?</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >CI/CD for PLM Deployments</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Dockerization of PLM Microservices</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Terraform Scripts for Infrastructure as Code</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 3 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-orange-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-orange-700 mb-4">
-              🚀 Level 3: Advanced Cloud Integration
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >High Availability for PLM Systems (Load Balancing, Auto
-                  Scaling)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Backup, Disaster Recovery & DR Drills</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Azure DevOps Pipelines for Teamcenter Custom Code</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >AWS CodePipeline for Windchill Deployments</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 4 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-orange-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-orange-700 mb-4">
-              🧠 Level 4: Custom Cloud Architectures
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Hybrid Cloud (On-prem + AWS/Azure) PLM Models</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Securing Windchill or Teamcenter over VPN/VPC</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Monitoring using Prometheus, Grafana</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 5 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-orange-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-orange-700 mb-4">
-              🛠 Level 5: Real-World Implementation Scenarios
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >PLM Cloud Migration Strategy (Checklist + Tools)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >ROI of Cloud vs On-Prem PLM</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Industry Templates: Automotive, Aero, Medical Devices</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >DevOps SRE Best Practices in PLM Support</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        </div>
-
-        <!-- AI/ML Course -->
-        <div v-if="activeCategory === 'AI/ML'" id="aiml" class="bg-gray-100 rounded-2xl p-6 sm:p-8">
-          <div class="mb-12">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
-              >
-                <Icon name="mdi:robot" class="text-white text-lg sm:text-2xl" />
-              </div>
-              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-                AI/ML for Engineers
-              </h2>
-            </div>
-            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-              Applied Intelligence for Industry 4.0
-            </p>
-            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-              🎯 <strong>Objective:</strong> Upskill engineering & PLM
-              professionals with practical AI/ML to automate, optimize, and
-              innovate engineering workflows.
-            </p>
-          </div>
-
-        <!-- Course Levels -->
-        <div class="space-y-6">
-          <!-- Level 1 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-blue-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-blue-700 mb-4">
-              🧩 Level 1: AI/ML Basics for Engineers
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Python Essentials for AI/ML</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Numpy, Pandas, Scikit-learn Basics</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Supervised vs Unsupervised Models</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Data Preparation & Visualization</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 2 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-blue-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-blue-700 mb-4">
-              ⚙️ Level 2: NLP & ChatGPT Integration
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Basics of LLMs and ChatGPT APIs</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Embeddings for Engineering Document Search</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Building Technical Support Chatbots using LangChain</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Prompt Engineering for Engineering Workflows</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 3 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-blue-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-blue-700 mb-4">
-              🚀 Level 3: Applied Models for Industry 4.0
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Predictive Maintenance (Sensor Time-Series Models)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Defect Detection from Image Datasets</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Text Classification using BERT (Change Requests, DMRs)</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >AI for BOM/Doc Automation</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 4 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-blue-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-blue-700 mb-4">
-              🧠 Level 4: Advanced Architectures
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Model Deployment using FastAPI & Streamlit</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Vector Databases for PLM Document Search</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Custom GPTs for Engineering Helpdesks</span
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Level 5 -->
-          <div
-            class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border-l-4 border-blue-500"
-          >
-            <h3 class="text-lg sm:text-xl font-bold text-blue-700 mb-4">
-              🛠 Level 5: Enterprise Strategy & Innovation
-            </h3>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Generative AI in PLM & CAD</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >AI Governance & Explainability</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >Industry Use Cases: EV, Aerospace, Medical, Machinery</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
-                />
-                <span class="text-sm sm:text-base text-gray-700"
-                  >AI-Powered PLM Decision Cockpit Dashboards</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
         </div>
       </div>
     </section>
@@ -1168,6 +218,228 @@ const categories = [
   { id: "AI/ML", name: "AI/ML", icon: "mdi:robot" },
 ];
 
+const coursesData = {
+  "PLM Windchill": {
+    title: "PLM Windchill Mastery Track",
+    subtitle: "From Basics to Enterprise Architect",
+    objective:
+      "End-to-end mastery of Windchill PLM for Configuration Management, BOM, Change Processes, and ECAD/MCAD integration – aligned with global deployment scenarios.",
+    icon: "mdi:cog",
+    color: "purple",
+    levels: [
+      {
+        title: "🧩 Level 1: Foundations",
+        items: [
+          "Windchill Architecture & Modules Overview (PDMLink, MPMLink, ProjectLink)",
+          "Introduction to Objects: WTPart, Document, CAD Document",
+          "Lifecycle & Versioning Concepts",
+          "Access Control & Team Roles",
+        ],
+      },
+      {
+        title: "⚙️ Level 2: Intermediate Concepts",
+        items: [
+          "Configuration Management (Lifecycles, Soft Types, Object Initialization Rules)",
+          "BOM Management: EBOM, MBOM, Occurrence Usage, Views",
+          "Change Management (CR/CN/Promotion Requests)",
+          "Workflow Basics: Process Template Creation",
+        ],
+      },
+      {
+        title: "🚀 Level 3: Advanced Practitioner Topics",
+        items: [
+          "ECAD/MCAD Integration (Creo, SolidWorks, Altium with XPLM)",
+          "MPMLink for Manufacturing Process Planning",
+          "Document & CAD Structure Synchronization",
+          "Part Classification & Variant Management",
+        ],
+      },
+      {
+        title: "🧠 Level 4: Customization & Extension",
+        items: [
+          "Info*Engine & Windchill REST APIs",
+          "Business Rules: OIR, ACL, Data Validation, Listener Events",
+          "Report Builder & Custom UI Widgets (Action/Commands)",
+        ],
+      },
+      {
+        title: "🛠 Level 5: Enterprise Implementation & Strategy",
+        items: [
+          "Data Migration & Legacy Import (Excel Loader, Windchill Loader)",
+          "ERP Integration (SAP, Oracle using Windchill ESI)",
+          "PLM-ALM Integration Strategy",
+          "CM2 & Regulatory Compliance (Medical/Automotive Use Case)",
+        ],
+      },
+    ],
+  },
+  "Siemens Teamcenter": {
+    title: "Siemens Teamcenter Masterclass",
+    subtitle: "Deploying Digital Threads",
+    objective:
+      "Train engineers, consultants, and architects on BOM, MRO, workflow automation, and deployment strategies across industries.",
+    icon: "mdi:cube",
+    color: "green",
+    backgroundClass: "bg-gray-100",
+    levels: [
+      {
+        title: "🧩 Level 1: Foundations",
+        items: [
+          "Teamcenter Basics & Architecture",
+          "Introduction to Item, Dataset, Revision & Workspace",
+          "Lifecycle Management & Release Flow",
+          "Basic Searches, Revisions, and Change Objects",
+        ],
+      },
+      {
+        title: "⚙️ Level 2: Intermediate BOM & Workflow Configuration",
+        items: [
+          "BOM View, Contexts, Occurrences, Alternate BOM",
+          "Classification, Properties, and Attribute Inheritance",
+          "Workflow Designer: Handlers, Rules, Review/Approval Flow",
+          "Access Management & Role Permissions",
+        ],
+      },
+      {
+        title: "🚀 Level 3: Advanced Use Cases",
+        items: [
+          "Variant Configuration using Product Configurator",
+          "Change Management with Impact Analysis",
+          "MRO BOMs for Aerospace & Defense",
+          "Visualization (JT2Go, Teamcenter Visualization)",
+        ],
+      },
+      {
+        title: "🧠 Level 4: Customization & BMIDE",
+        items: [
+          "BMIDE Deep Dive: Data Model, Extensions, LOVs, Stylesheets",
+          "Custom Business Rules and Handlers",
+          "Teamcenter Reporting & Analytics Configuration",
+          "Active Workspace Custom UI & Integration",
+        ],
+      },
+      {
+        title: "🛠 Level 5: Implementation Strategy & Scaling",
+        items: [
+          "Multi-site Teamcenter Deployment",
+          "Teamcenter-ERP Integration (SAP, Infor)",
+          "Teamcenter Data Migration & Cleanup",
+          "Digital Thread Strategy for Connected Engineering",
+        ],
+      },
+    ],
+  },
+  "Cloud Solutions": {
+    title: "Cloud Solutions for PLM & Engineering",
+    subtitle: "AWS / Azure DevOps",
+    objective:
+      "Cloud-first design for PLM hosting, DevOps pipelines, and infrastructure automation for Windchill/Teamcenter.",
+    icon: "mdi:cloud",
+    color: "orange",
+    levels: [
+      {
+        title: "🧩 Level 1: Cloud Infrastructure Basics",
+        items: [
+          "AWS & Azure Overview for Engineering Systems",
+          "Compute, Storage, Networking Essentials",
+          "IAM & Security Models",
+          "Basic CLI & Console Management",
+        ],
+      },
+      {
+        title: "⚙️ Level 2: Intermediate Cloud DevOps",
+        items: [
+          "IaaS vs PaaS vs SaaS: Which PLM Model?",
+          "CI/CD for PLM Deployments",
+          "Dockerization of PLM Microservices",
+          "Terraform Scripts for Infrastructure as Code",
+        ],
+      },
+      {
+        title: "🚀 Level 3: Advanced Cloud Integration",
+        items: [
+          "High Availability for PLM Systems (Load Balancing, Auto Scaling)",
+          "Backup, Disaster Recovery & DR Drills",
+          "Azure DevOps Pipelines for Teamcenter Custom Code",
+          "AWS CodePipeline for Windchill Deployments",
+        ],
+      },
+      {
+        title: "🧠 Level 4: Custom Cloud Architectures",
+        items: [
+          "Hybrid Cloud (On-prem + AWS/Azure) PLM Models",
+          "Securing Windchill or Teamcenter over VPN/VPC",
+          "Monitoring using Prometheus, Grafana",
+        ],
+      },
+      {
+        title: "🛠 Level 5: Real-World Implementation Scenarios",
+        items: [
+          "PLM Cloud Migration Strategy (Checklist + Tools)",
+          "ROI of Cloud vs On-Prem PLM",
+          "Industry Templates: Automotive, Aero, Medical Devices",
+          "DevOps SRE Best Practices in PLM Support",
+        ],
+      },
+    ],
+  },
+  "AI/ML": {
+    title: "AI/ML for Engineers",
+    subtitle: "Applied Intelligence for Industry 4.0",
+    objective:
+      "Upskill engineering & PLM professionals with practical AI/ML to automate, optimize, and innovate engineering workflows.",
+    icon: "mdi:robot",
+    color: "blue",
+    backgroundClass: "bg-gray-100",
+    levels: [
+      {
+        title: "🧩 Level 1: AI/ML Basics for Engineers",
+        items: [
+          "Python Essentials for AI/ML",
+          "Numpy, Pandas, Scikit-learn Basics",
+          "Supervised vs Unsupervised Models",
+          "Data Preparation & Visualization",
+        ],
+      },
+      {
+        title: "⚙️ Level 2: NLP & ChatGPT Integration",
+        items: [
+          "Basics of LLMs and ChatGPT APIs",
+          "Embeddings for Engineering Document Search",
+          "Building Technical Support Chatbots using LangChain",
+          "Prompt Engineering for Engineering Workflows",
+        ],
+      },
+      {
+        title: "🚀 Level 3: Applied Models for Industry 4.0",
+        items: [
+          "Predictive Maintenance (Sensor Time-Series Models)",
+          "Defect Detection from Image Datasets",
+          "Text Classification using BERT (Change Requests, DMRs)",
+          "AI for BOM/Doc Automation",
+        ],
+      },
+      {
+        title: "🧠 Level 4: Advanced Architectures",
+        items: [
+          "Model Deployment using FastAPI & Streamlit",
+          "Vector Databases for PLM Document Search",
+          "Custom GPTs for Engineering Helpdesks",
+        ],
+      },
+      {
+        title: "🛠 Level 5: Enterprise Strategy & Innovation",
+        items: [
+          "Generative AI in PLM & CAD",
+          "AI Governance & Explainability",
+          "Industry Use Cases: EV, Aerospace, Medical, Machinery",
+          "AI-Powered PLM Decision Cockpit Dashboards",
+        ],
+      },
+    ],
+  },
+};
+
 // Helper functions for styling
 const getActiveCategoryStyle = (categoryId) => {
   const styles = {
@@ -1187,5 +459,35 @@ const getCategoryBgColor = (categoryId) => {
     "AI/ML": "bg-blue-500",
   };
   return colors[categoryId] || "bg-gray-500";
+};
+
+const getColorClasses = (color) => {
+  const classes = {
+    purple: {
+      border: "border-purple-500",
+      text: "text-purple-700",
+      icon: "text-purple-500",
+      bg: "bg-purple-500",
+    },
+    green: {
+      border: "border-green-500",
+      text: "text-green-700",
+      icon: "text-green-500",
+      bg: "bg-green-500",
+    },
+    orange: {
+      border: "border-orange-500",
+      text: "text-orange-700",
+      icon: "text-orange-500",
+      bg: "bg-orange-500",
+    },
+    blue: {
+      border: "border-blue-500",
+      text: "text-blue-700",
+      icon: "text-blue-500",
+      bg: "bg-blue-500",
+    },
+  };
+  return classes[color] || classes.purple;
 };
 </script>
