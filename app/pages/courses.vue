@@ -5,18 +5,18 @@
       class="bg-gradient-to-r from-brand to-brand/80 text-white py-16 sm:py-20"
     >
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4">
           Transform Your Career
         </h1>
         <p
-          class="text-base sm:text-lg text-center text-white/90 max-w-3xl mx-auto"
+          class="text-lg sm:text-xl text-center text-white/90 max-w-3xl mx-auto"
         >
           Industry-aligned courses designed to make you job-ready from day one
         </p>
       </div>
     </section>
 
-    <!-- Course Navigation -->
+    <!-- Filter Tabs -->
     <section class="py-8 border-b bg-white">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-wrap justify-center gap-2 sm:gap-4">
@@ -27,55 +27,49 @@
             :class="[
               'flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300',
               activeCategory === category.id
-                ? getActiveCategoryStyle(category.id)
+                ? getActiveCategoryStyle(category.id) + ' shadow-lg scale-105'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
             ]"
           >
             <div
               :class="[
-                'w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center mr-2',
+                'w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center mr-2 flex-shrink-0',
                 getCategoryBgColor(category.id),
               ]"
             >
-              <Icon :name="category.icon" class="text-white text-xs" />
+              <Icon :name="category.icon" class="text-white text-xs sm:text-sm" />
             </div>
-            <span
-              :class="category.id === 'PLM Windchill' ? 'hidden sm:inline' : ''"
-            >
-              {{ category.id === "PLM Windchill" ? "PLM " : "" }} </span
-            >{{ category.name }}
+            <span class="truncate">{{ category.name }}</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- PLM Windchill Course -->
-    <section
-      v-if="activeCategory === 'PLM Windchill'"
-      id="windchill"
-      class="py-12 sm:py-16"
-    >
+    <!-- Course Content -->
+    <section class="py-12 sm:py-16">
       <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="mb-12">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-8 h-8 sm:w-12 sm:h-12 bg-purple-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4"
-            >
-              <Icon name="mdi:cog" class="text-white text-lg sm:text-2xl" />
+        <!-- PLM Windchill Course -->
+        <div v-if="activeCategory === 'PLM Windchill'" id="windchill">
+          <div class="mb-12">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 bg-purple-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              >
+                <Icon name="mdi:cog" class="text-white text-lg sm:text-2xl" />
+              </div>
+              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+                PLM Windchill Mastery Track
+              </h2>
             </div>
-            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-              PLM Windchill Mastery Track
-            </h2>
+            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
+              From Basics to Enterprise Architect
+            </p>
+            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
+              🎯 <strong>Objective:</strong> End-to-end mastery of Windchill PLM
+              for Configuration Management, BOM, Change Processes, and ECAD/MCAD
+              integration – aligned with global deployment scenarios.
+            </p>
           </div>
-          <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-            From Basics to Enterprise Architect
-          </p>
-          <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-            🎯 <strong>Objective:</strong> End-to-end mastery of Windchill PLM
-            for Configuration Management, BOM, Change Processes, and ECAD/MCAD
-            integration – aligned with global deployment scenarios.
-          </p>
-        </div>
 
         <!-- Course Levels -->
         <div class="space-y-6">
@@ -311,36 +305,30 @@
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Siemens Teamcenter Course -->
-    <section
-      v-if="activeCategory === 'Siemens Teamcenter'"
-      id="teamcenter"
-      class="py-12 sm:py-16 bg-gray-100"
-    >
-      <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="mb-12">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-8 h-8 sm:w-12 sm:h-12 bg-green-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4"
-            >
-              <Icon name="mdi:cube" class="text-white text-lg sm:text-2xl" />
-            </div>
-            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-              Siemens Teamcenter Masterclass
-            </h2>
-          </div>
-          <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-            Deploying Digital Threads
-          </p>
-          <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-            🎯 <strong>Objective:</strong> Train engineers, consultants, and
-            architects on BOM, MRO, workflow automation, and deployment
-            strategies across industries.
-          </p>
         </div>
+
+        <!-- Siemens Teamcenter Course -->
+        <div v-if="activeCategory === 'Siemens Teamcenter'" id="teamcenter" class="bg-gray-100 rounded-2xl p-6 sm:p-8">
+          <div class="mb-12">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 bg-green-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              >
+                <Icon name="mdi:cube" class="text-white text-lg sm:text-2xl" />
+              </div>
+              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+                Siemens Teamcenter Masterclass
+              </h2>
+            </div>
+            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
+              Deploying Digital Threads
+            </p>
+            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
+              🎯 <strong>Objective:</strong> Train engineers, consultants, and
+              architects on BOM, MRO, workflow automation, and deployment
+              strategies across industries.
+            </p>
+          </div>
 
         <!-- Course Levels -->
         <div class="space-y-6">
@@ -581,36 +569,30 @@
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Cloud Solutions Course -->
-    <section
-      v-if="activeCategory === 'Cloud Solutions'"
-      id="cloud"
-      class="py-12 sm:py-16"
-    >
-      <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="mb-12">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-8 h-8 sm:w-12 sm:h-12 bg-orange-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4"
-            >
-              <Icon name="mdi:cloud" class="text-white text-lg sm:text-2xl" />
-            </div>
-            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-              Cloud Solutions for PLM & Engineering
-            </h2>
-          </div>
-          <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-            AWS / Azure DevOps
-          </p>
-          <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-            🎯 <strong>Objective:</strong> Cloud-first design for PLM hosting,
-            DevOps pipelines, and infrastructure automation for
-            Windchill/Teamcenter.
-          </p>
         </div>
+
+        <!-- Cloud Solutions Course -->
+        <div v-if="activeCategory === 'Cloud Solutions'" id="cloud">
+          <div class="mb-12">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 bg-orange-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              >
+                <Icon name="mdi:cloud" class="text-white text-lg sm:text-2xl" />
+              </div>
+              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+                Cloud Solutions for PLM & Engineering
+              </h2>
+            </div>
+            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
+              AWS / Azure DevOps
+            </p>
+            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
+              🎯 <strong>Objective:</strong> Cloud-first design for PLM hosting,
+              DevOps pipelines, and infrastructure automation for
+              Windchill/Teamcenter.
+            </p>
+          </div>
 
         <!-- Course Levels -->
         <div class="space-y-6">
@@ -841,36 +823,30 @@
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- AI/ML Course -->
-    <section
-      v-if="activeCategory === 'AI/ML'"
-      id="aiml"
-      class="py-12 sm:py-16 bg-gray-100"
-    >
-      <div class="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="mb-12">
-          <div class="flex items-center mb-4">
-            <div
-              class="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4"
-            >
-              <Icon name="mdi:robot" class="text-white text-lg sm:text-2xl" />
-            </div>
-            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-              AI/ML for Engineers
-            </h2>
-          </div>
-          <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
-            Applied Intelligence for Industry 4.0
-          </p>
-          <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
-            🎯 <strong>Objective:</strong> Upskill engineering & PLM
-            professionals with practical AI/ML to automate, optimize, and
-            innovate engineering workflows.
-          </p>
         </div>
+
+        <!-- AI/ML Course -->
+        <div v-if="activeCategory === 'AI/ML'" id="aiml" class="bg-gray-100 rounded-2xl p-6 sm:p-8">
+          <div class="mb-12">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
+              >
+                <Icon name="mdi:robot" class="text-white text-lg sm:text-2xl" />
+              </div>
+              <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+                AI/ML for Engineers
+              </h2>
+            </div>
+            <p class="text-base sm:text-lg text-gray-700 font-medium mb-2">
+              Applied Intelligence for Industry 4.0
+            </p>
+            <p class="text-sm sm:text-base text-gray-600 max-w-4xl">
+              🎯 <strong>Objective:</strong> Upskill engineering & PLM
+              professionals with practical AI/ML to automate, optimize, and
+              innovate engineering workflows.
+            </p>
+          </div>
 
         <!-- Course Levels -->
         <div class="space-y-6">
@@ -1100,6 +1076,39 @@
             </ul>
           </div>
         </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-12 sm:py-16 bg-gray-900 text-white">
+      <div class="container max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
+              15,000+
+            </div>
+            <p class="text-gray-400">Students Trained</p>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
+              98%
+            </div>
+            <p class="text-gray-400">Job Placement</p>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
+              4.8/5
+            </div>
+            <p class="text-gray-400">Course Rating</p>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-bold text-brand mb-2">
+              100+
+            </div>
+            <p class="text-gray-400">Industry Partners</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1153,7 +1162,7 @@ watch(
 );
 
 const categories = [
-  { id: "PLM Windchill", name: "Windchill", icon: "mdi:cog" },
+  { id: "PLM Windchill", name: "PLM Windchill", icon: "mdi:cog" },
   { id: "Siemens Teamcenter", name: "Teamcenter", icon: "mdi:cube" },
   { id: "Cloud Solutions", name: "Cloud Solutions", icon: "mdi:cloud" },
   { id: "AI/ML", name: "AI/ML", icon: "mdi:robot" },
