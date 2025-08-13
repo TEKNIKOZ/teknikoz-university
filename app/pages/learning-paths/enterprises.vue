@@ -345,6 +345,7 @@
           <button
             v-for="button in ctaData.buttons"
             :key="button.text"
+            @click="contactStore.openContactModal()"
             :class="[
               'px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-full font-semibold text-sm sm:text-base md:text-lg transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group',
               button.type === 'primary'
@@ -365,6 +366,11 @@
 </template>
 
 <script setup>
+import { useContactStore } from "@/stores/contact.stores";
+
+// Initialize stores
+const contactStore = useContactStore();
+
 // SEO Meta
 useHead({
   title:
@@ -607,11 +613,6 @@ const ctaData = {
     {
       text: "Request Corporate Demo",
       type: "primary",
-      icon: "mdi:arrow-right",
-    },
-    {
-      text: "Book a Strategy Call",
-      type: "secondary",
       icon: "mdi:arrow-right",
     },
   ],

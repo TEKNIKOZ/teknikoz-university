@@ -247,6 +247,7 @@
           <button
             v-for="button in ctaData.buttons"
             :key="button.text"
+            @click="handleCTAClick(button.type)"
             :class="[
               'px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 group',
               button.type === 'primary'
@@ -267,6 +268,13 @@
 </template>
 
 <script setup>
+import { useContactStore } from "@/stores/contact.stores";
+import { useBrochureStore } from "@/stores/brochure.stores";
+
+// Initialize stores
+const contactStore = useContactStore();
+const brochureStore = useBrochureStore();
+
 // SEO Meta
 useHead({
   title:
@@ -448,5 +456,14 @@ const getTagClasses = (color) => {
     orange: "bg-orange-100 text-orange-800",
   };
   return tagColorMap[color] || "bg-gray-100 text-gray-800";
+};
+
+// Handle CTA button clicks
+const handleCTAClick = (buttonType) => {
+  if (buttonType === "primary") {
+    contactStore.openContactModal();
+  } else if (buttonType === "secondary") {
+    brochureStore.openBrochureModal();
+  }
 };
 </script>

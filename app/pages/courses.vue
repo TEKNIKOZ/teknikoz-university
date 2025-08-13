@@ -140,7 +140,7 @@
           with TEKNIKOZ
         </p>
         <button
-          @click="navigateTo('/contact')"
+          @click="contactStore.openContactModal()"
           class="bg-white text-brand px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-100 transition-colors duration-300"
         >
           Enroll Now →
@@ -152,6 +152,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
+import { useContactStore } from "@/stores/contact.stores";
 
 useHead({
   title: "Courses - TEKNIKOZ E-Learning",
@@ -166,6 +167,7 @@ useHead({
 
 // Handle URL parameters for direct navigation
 const route = useRoute();
+const contactStore = useContactStore();
 const activeCategory = ref(route.query.category || "PLM Windchill");
 
 // Watch for route changes to update active category
