@@ -138,12 +138,7 @@
         <div>
           <!-- NAVIGATE Section -->
           <div class="mb-6">
-            <h3
-              class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
-            >
-              {{ HEADER_CONTENT.mobileMenu.sections.navigate }}
-            </h3>
-            <div class="space-y-1">
+            <div class="">
               <NuxtLink
                 v-for="link in HEADER_MOBILE_NAV_LINKS"
                 :key="link.id"

@@ -9,12 +9,12 @@
         <div class="flex items-center space-x-3">
           <!-- <Icon
             name="heroicons:phone-solid"
-            class="w-4 h-4 cursor-pointer"
+            class="w-5 h-5 cursor-pointer"
             @click="call('+91 9876543210')"
           /> -->
           <Icon
             name="heroicons:envelope-solid"
-            class="w-4 h-4 cursor-pointer"
+            class="w-5 h-5 cursor-pointer"
             @click="mailto('info@teknikoz.com')"
           />
         </div>

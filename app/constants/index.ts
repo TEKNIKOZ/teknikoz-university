@@ -798,12 +798,12 @@ export const HEADER_MOBILE_NAV_LINKS: HeaderNavLinkData[] = [
       url: "/testimonials",
       icon: "mdi:star"
    },
-   {
-      id: 4,
-      title: "Contact",
-      url: "/contact",
-      icon: "mdi:email"
-   }
+   // {
+   //    id: 4,
+   //    title: "Contact",
+   //    url: "/contact",
+   //    icon: "mdi:email"
+   // }
 ];
 
 export const HEADER_MOBILE_AUTH_LINKS: HeaderNavLinkData[] = [
