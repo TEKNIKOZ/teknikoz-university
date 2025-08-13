@@ -68,7 +68,7 @@
           <NuxtLink
             :to="learningPath.path"
             :class="[
-              'w-full text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group',
+              'w-full text-white px-4 sm:px-6 py-3.5 sm:py-3 rounded-lg font-semibold transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group',
               learningPath.buttonColor,
               learningPath.buttonHoverColor,
             ]"
@@ -76,7 +76,7 @@
             {{ content.buttonText }}
             <Icon
               name="mdi:arrow-right"
-              class="ml-2 text-base group-hover:translate-x-1 transition-transform duration-300"
+              class="ml-2 text-lg sm:text-xl group-hover:translate-x-0.5 transition-transform duration-300"
             />
           </NuxtLink>
         </div>

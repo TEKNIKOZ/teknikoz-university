@@ -77,7 +77,7 @@ export const REAL_PROJECTS_CONTENT = {
    subtitle: "Create portfolio-ready projects that impress recruiters and showcase your skills",
    buttonText: "See All Projects",
    buttonLink: "/projects",
-   cardButtonText: "View Project Details"
+   cardButtonText: "View More Projects"
 };
 
 export interface FeatureData {

@@ -93,7 +93,7 @@
             <button
               @click="navigateTo(`/courses?category=${course.category}`)"
               :class="[
-                'w-full text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group',
+                'w-full text-white px-6 py-3.5 sm:py-3 rounded-lg font-semibold transition-colors duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group',
                 course.buttonColor,
                 course.buttonHoverColor,
               ]"
@@ -101,7 +101,7 @@
               <span>{{ content.buttonText }}</span>
               <Icon
                 name="mdi:arrow-right"
-                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                class="ml-2 text-lg sm:text-xl group-hover:translate-x-0.5 transition-transform duration-300"
               />
             </button>
           </div>

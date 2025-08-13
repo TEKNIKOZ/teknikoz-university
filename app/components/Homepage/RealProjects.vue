@@ -21,7 +21,8 @@
               {{ content.subtitle }}
             </p>
           </div>
-          <div class="md:text-right">
+          <!-- Desktop button - hidden on mobile -->
+          <div class="hidden md:block md:text-right">
             <button
               @click="navigateTo(content.buttonLink)"
               class="bg-brand text-white px-6 sm:px-8 py-2.5 rounded-full font-semibold text-base sm:text-lg transition-colors duration-300 inline-flex items-center justify-center overflow-hidden"
@@ -65,7 +66,7 @@
           <button
             @click="navigateTo(`/projects?category=${project.category}`)"
             :class="[
-              'w-full text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold transition-colors duration-300 inline-flex items-center justify-center group overflow-hidden',
+              'w-full text-white px-4 sm:px-6 py-3.5 sm:py-3 rounded-full font-semibold transition-colors duration-300 text-sm sm:text-base flex items-center justify-center group',
               project.buttonColor,
               project.buttonHoverColor,
             ]"
@@ -77,6 +78,16 @@
             />
           </button>
         </div>
+      </div>
+
+      <!-- Mobile button - shown only on mobile, hidden on desktop -->
+      <div class="flex justify-center mt-8 md:hidden">
+        <button
+          @click="navigateTo(content.buttonLink)"
+          class="bg-brand text-white px-6 sm:px-8 py-2.5 rounded-full font-semibold text-base sm:text-lg transition-colors duration-300 inline-flex items-center justify-center overflow-hidden"
+        >
+          <span>{{ content.buttonText }}</span>
+        </button>
       </div>
     </div>
   </section>

@@ -46,12 +46,6 @@
           >
             Testimonials
           </NuxtLink>
-          <NuxtLink
-            to="/contact"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
-          >
-            Contact
-          </NuxtLink>
         </nav>
 
         <!-- Auth & CTA Buttons & Mobile Menu Button -->
