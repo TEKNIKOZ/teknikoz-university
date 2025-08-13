@@ -552,3 +552,309 @@ export const CTA_SECTION_CONTENT = {
       { value: "4.8", label: "Rating", color: "text-yellow-400", icon: "mdi:star" }
    ]
 };
+
+// Footer Section Data
+export interface SocialLinkData {
+   id: number;
+   name: string;
+   url: string;
+   icon: string;
+   hoverColor: string;
+   ariaLabel: string;
+}
+
+export interface FooterLinkData {
+   id: number;
+   title: string;
+   url: string;
+}
+
+export interface FooterSectionData {
+   id: number;
+   title: string;
+   links: FooterLinkData[];
+}
+
+export interface ContactInfoData {
+   id: number;
+   type: 'address' | 'email';
+   icon: string;
+   content: string;
+   href?: string;
+}
+
+export const FOOTER_SOCIAL_LINKS: SocialLinkData[] = [
+   {
+      id: 1,
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/company/teknikoz",
+      icon: "mdi:linkedin",
+      hoverColor: "hover:text-blue-600",
+      ariaLabel: "LinkedIn"
+   },
+   {
+      id: 2,
+      name: "Facebook",
+      url: "https://www.facebook.com/people/Teknikoz/100083293054761",
+      icon: "mdi:facebook",
+      hoverColor: "hover:text-blue-400",
+      ariaLabel: "Facebook"
+   },
+   {
+      id: 3,
+      name: "Twitter",
+      url: "https://www.x.com/Teknikoz1",
+      icon: "mdi:twitter",
+      hoverColor: "hover:text-blue-400",
+      ariaLabel: "Twitter"
+   },
+   {
+      id: 4,
+      name: "Instagram",
+      url: "https://www.instagram.com/teknikoz",
+      icon: "mdi:instagram",
+      hoverColor: "hover:text-pink-400",
+      ariaLabel: "Instagram"
+   }
+];
+
+export const FOOTER_QUICK_LINKS: FooterLinkData[] = [
+   {
+      id: 1,
+      title: "About Us",
+      url: "#"
+   },
+   {
+      id: 2,
+      title: "Courses",
+      url: "/courses"
+   },
+   {
+      id: 3,
+      title: "Testimonials",
+      url: "/testimonials"
+   },
+   {
+      id: 4,
+      title: "Contact",
+      url: "/contact"
+   }
+];
+
+export const FOOTER_LEGAL_LINKS: FooterLinkData[] = [
+   {
+      id: 1,
+      title: "Privacy Policy",
+      url: "/legal/privacy"
+   },
+   {
+      id: 2,
+      title: "Terms of Service",
+      url: "/legal/terms"
+   },
+   {
+      id: 3,
+      title: "Cookie Policy",
+      url: "/legal/cookies"
+   },
+   {
+      id: 4,
+      title: "Refund Policy",
+      url: "/legal/refund"
+   }
+];
+
+export const FOOTER_CONTACT_INFO: ContactInfoData[] = [
+   {
+      id: 1,
+      type: 'address',
+      icon: "mdi:map-marker",
+      content: "Rainmakers Workspace, 213, 2nd Floor, Ramanashree Arcade, 18 MG Road, Bengaluru-560001 India"
+   },
+   {
+      id: 2,
+      type: 'email',
+      icon: "mdi:email",
+      content: "info@teknikoz.com",
+      href: "mailto:info@teknikoz.com"
+   }
+];
+
+export const FOOTER_CONTENT = {
+   logo: {
+      src: "/assets/images/footer-logo.svg",
+      alt: "TEKNIKOZ E-Learning"
+   },
+   description: "Empowering professionals with industry-leading PLM and AI skills through hands-on, mentor-led courses.",
+   sections: {
+      quickLinks: "Quick Links",
+      legal: "Legal",
+      contact: "Get In Touch"
+   },
+   copyright: {
+      text: "TEKNIKOZ E-Learning. All Rights Reserved."
+   },
+   bottomLinks: [
+      {
+         id: 1,
+         title: "Terms of Service",
+         url: "/legal/terms"
+      },
+      {
+         id: 2,
+         title: "Privacy Policy",
+         url: "/legal/privacy"
+      }
+   ]
+};
+
+// Header Section Data
+export interface HeaderNavLinkData {
+   id: number;
+   title: string;
+   url: string;
+   icon?: string;
+}
+
+export interface HeaderUserDropdownLinkData {
+   id: number;
+   title: string;
+   url: string;
+   icon: string;
+   type: 'link' | 'button';
+}
+
+export interface HeaderMobileNavSectionData {
+   id: number;
+   title: string;
+   links: HeaderNavLinkData[];
+}
+
+export const HEADER_NAV_LINKS: HeaderNavLinkData[] = [
+   {
+      id: 1,
+      title: "Courses",
+      url: "/courses"
+   },
+   {
+      id: 2,
+      title: "Learning Paths",
+      url: "/learning-paths"
+   },
+   {
+      id: 3,
+      title: "Testimonials",
+      url: "/testimonials"
+   }
+];
+
+export const HEADER_USER_DROPDOWN_LINKS: HeaderUserDropdownLinkData[] = [
+   {
+      id: 1,
+      title: "Profile",
+      url: "/profile",
+      icon: "mdi:account",
+      type: 'link'
+   },
+   {
+      id: 2,
+      title: "Contact",
+      url: "/contact",
+      icon: "mdi:email",
+      type: 'link'
+   },
+   {
+      id: 3,
+      title: "Brochure",
+      url: "/brochure",
+      icon: "mdi:file-document",
+      type: 'link'
+   },
+   {
+      id: 4,
+      title: "Logout",
+      url: "#",
+      icon: "mdi:logout",
+      type: 'button'
+   }
+];
+
+export const HEADER_MOBILE_NAV_LINKS: HeaderNavLinkData[] = [
+   {
+      id: 1,
+      title: "Courses",
+      url: "/courses",
+      icon: "mdi:school"
+   },
+   {
+      id: 2,
+      title: "Learning Paths",
+      url: "/learning-paths",
+      icon: "mdi:map-marker-path"
+   },
+   {
+      id: 3,
+      title: "Testimonials",
+      url: "/testimonials",
+      icon: "mdi:star"
+   },
+   {
+      id: 4,
+      title: "Contact",
+      url: "/contact",
+      icon: "mdi:email"
+   }
+];
+
+export const HEADER_MOBILE_AUTH_LINKS: HeaderNavLinkData[] = [
+   {
+      id: 1,
+      title: "Sign In",
+      url: "/login",
+      icon: "mdi:login"
+   }
+   // {
+   //    id: 2,
+   //    title: "Sign Up",
+   //    url: "/signup",
+   //    icon: "mdi:account-plus"
+   // }
+];
+
+export const HEADER_MOBILE_USER_LINKS: HeaderNavLinkData[] = [
+   {
+      id: 1,
+      title: "Profile",
+      url: "/profile",
+      icon: "mdi:account"
+   },
+   {
+      id: 2,
+      title: "Brochure",
+      url: "/brochure",
+      icon: "mdi:file-document"
+   }
+];
+
+export const HEADER_CONTENT = {
+   logo: {
+      src: "/assets/images/header-logo.svg",
+      alt: "Teknikoz E-Learning Logo",
+      homeUrl: "/"
+   },
+   buttons: {
+      signIn: "Sign In",
+      signUp: "Sign Up",
+      enrollNow: "Enroll Now"
+   },
+   mobileMenu: {
+      sections: {
+         navigate: "NAVIGATE",
+         account: "ACCOUNT"
+      },
+      logout: {
+         title: "Logout",
+         icon: "mdi:logout"
+      }
+   }
+};

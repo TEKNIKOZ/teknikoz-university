@@ -10,7 +10,7 @@
     <div class="container mx-auto max-w-7xl">
       <div class="flex items-center justify-between h-16 md:h-20">
         <!-- Logo -->
-        <NuxtLink to="/">
+        <NuxtLink :to="HEADER_CONTENT.logo.homeUrl">
           <div class="flex items-center">
             <img
               src="/assets/images/header-logo.svg"
@@ -23,28 +23,12 @@
         <!-- Desktop Navigation -->
         <nav class="hidden lg:flex items-center space-x-8">
           <NuxtLink
-            to="/courses"
+            v-for="link in HEADER_NAV_LINKS"
+            :key="link.id"
+            :to="link.url"
             class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
           >
-            Courses
-          </NuxtLink>
-          <NuxtLink
-            to="/learning-paths"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
-          >
-            Learning Paths
-          </NuxtLink>
-          <!-- <NuxtLink
-            to="/mentors"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
-          >
-            Mentors
-          </NuxtLink> -->
-          <NuxtLink
-            to="/testimonials"
-            class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
-          >
-            Testimonials
+            {{ link.title }}
           </NuxtLink>
         </nav>
 
@@ -59,14 +43,14 @@
               to="/login"
               class="text-gray-700 hover:text-brand transition-colors duration-200 font-medium"
             >
-              Sign In
+              {{ HEADER_CONTENT.buttons.signIn }}
             </NuxtLink>
-            <NuxtLink
+            <!-- <NuxtLink
               to="/signup"
               class="bg-brand/10 text-brand px-4 py-2 rounded-lg hover:bg-brand/20 transition-colors duration-200 font-medium text-sm border border-brand/20"
             >
-              Sign Up
-            </NuxtLink>
+              {{ HEADER_CONTENT.buttons.signUp }}
+            </NuxtLink> -->
           </div>
 
           <!-- User menu (desktop) -->
@@ -96,45 +80,35 @@
                 aria-orientation="vertical"
                 tabindex="-1"
               >
-                <NuxtLink
-                  to="/profile"
-                  class="block px-4 py-2 rounded-t-md text-sm text-gray-700 hover:bg-gray-100"
-                  role="menuitem"
-                  tabindex="-1"
-                  @click="closeUserDropdown"
+                <template
+                  v-for="(link, index) in HEADER_USER_DROPDOWN_LINKS"
+                  :key="link.id"
                 >
-                  <Icon name="mdi:account" class="inline w-4 h-4 mr-2" />
-                  Profile
-                </NuxtLink>
-                <NuxtLink
-                  to="/contact"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  role="menuitem"
-                  tabindex="-1"
-                  @click="closeUserDropdown"
-                >
-                  <Icon name="mdi:email" class="inline w-4 h-4 mr-2" />
-                  Contact
-                </NuxtLink>
-                <NuxtLink
-                  to="/brochure"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  role="menuitem"
-                  tabindex="-1"
-                  @click="closeUserDropdown"
-                >
-                  <Icon name="mdi:file-document" class="inline w-4 h-4 mr-2" />
-                  Brochure
-                </NuxtLink>
-                <button
-                  @click="handleLogout"
-                  class="block w-full text-left px-4 py-2 rounded-b-md text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
-                  role="menuitem"
-                  tabindex="-1"
-                >
-                  <Icon name="mdi:logout" class="inline w-4 h-4 mr-2" />
-                  Logout
-                </button>
+                  <NuxtLink
+                    v-if="link.type === 'link'"
+                    :to="link.url"
+                    :class="[
+                      'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100',
+                      index === 0 ? 'rounded-t-md' : '',
+                    ]"
+                    role="menuitem"
+                    tabindex="-1"
+                    @click="closeUserDropdown"
+                  >
+                    <Icon :name="link.icon" class="inline w-4 h-4 mr-2" />
+                    {{ link.title }}
+                  </NuxtLink>
+                  <button
+                    v-else
+                    @click="handleLogout"
+                    class="block w-full text-left px-4 py-2 rounded-b-md text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <Icon :name="link.icon" class="inline w-4 h-4 mr-2" />
+                    {{ link.title }}
+                  </button>
+                </template>
               </div>
             </div>
           </div>
@@ -143,7 +117,7 @@
             @click="contactStore.openContactModal()"
             class="bg-brand text-white px-4 py-2 md:px-6 md:py-2 rounded-lg hover:bg-brand/90 transition-colors duration-200 font-medium text-sm md:text-base hover:shadow-sm"
           >
-            Enroll Now
+            {{ HEADER_CONTENT.buttons.enrollNow }}
           </button>
 
           <!-- Mobile menu button -->
@@ -167,79 +141,21 @@
             <h3
               class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
             >
-              NAVIGATE
+              {{ HEADER_CONTENT.mobileMenu.sections.navigate }}
             </h3>
             <div class="space-y-1">
               <NuxtLink
-                to="/courses"
+                v-for="link in HEADER_MOBILE_NAV_LINKS"
+                :key="link.id"
+                :to="link.url"
                 class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
                 @click="closeMobileMenu"
               >
                 <Icon
-                  name="mdi:school"
+                  :name="link.icon"
                   class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
                 />
-                <span class="font-medium">Courses</span>
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 ml-auto text-gray-400"
-                />
-              </NuxtLink>
-              <NuxtLink
-                to="/learning-paths"
-                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
-                @click="closeMobileMenu"
-              >
-                <Icon
-                  name="mdi:map-marker-path"
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
-                />
-                <span class="font-medium">Learning Paths</span>
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 ml-auto text-gray-400"
-                />
-              </NuxtLink>
-              <!-- <NuxtLink
-                to="/mentors"
-                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
-                @click="closeMobileMenu"
-              >
-                <Icon
-                  name="mdi:account-group"
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
-                />
-                <span class="font-medium">Mentors</span>
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 ml-auto text-gray-400"
-                />
-              </NuxtLink> -->
-              <NuxtLink
-                to="/testimonials"
-                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
-                @click="closeMobileMenu"
-              >
-                <Icon
-                  name="mdi:star"
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
-                />
-                <span class="font-medium">Testimonials</span>
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 ml-auto text-gray-400"
-                />
-              </NuxtLink>
-              <NuxtLink
-                to="/contact"
-                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
-                @click="closeMobileMenu"
-              >
-                <Icon
-                  name="mdi:email"
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
-                />
-                <span class="font-medium">Contact</span>
+                <span class="font-medium">{{ link.title }}</span>
                 <Icon
                   name="mdi:chevron-right"
                   class="w-4 h-4 ml-auto text-gray-400"
@@ -253,34 +169,21 @@
             <h3
               class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
             >
-              ACCOUNT
+              {{ HEADER_CONTENT.mobileMenu.sections.account }}
             </h3>
             <div class="space-y-1">
               <NuxtLink
-                to="/login"
+                v-for="link in HEADER_MOBILE_AUTH_LINKS"
+                :key="link.id"
+                :to="link.url"
                 class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
                 @click="closeMobileMenu"
               >
                 <Icon
-                  name="mdi:login"
+                  :name="link.icon"
                   class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
                 />
-                <span class="font-medium">Sign In</span>
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 ml-auto text-gray-400"
-                />
-              </NuxtLink>
-              <NuxtLink
-                to="/signup"
-                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
-                @click="closeMobileMenu"
-              >
-                <Icon
-                  name="mdi:account-plus"
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
-                />
-                <span class="font-medium">Sign Up</span>
+                <span class="font-medium">{{ link.title }}</span>
                 <Icon
                   name="mdi:chevron-right"
                   class="w-4 h-4 ml-auto text-gray-400"
@@ -294,34 +197,21 @@
             <h3
               class="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-4"
             >
-              ACCOUNT
+              {{ HEADER_CONTENT.mobileMenu.sections.account }}
             </h3>
             <div class="space-y-1">
               <NuxtLink
-                to="/profile"
+                v-for="link in HEADER_MOBILE_USER_LINKS"
+                :key="link.id"
+                :to="link.url"
                 class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
                 @click="closeMobileMenu"
               >
                 <Icon
-                  name="mdi:account"
+                  :name="link.icon"
                   class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
                 />
-                <span class="font-medium">Profile</span>
-                <Icon
-                  name="mdi:chevron-right"
-                  class="w-4 h-4 ml-auto text-gray-400"
-                />
-              </NuxtLink>
-              <NuxtLink
-                to="/brochure"
-                class="flex items-center text-gray-700 hover:text-brand hover:bg-white transition-all duration-200 px-3 py-3 rounded-lg group"
-                @click="closeMobileMenu"
-              >
-                <Icon
-                  name="mdi:file-document"
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand"
-                />
-                <span class="font-medium">Brochure</span>
+                <span class="font-medium">{{ link.title }}</span>
                 <Icon
                   name="mdi:chevron-right"
                   class="w-4 h-4 ml-auto text-gray-400"
@@ -331,8 +221,13 @@
                 @click="handleLogout"
                 class="w-full flex items-center text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 px-3 py-3 rounded-lg group mt-4"
               >
-                <Icon name="mdi:logout" class="w-5 h-5 mr-3" />
-                <span class="font-medium">Logout</span>
+                <Icon
+                  :name="HEADER_CONTENT.mobileMenu.logout.icon"
+                  class="w-5 h-5 mr-3"
+                />
+                <span class="font-medium">{{
+                  HEADER_CONTENT.mobileMenu.logout.title
+                }}</span>
               </button>
             </div>
           </div>
@@ -347,6 +242,14 @@ import { useAuthStore } from "@/stores/auth.stores";
 import { useContactStore } from "@/stores/contact.stores";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import {
+  HEADER_CONTENT,
+  HEADER_NAV_LINKS,
+  HEADER_USER_DROPDOWN_LINKS,
+  HEADER_MOBILE_NAV_LINKS,
+  HEADER_MOBILE_AUTH_LINKS,
+  HEADER_MOBILE_USER_LINKS,
+} from "@/constants";
 
 const router = useRouter();
 const contactStore = useContactStore();

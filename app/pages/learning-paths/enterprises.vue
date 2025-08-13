@@ -199,10 +199,10 @@
             >
               {{ feature.title }}
             </h3>
-            <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+            <p class="text-sm text-gray-600 mb-3 sm:mb-4">
               {{ feature.description }}
             </p>
-            <ul class="text-xs sm:text-sm text-gray-500 space-y-1">
+            <ul class="text-sm text-gray-500 space-y-1">
               <li v-for="item in feature.features" :key="item">• {{ item }}</li>
             </ul>
           </div>
@@ -247,7 +247,7 @@
             >
               {{ reason.title }}
             </h3>
-            <p class="text-gray-600 text-xs sm:text-sm max-w-xs mx-auto">
+            <p class="text-gray-600 text-sm max-w-xs mx-auto">
               {{ reason.description }}
             </p>
           </div>
@@ -298,7 +298,7 @@
               >
                 {{ pkg.title }}
               </h3>
-              <p class="text-gray-600 text-xs sm:text-sm">
+              <p class="text-gray-600 text-sm">
                 {{ pkg.subtitle }}
               </p>
               <div class="mt-4">
@@ -308,7 +308,7 @@
                 <p class="text-gray-500 text-sm">{{ pkg.teamSize }}</p>
               </div>
             </div>
-            <ul class="space-y-2 text-gray-600 text-xs sm:text-sm">
+            <ul class="space-y-2 text-gray-600 text-sm">
               <li
                 v-for="feature in pkg.features"
                 :key="feature"

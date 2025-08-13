@@ -129,8 +129,8 @@
           </form>
 
           <!-- Footer -->
-          <div class="mt-8 text-center">
-            <p class="text-sm text-gray-600">
+          <div class="text-center">
+            <!-- <p class="text-sm text-gray-600">
               Don't have an account?
               <NuxtLink
                 to="/signup"
@@ -138,7 +138,7 @@
               >
                 Sign up
               </NuxtLink>
-            </p>
+            </p> -->
           </div>
         </div>
       </div>

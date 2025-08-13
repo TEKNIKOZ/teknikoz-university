@@ -175,7 +175,7 @@
             <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
               {{ connection.description }}
             </p>
-            <ul class="text-xs sm:text-sm text-gray-500 space-y-1">
+            <ul class="text-sm text-gray-500 space-y-1">
               <li v-for="feature in connection.features" :key="feature">
                 • {{ feature }}
               </li>
@@ -223,7 +223,7 @@
             >
               {{ tool.title }}
             </h3>
-            <p class="text-xs sm:text-sm text-gray-600">
+            <p class="text-sm text-gray-600">
               {{ tool.description }}
             </p>
           </div>

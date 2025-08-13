@@ -17,42 +17,19 @@
             />
           </div>
           <p class="text-white text-sm leading-relaxed mb-6">
-            Empowering professionals with industry-leading PLM and AI skills
-            through hands-on, mentor-led courses.
+            {{ FOOTER_CONTENT.description }}
           </p>
           <!-- Social Media Icons -->
           <div class="flex justify-start gap-4">
             <NuxtLink
-              to="https://www.linkedin.com/company/teknikoz"
+              v-for="social in FOOTER_SOCIAL_LINKS"
+              :key="social.id"
+              :to="social.url"
               target="_blank"
-              class="text-white hover:text-blue-600 transition-colors duration-300"
-              aria-label="LinkedIn"
+              :class="`text-white ${social.hoverColor} transition-colors duration-300`"
+              :aria-label="social.ariaLabel"
             >
-              <Icon name="mdi:linkedin" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </NuxtLink>
-            <NuxtLink
-              to="https://www.facebook.com/people/Teknikoz/100083293054761"
-              target="_blank"
-              class="text-white hover:text-blue-400 transition-colors duration-300"
-              aria-label="Facebook"
-            >
-              <Icon name="mdi:facebook" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </NuxtLink>
-            <NuxtLink
-              to="https://www.x.com/Teknikoz1"
-              target="_blank"
-              class="text-white hover:text-blue-400 transition-colors duration-300"
-              aria-label="Twitter"
-            >
-              <Icon name="mdi:twitter" class="w-5 h-5 sm:w-6 sm:h-6" />
-            </NuxtLink>
-            <NuxtLink
-              to="https://www.instagram.com/teknikoz"
-              target="_blank"
-              class="text-white hover:text-pink-400 transition-colors duration-300"
-              aria-label="Instagram"
-            >
-              <Icon name="mdi:instagram" class="w-5 h-5 sm:w-6 sm:h-6" />
+              <Icon :name="social.icon" class="w-6 h-6" />
             </NuxtLink>
           </div>
         </div>
@@ -63,10 +40,12 @@
             <span
               class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
             ></span>
-            Quick Links
+            {{ FOOTER_CONTENT.sections.quickLinks }}
           </h3>
           <ul class="space-y-3">
             <li
+              v-for="link in FOOTER_QUICK_LINKS"
+              :key="link.id"
               class="flex items-center transition-transform hover:translate-x-1 duration-300"
             >
               <Icon
@@ -74,66 +53,10 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="#"
+                :href="link.url"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                About Us
-              </a>
-            </li>
-            <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/courses"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Courses
-              </a>
-            </li>
-            <!-- <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/mentors"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Mentors
-              </a>
-            </li> -->
-            <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/testimonials"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Testimonials
-              </a>
-            </li>
-            <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/contact"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Contact
+                {{ link.title }}
               </a>
             </li>
           </ul>
@@ -145,10 +68,12 @@
             <span
               class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
             ></span>
-            Legal
+            {{ FOOTER_CONTENT.sections.legal }}
           </h3>
           <ul class="space-y-3">
             <li
+              v-for="link in FOOTER_LEGAL_LINKS"
+              :key="link.id"
               class="flex items-center transition-transform hover:translate-x-1 duration-300"
             >
               <Icon
@@ -156,52 +81,10 @@
                 class="w-4 h-4 mr-2 text-brand/70"
               />
               <a
-                href="/legal/privacy"
+                :href="link.url"
                 class="hover:text-white transition-colors text-sm sm:text-base"
               >
-                Privacy Policy
-              </a>
-            </li>
-            <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/legal/terms"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Terms of Service
-              </a>
-            </li>
-            <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/legal/cookies"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Cookie Policy
-              </a>
-            </li>
-            <li
-              class="flex items-center transition-transform hover:translate-x-1 duration-300"
-            >
-              <Icon
-                name="mdi:chevron-right"
-                class="w-4 h-4 mr-2 text-brand/70"
-              />
-              <a
-                href="/legal/refund"
-                class="hover:text-white transition-colors text-sm sm:text-base"
-              >
-                Refund Policy
+                {{ link.title }}
               </a>
             </li>
           </ul>
@@ -213,32 +96,37 @@
             <span
               class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-brand rounded-full"
             ></span>
-            Get In Touch
+            {{ FOOTER_CONTENT.sections.contact }}
           </h3>
           <div class="space-y-4">
-            <!-- Address -->
-            <div class="flex items-start">
+            <div
+              v-for="contact in FOOTER_CONTACT_INFO"
+              :key="contact.id"
+              :class="
+                contact.type === 'address'
+                  ? 'flex items-start'
+                  : 'flex items-center'
+              "
+            >
               <Icon
-                name="mdi:map-marker"
-                class="w-5 h-5 text-white hover:text-gray-400 mr-3 mt-1 flex-shrink-0"
+                :name="contact.icon"
+                :class="
+                  contact.type === 'address'
+                    ? 'w-5 h-5 text-white hover:text-gray-400 mr-3 mt-1 flex-shrink-0'
+                    : 'w-5 h-5 text-white mr-3 flex-shrink-0'
+                "
               />
-              <p class="hover:text-white text-sm leading-relaxed text-pretty">
-                Rainmakers Workspace, 213, 2nd Floor, Ramanashree Arcade, 18 MG
-                Road, Bengaluru-560001 India
-              </p>
-            </div>
-            <!-- Email -->
-            <div class="flex items-center">
-              <Icon
-                name="mdi:email"
-                class="w-5 h-5 text-white mr-3 flex-shrink-0"
-              />
-              <a
-                href="mailto:info@teknikoz.com"
-                class="hover:text-white text-sm transition-colors"
+              <component
+                :is="contact.href ? 'a' : 'p'"
+                :href="contact.href"
+                :class="
+                  contact.type === 'address'
+                    ? 'hover:text-white text-sm leading-relaxed text-pretty'
+                    : 'hover:text-white text-sm transition-colors'
+                "
               >
-                info@teknikoz.com
-              </a>
+                {{ contact.content }}
+              </component>
             </div>
           </div>
         </div>
@@ -247,32 +135,26 @@
       <!-- Bottom Bar -->
       <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-700">
         <div
-          class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0"
+          class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0"
         >
           <div class="text-center order-1 sm:order-2">
             <p class="text-gray-400 text-sm">
               &copy; {{ new Date().getFullYear() }}
-              TEKNIKOZ E-Learning. All Rights Reserved.
+              {{ FOOTER_CONTENT.copyright.text }}
             </p>
-          </div>
-          <div
-            class="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 order-3"
-          >
-            <a
-              href="/legal/terms"
-              class="text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:underline underline-offset-4"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="/legal/privacy"
-              class="text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:underline underline-offset-4"
-            >
-              Privacy Policy
-            </a>
           </div>
         </div>
       </div>
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+import {
+  FOOTER_CONTENT,
+  FOOTER_SOCIAL_LINKS,
+  FOOTER_QUICK_LINKS,
+  FOOTER_LEGAL_LINKS,
+  FOOTER_CONTACT_INFO,
+} from "@/constants";
+</script>
