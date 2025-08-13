@@ -114,7 +114,7 @@ export const WHY_STANDS_OUT_DATA: FeatureData[] = [
       id: 4,
       title: "Placement<br />& Interview Prep",
       description: "Mock interviews, job referrals, and placement support",
-      icon: "mdi:account-group",
+      icon: "mdi:account-multiple",
       bgColor: "bg-pink-500"
    }
 ];

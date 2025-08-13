@@ -62,10 +62,41 @@
 
 <script setup lang="ts">
 import { useBrochureStore } from "@/stores/brochure.stores";
-import { WHY_STANDS_OUT_DATA, WHY_STANDS_OUT_CONTENT } from "@/constants";
+import { WHY_STANDS_OUT_CONTENT } from "@/constants";
 
 const brochureStore = useBrochureStore();
 
-const features = WHY_STANDS_OUT_DATA;
 const content = WHY_STANDS_OUT_CONTENT;
+
+const features = [
+  {
+    id: 1,
+    title: "Real World Projects",
+    description:
+      "Build portfolio-ready projects solving actual industry challenges",
+    icon: "mdi:projector-screen",
+    bgColor: "bg-purple-500",
+  },
+  {
+    id: 2,
+    title: "Resume & LinkedIn Makeover",
+    description: "Craft a profile that gets noticed by top recruiters",
+    icon: "mdi:file-document-edit",
+    bgColor: "bg-green-500",
+  },
+  {
+    id: 3,
+    title: "1:1 Career Mentorship",
+    description: "Personalized guidance to accelerate your career",
+    icon: "mdi:message-processing",
+    bgColor: "bg-orange-500",
+  },
+  {
+    id: 4,
+    title: "Placement<br />& Interview Prep",
+    description: "Mock interviews, job referrals, and placement support",
+    icon: "mdi:account-group",
+    bgColor: "bg-pink-500",
+  },
+];
 </script>
