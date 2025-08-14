@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from "nuxt/config";
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
@@ -11,16 +12,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-og-image",
     "@nuxtjs/tailwindcss",
-    "@nuxtjs/color-mode",
   ],
-  colorMode: {
-    preference: "system",
-    fallback: "light",
-    classSuffix: "",
-  },
-  pinia: {
-    storesDirs: ["./stores"],
-  },
   srcDir: "app/",
   css: ["~/assets/css/tailwind.css"],
 

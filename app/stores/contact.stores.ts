@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import type { $Fetch } from 'nitropack'
 import { contactRepository, type Contact, type ContactFormData as ApiContactFormData } from '@/repository/contact.repository'
+import { useNuxtApp } from 'nuxt/app'
+import { ref, computed } from 'vue'
 
 interface ContactFormData {
   name: string

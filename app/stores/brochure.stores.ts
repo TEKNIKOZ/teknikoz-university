@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import type { $Fetch } from 'nitropack'
 import { brochureRepository, type BrochureRequest, type BrochureRequestData } from '@/repository/brochure.repository'
+import { useNuxtApp } from 'nuxt/app'
+import { ref, computed } from 'vue'
 
 interface BrochureFormData {
   name: string

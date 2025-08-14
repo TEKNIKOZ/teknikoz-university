@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import type { $Fetch } from "nitropack";
 import { TOKEN_KEY } from "~/constants/auth";
 import { authRepository, type UserRepositoryData } from "../repository/auth.repository";
+import { ref, nextTick } from "vue";
+import { useNuxtApp } from "nuxt/app";
 
 export const useAuthStore = defineStore("auth", () => {
    const token = ref("");
