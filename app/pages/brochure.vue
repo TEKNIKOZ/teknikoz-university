@@ -27,7 +27,7 @@
           to="/login"
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-brand hover:bg-brand/90"
         >
-          Sign In
+          Login
         </NuxtLink>
       </div>
 
@@ -340,6 +340,7 @@
 import { ref, onMounted, computed } from "vue";
 import { useBrochureManagementStore } from "@/stores/brochure.stores";
 import { useAuthStore } from "@/stores/auth.stores";
+import { useHead } from "nuxt/app";
 
 const brochureStore = useBrochureManagementStore();
 const authStore = useAuthStore();

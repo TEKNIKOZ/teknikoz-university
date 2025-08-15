@@ -28,7 +28,7 @@
               v-for="(testimonial, index) in testimonials"
               :key="index"
               class="w-full flex-shrink-0 px-2 sm:px-4"
-              v-show="isMobile || index % 2 === 0"
+              :class="{ 'sm:hidden': index % 2 !== 0 }"
             >
               <div
                 class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
@@ -118,17 +118,30 @@
 
         <!-- Carousel Indicators -->
         <div class="flex justify-center mt-6 sm:mt-8 space-x-2">
-          <button
-            v-for="(slide, index) in isMobile
-              ? testimonials.length
-              : Math.ceil(testimonials.length / 2)"
-            :key="index"
-            @click="currentSlide = index"
-            :class="[
-              'w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors duration-300',
-              currentSlide === index ? 'bg-gray-900' : 'bg-gray-300',
-            ]"
-          ></button>
+          <ClientOnly>
+            <button
+              v-for="(slide, index) in isMobile
+                ? testimonials.length
+                : Math.ceil(testimonials.length / 2)"
+              :key="index"
+              @click="currentSlide = index"
+              :class="[
+                'w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors duration-300',
+                currentSlide === index ? 'bg-gray-900' : 'bg-gray-300',
+              ]"
+            ></button>
+            <template #fallback>
+              <button
+                v-for="(slide, index) in Math.ceil(testimonials.length / 2)"
+                :key="index"
+                @click="currentSlide = index"
+                :class="[
+                  'w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors duration-300',
+                  currentSlide === index ? 'bg-gray-900' : 'bg-gray-300',
+                ]"
+              ></button>
+            </template>
+          </ClientOnly>
         </div>
       </div>
     </div>
@@ -136,7 +149,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import {
   TESTIMONIALS_SECTION_DATA,
   TESTIMONIALS_SECTION_CONTENT,
@@ -146,15 +159,8 @@ const testimonials = TESTIMONIALS_SECTION_DATA;
 const content = TESTIMONIALS_SECTION_CONTENT;
 
 const currentSlide = ref(0);
+const isMobile = ref(false);
 let autoSlideInterval: NodeJS.Timeout;
-
-// Check if screen is mobile
-const isMobile = computed(() => {
-  if (typeof window !== "undefined") {
-    return window.innerWidth < 640;
-  }
-  return false;
-});
 
 // Auto-slide functionality
 const startAutoSlide = () => {
@@ -172,11 +178,19 @@ const stopAutoSlide = () => {
   }
 };
 
+// Check screen size
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth < 640;
+};
+
 onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
   startAutoSlide();
 });
 
 onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize);
   stopAutoSlide();
 });
 </script>
