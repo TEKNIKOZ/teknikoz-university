@@ -1,16 +1,20 @@
 import { defineStore } from "pinia";
 import type { $Fetch } from "nitropack";
-import { TOKEN_KEY } from "~/constants/auth";
+import { TOKEN_KEY, REFRESH_TOKEN_KEY } from "~/constants/auth";
 import { authRepository, type UserRepositoryData } from "../repository/auth.repository";
 import { ref, nextTick } from "vue";
 import { useNuxtApp } from "nuxt/app";
 
 export const useAuthStore = defineStore("auth", () => {
    const token = ref("");
+   const refreshToken = ref("");
    const name = ref("");
    const email = ref("");
+   const phone = ref("");
    const userId = ref<number | null>(null);
    const roles = ref<string[]>([]);
+   const status = ref("");
+   const isEmailVerified = ref(false);
    const isAuthenticated = ref(false);
    const userProfile = ref<UserRepositoryData["data"] | null>(null);
 
@@ -33,6 +37,7 @@ export const useAuthStore = defineStore("auth", () => {
    if (import.meta.client) {
       nextTick(() => {
          token.value = getStorageValue(TOKEN_KEY);
+         refreshToken.value = getStorageValue(REFRESH_TOKEN_KEY);
          const userData = getStorageValue("user");
 
          if (userData) {
@@ -40,8 +45,11 @@ export const useAuthStore = defineStore("auth", () => {
                const user = JSON.parse(userData);
                name.value = user.name || "";
                email.value = user.email || "";
+               phone.value = user.phone || "";
                userId.value = user.id || null;
                roles.value = user.roles || [];
+               status.value = user.status || "active";
+               isEmailVerified.value = user.is_email_verified || false;
             } catch (e) {
                console.error("Error parsing user data:", e);
             }
@@ -52,23 +60,31 @@ export const useAuthStore = defineStore("auth", () => {
    }
 
    /**
-    * Set token in localStorage and state
+    * Set tokens in localStorage and state
     */
-   const setToken = (newToken: string) => {
+   const setTokens = (accessToken: string, refreshTkn?: string) => {
       if (import.meta.client) {
-         localStorage.setItem(TOKEN_KEY, newToken);
+         localStorage.setItem(TOKEN_KEY, accessToken);
+         if (refreshTkn) {
+            localStorage.setItem(REFRESH_TOKEN_KEY, refreshTkn);
+         }
       }
-      token.value = newToken;
+      token.value = accessToken;
+      if (refreshTkn) {
+         refreshToken.value = refreshTkn;
+      }
    };
 
    /**
-    * Clear token from localStorage and state
+    * Clear tokens from localStorage and state
     */
-   const clearToken = () => {
+   const clearTokens = () => {
       if (import.meta.client) {
          localStorage.removeItem(TOKEN_KEY);
+         localStorage.removeItem(REFRESH_TOKEN_KEY);
       }
       token.value = "";
+      refreshToken.value = "";
    };
 
    /**
@@ -77,8 +93,11 @@ export const useAuthStore = defineStore("auth", () => {
    const setUserData = (user: any) => {
       name.value = user.name;
       email.value = user.email;
+      phone.value = user.phone || "";
       userId.value = user.id;
       roles.value = user.roles;
+      status.value = user.status || "active";
+      isEmailVerified.value = user.is_email_verified || false;
 
       if (import.meta.client) {
          localStorage.setItem("user", JSON.stringify(user));
@@ -91,8 +110,11 @@ export const useAuthStore = defineStore("auth", () => {
    const clearUserData = () => {
       name.value = "";
       email.value = "";
+      phone.value = "";
       userId.value = null;
       roles.value = [];
+      status.value = "";
+      isEmailVerified.value = false;
       userProfile.value = null;
 
       if (import.meta.client) {
@@ -113,9 +135,9 @@ export const useAuthStore = defineStore("auth", () => {
             throw new Error(response.message || "Login failed");
          }
 
-         const { accessToken, user } = response.data!;
+         const { accessToken, refreshToken, user } = response.data!;
 
-         setToken(accessToken);
+         setTokens(accessToken, refreshToken);
          setUserData(user);
          isAuthenticated.value = true;
 
@@ -135,23 +157,31 @@ export const useAuthStore = defineStore("auth", () => {
    /**
     * Register a new user
     */
-   const signup = async (
-      name: string,
+   const register = async (
       email: string,
-      password: string
+      name: string,
+      password: string,
+      phone?: string,
+      role?: string,
+      agreement?: {
+         agreedToTerms: boolean;
+         agreementTimestamp: string;
+         termsVersion: string;
+         privacyVersion: string;
+      }
    ) => {
       try {
          const { $api } = useNuxtApp();
          const authRepo = authRepository($api as $Fetch);
-         const response = await authRepo.signup(name, email, password);
+         const response = await authRepo.register(email, name, password, phone, role, agreement);
 
          if (!response.success) {
             throw new Error(response.message || "Registration failed");
          }
 
-         const { accessToken, user } = response.data!;
+         const { accessToken, refreshToken, user } = response.data!;
 
-         setToken(accessToken);
+         setTokens(accessToken, refreshToken);
          setUserData(user);
          isAuthenticated.value = true;
 
@@ -179,7 +209,7 @@ export const useAuthStore = defineStore("auth", () => {
             await authRepo.logout();
          }
 
-         clearToken();
+         clearTokens();
          clearUserData();
          isAuthenticated.value = false;
 
@@ -191,7 +221,7 @@ export const useAuthStore = defineStore("auth", () => {
          console.error("Logout error:", error);
 
          // Still clear local data even if API call fails
-         clearToken();
+         clearTokens();
          clearUserData();
          isAuthenticated.value = false;
 
@@ -296,7 +326,7 @@ export const useAuthStore = defineStore("auth", () => {
             throw new Error(response.message || "Failed to load profile");
          }
 
-         userProfile.value = response.data;
+         userProfile.value = response.data || null;
          return {
             success: true,
             data: response.data,
@@ -311,22 +341,64 @@ export const useAuthStore = defineStore("auth", () => {
       }
    };
 
+   /**
+    * Get current user from API
+    */
+   const getCurrentUser = async () => {
+      try {
+         if (!isAuthenticated.value) {
+            return {
+               success: false,
+               message: "User not authenticated",
+            };
+         }
+
+         const { $api } = useNuxtApp();
+         const authRepo = authRepository($api as $Fetch);
+         const response = await authRepo.getCurrentUser();
+
+         if (!response.success) {
+            throw new Error(response.message || "Failed to get user");
+         }
+
+         if (response.data?.user) {
+            setUserData(response.data.user);
+         }
+
+         return {
+            success: true,
+            data: response.data,
+         };
+      } catch (error) {
+         console.error("Error getting current user:", error);
+         return {
+            success: false,
+            message: error instanceof Error ? error.message : "Failed to get user",
+         };
+      }
+   };
+
    return {
       token,
+      refreshToken,
       name,
       email,
+      phone,
       userId,
       roles,
+      status,
+      isEmailVerified,
       isAuthenticated,
       login,
-      signup,
+      register,
       logout,
       checkAuth,
-      setToken,
-      clearToken,
+      setTokens,
+      clearTokens,
       fetchAllUsers,
       userProfile,
       fetchUserProfile,
       changePassword,
+      getCurrentUser,
    };
 });

@@ -809,7 +809,7 @@ export const HEADER_MOBILE_NAV_LINKS: HeaderNavLinkData[] = [
 export const HEADER_MOBILE_AUTH_LINKS: HeaderNavLinkData[] = [
    {
       id: 1,
-      title: "Sign In",
+      title: "Login",
       url: "/login",
       icon: "mdi:login"
    }
@@ -843,7 +843,7 @@ export const HEADER_CONTENT = {
       homeUrl: "/"
    },
    buttons: {
-      signIn: "Sign In",
+      signIn: "Login",
       signUp: "Sign Up",
       enrollNow: "Enroll Now"
    },
