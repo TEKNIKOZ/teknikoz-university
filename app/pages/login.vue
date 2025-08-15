@@ -12,7 +12,7 @@
           <!-- Header -->
           <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome back</h2>
-            <p class="text-gray-600">Sign in to your account</p>
+            <p class="text-gray-600">Login to your account</p>
           </div>
 
           <form class="space-y-6" @submit.prevent="handleLogin">
@@ -70,33 +70,6 @@
               </div>
             </div>
 
-            <div class="flex items-center justify-between">
-              <div class="flex items-center">
-                <input
-                  id="remember-me"
-                  v-model="form.rememberMe"
-                  name="remember-me"
-                  type="checkbox"
-                  class="h-4 w-4 text-brand focus:ring-brand border-gray-300 rounded"
-                  :disabled="isLoading"
-                />
-                <label
-                  for="remember-me"
-                  class="ml-3 block text-sm text-gray-600"
-                >
-                  Remember me
-                </label>
-              </div>
-              <div class="text-sm">
-                <NuxtLink
-                  to="/forgot-password"
-                  class="font-semibold text-brand hover:text-brand/80 transition-colors"
-                >
-                  Forgot password?
-                </NuxtLink>
-              </div>
-            </div>
-
             <div
               v-if="error"
               class="rounded-lg bg-red-50/80 backdrop-blur-sm p-3 border border-red-200/50"
@@ -124,7 +97,7 @@
                 name="eos-icons:loading"
                 class="h-6 w-6 mr-3 animate-spin"
               />
-              {{ isLoading ? "Signing in..." : "Sign In" }}
+              {{ isLoading ? "Logging in..." : "Login" }}
             </button>
           </form>
 
@@ -148,8 +121,8 @@
 
 <script setup lang="ts">
 import { reactive, ref, computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useAuthStore } from "~/stores/auth.stores";
+import { useRouter, useRoute, useSeoMeta } from "nuxt/app";
+import { useAuthStore } from "@/stores/auth.stores";
 const { login } = useAuthStore();
 const router = useRouter();
 const route = useRoute();
@@ -158,13 +131,12 @@ const route = useRoute();
 useSeoMeta({
   title: "Login - Teknikoz E-Learning",
   description:
-    "Sign in to your Teknikoz E-Learning account to access courses and learning materials.",
+    "Login to your Teknikoz E-Learning account to access courses and learning materials.",
 });
 
 const form = reactive({
   email: "",
   password: "",
-  rememberMe: false,
 });
 
 const isLoading = ref(false);

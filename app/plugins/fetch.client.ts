@@ -1,5 +1,6 @@
 import type { $Fetch } from 'nitropack'
-import { TOKEN_KEY, PUBLIC_URLS } from '../constants/auth'
+import { useRuntimeConfig, defineNuxtPlugin, navigateTo } from 'nuxt/app'
+import { TOKEN_KEY, REFRESH_TOKEN_KEY, PUBLIC_URLS } from '../constants/auth'
 
 interface RefreshTokenResponse {
    success: boolean;
@@ -21,7 +22,7 @@ type HttpMethod =
 
 export default defineNuxtPlugin(() => {
    const config = useRuntimeConfig()
-   const baseUrlApi = config.public.baseUrlApi
+   const baseUrlApi = config.public.baseUrlApi as string
 
    // Warn if using non-HTTPS in production
    if (process.env.NODE_ENV === 'production' && baseUrlApi.startsWith('http://')) {
@@ -65,10 +66,16 @@ export default defineNuxtPlugin(() => {
 
          if (status === 401 && data?.message === 'Token expired') {
             try {
+               const refreshTokenValue = localStorage.getItem(REFRESH_TOKEN_KEY)
+               if (!refreshTokenValue) {
+                  throw new Error('No refresh token available')
+               }
+
                const refreshResult = await $fetch<RefreshTokenResponse>(
-                  `/api/auth/refresh-token`,
+                  `/auth/refresh`,
                   {
                      method: 'POST',
+                     body: { refreshToken: refreshTokenValue },
                      credentials: 'include',
                      baseURL: baseUrlApi,
                   }
@@ -104,6 +111,7 @@ export default defineNuxtPlugin(() => {
                console.error('Error refreshing token:', error)
                if (import.meta.client) {
                   localStorage.removeItem(TOKEN_KEY)
+                  localStorage.removeItem(REFRESH_TOKEN_KEY)
                   localStorage.removeItem('user')
                   await navigateTo('/login')
                }

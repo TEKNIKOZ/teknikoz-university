@@ -1,8 +1,6 @@
 <template>
   <NuxtLayout>
-    <ColorScheme tag="html">
-      <NuxtPage />
-    </ColorScheme>
+    <NuxtPage />
   </NuxtLayout>
 </template>
 

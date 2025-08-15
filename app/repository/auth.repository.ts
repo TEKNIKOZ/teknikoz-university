@@ -1,5 +1,5 @@
 import type { $Fetch } from "nitropack";
-import { getApiUrl } from "~/constants/auth";
+import { getApiUrl } from "@/constants/auth";
 
 export type AuthRepositoryData = {
    success: boolean;
@@ -8,11 +8,13 @@ export type AuthRepositoryData = {
          id: number;
          email: string;
          name: string;
-         is_active: boolean;
+         phone?: string;
          is_email_verified: boolean;
+         status: string;
          roles: string[];
       };
       accessToken: string;
+      refreshToken?: string;
       expiresIn: number;
    };
    message?: string;
@@ -22,23 +24,27 @@ export type AuthRepositoryData = {
 export type UserRepositoryData = {
    success: boolean;
    data?: {
-      id: number;
-      email: string;
-      name: string;
-      is_active: boolean;
-      is_email_verified: boolean;
-      roles: string[];
+      user: {
+         id: number;
+         email: string;
+         name: string;
+         phone?: string;
+         is_email_verified: boolean;
+         status: string;
+         roles: string[];
+      };
    };
-
    message?: string;
    errors?: any[];
 };
+
 export interface User {
    id: number;
    email: string;
    name: string;
-   is_active: boolean;
+   phone?: string;
    is_email_verified: boolean;
+   status: string;
    roles: string[];
 }
 
@@ -48,22 +54,14 @@ export type UsersRepositoryData = {
       id: number;
       email: string;
       name: string;
-      is_active: boolean;
+      phone?: string;
       is_email_verified: boolean;
+      status: string;
       roles: string[];
    }[];
-
    message?: string;
    errors?: any[];
 };
-export interface User {
-   id: number;
-   email: string;
-   name: string;
-   is_active: boolean;
-   is_email_verified: boolean;
-   roles: string[];
-}
 
 export const authRepository = (fetch: $Fetch) => {
    const apiUrl = getApiUrl();
@@ -80,26 +78,42 @@ export const authRepository = (fetch: $Fetch) => {
          });
       },
 
-      signup: async (
-         name: string,
+      register: async (
          email: string,
-         password: string
+         name: string,
+         password: string,
+         phone?: string,
+         role?: string,
+         agreement?: {
+            agreedToTerms: boolean;
+            agreementTimestamp: string;
+            termsVersion: string;
+            privacyVersion: string;
+         }
       ): Promise<AuthRepositoryData> => {
-         return fetch(`${apiUrl}/auth/signup`, {
+         return fetch(`${apiUrl}/auth/register`, {
             method: "POST",
-            body: { name, email, password },
+            body: { email, name, password, phone, role, agreement },
             credentials: "include",
          });
       },
 
-      refreshToken: async (): Promise<{ success: boolean; data?: { accessToken: string; expiresIn: number }; message?: string }> => {
-         return fetch(`${apiUrl}/auth/refresh-token`, {
+      refreshToken: async (refreshToken: string): Promise<{ success: boolean; data?: { accessToken: string; expiresIn: number }; message?: string }> => {
+         return fetch(`${apiUrl}/auth/refresh`, {
             method: "POST",
+            body: { refreshToken },
             credentials: "include",
          });
       },
 
-      logout: async (): Promise<{ success: boolean; message?: string; data?: null }> => {
+      getCurrentUser: async (): Promise<UserRepositoryData> => {
+         return fetch(`${apiUrl}/me`, {
+            method: "GET",
+            credentials: "include",
+         });
+      },
+
+      logout: async (): Promise<{ success: boolean; message?: string }> => {
          return fetch(`${apiUrl}/auth/logout`, {
             method: "POST",
             credentials: "include",
@@ -125,6 +139,29 @@ export const authRepository = (fetch: $Fetch) => {
       getAllUsers: async (): Promise<UsersRepositoryData> => {
          return fetch(`${apiUrl}/auth/users`, {
             method: "GET",
+            credentials: "include",
+         });
+      },
+
+      assignRole: async (userId: number, role: string): Promise<{ success: boolean; message?: string }> => {
+         return fetch(`${apiUrl}/auth/assign-role`, {
+            method: "POST",
+            body: { userId, role },
+            credentials: "include",
+         });
+      },
+
+      removeRole: async (userId: number, role: string): Promise<{ success: boolean; message?: string }> => {
+         return fetch(`${apiUrl}/auth/remove-role`, {
+            method: "POST",
+            body: { userId, role },
+            credentials: "include",
+         });
+      },
+
+      revokeAllTokens: async (): Promise<{ success: boolean; message?: string }> => {
+         return fetch(`${apiUrl}/auth/revoke-all-tokens`, {
+            method: "POST",
             credentials: "include",
          });
       },
