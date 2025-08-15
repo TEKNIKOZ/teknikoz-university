@@ -24,7 +24,7 @@
                     >Full Name</label
                   >
                   <p class="text-gray-900">
-                    {{ authStore.fullname || "Not provided" }}
+                    {{ authStore.name || "Not provided" }}
                   </p>
                 </div>
                 <div>

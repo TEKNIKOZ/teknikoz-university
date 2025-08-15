@@ -7,7 +7,7 @@ import { useNuxtApp } from "nuxt/app";
 
 export const useAuthStore = defineStore("auth", () => {
    const token = ref("");
-   const fullname = ref("");
+   const name = ref("");
    const email = ref("");
    const userId = ref<number | null>(null);
    const roles = ref<string[]>([]);
@@ -38,7 +38,7 @@ export const useAuthStore = defineStore("auth", () => {
          if (userData) {
             try {
                const user = JSON.parse(userData);
-               fullname.value = user.fullname || "";
+               name.value = user.name || "";
                email.value = user.email || "";
                userId.value = user.id || null;
                roles.value = user.roles || [];
@@ -75,7 +75,7 @@ export const useAuthStore = defineStore("auth", () => {
     * Save user data to localStorage and state
     */
    const setUserData = (user: any) => {
-      fullname.value = user.fullname;
+      name.value = user.name;
       email.value = user.email;
       userId.value = user.id;
       roles.value = user.roles;
@@ -89,7 +89,7 @@ export const useAuthStore = defineStore("auth", () => {
     * Clear user data from localStorage and state
     */
    const clearUserData = () => {
-      fullname.value = "";
+      name.value = "";
       email.value = "";
       userId.value = null;
       roles.value = [];
@@ -136,14 +136,14 @@ export const useAuthStore = defineStore("auth", () => {
     * Register a new user
     */
    const signup = async (
-      fullname: string,
+      name: string,
       email: string,
       password: string
    ) => {
       try {
          const { $api } = useNuxtApp();
          const authRepo = authRepository($api as $Fetch);
-         const response = await authRepo.signup(fullname, email, password);
+         const response = await authRepo.signup(name, email, password);
 
          if (!response.success) {
             throw new Error(response.message || "Registration failed");
@@ -313,7 +313,7 @@ export const useAuthStore = defineStore("auth", () => {
 
    return {
       token,
-      fullname,
+      name,
       email,
       userId,
       roles,
