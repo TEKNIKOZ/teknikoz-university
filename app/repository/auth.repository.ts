@@ -7,7 +7,7 @@ export type AuthRepositoryData = {
       user: {
          id: number;
          email: string;
-         fullname: string;
+         name: string;
          is_active: boolean;
          is_email_verified: boolean;
          roles: string[];
@@ -24,7 +24,7 @@ export type UserRepositoryData = {
    data?: {
       id: number;
       email: string;
-      fullname: string;
+      name: string;
       is_active: boolean;
       is_email_verified: boolean;
       roles: string[];
@@ -36,7 +36,7 @@ export type UserRepositoryData = {
 export interface User {
    id: number;
    email: string;
-   fullname: string;
+   name: string;
    is_active: boolean;
    is_email_verified: boolean;
    roles: string[];
@@ -47,7 +47,7 @@ export type UsersRepositoryData = {
    data?: {
       id: number;
       email: string;
-      fullname: string;
+      name: string;
       is_active: boolean;
       is_email_verified: boolean;
       roles: string[];
@@ -59,7 +59,7 @@ export type UsersRepositoryData = {
 export interface User {
    id: number;
    email: string;
-   fullname: string;
+   name: string;
    is_active: boolean;
    is_email_verified: boolean;
    roles: string[];
@@ -81,13 +81,13 @@ export const authRepository = (fetch: $Fetch) => {
       },
 
       signup: async (
-         fullname: string,
+         name: string,
          email: string,
          password: string
       ): Promise<AuthRepositoryData> => {
          return fetch(`${apiUrl}/auth/signup`, {
             method: "POST",
-            body: { fullname, email, password },
+            body: { name, email, password },
             credentials: "include",
          });
       },

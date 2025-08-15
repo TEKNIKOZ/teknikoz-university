@@ -62,7 +62,7 @@
                 class="flex items-center space-x-2 text-gray-700 hover:text-brand transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-gray-50"
               >
                 <Icon name="mdi:account-circle" class="w-5 h-5" />
-                <span>{{ authStore.fullname }}</span>
+                <span>{{ authStore.name }}</span>
                 <Icon
                   name="mdi:chevron-down"
                   :class="[
