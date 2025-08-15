@@ -226,7 +226,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import FindYourPathQuiz from "~/components/Quiz/FindYourPathQuiz.vue";
+import FindYourPathQuiz from "@/components/Quiz/FindYourPathQuiz.vue";
+import { useSeoMeta } from "nuxt/app";
 
 // Quiz state management
 const showQuiz = ref(false);

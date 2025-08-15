@@ -38,7 +38,7 @@
             to="/login"
             class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-brand hover:bg-brand/90 transition-colors"
           >
-            Sign In
+            Login
           </NuxtLink>
         </div>
 
@@ -147,7 +147,7 @@
                 v-for="contact in contactStore.emailSearchResults"
                 :key="contact.id"
                 class="p-4 hover:bg-gray-50 cursor-pointer"
-                @click="viewContact(contact.id)"
+                @click="viewContact(contact.id.toString())"
               >
                 <ContactCard :contact="contact" />
               </div>
@@ -187,7 +187,7 @@
                   v-for="contact in contactStore.contacts"
                   :key="contact.id"
                   class="p-4 cursor-pointer transition-colors"
-                  @click="viewContact(contact.id)"
+                  @click="viewContact(contact.id.toString())"
                 >
                   <ContactCard :contact="contact" />
                 </div>
@@ -241,6 +241,7 @@
 import { ref, onMounted, computed } from "vue";
 import { useContactManagementStore } from "@/stores/contact.stores";
 import { useAuthStore } from "@/stores/auth.stores";
+import { useHead } from "nuxt/app";
 const contactStore = useContactManagementStore();
 const authStore = useAuthStore();
 
@@ -277,7 +278,7 @@ const clearEmailSearch = () => {
 };
 
 const viewContact = async (id: string) => {
-  const result = await contactStore.fetchContactById(id);
+  const result = await contactStore.fetchContactById(Number(id));
   if (result.success) {
     showContactDetail.value = true;
   }
