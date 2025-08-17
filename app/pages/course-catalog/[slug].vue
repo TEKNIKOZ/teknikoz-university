@@ -119,7 +119,7 @@
 
                 <NuxtLink
                   v-if="canEditCourse"
-                  :to="`/course-catalog/${course.slug}/edit`"
+                  :to="`/dashboard/courses/${course.id}/edit`"
                   class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors"
                 >
                   <Icon name="mdi:pencil" class="mr-2" />
