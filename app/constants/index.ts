@@ -751,27 +751,41 @@ export const HEADER_NAV_LINKS: HeaderNavLinkData[] = [
 export const HEADER_USER_DROPDOWN_LINKS: HeaderUserDropdownLinkData[] = [
    {
       id: 1,
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: "mdi:view-dashboard",
+      type: 'link'
+   },
+   {
+      id: 2,
+      title: "Course Catalog",
+      url: "/course-catalog",
+      icon: "mdi:book-open-variant",
+      type: 'link'
+   },
+   {
+      id: 3,
       title: "Profile",
       url: "/profile",
       icon: "mdi:account",
       type: 'link'
    },
    {
-      id: 2,
+      id: 4,
       title: "Contact",
       url: "/contact",
       icon: "mdi:email",
       type: 'link'
    },
    {
-      id: 3,
+      id: 5,
       title: "Brochure",
       url: "/brochure",
       icon: "mdi:file-document",
       type: 'link'
    },
    {
-      id: 4,
+      id: 6,
       title: "Logout",
       url: "#",
       icon: "mdi:logout",
@@ -797,13 +811,7 @@ export const HEADER_MOBILE_NAV_LINKS: HeaderNavLinkData[] = [
       title: "Testimonials",
       url: "/testimonials",
       icon: "mdi:star"
-   },
-   // {
-   //    id: 4,
-   //    title: "Contact",
-   //    url: "/contact",
-   //    icon: "mdi:email"
-   // }
+   }
 ];
 
 export const HEADER_MOBILE_AUTH_LINKS: HeaderNavLinkData[] = [
@@ -824,12 +832,24 @@ export const HEADER_MOBILE_AUTH_LINKS: HeaderNavLinkData[] = [
 export const HEADER_MOBILE_USER_LINKS: HeaderNavLinkData[] = [
    {
       id: 1,
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: "mdi:view-dashboard"
+   },
+   {
+      id: 2,
+      title: "Course Catalog",
+      url: "/course-catalog",
+      icon: "mdi:book-open-variant"
+   },
+   {
+      id: 3,
       title: "Profile",
       url: "/profile",
       icon: "mdi:account"
    },
    {
-      id: 2,
+      id: 4,
       title: "Brochure",
       url: "/brochure",
       icon: "mdi:file-document"
