@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Teknikoz University",
+      title: "Teknikoz E-Learning",
       titleTemplate: "%s",
       meta: [
         {
