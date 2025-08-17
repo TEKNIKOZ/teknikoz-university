@@ -85,10 +85,8 @@ Every UI pages or components should be desktop and mobile responsive.
 ```
 <type>: <description>
 
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
 ```
+- Description should be short and concise, not too long but yet effective mentioning changes properly.
 
 **Commit Types:**
 - `feat:` - New feature or functionality
