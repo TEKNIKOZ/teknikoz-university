@@ -4,8 +4,10 @@
       <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">Profile</h1>
-          <p class="text-gray-600">
+          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+            Profile
+          </h1>
+          <p class="text-gray-600 text-sm sm:text-base">
             Manage your account information and preferences
           </p>
         </div>
@@ -19,13 +21,13 @@
             <div class="flex items-start">
               <Icon
                 name="heroicons:exclamation-triangle"
-                class="h-6 w-6 text-amber-500 mr-3 flex-shrink-0 mt-0.5"
+                class="h-4 w-4 text-amber-500 mr-3 flex-shrink-0 mt-0.5"
               />
               <div>
-                <h3 class="text-sm font-semibold text-amber-800 mb-1">
+                <h3 class="text-base font-semibold text-amber-800 mb-1">
                   Email Verification Required
                 </h3>
-                <p class="text-sm text-amber-700">
+                <p class="text-base text-amber-700">
                   Verify your email address to unlock all platform features and
                   ensure account security.
                 </p>
@@ -34,12 +36,14 @@
           </div>
 
           <!-- Profile Content -->
-          <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6">
             <div class="space-y-8">
               <!-- Role Section -->
-              <div class="flex items-center gap-3">
+              <div
+                class="flex items-center gap-3 border-b border-gray-100 pb-4"
+              >
                 <div
-                  class="w-10 h-10 bg-brand/10 rounded-full flex items-center justify-center"
+                  class="w-9 h-9 bg-brand/10 rounded-full flex items-center justify-center"
                 >
                   <Icon
                     name="heroicons:shield-check"
@@ -104,9 +108,7 @@
                         >
                       </div>
                       <div class="flex-1">
-                        <p
-                          class="text-gray-900 font-medium text-lg sm:text-base"
-                        >
+                        <p class="text-gray-900 font-medium text-base">
                           {{ authStore.name || "Not provided" }}
                         </p>
                       </div>
@@ -126,7 +128,7 @@
                           class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3"
                         >
                           <p
-                            class="text-gray-900 font-medium text-lg sm:text-base break-all"
+                            class="text-gray-900 font-medium text-base break-all"
                           >
                             {{ authStore.email || "Not provided" }}
                           </p>
@@ -161,9 +163,7 @@
                         >
                       </div>
                       <div class="flex-1">
-                        <p
-                          class="text-gray-900 font-medium text-lg sm:text-base"
-                        >
+                        <p class="text-gray-900 font-medium text-base">
                           {{ authStore.phone || "Not provided" }}
                         </p>
                       </div>

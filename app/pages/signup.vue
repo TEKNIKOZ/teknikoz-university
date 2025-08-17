@@ -319,7 +319,7 @@
 
             <button
               type="submit"
-              :disabled="isLoading || !isFormValid"
+              :disabled="isLoading || !isFormValid || success !== ''"
               class="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-lg text-white bg-brand hover:bg-brand/90 focus:outline-none focus:ring-4 focus:ring-brand/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-semibold text-lg shadow-xl"
             >
               <Icon
@@ -327,7 +327,18 @@
                 name="eos-icons:loading"
                 class="h-6 w-6 mr-3 animate-spin"
               />
-              {{ isLoading ? "Creating account..." : "Create Account" }}
+              <Icon
+                v-else-if="success"
+                name="heroicons:check-circle"
+                class="h-6 w-6 mr-3 text-white"
+              />
+              {{
+                isLoading
+                  ? "Creating account..."
+                  : success
+                  ? "Account created!"
+                  : "Create Account"
+              }}
             </button>
           </form>
 
