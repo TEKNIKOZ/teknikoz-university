@@ -382,6 +382,90 @@ export const useCourseStore = defineStore('course', () => {
     }
   }
 
+  const deleteSection = async (sectionId: number) => {
+    loading.value = true
+    error.value = null
+    const authStore = useAuthStore()
+    
+    try {
+      const { $api } = useNuxtApp()
+      const response = await courseRepo.deleteSection($api as $Fetch, sectionId, authStore.token)
+
+      if (response.success && currentCourse.value) {
+        // Refresh course to get updated sections
+        await fetchCourseById(currentCourse.value.id, true)
+        return { success: true, data: response.data }
+      } else {
+        throw new Error(response.message || 'Failed to delete section')
+      }
+    } catch (err: any) {
+      console.error('Error deleting section:', err)
+      error.value = err.data?.message || 'Failed to delete section'
+      return {
+        success: false,
+        error: error.value
+      }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  const deleteLesson = async (lessonId: number) => {
+    loading.value = true
+    error.value = null
+    const authStore = useAuthStore()
+    
+    try {
+      const { $api } = useNuxtApp()
+      const response = await courseRepo.deleteLesson($api as $Fetch, lessonId, authStore.token)
+
+      if (response.success && currentCourse.value) {
+        // Refresh course to get updated lessons
+        await fetchCourseById(currentCourse.value.id, true)
+        return { success: true, data: response.data }
+      } else {
+        throw new Error(response.message || 'Failed to delete lesson')
+      }
+    } catch (err: any) {
+      console.error('Error deleting lesson:', err)
+      error.value = err.data?.message || 'Failed to delete lesson'
+      return {
+        success: false,
+        error: error.value
+      }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  const deletePrice = async (priceId: number) => {
+    loading.value = true
+    error.value = null
+    const authStore = useAuthStore()
+    
+    try {
+      const { $api } = useNuxtApp()
+      const response = await courseRepo.deletePrice($api as $Fetch, priceId, authStore.token)
+
+      if (response.success && currentCourse.value) {
+        // Refresh course to get updated prices
+        await fetchCourseById(currentCourse.value.id, true)
+        return { success: true, data: response.data }
+      } else {
+        throw new Error(response.message || 'Failed to delete price')
+      }
+    } catch (err: any) {
+      console.error('Error deleting price:', err)
+      error.value = err.data?.message || 'Failed to delete price'
+      return {
+        success: false,
+        error: error.value
+      }
+    } finally {
+      loading.value = false
+    }
+  }
+
   const clearError = () => {
     error.value = null
   }
@@ -421,6 +505,9 @@ export const useCourseStore = defineStore('course', () => {
     uploadCourseCover,
     setCoursePrice,
     deleteMaterial,
+    deleteSection,
+    deleteLesson,
+    deletePrice,
     clearError,
     clearCurrentCourse,
 
