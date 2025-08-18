@@ -17,7 +17,7 @@
             </div>
             <NuxtLink
               to="/dashboard/courses/create"
-              class="inline-flex items-center px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+              class="inline-flex items-center px-4 py-2 bg-brand text-white font-medium rounded-lg hover:bg-brand/90 transition-colors"
             >
               <Icon name="mdi:plus" class="mr-2 text-xl" />
               Create Course
@@ -43,7 +43,7 @@
                 v-model="searchQuery"
                 type="text"
                 placeholder="Search by title..."
-                class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
               />
               <Icon
                 name="mdi:magnify"
@@ -61,7 +61,7 @@
             </label>
             <select
               v-model="filters.status"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
             >
               <option value="all">All Statuses</option>
               <option value="draft">Draft</option>
@@ -78,7 +78,7 @@
             </label>
             <select
               v-model="filters.level"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
             >
               <option value="all">All Levels</option>
               <option value="beginner">Beginner</option>
@@ -163,7 +163,7 @@
             !searchQuery && filters.status === 'all' && filters.level === 'all'
           "
           to="/dashboard/courses/create"
-          class="inline-flex items-center px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+          class="inline-flex items-center px-4 py-2 bg-brand text-white font-medium rounded-lg hover:bg-brand/90 transition-colors"
         >
           <Icon name="mdi:plus" class="mr-2" />
           Create Your First Course
@@ -187,7 +187,7 @@
             />
             <div
               v-else
-              class="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center"
+              class="w-full h-full bg-gradient-to-br from-brand to-brand/90 flex items-center justify-center"
             >
               <Icon
                 name="mdi:book-open-variant"
@@ -250,7 +250,7 @@
               </NuxtLink>
               <NuxtLink
                 :to="`/dashboard/courses/${course.id}/edit`"
-                class="flex-1 px-3 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors text-center"
+                class="flex-1 px-3 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors text-center"
               >
                 <Icon name="mdi:pencil" class="mr-1" />
                 Edit
@@ -298,9 +298,15 @@
               </button>
               <button
                 @click="deleteCourse"
-                class="flex-1 px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
+                :disabled="isDeletingCourse"
+                class="flex-1 px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                Delete
+                <Icon
+                  v-if="isDeletingCourse"
+                  name="mdi:loading"
+                  class="animate-spin mr-2"
+                />
+                {{ isDeletingCourse ? "Deleting..." : "Delete" }}
               </button>
             </div>
           </div>
@@ -329,6 +335,7 @@ const filters = ref({
 
 const showDeleteModal = ref(false);
 const courseToDelete = ref<Course | null>(null);
+const isDeletingCourse = ref(false);
 
 const filteredCourses = computed(() => {
   let courses = courseStore.courses;
@@ -366,11 +373,31 @@ const confirmDelete = (course: Course) => {
 const deleteCourse = async () => {
   if (!courseToDelete.value) return;
 
-  const result = await courseStore.deleteCourse(courseToDelete.value.id);
+  isDeletingCourse.value = true;
+  try {
+    const result = await courseStore.deleteCourse(courseToDelete.value.id);
 
-  if (result.success) {
-    showDeleteModal.value = false;
-    courseToDelete.value = null;
+    if (result.success) {
+      showDeleteModal.value = false;
+      courseToDelete.value = null;
+      // Refresh the course list
+      await courseStore.fetchCourses({
+        status: filters.value.status as "all" | "draft" | "published",
+        visibility: "all",
+        level: filters.value.level as
+          | "all"
+          | "beginner"
+          | "intermediate"
+          | "advanced",
+      });
+    } else {
+      alert(result.error || "Failed to delete course");
+    }
+  } catch (err) {
+    console.error("Error deleting course:", err);
+    alert("Error deleting course. Please try again.");
+  } finally {
+    isDeletingCourse.value = false;
   }
 };
 
