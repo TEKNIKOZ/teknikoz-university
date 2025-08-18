@@ -466,6 +466,100 @@ export const useCourseStore = defineStore('course', () => {
     }
   }
 
+  const updateSection = async (sectionId: number, data: { title: string; order_index?: number }) => {
+    loading.value = true
+    error.value = null
+    const authStore = useAuthStore()
+    
+    try {
+      const { $api } = useNuxtApp()
+      const response = await courseRepo.updateSection($api as $Fetch, sectionId, data, authStore.token)
+
+      if (response.success && currentCourse.value) {
+        // Refresh course to get updated sections
+        await fetchCourseById(currentCourse.value.id, true)
+        return { success: true, data: response.data }
+      } else {
+        throw new Error(response.message || 'Failed to update section')
+      }
+    } catch (err: any) {
+      console.error('Error updating section:', err)
+      error.value = err.data?.message || 'Failed to update section'
+      return {
+        success: false,
+        error: error.value
+      }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  const updateLesson = async (lessonId: number, data: Partial<LessonFormData>) => {
+    loading.value = true
+    error.value = null
+    const authStore = useAuthStore()
+    
+    try {
+      const { $api } = useNuxtApp()
+      const response = await courseRepo.updateLesson($api as $Fetch, lessonId, data, authStore.token)
+
+      if (response.success && currentCourse.value) {
+        // Refresh course to get updated lessons
+        await fetchCourseById(currentCourse.value.id, true)
+        return { success: true, data: response.data }
+      } else {
+        throw new Error(response.message || 'Failed to update lesson')
+      }
+    } catch (err: any) {
+      console.error('Error updating lesson:', err)
+      error.value = err.data?.message || 'Failed to update lesson'
+      return {
+        success: false,
+        error: error.value
+      }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  const updateMaterial = async (
+    materialId: number, 
+    data: {
+      title?: string;
+      description?: string;
+      file_type?: string;
+      is_downloadable?: boolean;
+      access_level?: 'public' | 'enrolled' | 'premium';
+      order_index?: number;
+    }
+  ) => {
+    loading.value = true
+    error.value = null
+    const authStore = useAuthStore()
+    
+    try {
+      const { $api } = useNuxtApp()
+      const response = await courseRepo.updateMaterial($api as $Fetch, materialId, data, authStore.token)
+
+      if (response.success && currentCourse.value) {
+        // Refresh course materials
+        await fetchCourseMaterials(currentCourse.value.id)
+        return { success: true, data: response.data }
+      } else {
+        throw new Error(response.message || 'Failed to update material')
+      }
+    } catch (err: any) {
+      console.error('Error updating material:', err)
+      error.value = err.data?.message || 'Failed to update material'
+      return {
+        success: false,
+        error: error.value
+      }
+    } finally {
+      loading.value = false
+    }
+  }
+
   const clearError = () => {
     error.value = null
   }
@@ -508,6 +602,9 @@ export const useCourseStore = defineStore('course', () => {
     deleteSection,
     deleteLesson,
     deletePrice,
+    updateSection,
+    updateLesson,
+    updateMaterial,
     clearError,
     clearCurrentCourse,
 
