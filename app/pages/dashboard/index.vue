@@ -33,10 +33,10 @@
                 {{ courseStats.total }}
               </p>
             </div>
-            <div class="p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg">
+            <div class="p-3 bg-brand/20 dark:bg-brand/50 rounded-lg">
               <Icon
                 name="mdi:book-open-variant"
-                class="text-2xl text-primary-600 dark:text-primary-400"
+                class="text-2xl text-brand dark:text-brand"
               />
             </div>
           </div>
@@ -90,10 +90,10 @@
           class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
         >
           <div class="flex items-center gap-4">
-            <div class="p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg">
+            <div class="p-3 bg-brand/20 dark:bg-brand/50 rounded-lg">
               <Icon
                 name="mdi:book-cog"
-                class="text-3xl text-primary-600 dark:text-primary-400"
+                class="text-3xl text-brand dark:text-brand"
               />
             </div>
             <div>
@@ -166,7 +166,7 @@
             </h2>
             <NuxtLink
               to="/dashboard/courses"
-              class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm font-medium"
+              class="text-brand hover:text-brand/90 dark:text-brand dark:hover:text-brand/70 text-sm font-medium"
             >
               View All →
             </NuxtLink>
@@ -210,13 +210,13 @@
               <div class="flex items-center gap-2">
                 <NuxtLink
                   :to="`/course-catalog/${course.slug}`"
-                  class="p-2 text-gray-500 hover:text-primary-600 transition-colors"
+                  class="p-2 text-gray-500 hover:text-brand transition-colors"
                 >
                   <Icon name="mdi:eye" />
                 </NuxtLink>
                 <NuxtLink
                   :to="`/dashboard/courses/${course.id}/edit`"
-                  class="p-2 text-gray-500 hover:text-primary-600 transition-colors"
+                  class="p-2 text-gray-500 hover:text-brand transition-colors"
                 >
                   <Icon name="mdi:pencil" />
                 </NuxtLink>
@@ -239,7 +239,7 @@
           <p>You haven't enrolled in any courses yet.</p>
           <NuxtLink
             to="/course-catalog"
-            class="inline-block mt-4 px-6 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+            class="inline-block mt-4 px-6 py-2 bg-brand text-white font-medium rounded-lg hover:bg-brand/90 transition-colors"
           >
             Browse Courses
           </NuxtLink>
