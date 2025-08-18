@@ -341,6 +341,71 @@ export const deleteMaterial = async (
   }
 };
 
+// Delete section (Admin/Teacher Only)
+export const deleteSection = async (
+  apiFetch: $Fetch,
+  sectionId: number,
+  token: string
+): Promise<GenericResponse> => {
+  try {
+    // Using the correct backend endpoint
+    const response = await apiFetch<GenericResponse>(`/sections/${sectionId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error('Error deleting section:', error);
+    throw error;
+  }
+};
+
+// Delete lesson (Admin/Teacher Only)
+export const deleteLesson = async (
+  apiFetch: $Fetch,
+  lessonId: number,
+  token: string
+): Promise<GenericResponse> => {
+  try {
+    // Using the correct backend endpoint
+    const response = await apiFetch<GenericResponse>(`/lessons/${lessonId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error('Error deleting lesson:', error);
+    throw error;
+  }
+};
+
+// Delete price (Admin/Teacher Only)
+export const deletePrice = async (
+  apiFetch: $Fetch,
+  priceId: number,
+  token: string
+): Promise<GenericResponse> => {
+  try {
+    const response = await apiFetch<GenericResponse>(`/prices/${priceId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error('Error deleting price:', error);
+    throw error;
+  }
+};
+
 // Export all functions as courseRepository for backwards compatibility
 export const courseRepository = {
   getCourses,
@@ -355,5 +420,8 @@ export const courseRepository = {
   uploadMaterial,
   uploadCourseCover,
   setCoursePrice,
-  deleteMaterial
+  deleteMaterial,
+  deleteSection,
+  deleteLesson,
+  deletePrice
 };
