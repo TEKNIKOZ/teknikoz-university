@@ -235,17 +235,44 @@
                   class="p-4 bg-gray-50 dark:bg-gray-800/40 border-b border-gray-200 dark:border-gray-700"
                 >
                   <div class="flex items-center justify-between">
-                    <h3 class="font-semibold text-gray-900 dark:text-white">
-                      {{ section.title }}
-                    </h3>
-                    <div class="flex items-center gap-2">
+                    <div class="flex-1">
+                      <h3 v-if="editingSection !== section.id" class="font-semibold text-gray-900 dark:text-white">
+                        {{ section.title }}
+                      </h3>
+                      <input
+                        v-else
+                        v-model="editingSectionTitle"
+                        @keyup.enter="saveSection(section.id)"
+                        @keyup.escape="cancelSectionEdit()"
+                        class="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                        placeholder="Section title"
+                        autofocus
+                      />
+                    </div>
+                    <div class="flex items-center gap-2 ml-4">
                       <button
-                        @click="editSection(section)"
+                        v-if="editingSection !== section.id"
+                        @click="startSectionEdit(section)"
                         class="p-2 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
                       >
                         <Icon name="mdi:pencil" />
                       </button>
                       <button
+                        v-else
+                        @click="saveSection(section.id)"
+                        class="p-2 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-all"
+                      >
+                        <Icon name="mdi:check" />
+                      </button>
+                      <button
+                        v-if="editingSection === section.id"
+                        @click="cancelSectionEdit()"
+                        class="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
+                      >
+                        <Icon name="mdi:close" />
+                      </button>
+                      <button
+                        v-if="editingSection !== section.id"
                         @click="deleteSection(section.id)"
                         :disabled="deletingSectionId === section.id"
                         class="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -264,27 +291,54 @@
                     :key="lesson.id"
                     class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-sm transition-shadow"
                   >
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 flex-1">
                       <Icon
                         :name="getLessonIcon(lesson.kind)"
                         class="text-gray-600 dark:text-gray-400 text-xl"
                       />
-                      <span class="text-gray-900 dark:text-white font-medium">{{
-                        lesson.title
-                      }}</span>
-                      <span
-                        class="text-xs text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium"
-                        >{{ lesson.kind }}</span
-                      >
+                      <div v-if="editingLesson !== lesson.id" class="flex items-center gap-3">
+                        <span class="text-gray-900 dark:text-white font-medium">{{
+                          lesson.title
+                        }}</span>
+                        <span
+                          class="text-xs text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium"
+                          >{{ lesson.kind }}</span
+                        >
+                      </div>
+                      <input
+                        v-else
+                        v-model="editingLessonData.title"
+                        @keyup.enter="saveLesson(lesson.id)"
+                        @keyup.escape="cancelLessonEdit()"
+                        class="flex-1 px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                        placeholder="Lesson title"
+                        autofocus
+                      />
                     </div>
                     <div class="flex items-center gap-2">
                       <button
-                        @click="editLesson(lesson)"
+                        v-if="editingLesson !== lesson.id"
+                        @click="startLessonEdit(lesson)"
                         class="p-1 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
                       >
                         <Icon name="mdi:pencil" class="text-sm" />
                       </button>
                       <button
+                        v-else
+                        @click="saveLesson(lesson.id)"
+                        class="p-1 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded transition-all"
+                      >
+                        <Icon name="mdi:check" class="text-sm" />
+                      </button>
+                      <button
+                        v-if="editingLesson === lesson.id"
+                        @click="cancelLessonEdit()"
+                        class="p-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
+                      >
+                        <Icon name="mdi:close" class="text-sm" />
+                      </button>
+                      <button
+                        v-if="editingLesson !== lesson.id"
                         @click="deleteLesson(lesson.id)"
                         :disabled="deletingLessonId === lesson.id"
                         class="p-1 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -344,23 +398,24 @@
             <div
               v-for="material in course.materials"
               :key="material.id"
-              class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow"
+              class="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow"
             >
-              <div class="flex items-center gap-3">
-                <Icon
-                  :name="getMaterialIcon(material.file_type)"
-                  class="text-3xl text-brand dark:text-brand"
-                />
-                <div>
-                  <h4 class="font-medium text-gray-900 dark:text-white">
-                    {{ material.title }}
-                  </h4>
-                  <p
-                    v-if="material.description"
-                    class="text-sm text-gray-500 dark:text-gray-400"
-                  >
-                    {{ material.description }}
-                  </p>
+              <div v-if="editingMaterial !== material.id" class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <Icon
+                    :name="getMaterialIcon(material.file_type)"
+                    class="text-3xl text-brand dark:text-brand"
+                  />
+                  <div>
+                    <h4 class="font-medium text-gray-900 dark:text-white">
+                      {{ material.title }}
+                    </h4>
+                    <p
+                      v-if="material.description"
+                      class="text-sm text-gray-500 dark:text-gray-400"
+                    >
+                      {{ material.description }}
+                    </p>
                   <div class="flex items-center gap-3 mt-1 text-xs">
                     <span
                       class="text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium"
@@ -378,15 +433,84 @@
                     >
                   </div>
                 </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button
+                    @click="startMaterialEdit(material)"
+                    class="p-2 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
+                  >
+                    <Icon name="mdi:pencil" />
+                  </button>
+                  <button
+                    @click="deleteMaterial(material.id)"
+                    :disabled="deletingMaterialId === material.id"
+                    class="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Icon v-if="deletingMaterialId === material.id" name="mdi:loading" class="animate-spin" />
+                    <Icon v-else name="mdi:delete" />
+                  </button>
+                </div>
               </div>
-              <button
-                @click="deleteMaterial(material.id)"
-                :disabled="deletingMaterialId === material.id"
-                class="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Icon v-if="deletingMaterialId === material.id" name="mdi:loading" class="animate-spin" />
-                <Icon v-else name="mdi:delete" />
-              </button>
+              <!-- Edit Mode -->
+              <div v-else class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                  <input
+                    v-model="editingMaterialData.title"
+                    type="text"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                    placeholder="Material title"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                  <textarea
+                    v-model="editingMaterialData.description"
+                    rows="2"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                    placeholder="Material description"
+                  ></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Access Level</label>
+                    <select
+                      v-model="editingMaterialData.access_level"
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                    >
+                      <option value="public">Public</option>
+                      <option value="enrolled">Enrolled</option>
+                      <option value="premium">Premium</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Downloadable</label>
+                    <select
+                      v-model="editingMaterialData.is_downloadable"
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                    >
+                      <option :value="true">Yes</option>
+                      <option :value="false">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 justify-end">
+                  <button
+                    @click="saveMaterial(material.id)"
+                    class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+                  >
+                    <Icon name="mdi:check" class="mr-1" />
+                    Save
+                  </button>
+                  <button
+                    @click="cancelMaterialEdit()"
+                    class="px-4 py-2 bg-gray-400 text-white font-medium rounded-lg hover:bg-gray-500 transition-colors"
+                  >
+                    <Icon name="mdi:close" class="mr-1" />
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div
@@ -991,10 +1115,6 @@ const deleteSection = async (sectionId: number) => {
   }
 };
 
-const editSection = (section: any) => {
-  // TODO: Implement section editing
-  console.log("Edit section:", section);
-};
 
 const showAddLesson = (sectionId: number) => {
   currentSectionId.value = sectionId;
@@ -1041,9 +1161,79 @@ const createLesson = async () => {
   }
 };
 
-const editLesson = (lesson: any) => {
-  // TODO: Implement lesson editing
-  console.log("Edit lesson:", lesson);
+// Section edit functions
+const startSectionEdit = (section: any) => {
+  editingSection.value = section.id;
+  editingSectionTitle.value = section.title;
+};
+
+const cancelSectionEdit = () => {
+  editingSection.value = null;
+  editingSectionTitle.value = "";
+};
+
+const saveSection = async (sectionId: number) => {
+  if (!editingSectionTitle.value.trim()) {
+    alert("Section title cannot be empty");
+    return;
+  }
+
+  try {
+    const result = await courseStore.updateSection(sectionId, {
+      title: editingSectionTitle.value.trim(),
+    });
+
+    if (result.success) {
+      editingSection.value = null;
+      editingSectionTitle.value = "";
+    } else {
+      alert(result.error || "Failed to update section");
+    }
+  } catch (err) {
+    console.error("Error updating section:", err);
+    alert("Error updating section");
+  }
+};
+
+// Lesson edit functions
+const startLessonEdit = (lesson: any) => {
+  editingLesson.value = lesson.id;
+  editingLessonData.value = {
+    title: lesson.title,
+    kind: lesson.kind,
+    duration_sec: lesson.duration_sec,
+    vod_asset_id: lesson.vod_asset_id,
+    pdf_url: lesson.pdf_url,
+    html_content: lesson.html_content,
+    external_url: lesson.external_url,
+    is_free_preview: lesson.is_free_preview,
+  };
+};
+
+const cancelLessonEdit = () => {
+  editingLesson.value = null;
+  editingLessonData.value = {};
+};
+
+const saveLesson = async (lessonId: number) => {
+  if (!editingLessonData.value.title?.trim()) {
+    alert("Lesson title cannot be empty");
+    return;
+  }
+
+  try {
+    const result = await courseStore.updateLesson(lessonId, editingLessonData.value);
+
+    if (result.success) {
+      editingLesson.value = null;
+      editingLessonData.value = {};
+    } else {
+      alert(result.error || "Failed to update lesson");
+    }
+  } catch (err) {
+    console.error("Error updating lesson:", err);
+    alert("Error updating lesson");
+  }
 };
 
 const deleteLesson = async (lessonId: number) => {
@@ -1060,6 +1250,45 @@ const deleteLesson = async (lessonId: number) => {
     alert('Error deleting lesson. Please try again.');
   } finally {
     deletingLessonId.value = null;
+  }
+};
+
+// Material edit functions
+const startMaterialEdit = (material: any) => {
+  editingMaterial.value = material.id;
+  editingMaterialData.value = {
+    title: material.title,
+    description: material.description,
+    file_type: material.file_type,
+    is_downloadable: material.is_downloadable,
+    access_level: material.access_level,
+    order_index: material.order_index,
+  };
+};
+
+const cancelMaterialEdit = () => {
+  editingMaterial.value = null;
+  editingMaterialData.value = {};
+};
+
+const saveMaterial = async (materialId: number) => {
+  if (!editingMaterialData.value.title?.trim()) {
+    alert("Material title cannot be empty");
+    return;
+  }
+
+  try {
+    const result = await courseStore.updateMaterial(materialId, editingMaterialData.value);
+
+    if (result.success) {
+      editingMaterial.value = null;
+      editingMaterialData.value = {};
+    } else {
+      alert(result.error || "Failed to update material");
+    }
+  } catch (err) {
+    console.error("Error updating material:", err);
+    alert("Error updating material");
   }
 };
 
@@ -1095,6 +1324,21 @@ const lessonForm = reactive<LessonFormData>({
   external_url: undefined,
   is_free_preview: false,
 });
+
+// Edit state variables
+const editingSection = ref<number | null>(null);
+const editingSectionTitle = ref("");
+const editingLesson = ref<number | null>(null);
+const editingLessonData = ref<Partial<LessonFormData>>({});
+const editingMaterial = ref<number | null>(null);
+const editingMaterialData = ref<{
+  title?: string;
+  description?: string;
+  file_type?: string;
+  is_downloadable?: boolean;
+  access_level?: 'public' | 'enrolled' | 'premium';
+  order_index?: number;
+}>({});
 
 const getFileType = (filename: string): string => {
   const ext = filename.split(".").pop()?.toLowerCase();

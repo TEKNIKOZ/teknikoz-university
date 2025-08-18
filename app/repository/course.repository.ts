@@ -406,6 +406,85 @@ export const deletePrice = async (
   }
 };
 
+// Update section (Admin/Teacher Only)
+export const updateSection = async (
+  apiFetch: $Fetch,
+  sectionId: number,
+  data: { title: string; order_index?: number },
+  token: string
+): Promise<GenericResponse> => {
+  try {
+    const response = await apiFetch<GenericResponse>(`/sections/${sectionId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: data
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error('Error updating section:', error);
+    throw error;
+  }
+};
+
+// Update lesson (Admin/Teacher Only)
+export const updateLesson = async (
+  apiFetch: $Fetch,
+  lessonId: number,
+  data: Partial<LessonFormData>,
+  token: string
+): Promise<GenericResponse> => {
+  try {
+    const response = await apiFetch<GenericResponse>(`/lessons/${lessonId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: data
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error('Error updating lesson:', error);
+    throw error;
+  }
+};
+
+// Update material (Admin/Teacher Only)
+export const updateMaterial = async (
+  apiFetch: $Fetch,
+  materialId: number,
+  data: {
+    title?: string;
+    description?: string;
+    file_type?: string;
+    is_downloadable?: boolean;
+    access_level?: 'public' | 'enrolled' | 'premium';
+    order_index?: number;
+  },
+  token: string
+): Promise<GenericResponse> => {
+  try {
+    const response = await apiFetch<GenericResponse>(`/courses/materials/${materialId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: data
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error('Error updating material:', error);
+    throw error;
+  }
+};
+
 // Export all functions as courseRepository for backwards compatibility
 export const courseRepository = {
   getCourses,
@@ -423,5 +502,8 @@ export const courseRepository = {
   deleteMaterial,
   deleteSection,
   deleteLesson,
-  deletePrice
+  deletePrice,
+  updateSection,
+  updateLesson,
+  updateMaterial
 };
