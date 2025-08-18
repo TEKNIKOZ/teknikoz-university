@@ -24,7 +24,7 @@
         </p>
         <NuxtLink
           to="/courses"
-          class="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+          class="inline-block px-6 py-3 bg-brand text-white rounded-lg hover:bg-brand/90 transition-colors"
         >
           Back to Courses
         </NuxtLink>
@@ -35,7 +35,7 @@
     <div v-else-if="course">
       <!-- Hero Section -->
       <div
-        class="relative bg-gradient-to-r from-primary-600 to-primary-700 text-white"
+        class="relative bg-gradient-to-r from-brand to-brand/90 text-white"
       >
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="relative max-w-7xl mx-auto px-4 py-12 md:py-16">
@@ -105,7 +105,7 @@
                 <button
                   v-if="!isEnrolled"
                   @click="enrollInCourse"
-                  class="px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                  class="px-6 py-3 bg-white text-brand font-semibold rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   Enroll Now
                 </button>
@@ -165,7 +165,7 @@
                 :class="[
                   'px-6 py-4 text-sm font-medium border-b-2 transition-colors',
                   activeTab === tab.id
-                    ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                    ? 'border-brand text-brand dark:text-brand'
                     : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
                 ]"
               >
@@ -242,7 +242,7 @@
                         </span>
                         <button
                           v-if="isEnrolled || lesson.is_free_preview"
-                          class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                          class="px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors"
                         >
                           Start
                         </button>
@@ -310,7 +310,7 @@
                     v-if="canAccessMaterial(material)"
                     :href="material.file_url"
                     target="_blank"
-                    class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                    class="px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors"
                   >
                     <Icon name="mdi:download" class="mr-1" />
                     Download
@@ -337,7 +337,7 @@
                 <div class="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg">
                   <Icon
                     name="mdi:school"
-                    class="text-3xl text-primary-600 mb-3"
+                    class="text-3xl text-brand mb-3"
                   />
                   <h4 class="font-semibold text-gray-900 dark:text-white mb-2">
                     Level
@@ -350,7 +350,7 @@
                 <div class="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg">
                   <Icon
                     name="mdi:clock-outline"
-                    class="text-3xl text-primary-600 mb-3"
+                    class="text-3xl text-brand mb-3"
                   />
                   <h4 class="font-semibold text-gray-900 dark:text-white mb-2">
                     Duration
@@ -363,7 +363,7 @@
                 <div class="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg">
                   <Icon
                     name="mdi:book-multiple"
-                    class="text-3xl text-primary-600 mb-3"
+                    class="text-3xl text-brand mb-3"
                   />
                   <h4 class="font-semibold text-gray-900 dark:text-white mb-2">
                     Lessons

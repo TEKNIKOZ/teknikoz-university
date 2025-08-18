@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-primary-500 to-primary-600 text-white py-12 px-4">
+    <div class="bg-gradient-to-r from-brand to-brand text-white py-12 px-4">
       <div class="max-w-7xl mx-auto">
         <h1 class="text-3xl md:text-4xl font-bold mb-4">Explore Our Courses</h1>
         <p class="text-lg md:text-xl opacity-90">Discover a wide range of courses to advance your skills</p>
@@ -20,7 +20,7 @@
             <select 
               v-model="filters.level" 
               @change="handleFilterChange"
-              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="all">All Levels</option>
               <option value="beginner">Beginner</option>
@@ -37,7 +37,7 @@
             <select 
               v-model="filters.status" 
               @change="handleFilterChange"
-              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="published">Published</option>
               <option value="draft">Draft</option>
@@ -53,7 +53,7 @@
             <select 
               v-model="filters.visibility" 
               @change="handleFilterChange"
-              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
               <option value="public">Public</option>
               <option value="private">Private</option>
@@ -71,7 +71,7 @@
               @input="handleSearch"
               type="text" 
               placeholder="Search courses..."
-              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:bg-gray-700 dark:text-white"
             >
           </div>
         </div>
@@ -144,7 +144,7 @@
 
           <!-- Course Content -->
           <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-brand dark:group-hover:text-brand transition-colors">
               {{ course.title }}
             </h3>
             
@@ -167,7 +167,7 @@
                 </span>
               </div>
 
-              <span class="text-primary-600 dark:text-primary-400 font-medium">
+              <span class="text-brand dark:text-brand font-medium">
                 View Course →
               </span>
             </div>
@@ -193,7 +193,7 @@
             :class="[
               'px-4 py-2 rounded-lg transition-colors',
               currentPage === page 
-                ? 'bg-primary-600 text-white' 
+                ? 'bg-brand text-white' 
                 : 'border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700'
             ]"
           >
