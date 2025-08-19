@@ -64,7 +64,7 @@ export default defineNuxtPlugin(() => {
             data = {}
          }
 
-         if (status === 401 && data?.message === 'Token expired') {
+         if (status === 401 && (data?.message === 'Token expired' || data?.message === 'Invalid or expired access token')) {
             try {
                const refreshTokenValue = localStorage.getItem(REFRESH_TOKEN_KEY)
                if (!refreshTokenValue) {

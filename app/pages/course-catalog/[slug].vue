@@ -409,10 +409,9 @@ const canEditCourse = computed(() => {
 });
 
 const displayedMaterials = computed(() => {
-  if (isEnrolled.value || canEditCourse.value) {
-    return course.value?.materials || [];
-  }
-  return courseStore.courseMaterials;
+  // Always show materials from the store, regardless of enrollment status
+  // The backend should handle access control
+  return courseStore.courseMaterials || [];
 });
 
 const getLevelBadgeClass = (level: string) => {
