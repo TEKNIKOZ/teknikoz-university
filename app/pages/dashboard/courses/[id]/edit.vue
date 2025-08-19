@@ -227,7 +227,7 @@
             <!-- Sections List -->
             <div v-if="course.sections?.length" class="space-y-4">
               <div
-                v-for="section in course.sections"
+                v-for="(section, sectionIndex) in course.sections"
                 :key="section.id"
                 class="border border-gray-200 dark:border-gray-700 rounded-lg"
               >
@@ -235,21 +235,59 @@
                   class="p-4 bg-gray-50 dark:bg-gray-800/40 border-b border-gray-200 dark:border-gray-700"
                 >
                   <div class="flex items-center justify-between">
-                    <div class="flex-1">
-                      <h3 v-if="editingSection !== section.id" class="font-semibold text-gray-900 dark:text-white">
-                        {{ section.title }}
-                      </h3>
-                      <input
-                        v-else
-                        v-model="editingSectionTitle"
-                        @keyup.enter="saveSection(section.id)"
-                        @keyup.escape="cancelSectionEdit()"
-                        class="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-                        placeholder="Section title"
-                        autofocus
-                      />
+                    <div class="flex items-center gap-3 flex-1">
+                      <!-- Drag Handle -->
+                      <button
+                        v-if="editingSection !== section.id"
+                        class="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-move"
+                        title="Drag to reorder"
+                      >
+                        <Icon name="mdi:drag-vertical" class="text-xl" />
+                      </button>
+                      
+                      <!-- Section Number -->
+                      <span class="text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+                        Section {{ section.order_index || 0 }}
+                      </span>
+                      
+                      <!-- Title -->
+                      <div class="flex-1">
+                        <h3 v-if="editingSection !== section.id" class="font-semibold text-gray-900 dark:text-white">
+                          {{ section.title }}
+                        </h3>
+                        <input
+                          v-else
+                          v-model="editingSectionTitle"
+                          @keyup.enter="saveSection(section.id)"
+                          @keyup.escape="cancelSectionEdit()"
+                          class="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                          placeholder="Section title"
+                          autofocus
+                        />
+                      </div>
                     </div>
                     <div class="flex items-center gap-2 ml-4">
+                      <!-- Move Up/Down Buttons -->
+                      <button
+                        v-if="editingSection !== section.id && sectionIndex > 0"
+                        @click="moveSectionUp(section, sectionIndex)"
+                        class="p-1.5 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
+                        title="Move up"
+                      >
+                        <Icon name="mdi:arrow-up" class="text-sm" />
+                      </button>
+                      <button
+                        v-if="editingSection !== section.id && sectionIndex < course.sections.length - 1"
+                        @click="moveSectionDown(section, sectionIndex)"
+                        class="p-1.5 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
+                        title="Move down"
+                      >
+                        <Icon name="mdi:arrow-down" class="text-sm" />
+                      </button>
+                      
+                      <div class="w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
+                      
+                      <!-- Edit/Save/Cancel -->
                       <button
                         v-if="editingSection !== section.id"
                         @click="startSectionEdit(section)"
@@ -287,16 +325,24 @@
                 <!-- Lessons -->
                 <div v-if="section.lessons?.length" class="p-4 space-y-2">
                   <div
-                    v-for="lesson in section.lessons"
+                    v-for="(lesson, lessonIndex) in section.lessons"
                     :key="lesson.id"
                     class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-sm transition-shadow"
                   >
                     <div class="flex items-center gap-3 flex-1">
+                      <!-- Drag Handle -->
+                      <button
+                        class="p-0.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-move"
+                        title="Drag to reorder"
+                      >
+                        <Icon name="mdi:drag-vertical" class="text-lg" />
+                      </button>
+                      
                       <Icon
                         :name="getLessonIcon(lesson.kind)"
                         class="text-gray-600 dark:text-gray-400 text-xl"
                       />
-                      <div v-if="editingLesson !== lesson.id" class="flex items-center gap-3">
+                      <div class="flex items-center gap-3 flex-1">
                         <span class="text-gray-900 dark:text-white font-medium">{{
                           lesson.title
                         }}</span>
@@ -304,41 +350,39 @@
                           class="text-xs text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium"
                           >{{ lesson.kind }}</span
                         >
+                        <span v-if="lesson.is_free_preview" class="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 px-2 py-0.5 rounded font-medium">
+                          Free Preview
+                        </span>
                       </div>
-                      <input
-                        v-else
-                        v-model="editingLessonData.title"
-                        @keyup.enter="saveLesson(lesson.id)"
-                        @keyup.escape="cancelLessonEdit()"
-                        class="flex-1 px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-                        placeholder="Lesson title"
-                        autofocus
-                      />
                     </div>
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <!-- Move Up/Down Buttons -->
                       <button
-                        v-if="editingLesson !== lesson.id"
+                        v-if="lessonIndex > 0"
+                        @click="moveLessonUp(section.id, lesson, lessonIndex)"
+                        class="p-1 text-gray-500 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
+                        title="Move up"
+                      >
+                        <Icon name="mdi:arrow-up" class="text-xs" />
+                      </button>
+                      <button
+                        v-if="lessonIndex < section.lessons.length - 1"
+                        @click="moveLessonDown(section.id, lesson, lessonIndex)"
+                        class="p-1 text-gray-500 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
+                        title="Move down"
+                      >
+                        <Icon name="mdi:arrow-down" class="text-xs" />
+                      </button>
+                      
+                      <div class="w-px h-4 bg-gray-300 dark:bg-gray-600 mx-1"></div>
+                      
+                      <button
                         @click="startLessonEdit(lesson)"
                         class="p-1 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
                       >
                         <Icon name="mdi:pencil" class="text-sm" />
                       </button>
                       <button
-                        v-else
-                        @click="saveLesson(lesson.id)"
-                        class="p-1 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded transition-all"
-                      >
-                        <Icon name="mdi:check" class="text-sm" />
-                      </button>
-                      <button
-                        v-if="editingLesson === lesson.id"
-                        @click="cancelLessonEdit()"
-                        class="p-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-all"
-                      >
-                        <Icon name="mdi:close" class="text-sm" />
-                      </button>
-                      <button
-                        v-if="editingLesson !== lesson.id"
                         @click="deleteLesson(lesson.id)"
                         :disabled="deletingLessonId === lesson.id"
                         class="p-1 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -961,6 +1005,231 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- Edit Lesson Modal -->
+    <Teleport to="body">
+      <div v-if="showEditLessonModal" class="fixed inset-0 z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 py-8">
+          <div
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            @click="showEditLessonModal = false"
+          ></div>
+
+          <div
+            class="relative bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto"
+          >
+            <div class="sticky top-0 bg-white dark:bg-gray-800 pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
+              <h3
+                class="text-xl font-bold text-gray-900 dark:text-white"
+              >
+                Edit Lesson
+              </h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Update lesson details and content
+              </p>
+            </div>
+
+            <form @submit.prevent="updateLesson" class="space-y-6">
+              <!-- Section Selection -->
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Section <span class="text-red-500">*</span>
+                </label>
+                <select
+                  v-model="lessonForm.section_id"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option v-for="section in course.sections" :key="section.id" :value="section.id">
+                    {{ section.title }}
+                  </option>
+                </select>
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Move lesson to a different section
+                </p>
+              </div>
+
+              <!-- Title -->
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Lesson Title <span class="text-red-500">*</span>
+                </label>
+                <input
+                  v-model="lessonForm.title"
+                  type="text"
+                  required
+                  placeholder="e.g., Introduction to Variables"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                />
+              </div>
+
+              <!-- Lesson Type -->
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Lesson Type <span class="text-red-500">*</span>
+                </label>
+                <select
+                  v-model="lessonForm.kind"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="video">Video</option>
+                  <option value="pdf">PDF Document</option>
+                  <option value="text">Text Content</option>
+                  <option value="external">External Link</option>
+                </select>
+              </div>
+
+              <!-- Dynamic Fields Based on Type -->
+              <!-- Video Fields -->
+              <div v-if="lessonForm.kind === 'video'" class="space-y-4 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Video Settings</h4>
+                <div>
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  >
+                    Video Asset ID
+                  </label>
+                  <input
+                    v-model="lessonForm.vod_asset_id"
+                    type="text"
+                    placeholder="Enter video asset ID"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  >
+                    Duration (seconds)
+                  </label>
+                  <input
+                    v-model.number="lessonForm.duration_sec"
+                    type="number"
+                    min="0"
+                    placeholder="Video duration in seconds"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  />
+                </div>
+              </div>
+
+              <!-- PDF Fields -->
+              <div v-if="lessonForm.kind === 'pdf'" class="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">PDF Settings</h4>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  PDF URL
+                </label>
+                <input
+                  v-model="lessonForm.pdf_url"
+                  type="url"
+                  placeholder="https://example.com/document.pdf"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                />
+              </div>
+
+              <!-- Text Content Fields -->
+              <div v-if="lessonForm.kind === 'text'" class="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Text Content</h4>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  HTML Content
+                </label>
+                <textarea
+                  v-model="lessonForm.html_content"
+                  rows="8"
+                  placeholder="Enter lesson content (HTML supported)"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-mono text-sm"
+                ></textarea>
+              </div>
+
+              <!-- External Link Fields -->
+              <div v-if="lessonForm.kind === 'external'" class="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">External Link</h4>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  External URL
+                </label>
+                <input
+                  v-model="lessonForm.external_url"
+                  type="url"
+                  placeholder="https://example.com/lesson"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                />
+              </div>
+
+              <!-- Order Index -->
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Order Index
+                </label>
+                <input
+                  v-model.number="lessonForm.order_index"
+                  type="number"
+                  min="0"
+                  placeholder="Display order within section (0 for default)"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                />
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Lower numbers appear first
+                </p>
+              </div>
+
+              <!-- Free Preview -->
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input
+                    v-model="lessonForm.is_free_preview"
+                    type="checkbox"
+                    class="w-5 h-5 text-brand bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-brand focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  />
+                  <div>
+                    <span
+                      class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Allow free preview
+                    </span>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      Users can access this lesson without enrollment
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <button
+                  type="button"
+                  @click="showEditLessonModal = false"
+                  class="flex-1 px-4 py-2.5 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600 transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  :disabled="isUpdatingLesson || !lessonForm.title"
+                  class="flex-1 px-4 py-2.5 bg-brand text-white font-semibold rounded-lg hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+                >
+                  <Icon v-if="isUpdatingLesson" name="mdi:loading" class="animate-spin mr-2" />
+                  {{ isUpdatingLesson ? "Updating..." : "Update Lesson" }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -1115,6 +1384,106 @@ const deleteSection = async (sectionId: number) => {
   }
 };
 
+// Section reordering functions
+const moveSectionUp = async (section: any, index: number) => {
+  if (index === 0 || !course.value?.sections) return;
+  
+  const prevSection = course.value.sections[index - 1];
+  const currentOrder = section.order_index || index;
+  const prevOrder = prevSection.order_index || (index - 1);
+  
+  try {
+    // Swap order indices
+    await courseStore.updateSection(section.id, { 
+      title: section.title,
+      order_index: prevOrder 
+    });
+    await courseStore.updateSection(prevSection.id, { 
+      title: prevSection.title,
+      order_index: currentOrder 
+    });
+  } catch (err) {
+    console.error('Error reordering sections:', err);
+    alert('Failed to reorder sections');
+  }
+};
+
+const moveSectionDown = async (section: any, index: number) => {
+  if (!course.value?.sections || index >= course.value.sections.length - 1) return;
+  
+  const nextSection = course.value.sections[index + 1];
+  const currentOrder = section.order_index || index;
+  const nextOrder = nextSection.order_index || (index + 1);
+  
+  try {
+    // Swap order indices
+    await courseStore.updateSection(section.id, { 
+      title: section.title,
+      order_index: nextOrder 
+    });
+    await courseStore.updateSection(nextSection.id, { 
+      title: nextSection.title,
+      order_index: currentOrder 
+    });
+  } catch (err) {
+    console.error('Error reordering sections:', err);
+    alert('Failed to reorder sections');
+  }
+};
+
+// Lesson reordering functions
+const moveLessonUp = async (sectionId: number, lesson: any, index: number) => {
+  if (index === 0 || !course.value?.sections) return;
+  
+  const section = course.value.sections.find(s => s.id === sectionId);
+  if (!section?.lessons) return;
+  
+  const prevLesson = section.lessons[index - 1];
+  const currentOrder = lesson.order_index || index;
+  const prevOrder = prevLesson.order_index || (index - 1);
+  
+  try {
+    // Swap order indices
+    await courseStore.updateLesson(lesson.id, { 
+      ...lesson,
+      order_index: prevOrder 
+    });
+    await courseStore.updateLesson(prevLesson.id, { 
+      ...prevLesson,
+      order_index: currentOrder 
+    });
+  } catch (err) {
+    console.error('Error reordering lessons:', err);
+    alert('Failed to reorder lessons');
+  }
+};
+
+const moveLessonDown = async (sectionId: number, lesson: any, index: number) => {
+  if (!course.value?.sections) return;
+  
+  const section = course.value.sections.find(s => s.id === sectionId);
+  if (!section?.lessons || index >= section.lessons.length - 1) return;
+  
+  const nextLesson = section.lessons[index + 1];
+  const currentOrder = lesson.order_index || index;
+  const nextOrder = nextLesson.order_index || (index + 1);
+  
+  try {
+    // Swap order indices
+    await courseStore.updateLesson(lesson.id, { 
+      ...lesson,
+      order_index: nextOrder 
+    });
+    await courseStore.updateLesson(nextLesson.id, { 
+      ...nextLesson,
+      order_index: currentOrder 
+    });
+  } catch (err) {
+    console.error('Error reordering lessons:', err);
+    alert('Failed to reorder lessons');
+  }
+};
+
 
 const showAddLesson = (sectionId: number) => {
   currentSectionId.value = sectionId;
@@ -1161,6 +1530,37 @@ const createLesson = async () => {
   }
 };
 
+const updateLesson = async () => {
+  if (!currentEditingLesson.value || !lessonForm.title) return;
+
+  isUpdatingLesson.value = true;
+  try {
+    const result = await courseStore.updateLesson(currentEditingLesson.value.id, lessonForm);
+
+    if (result.success) {
+      showEditLessonModal.value = false;
+      currentEditingLesson.value = null;
+      // Reset form
+      lessonForm.title = "";
+      lessonForm.kind = "video";
+      lessonForm.order_index = 0;
+      lessonForm.duration_sec = undefined;
+      lessonForm.vod_asset_id = undefined;
+      lessonForm.pdf_url = undefined;
+      lessonForm.html_content = undefined;
+      lessonForm.external_url = undefined;
+      lessonForm.is_free_preview = false;
+    } else {
+      alert(result.error || "Failed to update lesson");
+    }
+  } catch (err) {
+    console.error("Error updating lesson:", err);
+    alert("Error updating lesson");
+  } finally {
+    isUpdatingLesson.value = false;
+  }
+};
+
 // Section edit functions
 const startSectionEdit = (section: any) => {
   editingSection.value = section.id;
@@ -1197,17 +1597,18 @@ const saveSection = async (sectionId: number) => {
 
 // Lesson edit functions
 const startLessonEdit = (lesson: any) => {
-  editingLesson.value = lesson.id;
-  editingLessonData.value = {
-    title: lesson.title,
-    kind: lesson.kind,
-    duration_sec: lesson.duration_sec,
-    vod_asset_id: lesson.vod_asset_id,
-    pdf_url: lesson.pdf_url,
-    html_content: lesson.html_content,
-    external_url: lesson.external_url,
-    is_free_preview: lesson.is_free_preview,
-  };
+  currentEditingLesson.value = lesson;
+  lessonForm.section_id = lesson.section_id;
+  lessonForm.title = lesson.title;
+  lessonForm.kind = lesson.kind;
+  lessonForm.order_index = lesson.order_index || 0;
+  lessonForm.duration_sec = lesson.duration_sec;
+  lessonForm.vod_asset_id = lesson.vod_asset_id;
+  lessonForm.pdf_url = lesson.pdf_url;
+  lessonForm.html_content = lesson.html_content;
+  lessonForm.external_url = lesson.external_url;
+  lessonForm.is_free_preview = lesson.is_free_preview || false;
+  showEditLessonModal.value = true;
 };
 
 const cancelLessonEdit = () => {
@@ -1303,6 +1704,9 @@ const deletingMaterialId = ref<number | null>(null);
 const showAddLessonModal = ref(false);
 const isCreatingLesson = ref(false);
 const currentSectionId = ref<number | null>(null);
+const showEditLessonModal = ref(false);
+const isUpdatingLesson = ref(false);
+const currentEditingLesson = ref<any>(null);
 
 const materialForm = reactive({
   title: "",
