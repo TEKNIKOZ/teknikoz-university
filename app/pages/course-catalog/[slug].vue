@@ -34,9 +34,7 @@
     <!-- Course Content -->
     <div v-else-if="course">
       <!-- Hero Section -->
-      <div
-        class="relative bg-gradient-to-r from-brand to-brand/90 text-white"
-      >
+      <div class="relative bg-gradient-to-r from-brand to-brand/90 text-white">
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="relative max-w-7xl mx-auto px-4 py-12 md:py-16">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -306,15 +304,14 @@
                 </div>
 
                 <div class="flex items-center gap-2">
-                  <a
+                  <button
                     v-if="canAccessMaterial(material)"
-                    :href="material.file_url"
-                    target="_blank"
-                    class="px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors"
+                    @click="downloadMaterial(material)"
+                    class="px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors flex items-center"
                   >
                     <Icon name="mdi:download" class="mr-1" />
                     Download
-                  </a>
+                  </button>
                   <Icon v-else name="mdi:lock" class="text-2xl text-gray-400" />
                 </div>
               </div>
@@ -335,10 +332,7 @@
 
               <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg">
-                  <Icon
-                    name="mdi:school"
-                    class="text-3xl text-brand mb-3"
-                  />
+                  <Icon name="mdi:school" class="text-3xl text-brand mb-3" />
                   <h4 class="font-semibold text-gray-900 dark:text-white mb-2">
                     Level
                   </h4>
@@ -383,14 +377,16 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
 import { useCourseStore } from "~/stores/course.stores";
 import { useAuthStore } from "~/stores/auth.stores";
 import type { CourseMaterial } from "~/types/course";
+import { useRouter, useRoute } from "vue-router";
+import { useRuntimeConfig } from "nuxt/app";
 
 const route = useRoute();
 const courseStore = useCourseStore();
 const authStore = useAuthStore();
+const config = useRuntimeConfig();
 
 const activeTab = ref("curriculum");
 const isEnrolled = ref(false);
@@ -502,6 +498,63 @@ const canAccessMaterial = (material: CourseMaterial) => {
   if (material.access_level === "enrolled" && isEnrolled.value) return true;
   if (canEditCourse.value) return true;
   return false;
+};
+
+const downloadMaterial = async (material: CourseMaterial) => {
+  try {
+    const baseUrl = String(config.public.baseUrlApi).replace("/api", "");
+    const response = await fetch(
+      `${baseUrl}${material.file_url}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authStore.token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to download file");
+    }
+
+    // Get the filename from the Content-Disposition header or use a default
+    const contentDisposition = response.headers.get("Content-Disposition");
+    let filename = `material_${material.id}`;
+
+    if (contentDisposition) {
+      const filenameMatch = contentDisposition.match(
+        /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+      );
+      if (filenameMatch && filenameMatch[1]) {
+        filename = filenameMatch[1].replace(/['"]/g, "");
+      }
+    } else if (material.title) {
+      // Use material title as filename if available
+      filename = material.title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+      if (material.file_type) {
+        filename += `.${material.file_type}`;
+      }
+    }
+
+    // Create a blob from the response
+    const blob = await response.blob();
+
+    // Create a temporary URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary anchor element and trigger download
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Download failed:", error);
+    // You might want to show a toast notification here
+  }
 };
 
 const getTotalDuration = () => {
