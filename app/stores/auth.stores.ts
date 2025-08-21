@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { $Fetch } from "nitropack";
-import { TOKEN_KEY, REFRESH_TOKEN_KEY } from "~/constants/auth";
+import { TOKEN_KEY } from "~/constants/auth";
 import { authRepository, type UserRepositoryData } from "../repository/auth.repository";
 import { ref, nextTick } from "vue";
 import { useNuxtApp } from "nuxt/app";
@@ -33,12 +33,12 @@ export const useAuthStore = defineStore("auth", () => {
       return "";
    };
 
-   // Initialize from localStorage on client side
+
    if (import.meta.client) {
-      nextTick(() => {
+      const initTokens = () => {
          token.value = getStorageValue(TOKEN_KEY);
-         refreshToken.value = getStorageValue(REFRESH_TOKEN_KEY);
          const userData = getStorageValue("user");
+
 
          if (userData) {
             try {
@@ -56,23 +56,24 @@ export const useAuthStore = defineStore("auth", () => {
          }
 
          isAuthenticated.value = !!token.value;
-      });
+      };
+
+      // Initialize immediately
+      initTokens();
+
+      // Also initialize in nextTick as fallback
+      nextTick(initTokens);
    }
 
    /**
     * Set tokens in localStorage and state
     */
-   const setTokens = (accessToken: string, refreshTkn?: string) => {
+   const setTokens = (accessToken: string) => {
+
       if (import.meta.client) {
          localStorage.setItem(TOKEN_KEY, accessToken);
-         if (refreshTkn) {
-            localStorage.setItem(REFRESH_TOKEN_KEY, refreshTkn);
-         }
       }
       token.value = accessToken;
-      if (refreshTkn) {
-         refreshToken.value = refreshTkn;
-      }
    };
 
    /**
@@ -81,7 +82,6 @@ export const useAuthStore = defineStore("auth", () => {
    const clearTokens = () => {
       if (import.meta.client) {
          localStorage.removeItem(TOKEN_KEY);
-         localStorage.removeItem(REFRESH_TOKEN_KEY);
       }
       token.value = "";
       refreshToken.value = "";
@@ -135,9 +135,9 @@ export const useAuthStore = defineStore("auth", () => {
             throw new Error(response.message || "Login failed");
          }
 
-         const { accessToken, refreshToken, user } = response.data!;
+         const { accessToken, user } = response.data!;
 
-         setTokens(accessToken, refreshToken);
+         setTokens(accessToken);
          setUserData(user);
          isAuthenticated.value = true;
 
@@ -179,9 +179,9 @@ export const useAuthStore = defineStore("auth", () => {
             throw new Error(response.message || "Registration failed");
          }
 
-         const { accessToken, refreshToken, user } = response.data!;
+         const { accessToken, user } = response.data!;
 
-         setTokens(accessToken, refreshToken);
+         setTokens(accessToken);
          setUserData(user);
          isAuthenticated.value = true;
 
@@ -240,6 +240,10 @@ export const useAuthStore = defineStore("auth", () => {
 
       const storedToken = localStorage.getItem(TOKEN_KEY);
       return !!storedToken;
+   };
+
+   const hasRefreshToken = () => {
+      return true;
    };
 
    /* Change Password */
@@ -393,6 +397,7 @@ export const useAuthStore = defineStore("auth", () => {
       register,
       logout,
       checkAuth,
+      hasRefreshToken,
       setTokens,
       clearTokens,
       fetchAllUsers,

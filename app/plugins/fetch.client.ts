@@ -1,6 +1,6 @@
 import type { $Fetch } from 'nitropack'
 import { useRuntimeConfig, defineNuxtPlugin, navigateTo } from 'nuxt/app'
-import { TOKEN_KEY, REFRESH_TOKEN_KEY, PUBLIC_URLS } from '../constants/auth'
+import { TOKEN_KEY, PUBLIC_URLS } from '../constants/auth'
 
 interface RefreshTokenResponse {
    success: boolean;
@@ -65,27 +65,32 @@ export default defineNuxtPlugin(() => {
          }
 
          if (status === 401 && (data?.message === 'Token expired' || data?.message === 'Invalid or expired access token')) {
+            if (!import.meta.client) {
+               throw new Error('Cannot refresh token on server side')
+            }
+
             try {
-               const refreshTokenValue = localStorage.getItem(REFRESH_TOKEN_KEY)
-               if (!refreshTokenValue) {
-                  throw new Error('No refresh token available')
-               }
+
 
                const refreshResult = await $fetch<RefreshTokenResponse>(
                   `/auth/refresh`,
                   {
                      method: 'POST',
-                     body: { refreshToken: refreshTokenValue },
                      credentials: 'include',
                      baseURL: baseUrlApi,
+                     headers: {
+                        'Content-Type': 'application/json'
+                     }
                   }
                )
+
 
                if (refreshResult?.success && refreshResult?.data?.accessToken) {
                   const newToken = refreshResult.data.accessToken
 
                   if (import.meta.client) {
                      localStorage.setItem(TOKEN_KEY, newToken)
+
                   }
 
                   const newRequest = typeof request === 'string'
@@ -101,6 +106,7 @@ export default defineNuxtPlugin(() => {
 
                   newOptions.headers.set('Authorization', `Bearer ${newToken}`)
 
+
                   return await $fetch(newRequest, {
                      ...newOptions,
                      method: (newOptions.method || 'GET') as HttpMethod,
@@ -111,8 +117,8 @@ export default defineNuxtPlugin(() => {
                console.error('Error refreshing token:', error)
                if (import.meta.client) {
                   localStorage.removeItem(TOKEN_KEY)
-                  localStorage.removeItem(REFRESH_TOKEN_KEY)
                   localStorage.removeItem('user')
+
                   await navigateTo('/login')
                }
             }
