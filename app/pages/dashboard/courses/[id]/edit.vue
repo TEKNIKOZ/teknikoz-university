@@ -328,7 +328,7 @@
         <!-- Materials Tab -->
         <CourseMaterialsTab
           v-if="activeTab === 'materials'"
-          :course="course"
+          :course="normalizedCourse"
           :deleting-material-id="deletingMaterialId"
           :editing-material="editingMaterial"
           :editing-material-data="editingMaterialData"
@@ -361,7 +361,7 @@
     <!-- Add Lesson Modal -->
     <AddLessonModal
       :show="showAddLessonModal"
-      :section-id="currentSectionId"
+      :section-id="currentSectionId ?? undefined"
       :is-loading="isCreatingLesson"
       @close="showAddLessonModal = false"
       @submit="createLesson"
@@ -375,6 +375,19 @@
       :is-loading="isUpdatingLesson"
       @close="showEditLessonModal = false"
       @submit="updateLesson"
+    />
+
+    <!-- Delete Material Confirmation Dialog -->
+    <ConfirmDialog
+      :show="showDeleteMaterialDialog"
+      :title="`Delete ${materialToDelete?.title || 'Material'}`"
+      message="Are you sure you want to delete this material? This action cannot be undone."
+      confirm-text="Delete"
+      cancel-text="Cancel"
+      loading-text="Deleting..."
+      :is-loading="deletingMaterialId !== null"
+      @confirm="confirmDeleteMaterial"
+      @cancel="cancelDeleteMaterial"
     />
   </div>
 </template>
@@ -393,6 +406,7 @@ import AddSectionModal from "~/components/course/AddSectionModal.vue";
 import AddLessonModal from "~/components/course/AddLessonModal.vue";
 import EditLessonModal from "~/components/course/EditLessonModal.vue";
 import UploadMaterialModal from "~/components/course/UploadMaterialModal.vue";
+import ConfirmDialog from "~/components/ConfirmDialog.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -417,6 +431,19 @@ const tabs = [
 ];
 
 const course = computed(() => courseStore.currentCourse);
+
+// Normalize course for materials typing (ensure file_type is a string)
+const normalizedCourse = computed(() => {
+  const c = course.value as any;
+  if (!c) return c;
+  if (Array.isArray(c.materials)) {
+    c.materials = c.materials.map((m: any) => ({
+      ...m,
+      file_type: m.file_type ?? "other",
+    }));
+  }
+  return c;
+});
 
 const courseData = reactive({
   title: "",
@@ -750,6 +777,8 @@ const uploadProgress = ref(0);
 const deletingSectionId = ref<number | null>(null);
 const deletingLessonId = ref<number | null>(null);
 const deletingMaterialId = ref<number | null>(null);
+const showDeleteMaterialDialog = ref(false);
+const materialToDelete = ref<{id: number; title: string} | null>(null);
 const showAddLessonModal = ref(false);
 const isCreatingLesson = ref(false);
 const currentSectionId = ref<number | null>(null);
@@ -814,13 +843,21 @@ const uploadMaterial = async (formData: FormData) => {
   }
 };
 
-const deleteMaterial = async (materialId: number) => {
-  if (!confirm("Are you sure you want to delete this material?")) return;
+const deleteMaterial = (material: any) => {
+  materialToDelete.value = { id: material.id, title: material.title };
+  showDeleteMaterialDialog.value = true;
+};
 
-  deletingMaterialId.value = materialId;
+const confirmDeleteMaterial = async () => {
+  if (!materialToDelete.value) return;
+
+  deletingMaterialId.value = materialToDelete.value.id;
   try {
-    const result = await courseStore.deleteMaterial(materialId);
-    if (!result.success) {
+    const result = await courseStore.deleteMaterial(materialToDelete.value.id);
+    if (result.success) {
+      showDeleteMaterialDialog.value = false;
+      materialToDelete.value = null;
+    } else {
       alert("Failed to delete material");
     }
   } catch (err) {
@@ -829,6 +866,11 @@ const deleteMaterial = async (materialId: number) => {
   } finally {
     deletingMaterialId.value = null;
   }
+};
+
+const cancelDeleteMaterial = () => {
+  showDeleteMaterialDialog.value = false;
+  materialToDelete.value = null;
 };
 
 onMounted(async () => {

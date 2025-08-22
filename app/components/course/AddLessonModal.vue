@@ -1,18 +1,13 @@
 <template>
   <Teleport to="body">
     <div v-if="show" class="fixed inset-0 z-50 overflow-y-auto">
-      <div class="flex items-center justify-center min-h-screen px-4">
-        <div
-          class="fixed inset-0 bg-black/50"
-          @click="$emit('close')"
-        ></div>
+      <div class="flex items-center justify-center min-h-screen px-4 py-6 sm:py-8">
+        <div class="fixed inset-0 bg-black/50" @click="$emit('close')"></div>
 
         <div
-          class="relative bg-white dark:bg-gray-800 rounded-lg max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto"
+          class="relative bg-white dark:bg-gray-800 rounded-lg max-w-lg w-full p-4 sm:p-6 my-6 sm:my-8 mx-auto max-h-[90vh] sm:max-h-[85vh] overflow-y-auto"
         >
-          <h3
-            class="text-lg font-semibold text-gray-900 dark:text-white mb-4"
-          >
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Add Lesson
           </h3>
 
@@ -40,16 +35,26 @@
               >
                 Lesson Type <span class="text-red-500">*</span>
               </label>
-              <select
-                v-model="formData.kind"
-                required
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option value="video">Video</option>
-                <option value="pdf">PDF Document</option>
-                <option value="text">Text Content</option>
-                <option value="external">External Link</option>
-              </select>
+              <div class="relative">
+                <select
+                  v-model="formData.kind"
+                  required
+                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
+                >
+                  <option value="video">Video</option>
+                  <option value="pdf">PDF Document</option>
+                  <option value="text">Text Content</option>
+                  <option value="external">External Link</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                >
+                  <Icon
+                    name="mdi:chevron-down"
+                    class="h-4 w-4 text-gray-400"
+                  />
+                </div>
+              </div>
             </div>
 
             <!-- Video Fields -->
@@ -174,7 +179,11 @@
                 :disabled="isLoading || !formData.title"
                 class="flex-1 px-4 py-2 bg-brand text-white font-semibold rounded-lg hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
               >
-                <Icon v-if="isLoading" name="mdi:loading" class="animate-spin mr-2" />
+                <Icon
+                  v-if="isLoading"
+                  name="mdi:loading"
+                  class="animate-spin mr-2"
+                />
                 {{ isLoading ? "Creating..." : "Create Lesson" }}
               </button>
             </div>
@@ -186,75 +195,82 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, watch } from "vue";
 
 interface LessonFormData {
-  section_id?: number
-  title: string
-  kind: string
-  order_index: number
-  duration_sec?: number
-  vod_asset_id?: string
-  pdf_url?: string
-  html_content?: string
-  external_url?: string
-  is_free_preview: boolean
+  section_id?: number;
+  title: string;
+  kind: string;
+  order_index: number;
+  duration_sec?: number;
+  vod_asset_id?: string;
+  pdf_url?: string;
+  html_content?: string;
+  external_url?: string;
+  is_free_preview: boolean;
 }
 
 interface Props {
-  show: boolean
-  sectionId?: number
-  isLoading?: boolean
+  show: boolean;
+  sectionId?: number;
+  isLoading?: boolean;
 }
 
 interface Emits {
-  (e: 'close'): void
-  (e: 'submit', data: LessonFormData): void
+  (e: "close"): void;
+  (e: "submit", data: LessonFormData): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isLoading: false
-})
+  isLoading: false,
+});
 
-const emit = defineEmits<Emits>()
+const emit = defineEmits<Emits>();
 
 const formData = reactive<LessonFormData>({
-  title: '',
-  kind: 'video',
+  title: "",
+  kind: "video",
   order_index: 0,
   duration_sec: undefined,
   vod_asset_id: undefined,
   pdf_url: undefined,
   html_content: undefined,
   external_url: undefined,
-  is_free_preview: false
-})
+  is_free_preview: false,
+});
 
 // Update section_id when prop changes
-watch(() => props.sectionId, (newSectionId) => {
-  if (newSectionId) {
-    formData.section_id = newSectionId
-  }
-}, { immediate: true })
+watch(
+  () => props.sectionId,
+  (newSectionId) => {
+    if (newSectionId) {
+      formData.section_id = newSectionId;
+    }
+  },
+  { immediate: true }
+);
 
 // Reset form when modal closes
-watch(() => props.show, (newShow) => {
-  if (!newShow) {
-    formData.title = ''
-    formData.kind = 'video'
-    formData.order_index = 0
-    formData.duration_sec = undefined
-    formData.vod_asset_id = undefined
-    formData.pdf_url = undefined
-    formData.html_content = undefined
-    formData.external_url = undefined
-    formData.is_free_preview = false
+watch(
+  () => props.show,
+  (newShow) => {
+    if (!newShow) {
+      formData.title = "";
+      formData.kind = "video";
+      formData.order_index = 0;
+      formData.duration_sec = undefined;
+      formData.vod_asset_id = undefined;
+      formData.pdf_url = undefined;
+      formData.html_content = undefined;
+      formData.external_url = undefined;
+      formData.is_free_preview = false;
+    }
   }
-})
+);
 
 const handleSubmit = () => {
-  if (!formData.title.trim()) return
-  
-  emit('submit', { ...formData })
-}
+  if (!formData.title.trim()) return;
+
+  emit("submit", { ...formData });
+};
 </script>

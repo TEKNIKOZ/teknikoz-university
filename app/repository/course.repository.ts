@@ -485,6 +485,17 @@ export const updateMaterial = async (
   }
 };
 
+// Download material (Auth Required) - Currently disabled
+export const downloadMaterial = async (
+  apiFetch: $Fetch,
+  materialId: number,
+  token: string
+): Promise<any> => {
+  // Download functionality temporarily disabled
+  console.log('Download requested for material ID:', materialId);
+  throw new Error('Download functionality is currently under development');
+};
+
 // Export all functions as courseRepository for backwards compatibility
 export const courseRepository = {
   getCourses,
@@ -505,5 +516,6 @@ export const courseRepository = {
   deletePrice,
   updateSection,
   updateLesson,
-  updateMaterial
+  updateMaterial,
+  downloadMaterial
 };

@@ -1,14 +1,14 @@
 <template>
   <Teleport to="body">
     <div v-if="show" class="fixed inset-0 z-50 overflow-y-auto">
-      <div class="flex items-center justify-center min-h-screen px-4">
+      <div class="flex items-center justify-center min-h-screen px-4 py-6 sm:py-8">
         <div
           class="fixed inset-0 bg-black/50"
           @click="$emit('close')"
         ></div>
 
         <div
-          class="relative bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6"
+          class="relative bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-4 sm:p-6 my-6 sm:my-8 mx-auto"
         >
           <h3
             class="text-lg font-semibold text-gray-900 dark:text-white mb-4"
