@@ -6,7 +6,7 @@
       </h2>
       <button
         @click="$emit('showUploadMaterial')"
-        class="px-4 py-2.5 bg-brand text-white font-semibold rounded-lg hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all shadow-lg hover:shadow-xl"
+        class="px-4 py-2.5 bg-brand text-white font-semibold rounded-lg hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all shadow-lg hover:shadow-xl flex items-center justify-center"
       >
         <Icon name="mdi:upload" class="mr-2" />
         Upload Material
@@ -166,10 +166,10 @@ interface Material {
   id: number;
   title: string;
   description?: string;
-  file_type: string;
+  file_type?: string;
   file_size_bytes?: number;
-  access_level: "public" | "enrolled" | "premium";
-  is_downloadable: boolean;
+  access_level?: "public" | "enrolled" | "premium";
+  is_downloadable?: boolean;
   order_index?: number;
 }
 
