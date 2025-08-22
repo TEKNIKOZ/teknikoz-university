@@ -560,6 +560,12 @@ export const useCourseStore = defineStore('course', () => {
     }
   }
 
+  const downloadMaterial = async (materialId: number) => {
+    // Download functionality temporarily disabled
+    console.log('Download requested for material ID:', materialId)
+    throw new Error('Download functionality is currently under development')
+  }
+
   const clearError = () => {
     error.value = null
   }
@@ -605,6 +611,7 @@ export const useCourseStore = defineStore('course', () => {
     updateSection,
     updateLesson,
     updateMaterial,
+    downloadMaterial,
     clearError,
     clearCurrentCourse,
 

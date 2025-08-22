@@ -398,12 +398,10 @@ import { useCourseStore } from "~/stores/course.stores";
 import { useAuthStore } from "~/stores/auth.stores";
 import type { CourseMaterial } from "~/types/course";
 import { useRouter, useRoute } from "vue-router";
-import { useRuntimeConfig } from "nuxt/app";
 
 const route = useRoute();
 const courseStore = useCourseStore();
 const authStore = useAuthStore();
-const config = useRuntimeConfig();
 
 const activeTab = ref("curriculum");
 const isEnrolled = ref(false);
@@ -533,57 +531,9 @@ const canAccessMaterial = (material: CourseMaterial) => {
 };
 
 const downloadMaterial = async (material: CourseMaterial) => {
-  try {
-    const baseUrl = String(config.public.baseUrlApi).replace("/api", "");
-    const response = await fetch(`${baseUrl}${material.file_url}`, {
-      headers: {
-        Authorization: `Bearer ${authStore.token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to download file");
-    }
-
-    // Get the filename from the Content-Disposition header or use a default
-    const contentDisposition = response.headers.get("Content-Disposition");
-    let filename = `material_${material.id}`;
-
-    if (contentDisposition) {
-      const filenameMatch = contentDisposition.match(
-        /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
-      );
-      if (filenameMatch && filenameMatch[1]) {
-        filename = filenameMatch[1].replace(/['"]/g, "");
-      }
-    } else if (material.title) {
-      // Use material title as filename if available
-      filename = material.title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
-      if (material.file_type) {
-        filename += `.${material.file_type}`;
-      }
-    }
-
-    // Create a blob from the response
-    const blob = await response.blob();
-
-    // Create a temporary URL for the blob
-    const url = window.URL.createObjectURL(blob);
-
-    // Create a temporary anchor element and trigger download
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-
-    // Clean up
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.error("Download failed:", error);
-    // You might want to show a toast notification here
-  }
+  // Download functionality temporarily disabled
+  console.log("Download requested for material:", material.title);
+  alert("Download functionality is currently under development.");
 };
 
 const getTotalDuration = () => {

@@ -153,21 +153,89 @@
         </div>
       </div>
 
-      <!-- Cover Image URL -->
+      <!-- Cover Image Upload -->
       <div>
         <label
-          for="cover_url"
+          for="cover_image"
           class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
         >
-          Cover Image URL
+          Cover Image
         </label>
-        <input
-          id="cover_url"
-          v-model="formData.cover_url"
-          type="url"
-          placeholder="https://example.com/image.jpg"
-          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-        />
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Current Image Preview (if exists) -->
+          <div v-if="formData.cover_url && !selectedFile" class="flex items-center">
+            <div class="relative inline-block">
+              <img
+                :src="formData.cover_url"
+                alt="Current cover image"
+                class="w-32 h-20 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+              />
+              <button
+                type="button"
+                @click="removeCoverImage"
+                class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors"
+              >
+                ×
+              </button>
+            </div>
+            <div class="ml-4">
+              <p class="text-xs text-gray-500 dark:text-gray-400">Current cover image</p>
+              <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Click the upload area to replace</p>
+            </div>
+          </div>
+          
+          <!-- Empty state when no current image -->
+          <div v-else-if="!formData.cover_url && !selectedFile" class="flex items-center text-gray-500 dark:text-gray-400">
+            <Icon name="mdi:image-off" class="text-2xl mr-3" />
+            <span class="text-sm">No cover image set</span>
+          </div>
+
+          <!-- Upload Area -->
+          <div
+            class="h-32 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-brand dark:hover:border-brand transition-colors"
+            :class="{ 'col-span-2': !formData.cover_url || selectedFile }"
+            @click="($refs.fileInput as HTMLInputElement)?.click()"
+            @dragover.prevent
+            @drop.prevent="handleFileDrop"
+          >
+            <input
+              ref="fileInput"
+              type="file"
+              accept="image/*"
+              class="hidden"
+              @change="handleFileSelect"
+            />
+            <div v-if="!selectedFile" class="text-center">
+              <Icon
+                name="mdi:cloud-upload"
+                class="text-3xl text-gray-400 mb-2"
+              />
+              <p class="text-sm text-gray-500 dark:text-gray-400">
+                Click to upload or drag and drop
+              </p>
+              <p class="text-xs text-gray-400 dark:text-gray-500">
+                PNG, JPG, GIF up to 10MB
+              </p>
+            </div>
+            <div v-else class="text-center">
+              <Icon
+                name="mdi:check-circle"
+                class="text-3xl text-green-500 mb-2"
+              />
+              <p class="text-sm text-gray-700 dark:text-gray-300">
+                {{ selectedFile.name }}
+              </p>
+              <button
+                type="button"
+                @click.stop="removeFile"
+                class="mt-2 text-xs text-red-500 hover:text-red-700"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Form Actions -->
@@ -197,7 +265,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
+import { useCourseStore } from '~/stores/course.stores'
 
 interface CourseData {
   title: string
@@ -209,6 +278,7 @@ interface CourseData {
 }
 
 interface Course {
+  id?: number
   slug?: string
   title?: string
   summary?: string
@@ -232,6 +302,9 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<Emits>()
+const courseStore = useCourseStore()
+
+const selectedFile = ref<File | null>(null)
 
 const formData = reactive<CourseData>({
   title: '',
@@ -254,7 +327,70 @@ watch(() => props.course, (newCourse) => {
   }
 }, { immediate: true })
 
-const handleSubmit = () => {
+const handleFileSelect = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files[0]) {
+    const file = target.files[0]
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file')
+      return
+    }
+
+    // Validate file size (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size must be less than 10MB')
+      return
+    }
+
+    selectedFile.value = file
+  }
+}
+
+const handleFileDrop = (event: DragEvent) => {
+  const files = event.dataTransfer?.files
+  if (files && files[0]) {
+    const file = files[0]
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file')
+      return
+    }
+
+    // Validate file size (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size must be less than 10MB')
+      return
+    }
+
+    selectedFile.value = file
+  }
+}
+
+const removeFile = () => {
+  selectedFile.value = null
+}
+
+const removeCoverImage = () => {
+  formData.cover_url = ''
+}
+
+const handleSubmit = async () => {
+  // If there's a selected file, upload it first
+  if (selectedFile.value && props.course?.id) {
+    try {
+      const result = await courseStore.uploadCourseCover(props.course.id, selectedFile.value)
+      if (result.success && result.data?.cover_url) {
+        formData.cover_url = result.data.cover_url
+      }
+    } catch (error) {
+      console.error('Error uploading cover image:', error)
+      alert('Failed to upload cover image. The course will be saved without the new image.')
+    }
+  }
+  
   emit('submit', { ...formData })
 }
 </script>

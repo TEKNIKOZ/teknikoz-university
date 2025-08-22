@@ -4,14 +4,14 @@
       v-if="show"
       class="fixed inset-0 z-50 overflow-y-auto"
     >
-      <div class="flex items-center justify-center min-h-screen px-4 py-8">
+      <div class="flex items-center justify-center min-h-screen px-4 py-6 sm:py-8">
         <div
           class="fixed inset-0 bg-black/50 backdrop-blur-sm"
           @click="$emit('close')"
         ></div>
 
         <div
-          class="relative bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto"
+          class="relative bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-4 sm:p-6 my-6 sm:my-8 mx-auto max-h-[90vh] sm:max-h-[85vh] overflow-y-auto"
         >
           <div class="sticky top-0 bg-white dark:bg-gray-800 pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
             <h3
@@ -32,15 +32,25 @@
               >
                 Section <span class="text-red-500">*</span>
               </label>
-              <select
-                v-model="formData.section_id"
-                required
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option v-for="section in sections" :key="section.id" :value="section.id">
-                  {{ section.title }}
-                </option>
-              </select>
+              <div class="relative">
+                <select
+                  v-model="formData.section_id"
+                  required
+                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
+                >
+                  <option v-for="section in sections" :key="section.id" :value="section.id">
+                    {{ section.title }}
+                  </option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                >
+                  <Icon
+                    name="mdi:chevron-down"
+                    class="h-4 w-4 text-gray-400"
+                  />
+                </div>
+              </div>
               <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                 Move lesson to a different section
               </p>
@@ -69,16 +79,26 @@
               >
                 Lesson Type <span class="text-red-500">*</span>
               </label>
-              <select
-                v-model="formData.kind"
-                required
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option value="video">Video</option>
-                <option value="pdf">PDF Document</option>
-                <option value="text">Text Content</option>
-                <option value="external">External Link</option>
-              </select>
+              <div class="relative">
+                <select
+                  v-model="formData.kind"
+                  required
+                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
+                >
+                  <option value="video">Video</option>
+                  <option value="pdf">PDF Document</option>
+                  <option value="text">Text Content</option>
+                  <option value="external">External Link</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                >
+                  <Icon
+                    name="mdi:chevron-down"
+                    class="h-4 w-4 text-gray-400"
+                  />
+                </div>
+              </div>
             </div>
 
             <!-- Dynamic Fields Based on Type -->

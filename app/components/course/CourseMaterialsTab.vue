@@ -41,7 +41,7 @@
               </p>
               <div class="flex items-center gap-3 mt-1 text-xs">
                 <span
-                  class="text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium"
+                  class="capitalize text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium"
                   >{{ material.file_type }}</span
                 >
                 <span
@@ -62,10 +62,10 @@
               @click="startMaterialEdit(material)"
               class="p-2 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
             >
-              <Icon name="mdi:pencil" />
+              <Icon name="mdi:pencil" class="flex items-center" />
             </button>
             <button
-              @click="$emit('deleteMaterial', material.id)"
+              @click="$emit('deleteMaterial', material)"
               :disabled="deletingMaterialId === material.id"
               class="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -74,7 +74,7 @@
                 name="mdi:loading"
                 class="animate-spin"
               />
-              <Icon v-else name="mdi:delete" />
+              <Icon v-else name="mdi:delete" class="flex items-center" />
             </button>
           </div>
         </div>
@@ -110,27 +110,41 @@
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >Access Level</label
               >
-              <select
-                v-model="editingMaterialData.access_level"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-              >
-                <option value="public">Public</option>
-                <option value="enrolled">Enrolled</option>
-                <option value="premium">Premium</option>
-              </select>
+              <div class="relative">
+                <select
+                  v-model="editingMaterialData.access_level"
+                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
+                >
+                  <option value="public">Public</option>
+                  <option value="enrolled">Enrolled</option>
+                  <option value="premium">Premium</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                >
+                  <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
+                </div>
+              </div>
             </div>
             <div>
               <label
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >Downloadable</label
               >
-              <select
-                v-model="editingMaterialData.is_downloadable"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-              >
-                <option :value="true">Yes</option>
-                <option :value="false">No</option>
-              </select>
+              <div class="relative">
+                <select
+                  v-model="editingMaterialData.is_downloadable"
+                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
+                >
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                >
+                  <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
+                </div>
+              </div>
             </div>
           </div>
           <div class="flex items-center gap-2 justify-end">
@@ -138,14 +152,12 @@
               @click="$emit('saveMaterial', material.id, editingMaterialData)"
               class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
             >
-              <Icon name="mdi:check" class="mr-1" />
               Save
             </button>
             <button
               @click="cancelMaterialEdit"
               class="px-4 py-2 bg-gray-400 text-white font-medium rounded-lg hover:bg-gray-500 transition-colors"
             >
-              <Icon name="mdi:close" class="mr-1" />
               Cancel
             </button>
           </div>
@@ -184,7 +196,7 @@ interface Props {
 
 interface Emits {
   (e: "showUploadMaterial"): void;
-  (e: "deleteMaterial", materialId: number): void;
+  (e: "deleteMaterial", material: Material): void;
   (e: "saveMaterial", materialId: number, data: Partial<Material>): void;
 }
 
