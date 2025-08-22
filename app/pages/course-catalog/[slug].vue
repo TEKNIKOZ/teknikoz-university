@@ -44,7 +44,7 @@
                 <span
                   v-if="course.level"
                   :class="getLevelBadgeClass(course.level)"
-                  class="px-3 py-1 text-sm font-semibold rounded-full"
+                  class="px-3 py-1 text-sm font-semibold rounded-full capitalize"
                 >
                   {{ course.level }}
                 </span>
@@ -62,7 +62,9 @@
                 </span>
               </div>
 
-              <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              <h1
+                class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-normal"
+              >
                 {{ course.title }}
               </h1>
 
@@ -75,7 +77,7 @@
 
               <!-- Price Display -->
               <div v-if="course.price" class="mb-6">
-                <div class="flex items-baseline gap-3">
+                <div class="flex items-center gap-3">
                   <span class="text-3xl font-bold">
                     {{
                       formatPrice(course.price.amount, course.price.currency)
@@ -118,7 +120,7 @@
                 <NuxtLink
                   v-if="canEditCourse"
                   :to="`/dashboard/courses/${course.id}/edit`"
-                  class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors"
+                  class="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors flex items-center"
                 >
                   <Icon name="mdi:pencil" class="mr-2" />
                   Edit Course
@@ -161,7 +163,7 @@
                 :key="tab.id"
                 @click="activeTab = tab.id"
                 :class="[
-                  'px-6 py-4 text-sm font-medium border-b-2 transition-colors',
+                  'px-6 py-4 text-sm font-medium border-b-2 transition-colors  flex items-center',
                   activeTab === tab.id
                     ? 'border-brand text-brand dark:text-brand'
                     : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
@@ -214,30 +216,41 @@
                       <div class="flex items-center gap-3">
                         <Icon
                           :name="getLessonIcon(lesson.kind)"
-                          class="text-2xl text-gray-500"
+                          :class="['text-2xl', getLessonKindClass(lesson.kind)]"
                         />
                         <div>
-                          <h4 class="font-medium text-gray-900 dark:text-white">
-                            {{ lesson.title }}
-                          </h4>
+                          <div class="flex items-center gap-3">
+                            <h4
+                              class="font-medium text-gray-900 dark:text-white"
+                            >
+                              {{ lesson.title }}
+                            </h4>
+                            <span
+                              v-if="lesson.is_free_preview"
+                              class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 text-xs font-semibold rounded"
+                            >
+                              Free Preview
+                            </span>
+                          </div>
                           <div
-                            class="flex items-center gap-4 mt-1 text-sm text-gray-500 dark:text-gray-400"
+                            class="flex items-center gap-4 mt-1 text-sm"
                           >
-                            <span>{{ lesson.kind }}</span>
-                            <span v-if="lesson.duration_sec">{{
-                              formatDuration(lesson.duration_sec)
-                            }}</span>
+                            <span 
+                              :class="['capitalize font-medium', getLessonKindClass(lesson.kind)]"
+                            >
+                              {{ lesson.kind }}
+                            </span>
+                            <span 
+                              v-if="lesson.duration_sec"
+                              class="text-gray-500 dark:text-gray-400"
+                            >
+                              {{ formatDuration(lesson.duration_sec) }}
+                            </span>
                           </div>
                         </div>
                       </div>
 
                       <div class="flex items-center gap-2">
-                        <span
-                          v-if="lesson.is_free_preview"
-                          class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 text-xs font-semibold rounded"
-                        >
-                          Free Preview
-                        </span>
                         <button
                           v-if="isEnrolled || lesson.is_free_preview"
                           class="px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors"
@@ -291,11 +304,15 @@
                     <div
                       class="flex items-center gap-3 mt-1 text-xs text-gray-500 dark:text-gray-400"
                     >
-                      <span>{{ material.file_type }}</span>
+                      <span v-if="material.file_type">{{
+                        material.file_type.charAt(0).toUpperCase() +
+                        material.file_type.slice(1)
+                      }}</span>
                       <span v-if="material.file_size_bytes">{{
                         formatFileSize(material.file_size_bytes)
                       }}</span>
                       <span
+                        class="capitalize font-bold"
                         :class="getAccessLevelClass(material.access_level)"
                         >{{ material.access_level }}</span
                       >
@@ -438,6 +455,21 @@ const getLessonIcon = (kind: string) => {
   }
 };
 
+const getLessonKindClass = (kind: string) => {
+  switch (kind) {
+    case "video":
+      return "text-red-600 dark:text-red-400";
+    case "pdf":
+      return "text-blue-600 dark:text-blue-400";
+    case "text":
+      return "text-green-600 dark:text-green-400";
+    case "external":
+      return "text-purple-600 dark:text-purple-400";
+    default:
+      return "text-gray-500 dark:text-gray-400";
+  }
+};
+
 const getMaterialIcon = (type?: string) => {
   switch (type) {
     case "pdf":
@@ -503,14 +535,11 @@ const canAccessMaterial = (material: CourseMaterial) => {
 const downloadMaterial = async (material: CourseMaterial) => {
   try {
     const baseUrl = String(config.public.baseUrlApi).replace("/api", "");
-    const response = await fetch(
-      `${baseUrl}${material.file_url}`,
-      {
-        headers: {
-          Authorization: `Bearer ${authStore.token}`,
-        },
-      }
-    );
+    const response = await fetch(`${baseUrl}${material.file_url}`, {
+      headers: {
+        Authorization: `Bearer ${authStore.token}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Failed to download file");

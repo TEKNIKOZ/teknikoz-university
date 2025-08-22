@@ -9,7 +9,7 @@
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
             Dashboard
           </h1>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
             Welcome back, {{ authStore.name }}!
           </p>
         </div>
@@ -36,7 +36,7 @@
             <div class="p-3 bg-brand/20 dark:bg-brand/50 rounded-lg">
               <Icon
                 name="mdi:book-open-variant"
-                class="text-2xl text-brand dark:text-brand"
+                class="text-2xl text-brand dark:text-brand flex items-center"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@
             <div class="p-3 bg-green-100 dark:bg-green-900/50 rounded-lg">
               <Icon
                 name="mdi:check-circle"
-                class="text-2xl text-green-600 dark:text-green-400"
+                class="text-2xl text-green-600 dark:text-green-400 flex items-center"
               />
             </div>
           </div>
@@ -74,7 +74,7 @@
             <div class="p-3 bg-yellow-100 dark:bg-yellow-900/50 rounded-lg">
               <Icon
                 name="mdi:pencil"
-                class="text-2xl text-yellow-600 dark:text-yellow-400"
+                class="text-2xl text-yellow-600 dark:text-yellow-400 flex items-center"
               />
             </div>
           </div>
@@ -93,7 +93,7 @@
             <div class="p-3 bg-brand/20 dark:bg-brand/50 rounded-lg">
               <Icon
                 name="mdi:book-cog"
-                class="text-3xl text-brand dark:text-brand"
+                class="text-3xl text-brand dark:text-brand flex items-center"
               />
             </div>
             <div>
@@ -116,7 +116,7 @@
             <div class="p-3 bg-green-100 dark:bg-green-900/50 rounded-lg">
               <Icon
                 name="mdi:book-open-page-variant"
-                class="text-3xl text-green-600 dark:text-green-400"
+                class="text-3xl text-green-600 dark:text-green-400 flex items-center"
               />
             </div>
             <div>
@@ -139,7 +139,7 @@
             <div class="p-3 bg-purple-100 dark:bg-purple-900/50 rounded-lg">
               <Icon
                 name="mdi:account-circle"
-                class="text-3xl text-purple-600 dark:text-purple-400"
+                class="text-3xl text-purple-600 dark:text-purple-400 flex items-center"
               />
             </div>
             <div>
@@ -166,9 +166,13 @@
             </h2>
             <NuxtLink
               to="/dashboard/courses"
-              class="text-brand hover:text-brand/90 dark:text-brand dark:hover:text-brand/70 text-sm font-medium"
+              class="text-brand hover:text-brand/90 dark:text-brand dark:hover:text-brand/70 text-sm font-medium flex items-center group"
             >
-              View All →
+              View All
+              <Icon
+                name="mdi:arrow-right"
+                class="ml-1 hover:translate-x-0.5 transition-transform"
+              />
             </NuxtLink>
           </div>
         </div>
@@ -187,17 +191,17 @@
                 <div
                   class="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400"
                 >
-                  <span class="flex items-center">
+                  <span class="flex items-center capitalize">
                     <Icon name="mdi:school" class="mr-1" />
                     {{ course.level || "All Levels" }}
                   </span>
-                  <span class="flex items-center">
+                  <span class="flex items-center capitalize">
                     <Icon name="mdi:eye" class="mr-1" />
                     {{ course.visibility }}
                   </span>
                   <span
                     :class="[
-                      'px-2 py-1 rounded-full text-xs font-medium',
+                      'px-2 py-1 rounded-full text-xs capitalize font-bold',
                       course.status === 'published'
                         ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300'
                         : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300',
@@ -212,14 +216,20 @@
                   :to="`/course-catalog/${course.slug}`"
                   class="p-2 text-gray-500 hover:text-brand transition-colors"
                 >
-                  <Icon name="mdi:eye" />
+                  <Icon name="mdi:eye" class="text-lg" />
                 </NuxtLink>
                 <NuxtLink
                   :to="`/dashboard/courses/${course.id}/edit`"
                   class="p-2 text-gray-500 hover:text-brand transition-colors"
                 >
-                  <Icon name="mdi:pencil" />
+                  <Icon name="mdi:pencil" class="text-lg" />
                 </NuxtLink>
+                <button
+                  @click="confirmDelete(course)"
+                  class="p-2 text-gray-500 hover:text-red-600 transition-colors"
+                >
+                  <Icon name="mdi:delete" class="text-lg" />
+                </button>
               </div>
             </div>
           </div>
@@ -245,6 +255,53 @@
           </NuxtLink>
         </div>
       </div>
+
+      <!-- Delete Confirmation Modal -->
+      <Teleport to="body">
+        <div v-if="showDeleteModal" class="fixed inset-0 z-50 overflow-y-auto">
+          <div class="flex items-center justify-center min-h-screen px-4">
+            <div
+              class="fixed inset-0 bg-black/50"
+              @click="showDeleteModal = false"
+            ></div>
+
+            <div
+              class="relative bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6"
+            >
+              <h3
+                class="text-lg font-semibold text-gray-900 dark:text-white mb-4"
+              >
+                Delete Course
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-6">
+                Are you sure you want to delete "{{ courseToDelete?.title }}"?
+                This action cannot be undone.
+              </p>
+
+              <div class="flex items-center gap-3">
+                <button
+                  @click="showDeleteModal = false"
+                  class="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  @click="deleteCourse"
+                  :disabled="isDeletingCourse"
+                  class="flex-1 px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                >
+                  <Icon
+                    v-if="isDeletingCourse"
+                    name="mdi:loading"
+                    class="animate-spin mr-2"
+                  />
+                  {{ isDeletingCourse ? "Deleting..." : "Delete" }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Teleport>
     </div>
   </div>
 </template>
@@ -255,9 +312,23 @@ import { useAuthStore } from "~/stores/auth.stores";
 import { useCourseStore } from "~/stores/course.stores";
 import { useRouter } from "vue-router";
 
+interface Course {
+  id: number;
+  title: string;
+  slug: string;
+  status?: string;
+  level?: string;
+  visibility?: string;
+}
+
 const authStore = useAuthStore();
 const courseStore = useCourseStore();
 const router = useRouter();
+
+// Delete functionality
+const showDeleteModal = ref(false);
+const courseToDelete = ref<Course | null>(null);
+const isDeletingCourse = ref(false);
 
 const isTeacherOrAdmin = computed(() => {
   const roles = authStore.roles;
@@ -276,6 +347,36 @@ const courseStats = computed(() => {
 const recentCourses = computed(() => {
   return courseStore.courses.slice(0, 5);
 });
+
+const confirmDelete = (course: Course) => {
+  courseToDelete.value = course;
+  showDeleteModal.value = true;
+};
+
+const deleteCourse = async () => {
+  if (!courseToDelete.value) return;
+
+  isDeletingCourse.value = true;
+  try {
+    const result = await courseStore.deleteCourse(courseToDelete.value.id);
+    if (result.success) {
+      showDeleteModal.value = false;
+      courseToDelete.value = null;
+      // Refresh the courses list
+      await courseStore.fetchCourses({
+        status: "all",
+        visibility: "all",
+        level: "all",
+      });
+    } else {
+      alert(result.error || "Failed to delete course");
+    }
+  } catch (error) {
+    alert("Failed to delete course");
+  } finally {
+    isDeletingCourse.value = false;
+  }
+};
 
 onMounted(async () => {
   // Check if user is authenticated

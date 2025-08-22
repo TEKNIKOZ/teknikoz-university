@@ -11,7 +11,9 @@
               <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
                 Course Management
               </h1>
-              <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p
+                class="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400"
+              >
                 Manage your courses, sections, lessons, and materials
               </p>
             </div>
@@ -30,7 +32,7 @@
     <!-- Filters and Search -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           <!-- Search -->
           <div class="md:col-span-2">
             <label
@@ -43,11 +45,11 @@
                 v-model="searchQuery"
                 type="text"
                 placeholder="Search by title..."
-                class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                class="w-full px-4 py-2.5 pl-10 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
               />
               <Icon
                 name="mdi:magnify"
-                class="absolute left-3 top-2.5 text-gray-400 text-xl"
+                class="absolute left-3 top-3 text-gray-400 text-lg"
               />
             </div>
           </div>
@@ -59,14 +61,20 @@
             >
               Status
             </label>
-            <select
-              v-model="filters.status"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-            >
-              <option value="all">All Statuses</option>
-              <option value="draft">Draft</option>
-              <option value="published">Published</option>
-            </select>
+            <div class="relative">
+              <select
+                v-model="filters.status"
+                class="w-full px-4 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white bg-white appearance-none cursor-pointer pr-10"
+              >
+                <option value="all">All Statuses</option>
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+              <Icon
+                name="mdi:chevron-down"
+                class="absolute right-3 top-3 text-gray-400 text-lg pointer-events-none"
+              />
+            </div>
           </div>
 
           <!-- Level Filter -->
@@ -76,15 +84,21 @@
             >
               Level
             </label>
-            <select
-              v-model="filters.level"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
-            >
-              <option value="all">All Levels</option>
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
+            <div class="relative">
+              <select
+                v-model="filters.level"
+                class="w-full px-4 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white bg-white appearance-none cursor-pointer pr-10"
+              >
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+              <Icon
+                name="mdi:chevron-down"
+                class="absolute right-3 top-3 text-gray-400 text-lg pointer-events-none"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -199,7 +213,7 @@
             <div class="absolute top-4 right-4">
               <span
                 :class="[
-                  'px-3 py-1 text-xs font-semibold rounded-full',
+                  'px-3 py-1 text-xs font-semibold rounded-full capitalize',
                   course.status === 'published'
                     ? 'bg-green-500 text-white'
                     : 'bg-yellow-500 text-white',
@@ -243,76 +257,23 @@
             <div class="flex items-center gap-2">
               <NuxtLink
                 :to="`/course-catalog/${course.slug}`"
-                class="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-center"
+                class="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
               >
-                <Icon name="mdi:eye" class="mr-1" />
+                <Icon name="mdi:eye" class="mr-1 text-sm" />
                 Preview
               </NuxtLink>
               <NuxtLink
                 :to="`/dashboard/courses/${course.id}/edit`"
-                class="flex-1 px-3 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors text-center"
+                class="flex-1 px-3 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors flex items-center justify-center"
               >
-                <Icon name="mdi:pencil" class="mr-1" />
+                <Icon name="mdi:pencil" class="mr-1 text-sm" />
                 Edit
               </NuxtLink>
-              <button
-                @click="confirmDelete(course)"
-                class="px-3 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
-              >
-                <Icon name="mdi:delete" />
-              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Delete Confirmation Modal -->
-    <Teleport to="body">
-      <div v-if="showDeleteModal" class="fixed inset-0 z-50 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-          <div
-            class="fixed inset-0 bg-black/50"
-            @click="showDeleteModal = false"
-          ></div>
-
-          <div
-            class="relative bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6"
-          >
-            <h3
-              class="text-lg font-semibold text-gray-900 dark:text-white mb-4"
-            >
-              Delete Course
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-6">
-              Are you sure you want to delete "{{ courseToDelete?.title }}"?
-              This action cannot be undone.
-            </p>
-
-            <div class="flex items-center gap-3">
-              <button
-                @click="showDeleteModal = false"
-                class="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                @click="deleteCourse"
-                :disabled="isDeletingCourse"
-                class="flex-1 px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-              >
-                <Icon
-                  v-if="isDeletingCourse"
-                  name="mdi:loading"
-                  class="animate-spin mr-2"
-                />
-                {{ isDeletingCourse ? "Deleting..." : "Delete" }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Teleport>
   </div>
 </template>
 
@@ -332,10 +293,6 @@ const filters = ref({
   status: "all",
   level: "all",
 });
-
-const showDeleteModal = ref(false);
-const courseToDelete = ref<Course | null>(null);
-const isDeletingCourse = ref(false);
 
 const filteredCourses = computed(() => {
   let courses = courseStore.courses;
@@ -364,42 +321,6 @@ const filteredCourses = computed(() => {
 
   return courses;
 });
-
-const confirmDelete = (course: Course) => {
-  courseToDelete.value = course;
-  showDeleteModal.value = true;
-};
-
-const deleteCourse = async () => {
-  if (!courseToDelete.value) return;
-
-  isDeletingCourse.value = true;
-  try {
-    const result = await courseStore.deleteCourse(courseToDelete.value.id);
-
-    if (result.success) {
-      showDeleteModal.value = false;
-      courseToDelete.value = null;
-      // Refresh the course list
-      await courseStore.fetchCourses({
-        status: filters.value.status as "all" | "draft" | "published",
-        visibility: "all",
-        level: filters.value.level as
-          | "all"
-          | "beginner"
-          | "intermediate"
-          | "advanced",
-      });
-    } else {
-      alert(result.error || "Failed to delete course");
-    }
-  } catch (err) {
-    console.error("Error deleting course:", err);
-    alert("Error deleting course. Please try again.");
-  } finally {
-    isDeletingCourse.value = false;
-  }
-};
 
 onMounted(async () => {
   // Check if user has permission to access this page
