@@ -11,7 +11,9 @@
               <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
                 Edit Course
               </h1>
-              <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p
+                class="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400"
+              >
                 {{ course?.title || "Loading..." }}
               </p>
             </div>
@@ -65,7 +67,7 @@
     </div>
 
     <!-- Form Content -->
-    <div v-else-if="course" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div v-else-if="course" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <!-- Tabs -->
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm mb-6">
         <div class="border-b border-gray-200 dark:border-gray-700">
@@ -75,7 +77,7 @@
               :key="tab.id"
               @click="activeTab = tab.id"
               :class="[
-                'px-6 py-4 text-sm font-medium border-b-2 transition-colors',
+                'px-6 py-4 text-sm font-medium border-b-2 transition-colors flex items-center',
                 activeTab === tab.id
                   ? 'border-brand text-brand dark:text-brand'
                   : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
@@ -309,18 +311,18 @@
           :deleting-lesson-id="deletingLessonId"
           :editing-section="editingSection"
           :editing-section-title="editingSectionTitle"
-          @show-add-section="showAddSection = true"
-          @show-add-lesson="showAddLesson"
-          @start-section-edit="startSectionEdit"
-          @save-section="saveSection"
-          @cancel-section-edit="cancelSectionEdit"
-          @delete-section="deleteSection"
-          @move-section-up="moveSectionUp"
-          @move-section-down="moveSectionDown"
-          @start-lesson-edit="startLessonEdit"
-          @delete-lesson="deleteLesson"
-          @move-lesson-up="moveLessonUp"
-          @move-lesson-down="moveLessonDown"
+          @showAddSection="showAddSection = true"
+          @showAddLesson="showAddLesson"
+          @startSectionEdit="startSectionEdit"
+          @saveSection="saveSection"
+          @cancelSectionEdit="cancelSectionEdit"
+          @deleteSection="deleteSection"
+          @moveSectionUp="moveSectionUp"
+          @moveSectionDown="moveSectionDown"
+          @editLesson="startLessonEdit"
+          @deleteLesson="deleteLesson"
+          @moveLessonUp="moveLessonUp"
+          @moveLessonDown="moveLessonDown"
         />
 
         <!-- Materials Tab -->
@@ -330,11 +332,11 @@
           :deleting-material-id="deletingMaterialId"
           :editing-material="editingMaterial"
           :editing-material-data="editingMaterialData"
-          @show-upload-material="showUploadMaterial = true"
-          @start-material-edit="startMaterialEdit"
-          @save-material="saveMaterial"
-          @cancel-material-edit="cancelMaterialEdit"
-          @delete-material="deleteMaterial"
+          @showUploadMaterial="showUploadMaterial = true"
+          @startMaterialEdit="startMaterialEdit"
+          @saveMaterial="saveMaterial"
+          @cancelMaterialEdit="cancelMaterialEdit"
+          @deleteMaterial="deleteMaterial"
         />
       </div>
     </div>
@@ -374,7 +376,6 @@
       @close="showEditLessonModal = false"
       @submit="updateLesson"
     />
-
   </div>
 </template>
 
@@ -383,6 +384,15 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useCourseStore } from "~/stores/course.stores";
 import { useAuthStore } from "~/stores/auth.stores";
+
+// Import extracted components
+import CourseBasicInfoTab from "~/components/course/CourseBasicInfoTab.vue";
+import CourseSectionsTab from "~/components/course/CourseSectionsTab.vue";
+import CourseMaterialsTab from "~/components/course/CourseMaterialsTab.vue";
+import AddSectionModal from "~/components/course/AddSectionModal.vue";
+import AddLessonModal from "~/components/course/AddLessonModal.vue";
+import EditLessonModal from "~/components/course/EditLessonModal.vue";
+import UploadMaterialModal from "~/components/course/UploadMaterialModal.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -417,7 +427,6 @@ const courseData = reactive({
   cover_url: "",
 });
 
-
 const updateCourseInfo = async (formData: any) => {
   if (!course.value) return;
 
@@ -448,10 +457,7 @@ const createSection = async (formData: any) => {
 
   isCreatingSection.value = true;
   try {
-    const result = await courseStore.createSection(
-      course.value.id,
-      formData
-    );
+    const result = await courseStore.createSection(course.value.id, formData);
 
     if (result.success) {
       showAddSection.value = false;
@@ -763,7 +769,6 @@ const editingMaterialData = ref<{
   access_level?: "public" | "enrolled" | "premium";
   order_index?: number;
 }>({});
-
 
 const cancelUpload = () => {
   showUploadMaterial.value = false;
