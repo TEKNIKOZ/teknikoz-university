@@ -322,15 +322,17 @@
                 </div>
 
                 <div class="flex items-center gap-2">
-                  <button
-                    v-if="canAccessMaterial(material)"
-                    @click="downloadMaterial(material)"
-                    class="px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors flex items-center"
+                  <Icon 
+                    v-if="!canAccessMaterial(material)"
+                    name="mdi:lock" 
+                    class="text-2xl text-gray-400" 
+                  />
+                  <span 
+                    v-if="canAccessMaterial(material)" 
+                    class="text-sm text-brand font-medium"
                   >
-                    <Icon name="mdi:download" class="mr-1" />
-                    Download
-                  </button>
-                  <Icon v-else name="mdi:lock" class="text-2xl text-gray-400" />
+                    Available
+                  </span>
                 </div>
               </div>
             </div>
@@ -531,11 +533,7 @@ const canAccessMaterial = (material: CourseMaterial) => {
   return false;
 };
 
-const downloadMaterial = async (material: CourseMaterial) => {
-  // Download functionality temporarily disabled
-  console.log("Download requested for material:", material.title);
-  alert("Download functionality is currently under development.");
-};
+// Download functionality has been removed
 
 const getTotalDuration = () => {
   if (!course.value?.sections) return "0 minutes";
