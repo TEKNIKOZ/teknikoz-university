@@ -21,7 +21,7 @@
         class="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow"
       >
         <div
-          v-if="editingMaterial !== material.id"
+          v-if="props.editingMaterial !== material.id"
           class="flex items-center justify-between"
         >
           <div class="flex items-center gap-3">
@@ -59,7 +59,7 @@
           </div>
           <div class="flex items-center gap-2">
             <button
-              @click="startMaterialEdit(material)"
+              @click="emit('startMaterialEdit', material)"
               class="p-2 text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
             >
               <Icon name="mdi:pencil" class="flex items-center" />
@@ -86,7 +86,13 @@
               >Title</label
             >
             <input
-              v-model="editingMaterialData.title"
+              :value="props.editingMaterialData?.title || ''"
+              @input="
+                updateMaterialData(
+                  'title',
+                  ($event.target as HTMLInputElement).value
+                )
+              "
               type="text"
               class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
               placeholder="Material title"
@@ -98,65 +104,64 @@
               >Description</label
             >
             <textarea
-              v-model="editingMaterialData.description"
+              :value="props.editingMaterialData?.description || ''"
+              @input="
+                updateMaterialData(
+                  'description',
+                  ($event.target as HTMLTextAreaElement).value
+                )
+              "
               rows="2"
               class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
               placeholder="Material description"
             ></textarea>
           </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >Access Level</label
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Access Level</label
+            >
+            <div class="relative">
+              <select
+                :value="props.editingMaterialData?.access_level || 'enrolled'"
+                @change="
+                  updateMaterialData(
+                    'access_level',
+                    ($event.target as HTMLSelectElement).value
+                  )
+                "
+                class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
               >
-              <div class="relative">
-                <select
-                  v-model="editingMaterialData.access_level"
-                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
-                >
-                  <option value="public">Public</option>
-                  <option value="enrolled">Enrolled</option>
-                  <option value="premium">Premium</option>
-                </select>
-                <div
-                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
-                >
-                  <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
-                </div>
-              </div>
-            </div>
-            <div>
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >Downloadable</label
+                <option value="public">Public</option>
+                <option value="enrolled">Enrolled</option>
+                <option value="premium">Premium</option>
+              </select>
+              <div
+                class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
               >
-              <div class="relative">
-                <select
-                  v-model="editingMaterialData.is_downloadable"
-                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
-                >
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-                <div
-                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
-                >
-                  <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
-                </div>
+                <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
               </div>
             </div>
           </div>
           <div class="flex items-center gap-2 justify-end">
             <button
-              @click="$emit('saveMaterial', material.id, editingMaterialData)"
-              class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+              @click="
+                emit('saveMaterial', material.id, props.editingMaterialData)
+              "
+              :disabled="props.isSavingMaterial"
+              class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
-              Save
+              <Icon
+                v-if="props.isSavingMaterial"
+                name="mdi:loading"
+                class="animate-spin mr-2"
+              />
+              {{ props.isSavingMaterial ? "Saving..." : "Save" }}
             </button>
             <button
-              @click="cancelMaterialEdit"
-              class="px-4 py-2 bg-gray-400 text-white font-medium rounded-lg hover:bg-gray-500 transition-colors"
+              @click="emit('cancelMaterialEdit')"
+              :disabled="props.isSavingMaterial"
+              class="px-4 py-2 bg-gray-400 text-white font-medium rounded-lg hover:bg-gray-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
@@ -181,7 +186,6 @@ interface Material {
   file_type?: string;
   file_size_bytes?: number;
   access_level?: "public" | "enrolled" | "premium";
-  is_downloadable?: boolean;
   order_index?: number;
 }
 
@@ -192,22 +196,34 @@ interface Course {
 interface Props {
   course: Course | null;
   deletingMaterialId?: number | null;
+  editingMaterial?: number | null;
+  editingMaterialData?: Partial<Material>;
+  isSavingMaterial?: boolean;
 }
 
 interface Emits {
   (e: "showUploadMaterial"): void;
   (e: "deleteMaterial", material: Material): void;
   (e: "saveMaterial", materialId: number, data: Partial<Material>): void;
+  (e: "startMaterialEdit", material: Material): void;
+  (e: "cancelMaterialEdit"): void;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   deletingMaterialId: null,
+  editingMaterial: null,
+  editingMaterialData: () => ({}),
+  isSavingMaterial: false,
 });
 
-defineEmits<Emits>();
+const emit = defineEmits<Emits>();
 
-const editingMaterial = ref<number | null>(null);
-const editingMaterialData = reactive<Partial<Material>>({});
+// Update material data by directly modifying the reactive object from parent
+const updateMaterialData = (key: string, value: any) => {
+  if (props.editingMaterialData) {
+    (props.editingMaterialData as any)[key] = value;
+  }
+};
 
 const getMaterialIcon = (type?: string) => {
   switch (type) {
@@ -231,22 +247,5 @@ const formatFileSize = (bytes: number) => {
   if (bytes === 0) return "0 Bytes";
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return Math.round((bytes / Math.pow(1024, i)) * 100) / 100 + " " + sizes[i];
-};
-
-const startMaterialEdit = (material: Material) => {
-  editingMaterial.value = material.id;
-  Object.assign(editingMaterialData, {
-    title: material.title,
-    description: material.description,
-    file_type: material.file_type,
-    is_downloadable: material.is_downloadable,
-    access_level: material.access_level,
-    order_index: material.order_index,
-  });
-};
-
-const cancelMaterialEdit = () => {
-  editingMaterial.value = null;
-  Object.assign(editingMaterialData, {});
 };
 </script>

@@ -254,7 +254,7 @@ interface LessonFormData {
   section_id?: number
   title: string
   kind: string
-  order_index: number
+  order_index?: number
   duration_sec?: number
   vod_asset_id?: string
   pdf_url?: string
