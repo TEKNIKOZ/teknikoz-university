@@ -19,9 +19,12 @@
             </div>
             <NuxtLink
               to="/dashboard/courses"
-              class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors group"
             >
-              <Icon name="mdi:arrow-left" class="mr-2" />
+              <Icon
+                name="mdi:arrow-left"
+                class="mr-2 group-hover:-translate-x-0.5 transition-all"
+              />
               Back to Courses
             </NuxtLink>
           </div>
@@ -418,7 +421,7 @@
                 </NuxtLink>
                 <button
                   type="submit"
-                  :disabled="isSubmitting"
+                  :disabled="!canCreate"
                   class="px-6 py-2 bg-brand text-white font-medium rounded-lg hover:bg-brand/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span v-if="!isSubmitting">Create Course</span>
@@ -437,7 +440,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useCourseStore } from "~/stores/course.stores";
 import { useAuthStore } from "~/stores/auth.stores";
@@ -467,6 +470,19 @@ const priceData = reactive<PriceFormData>({
   is_recurring: false,
   interval_type: "monthly",
   is_active: true,
+});
+
+// Computed property to check if all mandatory fields are filled
+const isFormValid = computed(() => {
+  return (
+    formData.title.trim().length > 0 &&
+    formData.slug.trim().length > 0
+  );
+});
+
+// Computed property to determine if create button should be enabled
+const canCreate = computed(() => {
+  return isFormValid.value && !isSubmitting.value;
 });
 
 const generateSlug = () => {

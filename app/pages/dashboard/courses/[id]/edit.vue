@@ -12,7 +12,7 @@
                 Edit Course
               </h1>
               <p
-                class="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400"
+                class="mt-2 text-sm sm:text-lg text-gray-600 dark:text-gray-400"
               >
                 {{ course?.title || "Loading..." }}
               </p>
@@ -29,9 +29,12 @@
               </NuxtLink>
               <NuxtLink
                 to="/dashboard/courses"
-                class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors border border-gray-300 dark:border-gray-600 shadow-sm"
+                class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors border border-gray-300 dark:border-gray-600 shadow-sm group"
               >
-                <Icon name="mdi:arrow-left" class="mr-2" />
+                <Icon
+                  name="mdi:arrow-left"
+                  class="mr-2 group-hover:-translate-x-0.5 transition-all"
+                />
                 Back to Courses
               </NuxtLink>
             </div>
@@ -77,7 +80,7 @@
               :key="tab.id"
               @click="activeTab = tab.id"
               :class="[
-                'px-6 py-4 text-sm font-medium border-b-2 transition-colors flex items-center',
+                'px-6 py-4 text-base font-medium border-b-2 transition-colors flex items-center',
                 activeTab === tab.id
                   ? 'border-brand text-brand dark:text-brand'
                   : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
@@ -95,6 +98,7 @@
         <!-- Basic Info Tab -->
         <CourseBasicInfoTab
           v-if="activeTab === 'basic'"
+          ref="basicInfoTabRef"
           :course="course"
           :is-loading="isSaving"
           @submit="updateCourseInfo"
@@ -419,6 +423,7 @@ const isSaving = ref(false);
 const activeTab = ref("basic");
 const showAddSection = ref(false);
 const isCreatingSection = ref(false);
+const basicInfoTabRef = ref();
 
 const tabs = [
   { id: "basic", label: "Basic Info", icon: "mdi:information" },
@@ -461,6 +466,7 @@ const updateCourseInfo = async (formData: any) => {
   try {
     const result = await courseStore.updateCourse(course.value.id, {
       title: formData.title,
+      slug: formData.slug,
       summary: formData.summary,
       level: formData.level as any,
       status: formData.status as any,
@@ -468,7 +474,10 @@ const updateCourseInfo = async (formData: any) => {
       cover_url: formData.cover_url,
     });
 
-    if (!result.success) {
+    if (result.success) {
+      // Reset the form state to mark it as unchanged after successful save
+      basicInfoTabRef.value?.resetFormState();
+    } else {
       alert("Failed to update course");
     }
   } catch (err) {
@@ -778,7 +787,7 @@ const deletingSectionId = ref<number | null>(null);
 const deletingLessonId = ref<number | null>(null);
 const deletingMaterialId = ref<number | null>(null);
 const showDeleteMaterialDialog = ref(false);
-const materialToDelete = ref<{id: number; title: string} | null>(null);
+const materialToDelete = ref<{ id: number; title: string } | null>(null);
 const showAddLessonModal = ref(false);
 const isCreatingLesson = ref(false);
 const currentSectionId = ref<number | null>(null);
