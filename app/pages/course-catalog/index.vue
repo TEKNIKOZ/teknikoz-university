@@ -83,9 +83,9 @@
                 @change="handleFilterChange"
                 class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
               >
+                <option value="all">All</option>
                 <option value="published">Published</option>
                 <option value="draft">Draft</option>
-                <option value="all">All</option>
               </select>
               <div
                 class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
@@ -108,9 +108,9 @@
                 @change="handleFilterChange"
                 class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
               >
+                <option value="all">All</option>
                 <option value="public">Public</option>
                 <option value="private">Private</option>
-                <option value="all">All</option>
               </select>
               <div
                 class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
@@ -293,9 +293,9 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
-import { useCourseStore } from "~/stores/course.stores";
-import { useAuthStore } from "~/stores/auth.stores";
-import type { CourseFilters } from "~/types/course";
+import { useCourseStore } from "@/stores/course.stores";
+import { useAuthStore } from "@/stores/auth.stores";
+import type { CourseFilters } from "@/types/course";
 
 const courseStore = useCourseStore();
 const authStore = useAuthStore();

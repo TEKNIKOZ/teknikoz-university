@@ -163,7 +163,7 @@
                 :key="tab.id"
                 @click="activeTab = tab.id"
                 :class="[
-                  'px-6 py-4 text-sm font-medium border-b-2 transition-colors  flex items-center',
+                  'px-6 py-4 text-base font-medium border-b-2 transition-colors  flex items-center',
                   activeTab === tab.id
                     ? 'border-brand text-brand dark:text-brand'
                     : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
@@ -232,15 +232,16 @@
                               Free Preview
                             </span>
                           </div>
-                          <div
-                            class="flex items-center gap-4 mt-1 text-sm"
-                          >
-                            <span 
-                              :class="['capitalize font-medium', getLessonKindClass(lesson.kind)]"
+                          <div class="flex items-center gap-4 mt-1 text-sm">
+                            <span
+                              :class="[
+                                'capitalize font-medium',
+                                getLessonKindClass(lesson.kind),
+                              ]"
                             >
                               {{ lesson.kind }}
                             </span>
-                            <span 
+                            <span
                               v-if="lesson.duration_sec"
                               class="text-gray-500 dark:text-gray-400"
                             >
