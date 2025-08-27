@@ -336,6 +336,7 @@
           :deleting-material-id="deletingMaterialId"
           :editing-material="editingMaterial"
           :editing-material-data="editingMaterialData"
+          :is-saving-material="isSavingMaterial"
           @showUploadMaterial="showUploadMaterial = true"
           @startMaterialEdit="startMaterialEdit"
           @saveMaterial="saveMaterial"
@@ -748,7 +749,6 @@ const startMaterialEdit = (material: any) => {
     title: material.title,
     description: material.description,
     file_type: material.file_type,
-    is_downloadable: material.is_downloadable,
     access_level: material.access_level,
     order_index: material.order_index,
   };
@@ -765,6 +765,7 @@ const saveMaterial = async (materialId: number, data: any) => {
     return;
   }
 
+  isSavingMaterial.value = true;
   try {
     const result = await courseStore.updateMaterial(materialId, data);
 
@@ -777,12 +778,15 @@ const saveMaterial = async (materialId: number, data: any) => {
   } catch (err) {
     console.error("Error updating material:", err);
     alert("Error updating material");
+  } finally {
+    isSavingMaterial.value = false;
   }
 };
 
 const showUploadMaterial = ref(false);
 const isUploadingMaterial = ref(false);
 const uploadProgress = ref(0);
+const isSavingMaterial = ref(false);
 const deletingSectionId = ref<number | null>(null);
 const deletingLessonId = ref<number | null>(null);
 const deletingMaterialId = ref<number | null>(null);
@@ -803,7 +807,6 @@ const editingMaterialData = ref<{
   title?: string;
   description?: string;
   file_type?: string;
-  is_downloadable?: boolean;
   access_level?: "public" | "enrolled" | "premium";
   order_index?: number;
 }>({});
@@ -902,6 +905,9 @@ onMounted(async () => {
     const result = await courseStore.fetchCourseById(courseId, true);
 
     if (result.success && course.value) {
+      // Fetch materials for the course
+      await courseStore.fetchCourseMaterials(course.value.id);
+
       // Populate form data
       courseData.title = course.value.title;
       courseData.summary = course.value.summary || "";

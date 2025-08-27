@@ -78,9 +78,9 @@
                     type="text"
                     required
                     maxlength="100"
-                    pattern="[a-z0-9-]+"
                     placeholder="introduction-to-plm-windchill"
                     class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
+                    @input="validateSlug"
                   />
                   <button
                     type="button"
@@ -233,7 +233,7 @@
                     Click to upload or drag and drop
                   </p>
                   <p class="text-xs text-gray-400 dark:text-gray-500">
-                    PNG, JPG, GIF up to 10MB
+                    PNG, JPG, GIF up to 5MB
                   </p>
                 </div>
                 <div v-else class="text-center">
@@ -381,8 +381,6 @@
                         v-model="priceData.interval_type"
                         class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
                       >
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
                         <option value="monthly">Monthly</option>
                         <option value="yearly">Yearly</option>
                       </select>
@@ -442,9 +440,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useCourseStore } from "~/stores/course.stores";
-import { useAuthStore } from "~/stores/auth.stores";
-import type { CourseFormData, PriceFormData } from "~/types/course";
+import { useCourseStore } from "@/stores/course.stores";
+import { useAuthStore } from "@/stores/auth.stores";
+import type { CourseFormData, PriceFormData } from "@/types/course";
 
 const router = useRouter();
 const courseStore = useCourseStore();
@@ -472,12 +470,8 @@ const priceData = reactive<PriceFormData>({
   is_active: true,
 });
 
-// Computed property to check if all mandatory fields are filled
 const isFormValid = computed(() => {
-  return (
-    formData.title.trim().length > 0 &&
-    formData.slug.trim().length > 0
-  );
+  return formData.title.trim().length > 0 && formData.slug.trim().length > 0;
 });
 
 // Computed property to determine if create button should be enabled
@@ -493,6 +487,10 @@ const generateSlug = () => {
       .replace(/^-+|-+$/g, "")
       .substring(0, 100);
   }
+};
+
+const validateSlug = () => {
+  formData.slug = formData.slug.replace(/[^a-z0-9-]/g, "");
 };
 
 const handleFileSelect = (event: Event) => {
