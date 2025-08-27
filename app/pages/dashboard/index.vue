@@ -171,7 +171,7 @@
               View All
               <Icon
                 name="mdi:arrow-right"
-                class="ml-1 hover:translate-x-0.5 transition-transform"
+                class="ml-1 group-hover:translate-x-0.5 transition-transform"
               />
             </NuxtLink>
           </div>
@@ -214,21 +214,27 @@
               <div class="flex items-center gap-2">
                 <NuxtLink
                   :to="`/course-catalog/${course.slug}`"
-                  class="p-2 text-gray-500 hover:text-brand transition-colors"
+                  class="inline-flex items-center px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-brand/10 hover:text-brand dark:hover:bg-brand/20 transition-colors text-sm font-medium"
+                  title="View Course"
                 >
-                  <Icon name="mdi:eye" class="text-lg" />
+                  <Icon name="mdi:eye" class="mr-1 text-base" />
+                  View
                 </NuxtLink>
                 <NuxtLink
                   :to="`/dashboard/courses/${course.id}/edit`"
-                  class="p-2 text-gray-500 hover:text-brand transition-colors"
+                  class="inline-flex items-center px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-brand/10 hover:text-brand dark:hover:bg-brand/20 transition-colors text-sm font-medium"
+                  title="Edit Course"
                 >
-                  <Icon name="mdi:pencil" class="text-lg" />
+                  <Icon name="mdi:pencil" class="mr-1 text-base" />
+                  Edit
                 </NuxtLink>
                 <button
                   @click="confirmDelete(course)"
-                  class="p-2 text-gray-500 hover:text-red-600 transition-colors"
+                  class="inline-flex items-center px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-900/30 dark:hover:text-red-400 transition-colors text-sm font-medium"
+                  title="Delete Course"
                 >
-                  <Icon name="mdi:delete" class="text-lg" />
+                  <Icon name="mdi:delete" class="mr-1 text-base" />
+                  Delete
                 </button>
               </div>
             </div>
