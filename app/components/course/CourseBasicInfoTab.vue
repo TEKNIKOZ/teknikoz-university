@@ -36,13 +36,15 @@
           </label>
           <input
             id="slug"
-            :value="course?.slug || ''"
+            v-model="formData.slug"
             type="text"
-            readonly
-            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+            @input="onSlugInput"
+            @focus="slugTouched = true"
+            placeholder="e.g., introduction-to-plm-windchill"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand dark:bg-gray-700 dark:text-white"
           />
           <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            URL slug cannot be changed after creation
+            Only lowercase letters, numbers, and hyphens
           </p>
         </div>
       </div>
@@ -88,10 +90,7 @@
             <div
               class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
             >
-              <Icon
-                name="mdi:chevron-down"
-                class="h-4 w-4 text-gray-400"
-              />
+              <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
             </div>
           </div>
         </div>
@@ -116,10 +115,7 @@
             <div
               class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
             >
-              <Icon
-                name="mdi:chevron-down"
-                class="h-4 w-4 text-gray-400"
-              />
+              <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
             </div>
           </div>
         </div>
@@ -144,10 +140,7 @@
             <div
               class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
             >
-              <Icon
-                name="mdi:chevron-down"
-                class="h-4 w-4 text-gray-400"
-              />
+              <Icon name="mdi:chevron-down" class="h-4 w-4 text-gray-400" />
             </div>
           </div>
         </div>
@@ -161,10 +154,13 @@
         >
           Cover Image
         </label>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Current Image Preview (if exists) -->
-          <div v-if="formData.cover_url && !selectedFile" class="flex items-center">
+          <div
+            v-if="formData.cover_url && !selectedFile"
+            class="flex items-center"
+          >
             <div class="relative inline-block">
               <img
                 :src="formData.cover_url"
@@ -180,13 +176,20 @@
               </button>
             </div>
             <div class="ml-4">
-              <p class="text-xs text-gray-500 dark:text-gray-400">Current cover image</p>
-              <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Click the upload area to replace</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                Current cover image
+              </p>
+              <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                Click the upload area to replace
+              </p>
             </div>
           </div>
-          
+
           <!-- Empty state when no current image -->
-          <div v-else-if="!formData.cover_url && !selectedFile" class="flex items-center text-gray-500 dark:text-gray-400">
+          <div
+            v-else-if="!formData.cover_url && !selectedFile"
+            class="flex items-center text-gray-500 dark:text-gray-400"
+          >
             <Icon name="mdi:image-off" class="text-2xl mr-3" />
             <span class="text-sm">No cover image set</span>
           </div>
@@ -249,7 +252,7 @@
           </NuxtLink>
           <button
             type="submit"
-            :disabled="isLoading"
+            :disabled="!canSave"
             class="px-6 py-2 bg-brand text-white font-medium rounded-lg hover:bg-brand/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span v-if="!isLoading">Save Changes</span>
@@ -265,132 +268,227 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch, ref } from 'vue'
-import { useCourseStore } from '~/stores/course.stores'
+import { reactive, watch, ref, computed } from "vue";
+import { useCourseStore } from "~/stores/course.stores";
 
 interface CourseData {
-  title: string
-  summary: string
-  level: string
-  status: string
-  visibility: string
-  cover_url: string
+  title: string;
+  slug: string;
+  summary: string;
+  level: string;
+  status: string;
+  visibility: string;
+  cover_url: string;
 }
 
 interface Course {
-  id?: number
-  slug?: string
-  title?: string
-  summary?: string
-  level?: string
-  status?: string
-  visibility?: string
-  cover_url?: string
+  id?: number;
+  slug?: string;
+  title?: string;
+  summary?: string;
+  level?: string;
+  status?: string;
+  visibility?: string;
+  cover_url?: string;
 }
 
 interface Props {
-  course: Course | null
-  isLoading?: boolean
+  course: Course | null;
+  isLoading?: boolean;
 }
 
 interface Emits {
-  (e: 'submit', data: CourseData): void
+  (e: "submit", data: CourseData): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isLoading: false
-})
+  isLoading: false,
+});
 
-const emit = defineEmits<Emits>()
-const courseStore = useCourseStore()
+const emit = defineEmits<Emits>();
+const courseStore = useCourseStore();
 
-const selectedFile = ref<File | null>(null)
+const selectedFile = ref<File | null>(null);
+const slugTouched = ref(false);
+const lastAutoSlug = ref("");
 
 const formData = reactive<CourseData>({
-  title: '',
-  summary: '',
-  level: '',
-  status: 'draft',
-  visibility: 'public',
-  cover_url: ''
-})
+  title: "",
+  slug: "",
+  summary: "",
+  level: "",
+  status: "draft",
+  visibility: "public",
+  cover_url: "",
+});
+
+// Store initial form values to track changes
+const initialFormData = ref<CourseData>({
+  title: "",
+  slug: "",
+  summary: "",
+  level: "",
+  status: "draft",
+  visibility: "public",
+  cover_url: "",
+});
+
+// Computed property to check if form has changes
+const hasFormChanges = computed(() => {
+  return (
+    formData.title !== initialFormData.value.title ||
+    formData.slug !== initialFormData.value.slug ||
+    formData.summary !== initialFormData.value.summary ||
+    formData.level !== initialFormData.value.level ||
+    formData.status !== initialFormData.value.status ||
+    formData.visibility !== initialFormData.value.visibility ||
+    formData.cover_url !== initialFormData.value.cover_url ||
+    selectedFile.value !== null
+  );
+});
+
+// Computed property to determine if save button should be enabled
+const canSave = computed(() => {
+  return hasFormChanges.value && !props.isLoading;
+});
 
 // Watch for course prop changes and populate form
-watch(() => props.course, (newCourse) => {
-  if (newCourse) {
-    formData.title = newCourse.title || ''
-    formData.summary = newCourse.summary || ''
-    formData.level = newCourse.level || ''
-    formData.status = newCourse.status || 'draft'
-    formData.visibility = newCourse.visibility || 'public'
-    formData.cover_url = newCourse.cover_url || ''
+watch(
+  () => props.course,
+  (newCourse) => {
+    if (newCourse) {
+      const courseData = {
+        title: newCourse.title || "",
+        slug: newCourse.slug || "",
+        summary: newCourse.summary || "",
+        level: newCourse.level || "",
+        status: newCourse.status || "draft",
+        visibility: newCourse.visibility || "public",
+        cover_url: newCourse.cover_url || "",
+      };
+
+      // Update form data
+      Object.assign(formData, courseData);
+      
+      // Store initial values for change detection
+      initialFormData.value = { ...courseData };
+      
+      lastAutoSlug.value = formData.slug;
+      
+      // Reset selected file when course changes
+      selectedFile.value = null;
+    }
+  },
+  { immediate: true }
+);
+
+// Auto-generate slug from title unless user has edited slug manually
+watch(
+  () => formData.title,
+  (newTitle) => {
+    if (typeof newTitle !== "string") return;
+    const auto = slugify(newTitle);
+    if (!slugTouched.value || formData.slug === lastAutoSlug.value) {
+      formData.slug = auto;
+      lastAutoSlug.value = auto;
+    }
   }
-}, { immediate: true })
+);
 
 const handleFileSelect = (event: Event) => {
-  const target = event.target as HTMLInputElement
+  const target = event.target as HTMLInputElement;
   if (target.files && target.files[0]) {
-    const file = target.files[0]
+    const file = target.files[0];
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      alert('Please select an image file')
-      return
+    if (!file.type.startsWith("image/")) {
+      alert("Please select an image file");
+      return;
     }
 
     // Validate file size (10MB)
     if (file.size > 10 * 1024 * 1024) {
-      alert('File size must be less than 10MB')
-      return
+      alert("File size must be less than 10MB");
+      return;
     }
 
-    selectedFile.value = file
+    selectedFile.value = file;
   }
-}
+};
 
 const handleFileDrop = (event: DragEvent) => {
-  const files = event.dataTransfer?.files
+  const files = event.dataTransfer?.files;
   if (files && files[0]) {
-    const file = files[0]
+    const file = files[0];
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      alert('Please select an image file')
-      return
+    if (!file.type.startsWith("image/")) {
+      alert("Please select an image file");
+      return;
     }
 
     // Validate file size (10MB)
     if (file.size > 10 * 1024 * 1024) {
-      alert('File size must be less than 10MB')
-      return
+      alert("File size must be less than 10MB");
+      return;
     }
 
-    selectedFile.value = file
+    selectedFile.value = file;
   }
-}
+};
 
 const removeFile = () => {
-  selectedFile.value = null
-}
+  selectedFile.value = null;
+};
 
 const removeCoverImage = () => {
-  formData.cover_url = ''
-}
+  formData.cover_url = "";
+};
 
 const handleSubmit = async () => {
   // If there's a selected file, upload it first
   if (selectedFile.value && props.course?.id) {
     try {
-      const result = await courseStore.uploadCourseCover(props.course.id, selectedFile.value)
+      const result = await courseStore.uploadCourseCover(
+        props.course.id,
+        selectedFile.value
+      );
       if (result.success && result.data?.cover_url) {
-        formData.cover_url = result.data.cover_url
+        formData.cover_url = result.data.cover_url;
       }
     } catch (error) {
-      console.error('Error uploading cover image:', error)
-      alert('Failed to upload cover image. The course will be saved without the new image.')
+      console.error("Error uploading cover image:", error);
+      alert(
+        "Failed to upload cover image. The course will be saved without the new image."
+      );
     }
   }
-  
-  emit('submit', { ...formData })
-}
+
+  emit("submit", { ...formData });
+};
+
+// Reset form state after successful save (to be called by parent)
+const resetFormState = () => {
+  initialFormData.value = { ...formData };
+  selectedFile.value = null;
+};
+
+// Expose the reset function so parent component can call it after successful save
+defineExpose({ resetFormState });
+
+// Helpers
+const slugify = (value: string) => {
+  return (value || "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/_/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-{2,}/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
+const onSlugInput = () => {
+  slugTouched.value = true;
+  formData.slug = slugify(formData.slug);
+};
 </script>
