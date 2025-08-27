@@ -53,7 +53,6 @@ export interface CourseMaterial {
   file_url: string;
   file_size_bytes?: number;
   mime_type?: string;
-  is_downloadable?: boolean;
   access_level?: 'public' | 'enrolled' | 'premium';
   order_index?: number;
   created_at?: Date;
@@ -114,7 +113,6 @@ export interface MaterialFormData {
   description?: string;
   file_type?: 'pdf' | 'video' | 'image' | 'document' | 'archive' | 'other';
   access_level?: 'public' | 'enrolled' | 'premium';
-  order_index?: number;
 }
 
 export interface PriceFormData {
