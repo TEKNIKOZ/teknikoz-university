@@ -107,37 +107,7 @@
               </div>
             </div>
 
-            <!-- Download Permission -->
-            <div>
-              <label class="flex items-center gap-3">
-                <input
-                  v-model="formData.is_downloadable"
-                  type="checkbox"
-                  class="w-4 h-4 text-brand bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-brand focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                />
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                >
-                  Allow users to download this file
-                </span>
-              </label>
-            </div>
 
-            <!-- Order Index -->
-            <div>
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                Order Index
-              </label>
-              <input
-                v-model.number="formData.order_index"
-                type="number"
-                min="0"
-                placeholder="Display order (0 for default)"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-              />
-            </div>
 
             <!-- Upload Progress -->
             <div
@@ -193,8 +163,6 @@ interface MaterialFormData {
   title: string
   description: string
   access_level: string
-  is_downloadable: boolean
-  order_index: number
 }
 
 interface Props {
@@ -221,9 +189,7 @@ const selectedFile = ref<File | null>(null)
 const formData = reactive<MaterialFormData>({
   title: '',
   description: '',
-  access_level: 'enrolled',
-  is_downloadable: true,
-  order_index: 0
+  access_level: 'enrolled'
 })
 
 const getMaterialIcon = (type?: string) => {
@@ -289,8 +255,6 @@ const handleSubmit = () => {
   uploadFormData.append('title', formData.title)
   uploadFormData.append('description', formData.description || '')
   uploadFormData.append('access_level', formData.access_level)
-  uploadFormData.append('is_downloadable', formData.is_downloadable.toString())
-  uploadFormData.append('order_index', formData.order_index.toString())
 
   emit('submit', uploadFormData)
 }
@@ -302,8 +266,6 @@ watch(() => props.show, (newShow) => {
     formData.title = ''
     formData.description = ''
     formData.access_level = 'enrolled'
-    formData.is_downloadable = true
-    formData.order_index = 0
     if (fileInput.value) {
       fileInput.value.value = ''
     }

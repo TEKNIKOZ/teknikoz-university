@@ -133,21 +133,6 @@
               />
             </div>
 
-            <!-- Order Index -->
-            <div>
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                Order Index
-              </label>
-              <input
-                v-model.number="formData.order_index"
-                type="number"
-                min="0"
-                placeholder="Display order (0 for default)"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-              />
-            </div>
 
             <!-- Free Preview -->
             <div>
@@ -201,7 +186,6 @@ interface LessonFormData {
   section_id?: number;
   title: string;
   kind: string;
-  order_index: number;
   duration_sec?: number;
   vod_asset_id?: string;
   pdf_url?: string;
@@ -230,7 +214,6 @@ const emit = defineEmits<Emits>();
 const formData = reactive<LessonFormData>({
   title: "",
   kind: "video",
-  order_index: 0,
   duration_sec: undefined,
   vod_asset_id: undefined,
   pdf_url: undefined,
@@ -257,7 +240,6 @@ watch(
     if (!newShow) {
       formData.title = "";
       formData.kind = "video";
-      formData.order_index = 0;
       formData.duration_sec = undefined;
       formData.vod_asset_id = undefined;
       formData.pdf_url = undefined;
