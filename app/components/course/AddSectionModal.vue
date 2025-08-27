@@ -29,19 +29,6 @@
               />
             </div>
 
-            <div>
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                Order Index
-              </label>
-              <input
-                v-model.number="formData.order_index"
-                type="number"
-                min="0"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-              />
-            </div>
 
             <div class="flex items-center gap-3">
               <button
@@ -71,7 +58,6 @@ import { reactive, watch } from "vue";
 
 interface SectionFormData {
   title: string;
-  order_index: number;
 }
 
 interface Props {
@@ -92,7 +78,6 @@ const emit = defineEmits<Emits>();
 
 const formData = reactive<SectionFormData>({
   title: "",
-  order_index: 0,
 });
 
 // Reset form when modal closes
@@ -101,7 +86,6 @@ watch(
   (newShow) => {
     if (!newShow) {
       formData.title = "";
-      formData.order_index = 0;
     }
   }
 );
