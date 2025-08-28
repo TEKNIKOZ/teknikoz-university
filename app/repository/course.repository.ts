@@ -231,16 +231,55 @@ export const createLesson = async (
   token: string
 ): Promise<GenericResponse> => {
   try {
-    const response = await apiFetch<GenericResponse>(`/courses/${courseId}/lessons`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: lessonData
-    });
-
-    return response;
+    // Check if this is a PDF lesson with a file upload
+    if (lessonData.kind === 'pdf' && lessonData.file) {
+      // Create FormData for multipart upload
+      const formData = new FormData();
+      formData.append('title', lessonData.title);
+      formData.append('kind', lessonData.kind);
+      
+      // The backend expects these as specific types, but FormData converts everything to strings
+      // We'll send them as strings and the backend should parse them
+      if (lessonData.section_id !== undefined) {
+        formData.append('section_id', lessonData.section_id.toString());
+      }
+      
+      // Send boolean as string 'true' or 'false'
+      formData.append('is_free_preview', lessonData.is_free_preview ? 'true' : 'false');
+      
+      if (lessonData.order_index !== undefined) {
+        formData.append('order_index', lessonData.order_index.toString());
+      }
+      
+      // Append the PDF file
+      formData.append('file', lessonData.file);
+      
+      // Send as multipart/form-data
+      const response = await apiFetch<GenericResponse>(`/courses/${courseId}/lessons`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+          // Don't set Content-Type - browser will set it with boundary for multipart
+        },
+        body: formData
+      });
+      
+      return response;
+    } else {
+      // For non-PDF lessons, send as JSON
+      const { file, ...jsonData } = lessonData; // Remove file from data
+      
+      const response = await apiFetch<GenericResponse>(`/courses/${courseId}/lessons`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: jsonData
+      });
+      
+      return response;
+    }
   } catch (error: any) {
     console.error('Error creating lesson:', error);
     throw error;
