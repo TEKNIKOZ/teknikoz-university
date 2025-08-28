@@ -98,14 +98,13 @@ export interface SectionFormData {
 export interface LessonFormData {
   section_id?: number;
   title: string;
-  kind: 'video' | 'pdf' | 'text' | 'external';
+  kind: 'video' | 'pdf';
   duration_sec?: number;
   order_index?: number;
   vod_asset_id?: string;
   pdf_url?: string;
-  html_content?: string;
-  external_url?: string;
   is_free_preview?: boolean;
+  file?: File;
 }
 
 export interface MaterialFormData {

@@ -35,25 +35,45 @@
               >
                 Lesson Type <span class="text-red-500">*</span>
               </label>
-              <div class="relative">
-                <select
-                  v-model="formData.kind"
-                  required
-                  class="w-full h-10 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent dark:text-white appearance-none cursor-pointer transition-colors"
+              <div class="grid grid-cols-2 gap-3">
+                <label
+                  class="relative flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                  :class="formData.kind === 'video' 
+                    ? 'border-brand bg-brand/10 dark:bg-brand/20' 
+                    : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'"
                 >
-                  <option value="video">Video</option>
-                  <option value="pdf">PDF Document</option>
-                  <option value="text">Text Content</option>
-                  <option value="external">External Link</option>
-                </select>
-                <div
-                  class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
-                >
-                  <Icon
-                    name="mdi:chevron-down"
-                    class="h-4 w-4 text-gray-400"
+                  <input
+                    v-model="formData.kind"
+                    type="radio"
+                    value="video"
+                    class="sr-only"
                   />
-                </div>
+                  <div class="text-center">
+                    <Icon name="mdi:video" class="w-8 h-8 mb-2" :class="formData.kind === 'video' ? 'text-brand' : 'text-gray-500 dark:text-gray-400'" />
+                    <span class="block text-sm font-medium" :class="formData.kind === 'video' ? 'text-brand' : 'text-gray-700 dark:text-gray-300'">
+                      Video
+                    </span>
+                  </div>
+                </label>
+                <label
+                  class="relative flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                  :class="formData.kind === 'pdf' 
+                    ? 'border-brand bg-brand/10 dark:bg-brand/20' 
+                    : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'"
+                >
+                  <input
+                    v-model="formData.kind"
+                    type="radio"
+                    value="pdf"
+                    class="sr-only"
+                  />
+                  <div class="text-center">
+                    <Icon name="mdi:file-pdf-box" class="w-8 h-8 mb-2" :class="formData.kind === 'pdf' ? 'text-brand' : 'text-gray-500 dark:text-gray-400'" />
+                    <span class="block text-sm font-medium" :class="formData.kind === 'pdf' ? 'text-brand' : 'text-gray-700 dark:text-gray-300'">
+                      PDF Document
+                    </span>
+                  </div>
+                </label>
               </div>
             </div>
 
@@ -63,12 +83,13 @@
                 <label
                   class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
-                  Video Asset ID
+                  Vimeo Video ID <span class="text-red-500">*</span>
                 </label>
                 <input
                   v-model="formData.vod_asset_id"
                   type="text"
-                  placeholder="Enter video asset ID"
+                  required
+                  placeholder="e.g., 123456789"
                   class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                 />
               </div>
@@ -88,51 +109,82 @@
               </div>
             </div>
 
-            <!-- PDF Fields -->
+            <!-- PDF Upload Field -->
             <div v-if="formData.kind === 'pdf'">
               <label
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                PDF URL
+                Upload PDF File <span class="text-red-500">*</span>
               </label>
-              <input
-                v-model="formData.pdf_url"
-                type="url"
-                placeholder="https://example.com/document.pdf"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-              />
-            </div>
-
-            <!-- Text Content Fields -->
-            <div v-if="formData.kind === 'text'">
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              
+              <!-- Drop Zone -->
+              <div
+                @drop="handleDrop"
+                @dragover.prevent
+                @dragenter.prevent
+                @dragleave="isDragging = false"
+                @dragenter="isDragging = true"
+                class="relative border-2 border-dashed rounded-lg transition-all"
+                :class="isDragging 
+                  ? 'border-brand bg-brand/10 dark:bg-brand/20' 
+                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'"
               >
-                HTML Content
-              </label>
-              <textarea
-                v-model="formData.html_content"
-                rows="6"
-                placeholder="Enter HTML content for the lesson"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none"
-              ></textarea>
+                <input
+                  ref="fileInput"
+                  type="file"
+                  accept=".pdf,application/pdf"
+                  @change="handleFileSelect"
+                  class="sr-only"
+                />
+                
+                <div
+                  v-if="!pdfFile"
+                  class="p-8 text-center cursor-pointer"
+                  @click="() => fileInput?.click()"
+                >
+                  <Icon 
+                    name="mdi:cloud-upload" 
+                    class="w-12 h-12 mx-auto mb-3"
+                    :class="isDragging ? 'text-brand' : 'text-gray-400 dark:text-gray-500'"
+                  />
+                  <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Drag and drop your PDF here or click to browse
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    Maximum file size: 100MB
+                  </p>
+                </div>
+                
+                <!-- File Preview -->
+                <div v-else class="p-6">
+                  <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                    <div class="flex items-center gap-3">
+                      <Icon name="mdi:file-pdf-box" class="w-10 h-10 text-red-500" />
+                      <div>
+                        <p class="text-sm font-medium text-gray-900 dark:text-white">
+                          {{ pdfFile.name }}
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                          {{ formatFileSize(pdfFile.size) }}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      @click="removePdfFile"
+                      class="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full transition-colors"
+                    >
+                      <Icon name="mdi:close" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Error Message -->
+              <p v-if="fileError" class="text-sm text-red-500 mt-2">
+                {{ fileError }}
+              </p>
             </div>
-
-            <!-- External URL Fields -->
-            <div v-if="formData.kind === 'external'">
-              <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                External URL
-              </label>
-              <input
-                v-model="formData.external_url"
-                type="url"
-                placeholder="https://example.com/lesson"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-              />
-            </div>
-
 
             <!-- Free Preview -->
             <div>
@@ -161,7 +213,7 @@
               </button>
               <button
                 type="submit"
-                :disabled="isLoading || !formData.title"
+                :disabled="isLoading || !isFormValid"
                 class="flex-1 px-4 py-2 bg-brand text-white font-semibold rounded-lg hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
               >
                 <Icon
@@ -180,7 +232,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from "vue";
+import { reactive, ref, computed, watch } from "vue";
 
 interface LessonFormData {
   section_id?: number;
@@ -189,9 +241,8 @@ interface LessonFormData {
   duration_sec?: number;
   vod_asset_id?: string;
   pdf_url?: string;
-  html_content?: string;
-  external_url?: string;
   is_free_preview: boolean;
+  file?: File;
 }
 
 interface Props {
@@ -217,9 +268,27 @@ const formData = reactive<LessonFormData>({
   duration_sec: undefined,
   vod_asset_id: undefined,
   pdf_url: undefined,
-  html_content: undefined,
-  external_url: undefined,
   is_free_preview: false,
+});
+
+const pdfFile = ref<File | null>(null);
+const fileError = ref<string>("");
+const isDragging = ref(false);
+const fileInput = ref<HTMLInputElement | null>(null);
+
+// Computed property to check if form is valid
+const isFormValid = computed(() => {
+  if (!formData.title.trim()) return false;
+  
+  if (formData.kind === 'video') {
+    return !!formData.vod_asset_id;
+  }
+  
+  if (formData.kind === 'pdf') {
+    return !!pdfFile.value;
+  }
+  
+  return false;
 });
 
 // Update section_id when prop changes
@@ -243,16 +312,88 @@ watch(
       formData.duration_sec = undefined;
       formData.vod_asset_id = undefined;
       formData.pdf_url = undefined;
-      formData.html_content = undefined;
-      formData.external_url = undefined;
       formData.is_free_preview = false;
+      pdfFile.value = null;
+      fileError.value = "";
+      isDragging.value = false;
     }
   }
 );
 
-const handleSubmit = () => {
-  if (!formData.title.trim()) return;
+// Format file size for display
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+};
 
-  emit("submit", { ...formData });
+// Validate PDF file
+const validatePdfFile = (file: File): boolean => {
+  fileError.value = "";
+  
+  // Check file type
+  if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+    fileError.value = "Please select a PDF file";
+    return false;
+  }
+  
+  // Check file size (100MB limit)
+  const maxSize = 100 * 1024 * 1024; // 100MB in bytes
+  if (file.size > maxSize) {
+    fileError.value = "File size exceeds 100MB limit";
+    return false;
+  }
+  
+  return true;
+};
+
+// Handle file selection from input
+const handleFileSelect = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0];
+  
+  if (file && validatePdfFile(file)) {
+    pdfFile.value = file;
+  } else if (file) {
+    pdfFile.value = null;
+  }
+};
+
+// Handle drag and drop
+const handleDrop = (event: DragEvent) => {
+  event.preventDefault();
+  isDragging.value = false;
+  
+  const file = event.dataTransfer?.files[0];
+  
+  if (file && validatePdfFile(file)) {
+    pdfFile.value = file;
+  } else if (file) {
+    pdfFile.value = null;
+  }
+};
+
+// Remove selected PDF file
+const removePdfFile = () => {
+  pdfFile.value = null;
+  fileError.value = "";
+  if (fileInput.value) {
+    fileInput.value.value = "";
+  }
+};
+
+// Handle form submission
+const handleSubmit = () => {
+  if (!isFormValid.value) return;
+
+  const submitData: LessonFormData = { ...formData };
+  
+  if (formData.kind === 'pdf' && pdfFile.value) {
+    submitData.file = pdfFile.value;
+  }
+
+  emit("submit", submitData);
 };
 </script>
