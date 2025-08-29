@@ -81,39 +81,54 @@ Every UI pages or components should be desktop and mobile responsive.
 - **Commit frequently**: Make small, focused commits rather than large batch commits
 - **One feature per commit**: Each commit should represent a single logical change
 
-### Commit Message Format
+### Conventional Commit Format
 ```
-<type>: <description>
-
+<type>(<scope>): <description>
 ```
-- Description should be short and concise, not too long but yet effective mentioning changes properly.
 
-**Commit Types:**
-- `feat:` - New feature or functionality
-- `refactor:` - Code restructuring without changing functionality  
-- `fix:` - Bug fixes
-- `docs:` - Documentation changes
-- `chore:` - Maintenance tasks
-- `style:` - UI/styling changes
-- `test:` - Testing related changes
+- Use imperative mood ("add" not "added")
+- Keep under 72 characters
+- Use lowercase scope names such as: `auth`, `ui`, `components`, `pages`, `stores`, `repository`, `api`, `seo`, `config`, `deps`, `tests`
 
-### Frontend-Specific Commit Examples
+| Type     | Description              | Examples                                     |
+|----------|--------------------------|----------------------------------------------|
+| `feat`   | New feature              | `feat(auth): add Google OAuth`               |
+| `fix`    | Bug fix                  | `fix(ui): resolve button hover issue`        |
+| `docs`   | Documentation            | `docs(api): update auth endpoints`           |
+| `style`  | Code style               | `style: format with prettier`                |
+| `refactor` | Code refactoring       | `refactor(repository): optimize course repo` |
+| `perf`   | Performance              | `perf(pages): lazy-load hero images`         |
+| `test`   | Tests                    | `test(components): add BrochureModal tests`  |
+| `chore`  | Maintenance              | `chore(deps): update dependencies`           |
+
+#### Examples (Nuxt 3 / Vue project)
 ```bash
-# Group 1: Components
-git add app/components/auth/
-git commit -m "feat: add email verification component"
+feat(auth): add Google OAuth integration
+fix(ui): resolve mobile header z-index issue
+docs(api): document course repository endpoints
+refactor(stores): simplify auth store actions
+perf(pages): defer loading of homepage carousels
+test(components): add FindYourPathQuiz unit tests
+chore(deps): update Nuxt to v3.17.3
+```
 
-# Group 2: Pages  
+#### Frontend Staging & Commit Examples
+```bash
+# Components
+git add app/components/
+git commit -m "feat(components): add email verification component"
+
+# Pages
 git add app/pages/login.vue app/pages/signup.vue
-git commit -m "refactor: simplify auth pages layout"
+git commit -m "refactor(pages): simplify auth pages layout"
 
-# Group 3: Stores/State
+# Stores
 git add app/stores/auth.stores.ts
-git commit -m "feat: add user profile state management"
+git commit -m "feat(stores): add user profile state management"
 
-# Group 4: Styling
+# Styling / Config
 git add app/assets/css/ tailwind.config.js
-git commit -m "style: update brand colors and responsive design"
+git commit -m "style(assets): update brand colors and responsive design"
 ```
 
 ### Frontend Best Practices
