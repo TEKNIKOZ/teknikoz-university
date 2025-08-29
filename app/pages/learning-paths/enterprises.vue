@@ -217,7 +217,7 @@
           <h2
             class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4"
           >
-            Why Choose TEKNIKOZ E-Learning?
+            Why Choose TEKNIKOZ Smart Learning?
           </h2>
           <p
             class="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto"
@@ -374,7 +374,7 @@ const contactStore = useContactStore();
 // SEO Meta
 useHead({
   title:
-    "Enterprise Training Solutions - Workforce Transformation | Teknikoz E-Learning",
+    "Enterprise Training Solutions - Workforce Transformation | Teknikoz Smart Learning",
   meta: [
     {
       name: "description",

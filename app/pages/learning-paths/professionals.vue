@@ -336,7 +336,7 @@
 // SEO Meta
 useHead({
   title:
-    "Professionals Learning Path - Advance Your Engineering Career | Teknikoz E-Learning",
+    "Professionals Learning Path - Advance Your Engineering Career | Teknikoz Smart Learning",
   meta: [
     {
       name: "description",

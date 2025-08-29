@@ -233,12 +233,12 @@ const authStore = useAuthStore();
 
 // SEO
 useHead({
-  title: "Profile - Teknikoz E-Learning",
+  title: "Profile - Teknikoz Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "Manage your Teknikoz E-Learning account information and preferences.",
+        "Manage your Teknikoz Smart Learning account information and preferences.",
     },
   ],
 });

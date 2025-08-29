@@ -1,7 +1,7 @@
-# Teknikoz E-Learning - Claude Memory
+# Teknikoz Smart Learning - Claude Memory
 
 ## Project Overview
-Teknikoz E-Learning is a web application built for an educational platform using modern web technologies.
+Teknikoz Smart Learning is a web application built for an educational platform using modern web technologies.
 
 Every UI pages or components should be desktop and mobile responsive.
 

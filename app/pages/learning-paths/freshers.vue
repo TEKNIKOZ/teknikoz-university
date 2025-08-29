@@ -278,7 +278,7 @@ const brochureStore = useBrochureStore();
 // SEO Meta
 useHead({
   title:
-    "Freshers Learning Path - Kickstart Your PLM & AI Career | Teknikoz E-Learning",
+    "Freshers Learning Path - Kickstart Your PLM & AI Career | Teknikoz Smart Learning",
   meta: [
     {
       name: "description",

@@ -158,7 +158,7 @@
                 contact.form_type === 'contact'
                   ? 'Your inquiry'
                   : 'Brochure request'
-              } - Teknikoz E-Learning`"
+              } - Teknikoz Smart Learning`"
               class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
             >
               <Icon name="mdi:email" class="w-4 h-4 mr-2" />

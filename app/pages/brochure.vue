@@ -449,12 +449,12 @@ onMounted(async () => {
 
 // SEO
 useHead({
-  title: "Brochure Management - Teknikoz E-Learning",
+  title: "Brochure Management - Teknikoz Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "Manage and track all brochure requests and email deliveries for Teknikoz E-Learning",
+        "Manage and track all brochure requests and email deliveries for Teknikoz Smart Learning",
     },
   ],
 });

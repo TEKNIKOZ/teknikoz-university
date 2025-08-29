@@ -22,7 +22,7 @@
           <p class="text-gray-700 mb-8 leading-relaxed">
             At TEKNIKOZ, we are committed to protecting your privacy. This
             Privacy Policy explains how we collect, use, disclose, and safeguard
-            your information when you visit our e-learning portal.
+            your information when you visit our smart-learning portal.
           </p>
 
           <!-- Section 1 -->
@@ -118,9 +118,9 @@
             <p class="text-gray-700 leading-relaxed">
               For questions, email us at
               <a
-                href="mailto:support@teknikoz.com"
+                href="mailto:info@teknikoz.com"
                 class="text-brand hover:underline"
-                >support@teknikoz.com</a
+                >info@teknikoz.com</a
               >.
             </p>
           </div>
@@ -132,12 +132,12 @@
 
 <script setup>
 useHead({
-  title: "Privacy Policy - TEKNIKOZ E-Learning",
+  title: "Privacy Policy - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "TEKNIKOZ E-Learning Privacy Policy - Learn how we collect, use, and protect your personal information.",
+        "TEKNIKOZ Smart Learning Privacy Policy - Learn how we collect, use, and protect your personal information.",
     },
   ],
 });

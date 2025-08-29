@@ -369,9 +369,9 @@ const router = useRouter();
 
 // SEO Meta Tags
 useSeoMeta({
-  title: "Sign Up - Teknikoz E-Learning",
+  title: "Sign Up - Teknikoz Smart Learning",
   description:
-    "Create your Teknikoz E-Learning account to start learning and access exclusive courses.",
+    "Create your Teknikoz Smart Learning account to start learning and access exclusive courses.",
 });
 
 const form = reactive({

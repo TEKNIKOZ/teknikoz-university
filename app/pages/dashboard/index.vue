@@ -10,7 +10,8 @@
             Dashboard
           </h1>
           <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
-            Welcome back, {{ authStore.name }}!
+            Welcome back,
+            <span class="font-bold text-gray-900">{{ authStore.name }}!</span>
           </p>
         </div>
       </div>

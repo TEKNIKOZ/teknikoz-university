@@ -246,10 +246,10 @@ const handleQuizResult = (result: any) => {
 
 // SEO Meta
 useSeoMeta({
-  title: "Learning Paths - Teknikoz E-Learning",
+  title: "Learning Paths - Teknikoz Smart Learning",
   description:
     "Choose from tailored learning paths designed for freshers, professionals, and enterprises. Start your tech journey with the right program.",
-  ogTitle: "Learning Paths - Teknikoz E-Learning",
+  ogTitle: "Learning Paths - Teknikoz Smart Learning",
   ogDescription:
     "Choose from tailored learning paths designed for freshers, professionals, and enterprises. Start your tech journey with the right program.",
   ogImage: "/assets/images/learning-paths-og.jpg",

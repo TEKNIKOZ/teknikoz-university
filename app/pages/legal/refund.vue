@@ -52,9 +52,9 @@
             <p class="text-gray-700 mb-3 leading-relaxed">
               Email
               <a
-                href="mailto:billing@teknikoz.com"
+                href="mailto:info@teknikoz.com"
                 class="text-brand hover:underline"
-                >billing@teknikoz.com</a
+                >info@teknikoz.com</a
               >
               with:
             </p>
@@ -95,12 +95,12 @@
 
 <script setup>
 useHead({
-  title: "Refund Policy - TEKNIKOZ E-Learning",
+  title: "Refund Policy - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "TEKNIKOZ E-Learning Refund Policy - Learn about our refund terms and conditions for courses.",
+        "TEKNIKOZ Smart Learning Refund Policy - Learn about our refund terms and conditions for courses.",
     },
   ],
 });

@@ -14,7 +14,7 @@
           <div class="flex items-center">
             <img
               src="/assets/images/header-logo.svg"
-              alt="Teknikoz E-Learning Logo"
+              alt="Teknikoz Smart Learning Logo"
               class="h-10 md:h-12 w-auto"
             />
           </div>
