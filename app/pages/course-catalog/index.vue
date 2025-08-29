@@ -240,12 +240,12 @@
               </div>
 
               <span
-                class="text-brand dark:text-brand font-medium group flex items-center"
+                class="text-brand dark:text-brand font-medium group flex items-center group"
               >
                 View Course
                 <Icon
                   name="mdi:arrow-right"
-                  class="ml-1 hover:translate-x-0.5 transition-transform"
+                  class="ml-1 group-hover:translate-x-0.5 duration-300 ease-in-out"
                 />
               </span>
             </div>

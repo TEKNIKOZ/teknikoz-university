@@ -257,16 +257,16 @@
             <div class="flex items-center gap-2">
               <NuxtLink
                 :to="`/course-catalog/${course.slug}`"
-                class="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
+                class="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm sm:text-base font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
               >
-                <Icon name="mdi:eye" class="mr-1 text-sm" />
+                <Icon name="mdi:eye" class="mr-1" />
                 Preview
               </NuxtLink>
               <NuxtLink
                 :to="`/dashboard/courses/${course.id}/edit`"
-                class="flex-1 px-3 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand/90 transition-colors flex items-center justify-center"
+                class="flex-1 px-3 py-2 bg-brand text-white text-sm sm:text-base font-medium rounded-lg hover:bg-brand/90 transition-colors flex items-center justify-center"
               >
-                <Icon name="mdi:pencil" class="mr-1 text-sm" />
+                <Icon name="mdi:pencil" class="mr-1" />
                 Edit
               </NuxtLink>
             </div>
@@ -282,7 +282,6 @@ import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useCourseStore } from "~/stores/course.stores";
 import { useAuthStore } from "~/stores/auth.stores";
-import type { Course } from "~/types/course";
 
 const courseStore = useCourseStore();
 const authStore = useAuthStore();
