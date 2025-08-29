@@ -9,27 +9,9 @@
         <div
           class="relative bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-4 sm:p-6 my-6 sm:my-8 mx-auto"
         >
-          <!-- Icon -->
-          <div
-            class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full"
-          >
-            <Icon
-              name="mdi:alert-circle-outline"
-              class="w-6 h-6 text-red-600 dark:text-red-400"
-            />
-          </div>
-
-          <!-- Title -->
-          <h3
-            class="text-lg font-semibold text-gray-900 dark:text-white mb-2 text-center"
-          >
-            {{ title }}
-          </h3>
-
           <!-- Message -->
-          <p class="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
-            {{ message }}
-          </p>
+          <div class="text-base text-gray-600 dark:text-gray-300 text-center mb-6" v-html="formattedMessage">
+          </div>
 
           <!-- Actions -->
           <div class="flex items-center gap-3">
@@ -61,6 +43,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface Props {
   show: boolean;
   title?: string;
@@ -76,7 +60,7 @@ interface Emits {
   (e: "cancel"): void;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   title: "Confirm Action",
   message: "Are you sure you want to proceed?",
   confirmText: "Confirm",
@@ -86,6 +70,14 @@ withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<Emits>();
+
+// Format message to make content in single quotes bold
+const formattedMessage = computed(() => {
+  if (!props.message) return '';
+  
+  // Replace content within single quotes with bold text
+  return props.message.replace(/'([^']+)'/g, '<strong class="font-bold text-gray-900 dark:text-white">$1</strong>');
+});
 
 const handleConfirm = () => {
   emit("confirm");
