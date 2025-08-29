@@ -20,8 +20,8 @@
           </p>
 
           <p class="text-gray-700 mb-8 leading-relaxed">
-            By accessing or using the TEKNIKOZ e-learning portal, you agree to
-            be bound by the following terms:
+            By accessing or using the TEKNIKOZ smart-learning portal, you agree
+            to be bound by the following terms:
           </p>
 
           <!-- Section 1 -->
@@ -107,12 +107,12 @@
 
 <script setup>
 useHead({
-  title: "Terms of Service - TEKNIKOZ E-Learning",
+  title: "Terms of Service - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "TEKNIKOZ E-Learning Terms of Service - Read our terms and conditions for using our e-learning platform.",
+        "TEKNIKOZ Smart Learning Terms of Service - Read our terms and conditions for using our smart-learning platform.",
     },
   ],
 });

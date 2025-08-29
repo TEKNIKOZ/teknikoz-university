@@ -123,7 +123,7 @@ export const WHY_STANDS_OUT_CONTENT = {
    title: {
       main: "Why",
       highlight: "TEKNIKOZ",
-      suffix: "E-Learning Stands Out"
+      suffix: "Smart Learning Stands Out"
    },
    subtitle: "We don't just teach concepts - we prepare you for real-world success",
    buttonText: "Download Brochure"
@@ -545,7 +545,7 @@ export const CTA_SECTION_CONTENT = {
       main: "Ready to Transform Your",
       highlight: "Career?"
    },
-   subtitle: "Join TEKNIKOZ E-Learning today and unlock your potential with world-class mentorship and hands-on learning",
+   subtitle: "Join TEKNIKOZ Smart Learning today and unlock your potential with world-class mentorship and hands-on learning",
    statistics: [
       { value: "15K+", label: "Students", color: "text-yellow-400" },
       { value: "95%", label: "Placed", color: "text-green-400" },
@@ -683,7 +683,7 @@ export const FOOTER_CONTACT_INFO: ContactInfoData[] = [
 export const FOOTER_CONTENT = {
    logo: {
       src: "/assets/images/footer-logo.svg",
-      alt: "TEKNIKOZ E-Learning"
+      alt: "TEKNIKOZ Smart Learning"
    },
    description: "Empowering professionals with industry-leading PLM and AI skills through hands-on, mentor-led courses.",
    sections: {
@@ -692,7 +692,7 @@ export const FOOTER_CONTENT = {
       contact: "Get In Touch"
    },
    copyright: {
-      text: "TEKNIKOZ E-Learning. All Rights Reserved."
+      text: "TEKNIKOZ Smart Learning. All Rights Reserved."
    },
    bottomLinks: [
       {
@@ -859,7 +859,7 @@ export const HEADER_MOBILE_USER_LINKS: HeaderNavLinkData[] = [
 export const HEADER_CONTENT = {
    logo: {
       src: "/assets/images/header-logo.svg",
-      alt: "Teknikoz E-Learning Logo",
+      alt: "Teknikoz Smart Learning Logo",
       homeUrl: "/"
    },
    buttons: {

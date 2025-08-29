@@ -155,12 +155,12 @@ import { ref, watch } from "vue";
 import { useContactStore } from "@/stores/contact.stores";
 
 useHead({
-  title: "Courses - TEKNIKOZ E-Learning",
+  title: "Courses - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "Explore comprehensive courses in PLM Windchill, Siemens Teamcenter, Cloud Solutions, and AI/ML at TEKNIKOZ E-Learning",
+        "Explore comprehensive courses in PLM Windchill, Siemens Teamcenter, Cloud Solutions, and AI/ML at TEKNIKOZ Smart Learning",
     },
   ],
 });

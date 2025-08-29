@@ -365,7 +365,7 @@
 import { ref, reactive, watch } from "vue";
 
 useHead({
-  title: "Real Projects - TEKNIKOZ E-Learning",
+  title: "Real Projects - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",

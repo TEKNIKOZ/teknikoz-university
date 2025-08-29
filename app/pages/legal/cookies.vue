@@ -98,12 +98,12 @@
 
 <script setup>
 useHead({
-  title: "Cookie Policy - TEKNIKOZ E-Learning",
+  title: "Cookie Policy - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "TEKNIKOZ E-Learning Cookie Policy - Learn about how we use cookies and similar technologies on our platform.",
+        "TEKNIKOZ Smart Learning Cookie Policy - Learn about how we use cookies and similar technologies on our platform.",
     },
   ],
 });

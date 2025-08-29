@@ -7,12 +7,12 @@
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-gray-300"
       >
-        <!-- TEKNIKOZ E-Learning Column -->
+        <!-- TEKNIKOZ Smart Learning Column -->
         <div class="text-left">
           <div class="flex items-center mb-4 sm:mb-6">
             <img
               src="/assets/images/footer-logo.svg"
-              alt="TEKNIKOZ E-Learning"
+              alt="TEKNIKOZ Smart Learning"
               class="h-12 w-auto mr-3"
             />
           </div>

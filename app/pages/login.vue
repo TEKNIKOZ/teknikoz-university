@@ -129,9 +129,9 @@ const route = useRoute();
 
 // SEO Meta Tags
 useSeoMeta({
-  title: "Login - Teknikoz E-Learning",
+  title: "Login - Teknikoz Smart Learning",
   description:
-    "Login to your Teknikoz E-Learning account to access courses and learning materials.",
+    "Login to your Teknikoz Smart Learning account to access courses and learning materials.",
 });
 
 const form = reactive({

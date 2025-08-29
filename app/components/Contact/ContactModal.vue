@@ -16,7 +16,7 @@
           {{
             contactStore.hasContactSubmitted
               ? "Thank You!"
-              : "Contact Teknikoz E-Learning"
+              : "Contact Teknikoz Smart Learning"
           }}
         </h2>
         <button

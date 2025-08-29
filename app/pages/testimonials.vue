@@ -181,12 +181,12 @@ import boyTestimonial from "@/assets/images/boy-testimonial.png";
 import girlTestimonial from "@/assets/images/girl-testimonial.png";
 
 useHead({
-  title: "Success Stories - TEKNIKOZ E-Learning",
+  title: "Success Stories - TEKNIKOZ Smart Learning",
   meta: [
     {
       name: "description",
       content:
-        "Read success stories from TEKNIKOZ E-Learning students who transformed their careers through our courses",
+        "Read success stories from TEKNIKOZ Smart Learning students who transformed their careers through our courses",
     },
   ],
 });
