@@ -337,11 +337,13 @@
           :editing-material="editingMaterial"
           :editing-material-data="editingMaterialData"
           :is-saving-material="isSavingMaterial"
+          :has-material-changes="hasMaterialChanges"
           @showUploadMaterial="showUploadMaterial = true"
           @startMaterialEdit="startMaterialEdit"
           @saveMaterial="saveMaterial"
           @cancelMaterialEdit="cancelMaterialEdit"
           @deleteMaterial="deleteMaterial"
+          @updateMaterialField="updateMaterialField"
         />
       </div>
     </div>
@@ -382,11 +384,36 @@
       @submit="updateLesson"
     />
 
+    <!-- Delete Section Confirmation Dialog -->
+    <ConfirmDialog
+      :show="showDeleteSectionDialog"
+      :message="`Are you sure you want to delete section '${sectionToDelete?.title || 'this section'}'?${sectionToDelete?.lessonCount ? ` This will also delete ${sectionToDelete.lessonCount} lesson${sectionToDelete.lessonCount === 1 ? '' : 's'}.` : ''} This action cannot be undone.`"
+      confirm-text="Delete"
+      cancel-text="Cancel"
+      loading-text="Deleting..."
+      :is-loading="deletingSectionId !== null"
+      @confirm="confirmDeleteSection"
+      @cancel="cancelDeleteSection"
+    />
+
+    <!-- Delete Lesson Confirmation Dialog -->
+    <ConfirmDialog
+      :show="showDeleteLessonDialog"
+      :title="`Delete ${lessonToDelete?.title || 'Lesson'}`"
+      :message="`Are you sure you want to delete '${lessonToDelete?.title || 'this lesson'}'? This action cannot be undone.`"
+      confirm-text="Delete"
+      cancel-text="Cancel"
+      loading-text="Deleting..."
+      :is-loading="deletingLessonId !== null"
+      @confirm="confirmDeleteLesson"
+      @cancel="cancelDeleteLesson"
+    />
+
     <!-- Delete Material Confirmation Dialog -->
     <ConfirmDialog
       :show="showDeleteMaterialDialog"
       :title="`Delete ${materialToDelete?.title || 'Material'}`"
-      message="Are you sure you want to delete this material? This action cannot be undone."
+      :message="`Are you sure you want to delete '${materialToDelete?.title || 'this material'}'? This action cannot be undone.`"
       confirm-text="Delete"
       cancel-text="Cancel"
       loading-text="Deleting..."
@@ -509,18 +536,30 @@ const createSection = async (formData: any) => {
   }
 };
 
-const deleteSection = async (sectionId: number) => {
-  if (
-    !confirm(
-      "Are you sure you want to delete this section? All lessons in this section will also be deleted."
-    )
-  )
-    return;
+// Section deletion state
+const showDeleteSectionDialog = ref(false);
+const sectionToDelete = ref<{ id: number; title: string; lessonCount?: number } | null>(null);
 
-  deletingSectionId.value = sectionId;
+const deleteSection = (section: any) => {
+  const lessonCount = section.lessons?.length || 0;
+  sectionToDelete.value = { 
+    id: section.id, 
+    title: section.title, 
+    lessonCount 
+  };
+  showDeleteSectionDialog.value = true;
+};
+
+const confirmDeleteSection = async () => {
+  if (!sectionToDelete.value) return;
+
+  deletingSectionId.value = sectionToDelete.value.id;
   try {
-    const result = await courseStore.deleteSection(sectionId);
-    if (!result.success) {
+    const result = await courseStore.deleteSection(sectionToDelete.value.id);
+    if (result.success) {
+      showDeleteSectionDialog.value = false;
+      sectionToDelete.value = null;
+    } else {
       alert(result.error || "Failed to delete section");
     }
   } catch (err) {
@@ -529,6 +568,11 @@ const deleteSection = async (sectionId: number) => {
   } finally {
     deletingSectionId.value = null;
   }
+};
+
+const cancelDeleteSection = () => {
+  showDeleteSectionDialog.value = false;
+  sectionToDelete.value = null;
 };
 
 // Section reordering functions
@@ -579,6 +623,7 @@ const moveSectionDown = async (section: any, index: number) => {
   }
 };
 
+// TODO: Next API Implementation
 // Lesson reordering functions
 const moveLessonUp = async (sectionId: number, lesson: any, index: number) => {
   if (index === 0 || !course.value?.sections) return;
@@ -590,22 +635,18 @@ const moveLessonUp = async (sectionId: number, lesson: any, index: number) => {
   const currentOrder = lesson.order_index || index;
   const prevOrder = prevLesson.order_index || index - 1;
 
-  try {
-    // Swap order indices
-    await courseStore.updateLesson(lesson.id, {
-      ...lesson,
-      order_index: prevOrder,
-    });
-    await courseStore.updateLesson(prevLesson.id, {
-      ...prevLesson,
-      order_index: currentOrder,
-    });
-  } catch (err) {
-    console.error("Error reordering lessons:", err);
-    alert("Failed to reorder lessons");
-  }
+  // Log the intended changes instead of updating
+  console.log("Would update lesson", lesson.id, {
+    ...lesson,
+    order_index: prevOrder,
+  });
+  console.log("Would update lesson", prevLesson.id, {
+    ...prevLesson,
+    order_index: currentOrder,
+  });
 };
 
+// TODO: Next API Implementation
 const moveLessonDown = async (
   sectionId: number,
   lesson: any,
@@ -620,20 +661,15 @@ const moveLessonDown = async (
   const currentOrder = lesson.order_index || index;
   const nextOrder = nextLesson.order_index || index + 1;
 
-  try {
-    // Swap order indices
-    await courseStore.updateLesson(lesson.id, {
-      ...lesson,
-      order_index: nextOrder,
-    });
-    await courseStore.updateLesson(nextLesson.id, {
-      ...nextLesson,
-      order_index: currentOrder,
-    });
-  } catch (err) {
-    console.error("Error reordering lessons:", err);
-    alert("Failed to reorder lessons");
-  }
+  // Log the intended changes instead of updating
+  console.log("Would update lesson", lesson.id, {
+    ...lesson,
+    order_index: currentOrder,
+  });
+  console.log("Would update lesson", nextLesson.id, {
+    ...nextLesson,
+    order_index: currentOrder,
+  });
 };
 
 const showAddLesson = (sectionId: number) => {
@@ -725,13 +761,25 @@ const startLessonEdit = (lesson: any) => {
   showEditLessonModal.value = true;
 };
 
-const deleteLesson = async (lessonId: number) => {
-  if (!confirm("Are you sure you want to delete this lesson?")) return;
+// Lesson deletion state
+const showDeleteLessonDialog = ref(false);
+const lessonToDelete = ref<{ id: number; title: string } | null>(null);
 
-  deletingLessonId.value = lessonId;
+const deleteLesson = (lesson: any) => {
+  lessonToDelete.value = { id: lesson.id, title: lesson.title };
+  showDeleteLessonDialog.value = true;
+};
+
+const confirmDeleteLesson = async () => {
+  if (!lessonToDelete.value) return;
+
+  deletingLessonId.value = lessonToDelete.value.id;
   try {
-    const result = await courseStore.deleteLesson(lessonId);
-    if (!result.success) {
+    const result = await courseStore.deleteLesson(lessonToDelete.value.id);
+    if (result.success) {
+      showDeleteLessonDialog.value = false;
+      lessonToDelete.value = null;
+    } else {
       alert(result.error || "Failed to delete lesson");
     }
   } catch (err) {
@@ -742,21 +790,56 @@ const deleteLesson = async (lessonId: number) => {
   }
 };
 
+const cancelDeleteLesson = () => {
+  showDeleteLessonDialog.value = false;
+  lessonToDelete.value = null;
+};
+
 // Material edit functions
+const originalMaterialData = ref<any>({});
+const hasMaterialChanges = ref(false);
+
+const checkMaterialChanges = () => {
+  if (!editingMaterialData.value || !originalMaterialData.value) {
+    hasMaterialChanges.value = false;
+    return;
+  }
+
+  // Check if any field has changed
+  hasMaterialChanges.value =
+    editingMaterialData.value.title !== originalMaterialData.value.title ||
+    editingMaterialData.value.description !==
+      originalMaterialData.value.description ||
+    editingMaterialData.value.access_level !==
+      originalMaterialData.value.access_level;
+};
+
 const startMaterialEdit = (material: any) => {
   editingMaterial.value = material.id;
-  editingMaterialData.value = {
-    title: material.title,
-    description: material.description,
+  const materialData = {
+    title: material.title || '',
+    description: material.description || '',
     file_type: material.file_type,
-    access_level: material.access_level,
+    access_level: material.access_level || 'enrolled',
     order_index: material.order_index,
   };
+  editingMaterialData.value = { ...materialData };
+  originalMaterialData.value = { ...materialData };
+  hasMaterialChanges.value = false;
+};
+
+const updateMaterialField = (field: string, value: any) => {
+  if (editingMaterialData.value) {
+    (editingMaterialData.value as any)[field] = value;
+    checkMaterialChanges();
+  }
 };
 
 const cancelMaterialEdit = () => {
   editingMaterial.value = null;
   editingMaterialData.value = {};
+  originalMaterialData.value = {};
+  hasMaterialChanges.value = false;
 };
 
 const saveMaterial = async (materialId: number, data: any) => {
@@ -765,13 +848,29 @@ const saveMaterial = async (materialId: number, data: any) => {
     return;
   }
 
+  // Don't save if no changes
+  if (!hasMaterialChanges.value) {
+    return;
+  }
+
   isSavingMaterial.value = true;
   try {
-    const result = await courseStore.updateMaterial(materialId, data);
+    // Ensure all fields have proper values (not null/undefined)
+    const materialData = {
+      title: data.title || '',
+      description: data.description || '',
+      access_level: data.access_level || 'enrolled',
+      file_type: data.file_type,
+      order_index: data.order_index
+    };
+    
+    const result = await courseStore.updateMaterial(materialId, materialData);
 
     if (result.success) {
       editingMaterial.value = null;
       editingMaterialData.value = {};
+      originalMaterialData.value = {};
+      hasMaterialChanges.value = false;
     } else {
       alert(result.error || "Failed to update material");
     }
