@@ -118,7 +118,7 @@
                 </button>
                 <button
                   v-if="editingSection !== section.id"
-                  @click="$emit('deleteSection', section.id)"
+                  @click="$emit('deleteSection', section)"
                   :disabled="deletingSectionId === section.id"
                   class="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -207,7 +207,7 @@
                   <Icon name="mdi:pencil" class="text-sm flex items-center" />
                 </button>
                 <button
-                  @click="$emit('deleteLesson', lesson.id)"
+                  @click="$emit('deleteLesson', lesson)"
                   :disabled="deletingLessonId === lesson.id"
                   class="p-1 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -281,8 +281,8 @@ interface Emits {
   (e: "showAddLesson", sectionId: number): void;
   (e: "editLesson", lesson: Lesson): void;
   (e: "saveSection", sectionId: number, title: string): void;
-  (e: "deleteSection", sectionId: number): void;
-  (e: "deleteLesson", lessonId: number): void;
+  (e: "deleteSection", section: Section): void;
+  (e: "deleteLesson", lesson: Lesson): void;
   (e: "moveSectionUp", section: Section, index: number): void;
   (e: "moveSectionDown", section: Section, index: number): void;
   (e: "moveLessonUp", sectionId: number, lesson: Lesson, index: number): void;

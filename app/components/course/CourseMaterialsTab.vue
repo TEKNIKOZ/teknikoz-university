@@ -148,8 +148,14 @@
               @click="
                 emit('saveMaterial', material.id, props.editingMaterialData)
               "
-              :disabled="props.isSavingMaterial"
-              class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              :disabled="props.isSavingMaterial || !props.hasMaterialChanges"
+              :class="[
+                'px-4 py-2 font-medium rounded-lg transition-colors flex items-center',
+                props.hasMaterialChanges && !props.isSavingMaterial
+                  ? 'bg-green-600 text-white hover:bg-green-700'
+                  : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ]"
+              :title="!props.hasMaterialChanges ? 'No changes to save' : ''"
             >
               <Icon
                 v-if="props.isSavingMaterial"
@@ -199,6 +205,7 @@ interface Props {
   editingMaterial?: number | null;
   editingMaterialData?: Partial<Material>;
   isSavingMaterial?: boolean;
+  hasMaterialChanges?: boolean;
 }
 
 interface Emits {
@@ -207,6 +214,7 @@ interface Emits {
   (e: "saveMaterial", materialId: number, data: Partial<Material>): void;
   (e: "startMaterialEdit", material: Material): void;
   (e: "cancelMaterialEdit"): void;
+  (e: "updateMaterialField", field: string, value: any): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -214,15 +222,14 @@ const props = withDefaults(defineProps<Props>(), {
   editingMaterial: null,
   editingMaterialData: () => ({}),
   isSavingMaterial: false,
+  hasMaterialChanges: false,
 });
 
 const emit = defineEmits<Emits>();
 
-// Update material data by directly modifying the reactive object from parent
+// Update material data through parent component to track changes
 const updateMaterialData = (key: string, value: any) => {
-  if (props.editingMaterialData) {
-    (props.editingMaterialData as any)[key] = value;
-  }
+  emit('updateMaterialField', key, value);
 };
 
 const getMaterialIcon = (type?: string) => {
