@@ -53,11 +53,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl:
-        process.env.NUXT_PUBLIC_BASE_URL ||
-        "https://e-learning.teknikoz.com",
+        process.env.NUXT_PUBLIC_BASE_URL,
       baseUrlApi:
-        process.env.NUXT_PUBLIC_BASE_URL_API ||
-        "https://teknikoz-univ-backend.onrender.com",
+        process.env.NUXT_PUBLIC_BASE_URL_API,
     },
   },
 });
